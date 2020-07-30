@@ -1,0 +1,49 @@
+$highlight-color: rgba(246, 246, 246, 1);
+$highlight-dark-color: rgba(118, 118, 118, 0.26);
+
+.grid-container {
+  background: #eee;
+  overflow: hidden;
+  font-size: 12px;
+
+  .horizontal-scroll {
+    width: 100%;
+    cdk-virtual-scroll-viewport {
+      height: 90vh;
+    }
+  }
+  .vertical-scroll {
+    overflow-y: auto;
+    height: 100%;
+  }
+
+  table {
+    border-collapse: collapse;
+    background: white;
+    table-layout: fixed;
+    width: 100%;
+    position: relative;
+
+    thead {
+      background: $highlight-color;
+    }
+  }
+  th, td {
+    padding: 0px 8px;
+    border-left: 1px solid $highlight-dark-color;
+    width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: start;
+  }
+
+  .odd {
+    background-color: $highlight-color;
+  }
+}
+
+.selection {
+  width: 18px !important;
+}
+

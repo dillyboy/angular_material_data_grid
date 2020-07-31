@@ -14,9 +14,9 @@
     <cdk-virtual-scroll-viewport [itemSize]="20" (scroll)="scrollChanged($event)">
       <div class="vertical-scroll">
         <table>
-          <tbody>
-            <tr *cdkVirtualFor="let item of response.gridData; let odd=odd;" [ngClass]="{ odd: odd}">
-              <td *ngIf="selection" class="selection"><mat-checkbox [(ngModel)]="item['gridItemSelected']"></mat-checkbox></td>
+          <tbody (window:mouseup)="endSelect()">
+            <tr *cdkVirtualFor="let item of response.gridData; let odd=odd;" (mouseover)="overSelect($event, item)" [ngClass]="{ odd: odd, rowSelected: item.gridItemSelected == true}">
+              <td *ngIf="selection" class="selection animated" #selection (mousedown)="startSelect(item, selection)"><mat-checkbox [(ngModel)]="item['gridItemSelected']"></mat-checkbox></td>
               <td *ngFor="let heading of headings;">{{item[heading.fieldName]}}</td>
             </tr>
           </tbody>

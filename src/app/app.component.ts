@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Renderer2} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {ApiResponseModel} from './api-response.model';
 
@@ -37,8 +37,14 @@ export class AppComponent {
   loadingData = true;
   response = { gridData: [], totalCount: 0};
   moveRight = '0';
+  selectionStarted = false;
+  selectionTimeoutHandler: any;
+  allCheckBoxesSelected = false;
+  selectedRows = [];
 
-  constructor(private http: HttpClient, private changeDetectorRef: ChangeDetectorRef) {
+  constructor(private http: HttpClient,
+              private changeDetectorRef: ChangeDetectorRef,
+              private renderer: Renderer2) {
     this.http.get<ApiResponseModel>('./assets/data.json').subscribe(data => {
       this.response = data.payload;
       console.log(this.response.gridData);
@@ -55,5 +61,48 @@ export class AppComponent {
     this.response.gridData.forEach(item => {
       item.gridItemSelected = this.allGridItemsSelected;
     });
+  }
+
+  // Multiple Selection logic
+  startSelect(item, element): void {
+    this.selectionTimeoutHandler = setTimeout(() => {
+      this.renderer.addClass(element, 'pulse');
+      this.selectionStarted = true;
+      item.gridItemSelected = true;
+      this.selectionTimeoutHandler = null;
+
+      setTimeout(() => {
+        this.renderer.removeClass(element, 'pulse');
+      }, 1000);
+    }, 350);
+  }
+
+  endSelect(): void {
+    clearInterval(this.selectionTimeoutHandler);
+    if (this.selectionStarted) {
+      this.selectionStarted = false;
+      window.document.getSelection().removeAllRanges();
+    }
+  }
+
+  overSelect($event, item): void {
+    if (this.selectionStarted) {
+      item.gridItemSelected = true;
+      this.getSelection();
+    }
+  }
+
+  getSelection(): void {
+    this.selectedRows = [];
+    this.allCheckBoxesSelected = true;
+    for (let i = 0, len = this.response.gridData.length; i < len; i++) {
+      if (this.response.gridData[i].gridItemSelected === true) {
+        this.selectedRows.push(this.response.gridData[i]);
+      } else {
+        this.allCheckBoxesSelected = false;
+      }
+    }
+    // this.selectionEmit.emit(this.selectedRows);
+    // this.selectAllState = false;
   }
 }

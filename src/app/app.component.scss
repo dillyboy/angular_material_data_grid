@@ -11,7 +11,7 @@ $highlight-dark-color: rgba(118, 118, 118, 0.26);
   .horizontal-scroll {
     width: 100%;
     cdk-virtual-scroll-viewport {
-      height: 90vh;
+      height: calc(100vh - 100px);
     }
   }
   .vertical-scroll {
@@ -56,6 +56,13 @@ $highlight-dark-color: rgba(118, 118, 118, 0.26);
 
 .selection {
   width: 18px !important;
+}
+
+.layout-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 8px;
 }
 
 @include pulse-animation();

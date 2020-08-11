@@ -6,7 +6,7 @@ import {ApiResponseModel} from './api-response.model';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
   headings = [ {fieldName: 'uid', display: 'ID', type: 'number', minWidth: '160px', maxWidth: '160px', width: '12.25%', filter: true},
@@ -41,16 +41,11 @@ export class AppComponent {
   selectionTimeoutHandler: any;
   allCheckBoxesSelected = false;
   selectedRows = [];
+  currentPage = 0;
 
   constructor(private http: HttpClient,
               private changeDetectorRef: ChangeDetectorRef,
               private renderer: Renderer2) {
-    this.http.get<ApiResponseModel>('./assets/data.json').subscribe(data => {
-      this.response = data.payload;
-      console.log(this.response.gridData);
-      this.changeDetectorRef.detectChanges();
-      this.loadingData = false;
-    });
   }
 
   scrollChanged(ev): void {
@@ -104,5 +99,27 @@ export class AppComponent {
     }
     // this.selectionEmit.emit(this.selectedRows);
     // this.selectAllState = false;
+  }
+
+  // page change event
+  pageChanged(pageNo): void {
+    if (this.currentPage === pageNo) {
+      return null;
+    }
+    this.currentPage = pageNo;
+    this.loadingData = true;
+    const url = 'https://angular-grid.herokuapp.com/getUsers';
+    const body = {
+      entity: {},
+      page: pageNo,
+      perPage: 100
+    };
+
+    this.http.post<ApiResponseModel>(url, body).subscribe(data => {
+      this.response = data.payload;
+      console.log(this.response.gridData);
+      this.changeDetectorRef.detectChanges();
+      this.loadingData = false;
+    });
   }
 }

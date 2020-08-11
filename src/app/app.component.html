@@ -24,4 +24,12 @@
       </div>
     </cdk-virtual-scroll-viewport>
   </div>
+  <div class="layout-container" style="height: 40px;">
+    <app-pagination [loadingData]="loadingData" [noOfTotalRecords]="response.totalCount" (pageChanged)="pageChanged($event)"></app-pagination>
+    <div>
+      <select name="pageLimit">
+        <option>100</option>
+      </select>
+    </div>
+  </div>
 </div>

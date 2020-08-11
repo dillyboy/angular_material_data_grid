@@ -8,10 +8,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +24,9 @@ import { FormsModule } from '@angular/forms';
     ScrollingModule,
     FormsModule,
     MatProgressBarModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

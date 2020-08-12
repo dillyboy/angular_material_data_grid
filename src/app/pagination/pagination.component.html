@@ -38,13 +38,6 @@
         <span *ngIf="noOfSelectedRow">
             <span class="font-bold">{{noOfSelectedRow}} Selected</span>
             <span class="ml-2 mr-2">|</span>
-        </span>{{(this.noOfRecords * currentPage) - this.noOfRecords + 1}} -
-        <span *ngIf="currentPage !== pages">
-            {{this.newRecordsPerPage * currentPage}}
-        </span>
-        <span *ngIf="currentPage === pages">
-            {{noOfTotalRecords}}
-        </span>
-        of {{noOfTotalRecords}} items
+        </span>{{pageInfoDisplayText}}
     </div>
 </div>

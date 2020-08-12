@@ -18,6 +18,7 @@ export class PaginationComponent implements OnInit, OnChanges {
   pages = 0;
   currentPage = 1;
   pagesOnDisplay = [];
+  pageInfoDisplayText = '';
 
   constructor() { }
 
@@ -59,6 +60,7 @@ export class PaginationComponent implements OnInit, OnChanges {
         this.pagesOnDisplay.push(i);
       }
     }
+    this.pageInfoDisplayText = `${(this.noOfRecords * this.currentPage) - this.noOfRecords + 1} - ${this.currentPage === this.pages ? this.noOfTotalRecords : this.newRecordsPerPage * this.currentPage} of ${this.noOfTotalRecords} items`;
     if (notify) {
       this.pageChanged.emit({pageNo: this.currentPage, recordsPerPage: this.recordsPerPage});
     }

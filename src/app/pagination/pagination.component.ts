@@ -12,6 +12,7 @@ export class PaginationComponent implements OnInit, OnChanges {
   @Input() noOfTotalRecords = 0;
   @Input() loadingData = true;
   recordsPerPage = 100;
+  newRecordsPerPage = 100;
   pages = 0;
   currentPage = 1;
   pagesOnDisplay = [];
@@ -19,19 +20,21 @@ export class PaginationComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit(): void {
-
+    this.pageChanged.emit({pageNo: 1, recordsPerPage: this.recordsPerPage}); // initial request trigger
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.noOfTotalRecords) {
-      console.log(changes.noOfTotalRecords);
-      this.pages = Math.ceil(this.noOfTotalRecords / this.recordsPerPage);
-      this.pageChange(this.currentPage);
+    if (changes.loadingData?.currentValue === false) { // render pages buttons when data is loaded
+      if (this.newRecordsPerPage !== this.recordsPerPage) { // if page size changes go back to page 1
+        this.recordsPerPage = this.newRecordsPerPage;
+        this.currentPage = 1;
+      }
+      this.pageChange(this.currentPage, false); // render page buttons without an emit to parent
     }
-
   }
 
-  pageChange(pageNo): void {
+  pageChange(pageNo, notify = true): void {
+    this.pages = Math.ceil(this.noOfTotalRecords / this.recordsPerPage);
     this.currentPage = pageNo;
     this.pagesOnDisplay = [];
 
@@ -54,11 +57,13 @@ export class PaginationComponent implements OnInit, OnChanges {
         this.pagesOnDisplay.push(i);
       }
     }
-    this.pageChanged.emit({pageNo: this.currentPage, recordsPerPage: this.recordsPerPage});
+    if (notify) {
+      this.pageChanged.emit({pageNo: this.currentPage, recordsPerPage: this.recordsPerPage});
+    }
   }
 
   recordsPerPageChanged(): void {
-    this.pageChange(1);
+    this.pageChanged.emit({pageNo: 1, recordsPerPage: this.newRecordsPerPage});
   }
 
 }

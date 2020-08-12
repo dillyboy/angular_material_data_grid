@@ -1,12 +1,12 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Renderer2} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {ApiResponseModel} from './api-response.model';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Renderer2 } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { ApiResponseModel } from './api-response.model';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
   headings = [ {fieldName: 'uid', display: 'ID', type: 'number', minWidth: '160px', maxWidth: '160px', width: '12.25%', filter: true},
@@ -41,7 +41,6 @@ export class AppComponent {
   selectionTimeoutHandler: any;
   allCheckBoxesSelected = false;
   selectedRows = [];
-  currentPage = 0;
 
   constructor(private http: HttpClient,
               private changeDetectorRef: ChangeDetectorRef,
@@ -103,17 +102,14 @@ export class AppComponent {
 
   // page change event
   pageChanged({pageNo, recordsPerPage}): void {
-    if (this.currentPage === pageNo) {
-      return null;
-    }
-    this.currentPage = pageNo;
     this.loadingData = true;
     const url = 'https://angular-grid.herokuapp.com/getUsers';
     const body = {
       entity: {},
       page: pageNo,
-      perPage: 100
+      perPage: recordsPerPage
     };
+    console.log(body);
 
     this.http.post<ApiResponseModel>(url, body).subscribe(data => {
       this.response = data.payload;

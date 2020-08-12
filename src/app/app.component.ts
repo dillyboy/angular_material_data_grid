@@ -102,7 +102,7 @@ export class AppComponent {
   }
 
   // page change event
-  pageChanged(pageNo): void {
+  pageChanged({pageNo, recordsPerPage}): void {
     if (this.currentPage === pageNo) {
       return null;
     }

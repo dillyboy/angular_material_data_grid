@@ -1,15 +1,23 @@
-.buttons-container {
-  color: gray;
-  .mat-icon-button {
-    width: 26px;
-    height: 26px;
-    line-height: 26px;
-    border-radius: 2px;
-    margin-right: 6px;
-    font-weight: 400;
-    &.highlight {
-      background: green;
-      color: white;
+.layout-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 8px;
+
+  .buttons-container {
+    color: gray;
+    .mat-icon-button {
+      width: 26px;
+      height: 26px;
+      line-height: 26px;
+      border-radius: 2px;
+      margin-right: 6px;
+      font-weight: 400;
+      &.highlight {
+        background: green;
+        color: white;
+      }
     }
   }
+
 }

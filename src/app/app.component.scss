@@ -58,11 +58,4 @@ $highlight-dark-color: rgba(118, 118, 118, 0.26);
   width: 18px !important;
 }
 
-.layout-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 8px;
-}
-
 @include pulse-animation();

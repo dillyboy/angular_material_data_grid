@@ -1,27 +1,39 @@
-<div class="buttons-container">
-    <button mat-icon-button aria-label="pagination" [disabled]="currentPage === 1 || loadingData" (click)="pageChange(1)">
-        <mat-icon class="material-icons-outlined">skip_previous</mat-icon>
-    </button>
-    <button mat-icon-button aria-label="pagination" [disabled]="currentPage === 1 || loadingData" (click)="pageChange(currentPage - 1)">
-        <mat-icon class="material-icons-outlined">keyboard_arrow_left</mat-icon>
-    </button>
-    <button mat-icon-button aria-label="pagination" disabled *ngIf="!pagesOnDisplay.includes(1)">
-        <mat-icon class="material-icons-outlined">more_horiz</mat-icon>
-    </button>
-    <button mat-icon-button aria-label="pagination"
-            *ngFor="let page of pagesOnDisplay"
-            [ngClass]="{'highlight': currentPage === page}"
-            [disabled]="loadingData"
-            (click)="pageChange(page)">
-        {{page}}
-    </button>
-    <button mat-icon-button aria-label="pagination" disabled *ngIf="!pagesOnDisplay.includes(pages)">
-        <mat-icon class="material-icons-outlined">more_horiz</mat-icon>
-    </button>
-    <button mat-icon-button aria-label="pagination" [disabled]="currentPage === pages || loadingData" (click)="pageChange(currentPage + 1)">
-        <mat-icon class="material-icons-outlined">keyboard_arrow_right</mat-icon>
-    </button>
-    <button mat-icon-button aria-label="pagination" [disabled]="currentPage === pages || loadingData" (click)="pageChange(pages)">
-        <mat-icon class="material-icons-outlined">skip_next_outline</mat-icon>
-    </button>
+<div class="layout-container" style="height: 40px;">
+    <div class="buttons-container">
+        <button mat-icon-button aria-label="pagination" [disabled]="currentPage === 1 || loadingData" (click)="pageChange(1)">
+            <mat-icon class="material-icons-outlined">skip_previous</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="pagination" [disabled]="currentPage === 1 || loadingData" (click)="pageChange(currentPage - 1)">
+            <mat-icon class="material-icons-outlined">keyboard_arrow_left</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="pagination" disabled *ngIf="!pagesOnDisplay.includes(1)">
+            <mat-icon class="material-icons-outlined">more_horiz</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="pagination"
+                *ngFor="let page of pagesOnDisplay"
+                [ngClass]="{'highlight': currentPage === page}"
+                [disabled]="loadingData"
+                (click)="pageChange(page)">
+            {{page}}
+        </button>
+        <button mat-icon-button aria-label="pagination" disabled *ngIf="!pagesOnDisplay.includes(pages)">
+            <mat-icon class="material-icons-outlined">more_horiz</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="pagination" [disabled]="currentPage === pages || loadingData" (click)="pageChange(currentPage + 1)">
+            <mat-icon class="material-icons-outlined">keyboard_arrow_right</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="pagination" [disabled]="currentPage === pages || loadingData" (click)="pageChange(pages)">
+            <mat-icon class="material-icons-outlined">skip_next_outline</mat-icon>
+        </button>
+    </div>
+
+    <div>
+        <select name="pageLimit" [(ngModel)]="recordsPerPage" (ngModelChange)="recordsPerPageChanged()">
+            <option [ngValue]="50">50</option>
+            <option [ngValue]="100">100</option>
+            <option [ngValue]="250">250</option>
+            <option [ngValue]="500">500</option>
+            <option [ngValue]="1000">1000</option>
+        </select>
+    </div>
 </div>

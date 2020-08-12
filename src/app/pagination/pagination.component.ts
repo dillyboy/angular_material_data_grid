@@ -9,7 +9,7 @@ export class PaginationComponent implements OnInit, OnChanges {
 
   @Output() pageChanged: any = new EventEmitter<any>();
 
-  @Input() noOfTotalRecords = 1001;
+  @Input() noOfTotalRecords = 0;
   @Input() loadingData = true;
   recordsPerPage = 100;
   pages = 0;
@@ -54,7 +54,11 @@ export class PaginationComponent implements OnInit, OnChanges {
         this.pagesOnDisplay.push(i);
       }
     }
-    this.pageChanged.emit(this.currentPage);
+    this.pageChanged.emit({pageNo: this.currentPage, recordsPerPage: this.recordsPerPage});
+  }
+
+  recordsPerPageChanged(): void {
+    this.pageChange(1);
   }
 
 }

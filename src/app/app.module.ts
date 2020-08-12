@@ -11,11 +11,14 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { PaginationComponent } from './pagination/pagination.component';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PaginationComponent
+    PaginationComponent,
+    ConfirmationComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,11 @@ import { PaginationComponent } from './pagination/pagination.component';
     MatProgressBarModule,
     MatCheckboxModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
+  ],
+  entryComponents: [
+    ConfirmationComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

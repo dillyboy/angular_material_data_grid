@@ -1,4 +1,6 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationComponent } from '../confirmation/confirmation.component';
 
 @Component({
   selector: 'app-pagination',
@@ -20,7 +22,7 @@ export class PaginationComponent implements OnInit, OnChanges {
   pagesOnDisplay = [];
   pageInfoDisplayText = '';
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.pageChanged.emit({pageNo: 1, recordsPerPage: this.recordsPerPage}); // initial request trigger
@@ -37,6 +39,27 @@ export class PaginationComponent implements OnInit, OnChanges {
   }
 
   pageChange(pageNo, notify = true): void {
+    if (this.noOfSelectedRow > 0) {
+      this.dialog.open(ConfirmationComponent, {
+        width: '300px',
+        data: {
+          title: 'Discard Selection?',
+          content: 'If you leave this page your selection will get discarded, do you want to proceed anyway?',
+          ok_text: 'PROCEED',
+          cancel_text: 'CANCEL'
+        }
+       }).afterClosed().subscribe(result => {
+        if (result) {
+          this.continuePageChange(pageNo, notify);
+        }
+      });
+    } else {
+      this.continuePageChange(pageNo, notify);
+    }
+
+  }
+
+  continuePageChange(pageNo, notify = true): void {
     this.pages = Math.ceil(this.noOfTotalRecords / this.recordsPerPage);
     this.currentPage = pageNo;
     this.pagesOnDisplay = [];

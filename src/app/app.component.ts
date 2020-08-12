@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Renderer2 } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ApiResponseModel } from './api-response.model';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -44,7 +45,8 @@ export class AppComponent {
 
   constructor(private http: HttpClient,
               private changeDetectorRef: ChangeDetectorRef,
-              private renderer: Renderer2) {
+              private renderer: Renderer2,
+              public dialog: MatDialog) {
   }
 
   scrollChanged(ev): void {
@@ -125,6 +127,7 @@ export class AppComponent {
     console.log(body);
 
     this.http.post<ApiResponseModel>(url, body).subscribe(data => {
+      this.selectedRows = [];
       this.response = data.payload;
       console.log(this.response.gridData);
       this.changeDetectorRef.detectChanges();

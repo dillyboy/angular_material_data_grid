@@ -11,7 +11,7 @@
       </thead>
     </table>
     <mat-progress-bar *ngIf="loadingData" mode="indeterminate"></mat-progress-bar>
-    <cdk-virtual-scroll-viewport [itemSize]="20" (scroll)="scrollChanged($event)">
+    <cdk-virtual-scroll-viewport id="scrollViewport" [itemSize]="20" (scroll)="scrollChanged($event)">
       <div class="vertical-scroll">
         <table>
           <tbody (window:mouseup)="endSelect()">

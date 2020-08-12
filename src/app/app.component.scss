@@ -58,4 +58,8 @@ $highlight-dark-color: rgba(118, 118, 118, 0.26);
   width: 18px !important;
 }
 
+#scrollViewport {
+  scroll-behavior: smooth;
+}
+
 @include pulse-animation();

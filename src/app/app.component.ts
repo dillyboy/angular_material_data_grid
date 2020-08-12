@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Renderer2 } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ApiResponseModel } from './api-response.model';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
+
   headings = [ {fieldName: 'uid', display: 'ID', type: 'number', minWidth: '160px', maxWidth: '160px', width: '12.25%', filter: true},
     {fieldName: 'first_name', display: 'First Name', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%'},
     {fieldName: 'email', display: 'Email', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%'},
@@ -130,8 +131,9 @@ export class AppComponent {
       this.selectedRows = [];
       this.response = data.payload;
       console.log(this.response.gridData);
-      this.changeDetectorRef.detectChanges();
       this.loadingData = false;
+      this.changeDetectorRef.detectChanges();
+      document.getElementById('scrollViewport').scrollTop = 0;
     });
   }
 }

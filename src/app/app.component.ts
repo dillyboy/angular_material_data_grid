@@ -52,8 +52,21 @@ export class AppComponent {
   }
 
   allGridItemsSelectionChanged(): void {
+    this.selectedRows = [];
     this.response.gridData.forEach(item => {
       item.gridItemSelected = this.allGridItemsSelected;
+      if (item.gridItemSelected) {
+        this.selectedRows.push(item);
+      }
+    });
+  }
+
+  gridItemSelectionChanged(): void {
+    this.selectedRows = [];
+    this.response.gridData.forEach(item => {
+      if (item.gridItemSelected) {
+        this.selectedRows.push(item);
+      }
     });
   }
 

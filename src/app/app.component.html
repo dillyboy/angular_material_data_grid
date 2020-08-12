@@ -16,7 +16,7 @@
         <table>
           <tbody (window:mouseup)="endSelect()">
             <tr *cdkVirtualFor="let item of response.gridData; let odd=odd;" (mouseover)="overSelect($event, item)" [ngClass]="{ odd: odd, rowSelected: item.gridItemSelected == true}">
-              <td *ngIf="selection" class="selection animated" #selection (mousedown)="startSelect(item, selection)"><mat-checkbox [(ngModel)]="item['gridItemSelected']"></mat-checkbox></td>
+              <td *ngIf="selection" class="selection animated" #selection (mousedown)="startSelect(item, selection)"><mat-checkbox [(ngModel)]="item['gridItemSelected']" (ngModelChange)="gridItemSelectionChanged()"></mat-checkbox></td>
               <td *ngFor="let heading of headings;">{{item[heading.fieldName]}}</td>
             </tr>
           </tbody>
@@ -25,6 +25,6 @@
     </cdk-virtual-scroll-viewport>
   </div>
 
-  <app-pagination [loadingData]="loadingData" [noOfTotalRecords]="response.totalCount" (pageChanged)="pageChanged($event)"></app-pagination>
+  <app-pagination [loadingData]="loadingData" [noOfTotalRecords]="response.totalCount" [noOfRecords]="response.gridData.length" [noOfSelectedRow]="selectedRows.length" (pageChanged)="pageChanged($event)"></app-pagination>
 
 </div>

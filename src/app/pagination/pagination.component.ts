@@ -11,6 +11,8 @@ export class PaginationComponent implements OnInit, OnChanges {
 
   @Input() noOfTotalRecords = 0;
   @Input() loadingData = true;
+  @Input() noOfRecords = 0;
+  @Input() noOfSelectedRow = 0;
   recordsPerPage = 100;
   newRecordsPerPage = 100;
   pages = 0;

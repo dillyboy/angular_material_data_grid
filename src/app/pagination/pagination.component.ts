@@ -21,6 +21,15 @@ export class PaginationComponent implements OnInit, OnChanges {
   currentPage = 1;
   pagesOnDisplay = [];
   pageInfoDisplayText = '';
+  discardSelectionConfirmationObj = {
+    width: '300px',
+    data: {
+      title: 'Discard Selection?',
+      content: 'If you leave this page your selection will get discarded, do you want to proceed anyway?',
+      ok_text: 'PROCEED',
+      cancel_text: 'CANCEL'
+    }
+  } as const;
 
   constructor(public dialog: MatDialog) { }
 
@@ -40,15 +49,7 @@ export class PaginationComponent implements OnInit, OnChanges {
 
   pageChange(pageNo, notify = true): void {
     if (this.noOfSelectedRow > 0) {
-      this.dialog.open(ConfirmationComponent, {
-        width: '300px',
-        data: {
-          title: 'Discard Selection?',
-          content: 'If you leave this page your selection will get discarded, do you want to proceed anyway?',
-          ok_text: 'PROCEED',
-          cancel_text: 'CANCEL'
-        }
-       }).afterClosed().subscribe(result => {
+      this.dialog.open(ConfirmationComponent, this.discardSelectionConfirmationObj).afterClosed().subscribe(result => {
         if (result) {
           this.continuePageChange(pageNo, notify);
         }
@@ -90,7 +91,15 @@ export class PaginationComponent implements OnInit, OnChanges {
   }
 
   recordsPerPageChanged(): void {
-    this.pageChanged.emit({pageNo: 1, recordsPerPage: this.newRecordsPerPage});
+    if (this.noOfSelectedRow > 0) {
+      this.dialog.open(ConfirmationComponent, this.discardSelectionConfirmationObj).afterClosed().subscribe(result => {
+        if (result) {
+          this.pageChanged.emit({pageNo: 1, recordsPerPage: this.newRecordsPerPage});
+        }
+      });
+    } else {
+      this.pageChanged.emit({pageNo: 1, recordsPerPage: this.newRecordsPerPage});
+    }
   }
 
 }

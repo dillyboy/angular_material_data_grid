@@ -3,10 +3,44 @@
 $highlight-color: rgba(246, 246, 246, 1);
 $highlight-dark-color: rgba(118, 118, 118, 0.26);
 
-.grid-container {
+#grid-container {
   background: #eee;
   overflow: hidden;
   font-size: 12px;
+  position: relative;
+
+  .grid-nav-btns {
+    position: absolute;
+    top: 45%;
+    z-index: 1;
+    background-color: rgba(0,0,0,.5);
+    color: white;
+    font-size: 18px;
+    min-width: 40px;
+    padding: 0;
+    height: 50px;
+  }
+
+  .navigate-left-btn {
+    left: 0;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    @extend .grid-nav-btns;
+  }
+
+  .navigate-right-btn {
+    right: 0;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    @extend .grid-nav-btns;
+  }
+
+  .navigate-icons {
+    line-height: 40px;
+    font-size: 40px;
+    height: 40px;
+    width: 40px;
+  }
 
   .horizontal-scroll {
     width: 100%;

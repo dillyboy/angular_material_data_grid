@@ -13,3 +13,20 @@
 .font-bold {
   font-weight: bold;
 }
+
+.position-relative {
+  position: relative !important;
+}
+
+.position-absolute {
+  position: absolute !important;
+  z-index: 2;
+}
+
+.fs-18 {
+  font-size: 18px;
+}
+
+.fs-40 {
+  font-size: 40px;
+}

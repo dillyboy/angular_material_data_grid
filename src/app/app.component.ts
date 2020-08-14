@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import {
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostListener,
+  Renderer2,
+  ViewChild
+} from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ApiResponseModel } from './api-response.model';
 import { MatDialog } from '@angular/material/dialog';
@@ -9,7 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent {
+export class AppComponent implements AfterContentInit{
 
   headings = [ {fieldName: 'uid', display: 'ID', type: 'number', minWidth: '160px', maxWidth: '160px', width: '12.25%', filter: true},
     {fieldName: 'first_name', display: 'First Name', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%'},
@@ -38,11 +47,19 @@ export class AppComponent {
   allGridItemsSelected = false;
   loadingData = true;
   response = { gridData: [], totalCount: 0};
-  moveRight = '0';
   selectionStarted = false;
   selectionTimeoutHandler: any;
   allCheckBoxesSelected = false;
   selectedRows = [];
+  gridWidth = null;
+  scrollRemainingDistanceToLeft = 0;
+  scrollRemainingDistanceToRight = null;
+
+  // Window resize listener
+  @HostListener('window:resize', ['$event'])
+  onResize(event): void {
+    this.calculateGridWidth();
+  }
 
   constructor(private http: HttpClient,
               private changeDetectorRef: ChangeDetectorRef,
@@ -50,8 +67,17 @@ export class AppComponent {
               public dialog: MatDialog) {
   }
 
+  ngAfterContentInit(): void {
+    this.calculateGridWidth();
+  }
+
+  private calculateGridWidth(): void {
+    this.gridWidth = document.getElementById('grid-container').clientWidth;
+  }
+
   scrollChanged(ev): void {
-   this.moveRight = '-' + ev.target.scrollLeft + 'px';
+   this.scrollRemainingDistanceToLeft = ev.target.scrollLeft;
+   this.scrollRemainingDistanceToRight = ev.target.scrollWidth - ev.target.scrollLeft - this.gridWidth;
   }
 
   allGridItemsSelectionChanged(): void {

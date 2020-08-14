@@ -1,6 +1,12 @@
-<div class="grid-container">
+<div id="grid-container">
+  <button *ngIf="scrollRemainingDistanceToLeft !== 0" mat-button aria-label="navigate left" class="navigate-left-btn">
+    <mat-icon class="fs-40 navigate-icons">chevron_left</mat-icon>
+  </button>
+  <button *ngIf="scrollRemainingDistanceToRight !== 0" mat-button aria-label="navigate left" class="navigate-right-btn">
+    <mat-icon class="fs-40 navigate-icons">chevron_right</mat-icon>
+  </button>
   <div class="horizontal-scroll">
-    <table [ngStyle]="{'left': moveRight}" >
+    <table [ngStyle]="{'left': '-' + scrollRemainingDistanceToLeft + 'px'}" >
       <thead>
         <th *ngIf="selection" class="selection"><mat-checkbox [(ngModel)]="allGridItemsSelected" (ngModelChange)="allGridItemsSelectionChanged()"></mat-checkbox></th>
         <th *ngFor="let heading of headings;">{{heading.display}}</th>

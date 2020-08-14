@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { PaginationComponent } from './pagination/pagination.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatCheckboxModule,
     MatButtonModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    DragDropModule
   ],
   entryComponents: [
     ConfirmationComponent

@@ -9,11 +9,11 @@
     <table [ngStyle]="{'left': '-' + scrollRemainingDistanceToLeft + 'px'}" >
       <thead>
         <th *ngIf="selection" class="selection"><mat-checkbox [(ngModel)]="allGridItemsSelected" (ngModelChange)="allGridItemsSelectionChanged()"></mat-checkbox></th>
-        <th *ngFor="let heading of headings;">{{heading.display}}</th>
+        <th *ngFor="let heading of headings | columnFilter;">{{heading.display}}</th>
       </thead>
       <thead>
         <th *ngIf="selection" class="selection"></th>
-        <th *ngFor="let heading of headings;">{{heading.display}}</th>
+        <th *ngFor="let heading of headings | columnFilter;">{{heading.display}}</th>
       </thead>
     </table>
     <mat-progress-bar *ngIf="loadingData" mode="indeterminate"></mat-progress-bar>
@@ -23,7 +23,7 @@
           <tbody (window:mouseup)="endSelect()">
             <tr *cdkVirtualFor="let item of response.gridData; let odd=odd;" (mouseover)="overSelect($event, item)" [ngClass]="{ odd: odd, rowSelected: item.gridItemSelected == true}">
               <td *ngIf="selection" class="selection animated" #selection (mousedown)="startSelect(item, selection)"><mat-checkbox [(ngModel)]="item['gridItemSelected']" (ngModelChange)="gridItemSelectionChanged()"></mat-checkbox></td>
-              <td *ngFor="let heading of headings;">{{item[heading.fieldName]}}</td>
+              <td *ngFor="let heading of headings | columnFilter;">{{item[heading.fieldName]}}</td>
             </tr>
           </tbody>
         </table>

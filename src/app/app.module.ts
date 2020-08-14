@@ -14,12 +14,14 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ColumnFilterPipe } from './pipes/column-filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     PaginationComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    ColumnFilterPipe
   ],
   imports: [
     BrowserModule,

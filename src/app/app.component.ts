@@ -75,6 +75,16 @@ export class AppComponent implements AfterContentInit{
     this.gridWidth = document.getElementById('grid-container').clientWidth;
   }
 
+  scrollLeft(): void {
+    const scrollLeft = document.getElementById('scrollViewport').scrollLeft;
+    document.getElementById('scrollViewport').scrollLeft = scrollLeft - this.gridWidth * 80 / 100;
+  }
+
+  scrollRight(): void {
+    const scrollLeft = document.getElementById('scrollViewport').scrollLeft;
+    document.getElementById('scrollViewport').scrollLeft = this.gridWidth * 80 / 100 + scrollLeft;
+  }
+
   scrollChanged(ev): void {
    this.scrollRemainingDistanceToLeft = ev.target.scrollLeft;
    this.scrollRemainingDistanceToRight = ev.target.scrollWidth - ev.target.scrollLeft - this.gridWidth;

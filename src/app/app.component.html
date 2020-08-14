@@ -1,8 +1,8 @@
 <div id="grid-container">
-  <button *ngIf="scrollRemainingDistanceToLeft !== 0" mat-button aria-label="navigate left" class="navigate-left-btn">
+  <button *ngIf="scrollRemainingDistanceToLeft !== 0" mat-button (click)="scrollLeft()" aria-label="navigate left" class="navigate-left-btn">
     <mat-icon class="fs-40 navigate-icons">chevron_left</mat-icon>
   </button>
-  <button *ngIf="scrollRemainingDistanceToRight !== 0" mat-button aria-label="navigate left" class="navigate-right-btn">
+  <button *ngIf="scrollRemainingDistanceToRight !== 0" mat-button (click)="scrollRight()" aria-label="navigate right" class="navigate-right-btn">
     <mat-icon class="fs-40 navigate-icons">chevron_right</mat-icon>
   </button>
   <div class="horizontal-scroll">

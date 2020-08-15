@@ -42,7 +42,7 @@
 }
 
 #grid-container {
-  margin: 2rem;
+  margin: 1.5rem;
   #column-control-btn {
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
@@ -93,8 +93,7 @@
     .horizontal-scroll {
       width: 100%;
       cdk-virtual-scroll-viewport {
-        min-height: 400px;
-        // height: calc(100vh - 100px);
+        min-height: 300px;
       }
     }
     .vertical-scroll {

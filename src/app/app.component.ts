@@ -54,6 +54,7 @@ export class AppComponent implements AfterContentInit{
   allCheckBoxesSelected = false;
   selectedRows = [];
   gridWidth = null;
+  offsetTop = null;
   scrollRemainingDistanceToLeft = 0;
   scrollRemainingDistanceToRight = null;
 
@@ -74,7 +75,15 @@ export class AppComponent implements AfterContentInit{
   }
 
   private calculateGridWidth(): void {
-    this.gridWidth = document.getElementById('grid-container').clientWidth;
+    const gridContainer = document.getElementById('grid-container');
+    this.gridWidth = gridContainer.clientWidth;
+    const heightOfHeaderAndFooter = 112;
+    const extraSpace = 25;
+    let totalOffset = gridContainer.offsetTop + heightOfHeaderAndFooter + extraSpace;
+    if (this.columnControl) {
+      totalOffset += 24; // heightOfColumnControlBtn
+    }
+    this.offsetTop = totalOffset;
   }
 
   scrollLeft(): void {

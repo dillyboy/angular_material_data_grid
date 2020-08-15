@@ -29,7 +29,9 @@
         </thead>
         <thead>
           <th *ngIf="selection" class="selection"></th>
-          <th *ngFor="let heading of headings | columnFilter;">{{heading.display}}</th>
+          <th *ngFor="let heading of headings | columnFilter;">
+            <app-filter-header [heading]="heading" (filter)="filter($event)"></app-filter-header>
+          </th>
         </thead>
       </table>
       <mat-progress-bar *ngIf="loadingData" mode="indeterminate" class="position-absolute"></mat-progress-bar>

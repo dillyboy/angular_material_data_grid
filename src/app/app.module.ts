@@ -19,6 +19,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatRippleModule } from '@angular/material/core';
 import { SortHeaderComponent } from './sort-header/sort-header.component';
+import { FilterHeaderComponent } from './filter-header/filter-header.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SortHeaderComponent } from './sort-header/sort-header.component';
     PaginationComponent,
     ConfirmationComponent,
     ColumnFilterPipe,
-    SortHeaderComponent
+    SortHeaderComponent,
+    FilterHeaderComponent
   ],
   imports: [
     BrowserModule,

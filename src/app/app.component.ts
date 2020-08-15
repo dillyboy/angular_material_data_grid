@@ -130,6 +130,10 @@ export class AppComponent implements AfterContentInit{
     this.pageChanged({pageNo: 1, recordsPerPage: this.recordsPerPage, ...sortObj});
   }
 
+  filter(ev): void {
+    console.log(ev);
+  }
+
   allGridItemsSelectionChanged(): void {
     this.selectedRows = [];
     this.response.gridData.forEach(item => {

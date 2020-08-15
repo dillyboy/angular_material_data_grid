@@ -2,12 +2,32 @@
   text-align: right;
 }
 
+.m-2 {
+  margin: .5rem !important;
+}
+
+.mt-2 {
+  margin-top: .5rem !important;
+}
+
+.mb-2 {
+  margin-bottom: .5rem !important;
+}
+
 .ml-2 {
   margin-left: .5rem !important;
 }
 
 .mr-2 {
   margin-right: .5rem !important;
+}
+
+.p-2 {
+  padding: .5rem !important;
+}
+
+.p-3 {
+  padding: 1rem !important;
 }
 
 .font-bold {
@@ -21,6 +41,10 @@
 .position-absolute {
   position: absolute !important;
   z-index: 2;
+}
+
+.d-inline-flex {
+  display: inline-flex !important;
 }
 
 .fs-18 {

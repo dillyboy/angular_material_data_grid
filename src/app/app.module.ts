@@ -15,6 +15,8 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ColumnFilterPipe } from './pipes/column-filter.pipe';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { ColumnFilterPipe } from './pipes/column-filter.pipe';
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
-    DragDropModule
+    DragDropModule,
+    MatCardModule,
+    MatMenuModule
   ],
   entryComponents: [
     ConfirmationComponent

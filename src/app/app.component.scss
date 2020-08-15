@@ -3,88 +3,111 @@
 $highlight-color: rgba(246, 246, 246, 1);
 $highlight-dark-color: rgba(118, 118, 118, 0.26);
 
-#grid-container {
-  background: #eee;
-  overflow: hidden;
-  font-size: 12px;
-  position: relative;
-
-  .grid-nav-btns {
-    position: absolute;
-    top: calc(50% - 25px);
-    z-index: 1;
-    background-color: rgba(0,0,0,.5);
-    color: white;
+.column-control-container {
+  width: 380px;
+  padding: 0 9px;
+  div div mat-icon {
     font-size: 18px;
-    min-width: 40px;
-    padding: 0;
-    height: 50px;
-  }
-
-  .navigate-left-btn {
-    left: 0;
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-    @extend .grid-nav-btns;
-  }
-
-  .navigate-right-btn {
-    right: 0;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    @extend .grid-nav-btns;
-  }
-
-  .navigate-icons {
-    line-height: 40px;
-    font-size: 40px;
-    height: 40px;
-    width: 40px;
-  }
-
-  .horizontal-scroll {
-    width: 100%;
-    cdk-virtual-scroll-viewport {
-      height: calc(100vh - 100px);
-    }
-  }
-  .vertical-scroll {
-    overflow-y: auto;
-    height: 100%;
-  }
-
-  table {
-    border-collapse: collapse;
-    background: white;
-    table-layout: fixed;
-    width: 100%;
+    top: 2px;
     position: relative;
-
-    thead {
-      background: $highlight-color;
-    }
+    cursor: move;
   }
-  th, td {
-    padding: 0px 8px;
-    border-left: 1px solid $highlight-dark-color;
-    width: 160px;
+  div div mat-checkbox {
+    margin-right: 9px;
+  }
+}
+
+#grid-container {
+  margin: 2rem;
+  #column-control-btn {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+
+  #grid {
+    background: #eee;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    text-align: start;
-  }
-  tr {
-    &:hover {
-      transition:all ease 0.1s;
-      background-color: $highlight-dark-color;
-    }
-    &.rowSelected {
-      background: rgba(0, 153, 255, 0.3) !important;
-    }
-  }
+    font-size: 12px;
+    position: relative;
+    padding: 0px;
 
-  .odd {
-    background-color: $highlight-color;
+    .grid-nav-btns {
+      position: absolute;
+      top: calc(50% - 25px);
+      z-index: 1;
+      background-color: rgba(0,0,0,.5);
+      color: white;
+      font-size: 18px;
+      min-width: 40px;
+      padding: 0;
+      height: 50px;
+    }
+
+    .navigate-left-btn {
+      left: 0;
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+      @extend .grid-nav-btns;
+    }
+
+    .navigate-right-btn {
+      right: 0;
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
+      @extend .grid-nav-btns;
+    }
+
+    .navigate-icons {
+      line-height: 40px;
+      font-size: 40px;
+      height: 40px;
+      width: 40px;
+    }
+
+    .horizontal-scroll {
+      width: 100%;
+      cdk-virtual-scroll-viewport {
+        height: calc(100vh - 100px);
+      }
+    }
+    .vertical-scroll {
+      overflow-y: auto;
+      height: 100%;
+    }
+
+    table {
+      border-collapse: collapse;
+      background: white;
+      table-layout: fixed;
+      width: 100%;
+      position: relative;
+
+      thead {
+        background: $highlight-color;
+      }
+    }
+    th, td {
+      padding: 0px 8px;
+      border-left: 1px solid $highlight-dark-color;
+      width: 160px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      text-align: start;
+    }
+    tr {
+      &:hover {
+        transition:all ease 0.1s;
+        background-color: $highlight-dark-color;
+      }
+      &.rowSelected {
+        background: rgba(0, 153, 255, 0.3) !important;
+      }
+    }
+
+    .odd {
+      background-color: $highlight-color;
+    }
   }
 }
 
@@ -94,6 +117,10 @@ $highlight-dark-color: rgba(118, 118, 118, 0.26);
 
 #scrollViewport {
   scroll-behavior: smooth;
+}
+
+.grid-container {
+  margin: 2rem;
 }
 
 @include pulse-animation();

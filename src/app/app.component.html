@@ -1,36 +1,52 @@
+
 <div id="grid-container">
-  <button *ngIf="scrollRemainingDistanceToLeft !== 0" mat-button (click)="scrollLeft()" aria-label="navigate left" class="navigate-left-btn">
-    <mat-icon class="fs-40 navigate-icons">chevron_left</mat-icon>
-  </button>
-  <button *ngIf="scrollRemainingDistanceToRight !== 0" mat-button (click)="scrollRight()" aria-label="navigate right" class="navigate-right-btn">
-    <mat-icon class="fs-40 navigate-icons">chevron_right</mat-icon>
-  </button>
-  <div class="horizontal-scroll">
-    <table [ngStyle]="{'left': '-' + scrollRemainingDistanceToLeft + 'px'}" >
-      <thead>
-        <th *ngIf="selection" class="selection"><mat-checkbox [(ngModel)]="allGridItemsSelected" (ngModelChange)="allGridItemsSelectionChanged()"></mat-checkbox></th>
-        <th *ngFor="let heading of headings | columnFilter;">{{heading.display}}</th>
-      </thead>
-      <thead>
-        <th *ngIf="selection" class="selection"></th>
-        <th *ngFor="let heading of headings | columnFilter;">{{heading.display}}</th>
-      </thead>
-    </table>
-    <mat-progress-bar *ngIf="loadingData" mode="indeterminate"></mat-progress-bar>
-    <cdk-virtual-scroll-viewport id="scrollViewport" [itemSize]="20" (scroll)="scrollChanged($event)">
-      <div class="vertical-scroll">
-        <table>
-          <tbody (window:mouseup)="endSelect()">
-            <tr *cdkVirtualFor="let item of response.gridData; let odd=odd;" (mouseover)="overSelect($event, item)" [ngClass]="{ odd: odd, rowSelected: item.gridItemSelected == true}">
-              <td *ngIf="selection" class="selection animated" #selection (mousedown)="startSelect(item, selection)"><mat-checkbox [(ngModel)]="item['gridItemSelected']" (ngModelChange)="gridItemSelectionChanged()"></mat-checkbox></td>
-              <td *ngFor="let heading of headings | columnFilter;">{{item[heading.fieldName]}}</td>
-            </tr>
-          </tbody>
-        </table>
+  <button mat-raised-button id="column-control-btn" [matMenuTriggerFor]="columnControl">Column Control<mat-icon>expand_more</mat-icon></button>
+  <mat-menu #columnControl="matMenu">
+    <div class="column-control-container" (click)="$event.stopPropagation()">
+      <div *ngFor="let heading of headings">
+        <div class="d-inline-flex">
+          <mat-icon>drag_indicator</mat-icon>
+          <mat-checkbox *ngIf="heading.show === undefined" disabled checked="true"></mat-checkbox>
+          <mat-checkbox *ngIf="heading.show !== undefined" [(ngModel)]="heading.show" (ngModelChange)="showHideColumn()"></mat-checkbox>
+          {{heading.display}}
+        </div>
       </div>
-    </cdk-virtual-scroll-viewport>
-  </div>
+    </div>
+  </mat-menu>
+  <mat-card id="grid">
+    <button *ngIf="scrollRemainingDistanceToLeft !== 0" mat-button (click)="scrollLeft()" aria-label="navigate left" class="navigate-left-btn">
+      <mat-icon class="fs-40 navigate-icons">chevron_left</mat-icon>
+    </button>
+    <button *ngIf="scrollRemainingDistanceToRight !== 0" mat-button (click)="scrollRight()" aria-label="navigate right" class="navigate-right-btn">
+      <mat-icon class="fs-40 navigate-icons">chevron_right</mat-icon>
+    </button>
+    <div class="horizontal-scroll">
+      <table [ngStyle]="{'left': '-' + scrollRemainingDistanceToLeft + 'px'}" >
+        <thead>
+          <th *ngIf="selection" class="selection"><mat-checkbox [(ngModel)]="allGridItemsSelected" (ngModelChange)="allGridItemsSelectionChanged()"></mat-checkbox></th>
+          <th *ngFor="let heading of headings | columnFilter;">{{heading.display}}</th>
+        </thead>
+        <thead>
+          <th *ngIf="selection" class="selection"></th>
+          <th *ngFor="let heading of headings | columnFilter;">{{heading.display}}</th>
+        </thead>
+      </table>
+      <mat-progress-bar *ngIf="loadingData" mode="indeterminate"></mat-progress-bar>
+      <cdk-virtual-scroll-viewport id="scrollViewport" [itemSize]="20" (scroll)="scrollChanged($event)">
+        <div class="vertical-scroll">
+          <table>
+            <tbody (window:mouseup)="endSelect()">
+              <tr *cdkVirtualFor="let item of response.gridData; let odd=odd;" (mouseover)="overSelect($event, item)" [ngClass]="{ odd: odd, rowSelected: item.gridItemSelected == true}">
+                <td *ngIf="selection" class="selection animated" #selection (mousedown)="startSelect(item, selection)"><mat-checkbox [(ngModel)]="item['gridItemSelected']" (ngModelChange)="gridItemSelectionChanged()"></mat-checkbox></td>
+                <td *ngFor="let heading of headings | columnFilter;">{{item[heading.fieldName]}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </cdk-virtual-scroll-viewport>
+    </div>
 
-  <app-pagination [loadingData]="loadingData" [noOfTotalRecords]="response.totalCount" [noOfRecords]="response.gridData.length" [noOfSelectedRow]="selectedRows.length" (pageChanged)="pageChanged($event)"></app-pagination>
+    <app-pagination [loadingData]="loadingData" [noOfTotalRecords]="response.totalCount" [noOfRecords]="response.gridData.length" [noOfSelectedRow]="selectedRows.length" (pageChanged)="pageChanged($event)"></app-pagination>
 
+  </mat-card>
 </div>

@@ -32,7 +32,7 @@ export class AppComponent implements AfterContentInit{
     {fieldName: 'movie_taste', display: 'Movie Taste', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%', show: false},
     {fieldName: 'country', display: 'Country', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%',
       filterType: 'multi-select', other: { selectionMode: 'multiple', source: 'external', url: `countries`,
-        key: 'displayName', value: 'value', stringList: true}, show: false},
+        key: 'displayName', value: 'value', stringList: true}, show: true},
     {fieldName: 'city', display: 'City', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%', show: false},
     {fieldName: 'company', display: 'Company', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%', show: false},
     {fieldName: 'iban', display: 'Iban', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%', show: false},
@@ -88,6 +88,10 @@ export class AppComponent implements AfterContentInit{
   scrollChanged(ev): void {
    this.scrollRemainingDistanceToLeft = ev.target.scrollLeft;
    this.scrollRemainingDistanceToRight = ev.target.scrollWidth - ev.target.scrollLeft - this.gridWidth;
+  }
+
+  showHideColumn(): void {
+    this.headings = [...this.headings]; // to run change detection in the virtual scroll need to reassign a fresh copy
   }
 
   allGridItemsSelectionChanged(): void {

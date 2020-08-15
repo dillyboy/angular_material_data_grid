@@ -1,3 +1,5 @@
+@import 'variables';
+
 .layout-container {
   display: flex;
   justify-content: space-between;
@@ -88,4 +90,12 @@
 
 .hidden {
   display: none !important;
+}
+
+.primary-color {
+  color: $primary;
+}
+
+.accent-color {
+  color: $accent;
 }

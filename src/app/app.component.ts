@@ -21,7 +21,8 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 })
 export class AppComponent implements AfterContentInit{
 
-  headings = [ {fieldName: 'uid', display: 'ID', type: 'number', minWidth: '160px', maxWidth: '160px', width: '12.25%', filter: true},
+  headings: any = [ {fieldName: 'uid', display: 'ID', type: 'number', minWidth: '160px', maxWidth: '160px', width: '12.25%', filter: true,
+    disableSorting: true},
     {fieldName: 'first_name', display: 'First Name', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%'},
     {fieldName: 'email', display: 'Email', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%'},
     {fieldName: 'gender', display: 'Gender', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%',
@@ -48,6 +49,7 @@ export class AppComponent implements AfterContentInit{
   allGridItemsSelected = false;
   loadingData = true;
   response = { gridData: [], totalCount: 0};
+  recordsPerPage = 0;
   columnControl = true;
   selectionStarted = false;
   selectionTimeoutHandler: any;
@@ -110,6 +112,22 @@ export class AppComponent implements AfterContentInit{
   columnDrop(ev): void {
     moveItemInArray(this.headings, ev.previousIndex, ev.currentIndex);
     this.updateColumns();
+  }
+
+  sort(ev): void {
+    let index = null;
+    this.headings.forEach((heading: any, i) => {
+      if (heading.fieldName === ev.fieldName) {
+        index = i;
+      } else {
+        heading.sort = null;
+      }
+    });
+    const sortObj = {
+      sort: this.headings[index]?.sort,
+      sortField: this.headings[index]?.sort ? this.headings[index]?.fieldName : null
+    };
+    this.pageChanged({pageNo: 1, recordsPerPage: this.recordsPerPage, ...sortObj});
   }
 
   allGridItemsSelectionChanged(): void {
@@ -175,13 +193,16 @@ export class AppComponent implements AfterContentInit{
   }
 
   // page change event
-  pageChanged({pageNo, recordsPerPage}): void {
+  pageChanged({pageNo, recordsPerPage, sort = null, sortField = null}): void {
+    this.recordsPerPage = recordsPerPage;
     this.loadingData = true;
     const url = 'https://angular-grid.herokuapp.com/getUsers';
     const body = {
       entity: {},
       page: pageNo,
-      perPage: recordsPerPage
+      perPage: recordsPerPage,
+      sort,
+      sortField
     };
     console.log(body);
 

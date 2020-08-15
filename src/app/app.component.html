@@ -23,14 +23,16 @@
       <table [ngStyle]="{'left': '-' + scrollRemainingDistanceToLeft + 'px'}" >
         <thead>
           <th *ngIf="selection" class="selection"><mat-checkbox [(ngModel)]="allGridItemsSelected" (ngModelChange)="allGridItemsSelectionChanged()"></mat-checkbox></th>
-          <th *ngFor="let heading of headings | columnFilter;">{{heading.display}}</th>
+          <th *ngFor="let heading of headings | columnFilter;">
+            <app-sort-header [heading]="heading" (filter)="sort($event)"></app-sort-header>
+          </th>
         </thead>
         <thead>
           <th *ngIf="selection" class="selection"></th>
           <th *ngFor="let heading of headings | columnFilter;">{{heading.display}}</th>
         </thead>
       </table>
-      <mat-progress-bar *ngIf="loadingData" mode="indeterminate"></mat-progress-bar>
+      <mat-progress-bar *ngIf="loadingData" mode="indeterminate" class="position-absolute"></mat-progress-bar>
       <cdk-virtual-scroll-viewport id="scrollViewport" [itemSize]="20" (scroll)="scrollChanged($event)">
         <div class="vertical-scroll">
           <table>

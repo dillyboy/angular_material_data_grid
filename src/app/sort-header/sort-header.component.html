@@ -1,0 +1,9 @@
+<div class="layout-container" [ngStyle]="{'cursor': heading.disableSorting ? 'default': 'pointer'}" matRipple [matRippleDisabled]="heading.disableSorting" (click)="sort()">
+    <span> {{heading.display}}</span>
+    <ng-container *ngIf="!heading.disableSorting">
+        <mat-icon *ngIf="!heading.sort" class="fs-12">sort</mat-icon>
+        <mat-icon *ngIf="heading.sort === 'asc'"  class="fs-12">keyboard_arrow_up</mat-icon>
+        <mat-icon *ngIf="heading.sort === 'desc'" class="fs-12">keyboard_arrow_down</mat-icon>
+    </ng-container>
+</div>
+

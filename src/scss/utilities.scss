@@ -1,5 +1,16 @@
+.layout-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8px;
+}
+
 .text-right {
   text-align: right;
+}
+
+.m-0 {
+  margin: 0 !important;
 }
 
 .m-2 {
@@ -26,6 +37,10 @@
   margin-right: .5rem !important;
 }
 
+.p-0 {
+  padding: 0 !important;
+}
+
 .p-2 {
   padding: .5rem !important;
 }
@@ -40,6 +55,10 @@
 
 .position-relative {
   position: relative !important;
+}
+
+.position-absolute {
+  position: absolute !important;
 }
 
 .position-absolute {

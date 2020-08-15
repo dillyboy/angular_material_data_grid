@@ -87,13 +87,24 @@ export class AppComponent implements AfterContentInit{
     document.getElementById('scrollViewport').scrollLeft = this.gridWidth * 80 / 100 + scrollLeft;
   }
 
-  scrollChanged(ev): void {
-   this.scrollRemainingDistanceToLeft = ev.target.scrollLeft;
-   this.scrollRemainingDistanceToRight = ev.target.scrollWidth - ev.target.scrollLeft - this.gridWidth;
+  scrollChanged(ev?): void {
+    let elem = null;
+    if (ev) {
+      elem = ev.target;
+    } else {
+      elem = document.getElementById('scrollViewport') as HTMLElement;
+    }
+    this.scrollRemainingDistanceToLeft = elem.scrollLeft;
+    this.scrollRemainingDistanceToRight = elem.scrollWidth - elem.scrollLeft - this.gridWidth;
   }
 
   updateColumns(): void {
     this.headings = [...this.headings]; // to run change detection in the virtual scroll need to reassign a fresh copy
+    setTimeout(() => {
+      this.scrollChanged(); // this is done to recalculate scrollRemainingDistanceToLeft & scrollRemainingDistanceToRight
+                            // values which helps to show the auto scroll navigate buttons
+      this.changeDetectorRef.detectChanges();
+    }, 100);
   }
 
   columnDrop(ev): void {

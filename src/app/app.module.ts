@@ -17,9 +17,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ColumnFilterPipe } from './pipes/column-filter.pipe';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatRippleModule } from '@angular/material/core';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { SortHeaderComponent } from './sort-header/sort-header.component';
 import { FilterHeaderComponent } from './filter-header/filter-header.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,9 @@ import { FilterHeaderComponent } from './filter-header/filter-header.component';
     DragDropModule,
     MatCardModule,
     MatMenuModule,
-    MatRippleModule
+    MatRippleModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   entryComponents: [
     ConfirmationComponent

@@ -1,8 +1,11 @@
+@import "../../scss/variables";
+
 .layout-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 8px;
+  padding: 0 8px;
+  border-top: 1px solid $highlight-color;
 
   .buttons-container {
     color: gray;

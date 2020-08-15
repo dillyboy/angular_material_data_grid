@@ -1,4 +1,3 @@
-
 <div id="grid-container">
   <button *ngIf="columnControl" mat-raised-button id="column-control-btn" [matMenuTriggerFor]="columnControlMenu">Column Control<mat-icon>expand_more</mat-icon></button>
   <mat-menu #columnControlMenu="matMenu">
@@ -47,6 +46,5 @@
     </div>
 
     <app-pagination [loadingData]="loadingData" [noOfTotalRecords]="response.totalCount" [noOfRecords]="response.gridData.length" [noOfSelectedRow]="selectedRows.length" (pageChanged)="pageChanged($event)"></app-pagination>
-
   </mat-card>
 </div>

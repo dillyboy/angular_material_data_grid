@@ -1,7 +1,5 @@
+@import "../scss/variables";
 @import "../scss/animations";
-
-$highlight-color: rgba(246, 246, 246, 1);
-$highlight-dark-color: rgba(118, 118, 118, 0.26);
 
 .column-control-container {
   width: 260px;
@@ -94,7 +92,8 @@ $highlight-dark-color: rgba(118, 118, 118, 0.26);
     .horizontal-scroll {
       width: 100%;
       cdk-virtual-scroll-viewport {
-        height: calc(100vh - 100px);
+        min-height: 400px;
+        // height: calc(100vh - 100px);
       }
     }
     .vertical-scroll {

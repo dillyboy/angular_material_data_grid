@@ -11,6 +11,7 @@ import {
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ApiResponseModel } from './api-response.model';
 import { MatDialog } from '@angular/material/dialog';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-root',
@@ -47,6 +48,7 @@ export class AppComponent implements AfterContentInit{
   allGridItemsSelected = false;
   loadingData = true;
   response = { gridData: [], totalCount: 0};
+  columnControl = true;
   selectionStarted = false;
   selectionTimeoutHandler: any;
   allCheckBoxesSelected = false;
@@ -90,8 +92,13 @@ export class AppComponent implements AfterContentInit{
    this.scrollRemainingDistanceToRight = ev.target.scrollWidth - ev.target.scrollLeft - this.gridWidth;
   }
 
-  showHideColumn(): void {
+  updateColumns(): void {
     this.headings = [...this.headings]; // to run change detection in the virtual scroll need to reassign a fresh copy
+  }
+
+  columnDrop(ev): void {
+    moveItemInArray(this.headings, ev.previousIndex, ev.currentIndex);
+    this.updateColumns();
   }
 
   allGridItemsSelectionChanged(): void {

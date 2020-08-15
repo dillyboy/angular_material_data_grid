@@ -4,17 +4,43 @@ $highlight-color: rgba(246, 246, 246, 1);
 $highlight-dark-color: rgba(118, 118, 118, 0.26);
 
 .column-control-container {
-  width: 380px;
+  width: 260px;
   padding: 0 9px;
+  min-height: 60px;
+  display: block;
+  border-radius: 4px;
+  overflow: hidden;
   div div mat-icon {
     font-size: 18px;
     top: 2px;
     position: relative;
     cursor: move;
   }
-  div div mat-checkbox {
-    margin-right: 9px;
-  }
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+  0 8px 10px 1px rgba(0, 0, 0, 0.14),
+  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  background: white;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.column-control-container:last-child {
+  border: none;
+}
+
+.column-control-container.cdk-drop-list-dragging .column-item:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 #grid-container {
@@ -22,10 +48,11 @@ $highlight-dark-color: rgba(118, 118, 118, 0.26);
   #column-control-btn {
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
+    padding: 0 10px;
+    line-height: inherit;
   }
 
   #grid {
-    background: #eee;
     overflow: hidden;
     font-size: 12px;
     position: relative;
@@ -77,7 +104,6 @@ $highlight-dark-color: rgba(118, 118, 118, 0.26);
 
     table {
       border-collapse: collapse;
-      background: white;
       table-layout: fixed;
       width: 100%;
       position: relative;

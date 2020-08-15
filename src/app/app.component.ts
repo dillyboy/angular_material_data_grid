@@ -25,7 +25,7 @@ export class AppComponent implements AfterContentInit{
     {fieldName: 'email', display: 'Email', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%'},
     {fieldName: 'gender', display: 'Gender', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%',
       filterType: 'multi-select', other: { selectionMode: 'single', source: 'internal', url: 'gender', stringList: true}},
-    {fieldName: 'date_of_birth', display: 'Date Of Birth', type: 'date-range', minWidth: '160px', maxWidth: '160px', width: '12.25%'},
+    {fieldName: 'date_of_birth', display: 'Date Of Birth', type: 'date', minWidth: '160px', maxWidth: '160px', width: '12.25%'},
     {fieldName: 'ip_address', display: 'IP Address', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%'},
     {fieldName: 'car', display: 'Car', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%'},
     {fieldName: 'phone', display: 'Phone', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%'},

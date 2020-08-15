@@ -7,7 +7,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { HttpClientModule } from '@angular/common/http';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { PaginationComponent } from './pagination/pagination.component';
@@ -21,6 +21,7 @@ import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { SortHeaderComponent } from './sort-header/sort-header.component';
 import { FilterHeaderComponent } from './filter-header/filter-header.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     HttpClientModule,
     ScrollingModule,
     FormsModule,
+    ReactiveFormsModule,
     MatProgressBarModule,
     MatCheckboxModule,
     MatButtonModule,
@@ -47,7 +49,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatMenuModule,
     MatRippleModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTooltipModule
   ],
   entryComponents: [
     ConfirmationComponent

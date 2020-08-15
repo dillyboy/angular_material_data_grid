@@ -112,6 +112,10 @@
         background: $highlight-color;
       }
     }
+    th {
+      border-bottom: 1px solid $highlight-dark-color;
+      height: 34px;
+    }
     th, td {
       padding: 0px 8px;
       border-left: 1px solid $highlight-dark-color;

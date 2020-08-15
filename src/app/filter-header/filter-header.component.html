@@ -1,1 +1,19 @@
-<span>filter placeholder</span>
+<div class="filter-component">
+    <ng-container *ngIf="heading.type == 'date' && heading.disableFiltering !== true">
+        <input *ngIf="filterParam === 'Filter Applied'" readonly class="date-range-input date-range-input-empty" type="text" name="filter" value="Is Empty">
+        <input *ngIf="filterParam !== 'Filter Applied'" readonly class="date-range-input" type="text" [(ngModel)]="filterParam" name="filter" (click)="picker.open()">
+        <button mat-icon-button type="button" class="elem-right-margin" matTooltip="Is Empty" [disabled]="filterParam === 'Filter Applied'" (click)="applyFilter('blank')">
+            <mat-icon class="material-icons-outlined">more_horiz</mat-icon>
+        </button>
+        <button mat-icon-button type="button" *ngIf="filterParam.length != 0" matTooltip="Remove" (click)="removeFilter()">
+            <mat-icon class="material-icons-outlined">cancel</mat-icon>
+        </button>
+        <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+            <input class="hidden" matStartDate formControlName="start" placeholder="Start date">
+            <input class="hidden" matEndDate formControlName="end" placeholder="End date" (dateChange)="dateRangeChange()">
+        </mat-date-range-input>
+        <mat-datepicker-toggle class="hidden" matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker class="hidden" #picker></mat-date-range-picker>
+    </ng-container>
+
+</div>

@@ -1,9 +1,9 @@
 <div class="layout-container" [ngStyle]="{'cursor': heading.disableSorting ? 'default': 'pointer'}" matRipple [matRippleDisabled]="heading.disableSorting" (click)="sort()">
-    <span class="font-weight-bold"> {{heading.display}}</span>
+    <span id="header-text" class="text-truncate"> {{heading.display}}</span>
     <ng-container *ngIf="!heading.disableSorting">
-        <mat-icon *ngIf="!heading.sort"           class="fs-12">sort</mat-icon>
-        <mat-icon *ngIf="heading.sort === 'asc'"  class="fs-12 accent-color">keyboard_arrow_up</mat-icon>
-        <mat-icon *ngIf="heading.sort === 'desc'" class="fs-12 accent-color">keyboard_arrow_down</mat-icon>
+        <mat-icon *ngIf="!heading.sort"           class="fs-12" matTooltip="Sort Ascending">sort</mat-icon>
+        <mat-icon *ngIf="heading.sort === 'asc'"  class="fs-12 accent-color" matTooltip="Sort Descending">keyboard_arrow_up</mat-icon>
+        <mat-icon *ngIf="heading.sort === 'desc'" class="fs-12 accent-color" matTooltip="Remove Sort">keyboard_arrow_down</mat-icon>
     </ng-container>
 </div>
 

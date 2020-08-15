@@ -1,11 +1,11 @@
 <div class="filter-component">
     <ng-container *ngIf="heading.type == 'date' && heading.disableFiltering !== true">
         <input *ngIf="filterParam === 'Filter Applied'" readonly class="date-range-input date-range-input-empty" type="text" name="filter" value="Is Empty">
-        <input *ngIf="filterParam !== 'Filter Applied'" readonly class="date-range-input" type="text" [(ngModel)]="filterParam" name="filter" (click)="picker.open()">
+        <input *ngIf="filterParam !== 'Filter Applied'" readonly class="date-range-input" type="text" [(ngModel)]="filterParam" [matTooltip]="filterParam" name="filter" (click)="picker.open()">
         <button mat-icon-button type="button" class="elem-right-margin" matTooltip="Is Empty" [disabled]="filterParam === 'Filter Applied'" (click)="applyFilter('blank')">
             <mat-icon class="material-icons-outlined">more_horiz</mat-icon>
         </button>
-        <button mat-icon-button type="button" *ngIf="filterParam.length != 0" matTooltip="Remove" (click)="removeFilter()">
+        <button mat-icon-button type="button" *ngIf="filterParam.length !== 0" matTooltip="Remove" (click)="removeFilter()">
             <mat-icon class="material-icons-outlined">cancel</mat-icon>
         </button>
         <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
@@ -14,6 +14,28 @@
         </mat-date-range-input>
         <mat-datepicker-toggle class="hidden" matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker class="hidden" #picker></mat-date-range-picker>
+    </ng-container>
+
+    <ng-container *ngIf="heading.type === 'string' && heading.filterType !== 'multi-select' && heading.disableFiltering !== true">
+        <input class="" type="text" name="filter" [(ngModel)]="filterParam" [ngClass]="{'font-weight-bold accent-color': filterApplied}" (keyup)="changeStringFilter($event)">
+        <button mat-icon-button type="button" class="elem-right-margin" matTooltip="Filtration Logic" [matMenuTriggerFor]="stringFilterMenu">
+            <mat-icon class="material-icons-outlined">filter_alt</mat-icon>
+        </button>
+        <button mat-icon-button type="button" *ngIf="filterParam.length !== 0" matTooltip="Remove" (click)="removeFilter()">
+            <mat-icon class="material-icons-outlined">cancel</mat-icon>
+        </button>
+
+        <mat-menu #stringFilterMenu="matMenu" xPosition="before">
+            <button mat-menu-item *ngFor="let item of stringFilterTypes" [ngClass]="{'highlight-filter': selectedStringFilterType === item.key}" (click)="selectedStringFilterType = item.key;createFilterObj()">{{item.display}}</button>
+        </mat-menu>
+    </ng-container>
+
+    <ng-container *ngIf="heading.type === 'string' && heading.filterType === 'multi-select' && heading.disableFiltering !== true">
+        <app-multi-select class="w-100"></app-multi-select>
+    </ng-container>
+
+    <ng-container *ngIf="heading.type === 'number' && heading.disableFiltering !== true">
+        <app-number-filter class="w-100"></app-number-filter>
     </ng-container>
 
 </div>

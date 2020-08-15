@@ -1,7 +1,7 @@
 @import 'variables';
 
 .layout-container {
-  display: flex;
+  display: flex !important;
   justify-content: space-between;
   align-items: center;
   padding: 0 8px;
@@ -51,10 +51,6 @@
   padding: .75rem !important;
 }
 
-.font-bold {
-  font-weight: bold;
-}
-
 .position-relative {
   position: relative !important;
 }
@@ -80,12 +76,20 @@
   font-size: 40px;
 }
 
+.font-italic {
+  font-style: italic !important;
+}
+
+.w-100 {
+  width: 100% !important;
+}
+
 .font-weight-normal {
   font-weight: normal;
 }
 
 .font-weight-bold {
-  font-weight: bold;
+  font-weight: bold !important;
 }
 
 .hidden {
@@ -98,4 +102,21 @@
 
 .accent-color {
   color: $accent;
+}
+
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mat-menu-item {
+  height: 26px !important;
+  line-height: 26px !important;
+  font-size: 12px !important;
+}
+
+.mat-option {
+  height: 26px !important;
+  padding: 0 10px !important;
 }

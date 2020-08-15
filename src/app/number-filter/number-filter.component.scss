@@ -1,0 +1,12 @@
+.mat-stroked-button {
+  line-height: 26px;
+  font-size: 12px;
+  padding: 0 4px;
+  width: 100%;
+  background: white;
+  ::ng-deep .mat-button-wrapper {
+    display: flex !important;
+    justify-content: space-between;
+    width: 100%;
+  }
+}

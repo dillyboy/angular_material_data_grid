@@ -8,9 +8,30 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class FilterHeaderComponent implements OnInit {
 
-  @Input() heading: any = { display: null, type: 'string', sort: '', disableSorting: false, disableFiltering: false};
+  @Input() heading: any = { display: null, type: 'string', sort: '', filterType: null, disableSorting: false, disableFiltering: false};
   @Output() filter = new EventEmitter();
   filterParam = '';
+  filterApplied = false;
+
+  stringFilterTypes = [
+    {key: 'eq', display: 'Is equal to'},
+    {key: 'neq', display: 'Is not equal to'},
+    {key: 'contains', display: 'Contains'},
+    {key: 'startswith', display: 'Starts with'},
+    {key: 'endswith', display: 'Ends with'},
+    {key: 'blank', display: 'Is Empty'},
+  ];
+
+  selectedStringFilterType = 'contains';
+
+  numericFilterTypes = [
+    {key: 'eq', display: 'Is equal to', selected: false},
+    {key: 'neq', display: 'Is not equal to', selected: false},
+    {key: 'greaterorequal', display: 'Is greater than or equal to', selected: false},
+    {key: 'greaterthan', display: 'Is greater than', selected: false},
+    {key: 'lessthanorequal', display: 'Is less than or equal to', selected: false},
+    {key: 'lessthan', display: 'Is less than', selected: false}
+  ];
 
   range = new FormGroup({
     start: new FormControl(),
@@ -27,10 +48,31 @@ export class FilterHeaderComponent implements OnInit {
     this.filterParam = 'Filter Applied';
   }
 
+  changeFilterOperator(): void {
+
+  }
+
+  changeStringFilter(ev): void {
+    if (ev.code === 'Enter') {
+      this.createFilterObj();
+    } else {
+      this.filterApplied = false;
+    }
+  }
+
+  createFilterObj(): void {
+    if (this.filterParam) {
+      const filterObj = {fieldName: this.heading.fieldName, operator: this.selectedStringFilterType, value: this.filterParam};
+      console.log(filterObj);
+      this.filterApplied = true;
+    }
+  }
+
   removeFilter(): void {
     this.range.controls.start.setValue(null);
     this.range.controls.end.setValue(null);
     this.filterParam = '';
+    this.filterApplied = false;
   }
 
   dateRangeChange(): void {

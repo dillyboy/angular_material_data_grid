@@ -22,6 +22,9 @@ import { SortHeaderComponent } from './sort-header/sort-header.component';
 import { FilterHeaderComponent } from './filter-header/filter-header.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSelectModule } from '@angular/material/select';
+import { MultiSelectComponent } from './multi-select/multi-select.component';
+import { NumberFilterComponent } from './number-filter/number-filter.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ConfirmationComponent,
     ColumnFilterPipe,
     SortHeaderComponent,
-    FilterHeaderComponent
+    FilterHeaderComponent,
+    MultiSelectComponent,
+    NumberFilterComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +55,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatRippleModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSelectModule
   ],
   entryComponents: [
     ConfirmationComponent

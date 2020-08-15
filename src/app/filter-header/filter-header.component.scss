@@ -6,6 +6,10 @@
   line-height: 26px;
   border-radius: 2px;
   font-weight: 400;
+
+  mat-icon {
+    opacity: .6;
+  }
 }
 
 .filter-component {
@@ -28,7 +32,7 @@
   }
 }
 input, select {
-  border-radius: 2px;
+  border-radius: 4px;
   padding: 0 4px;
   box-sizing: border-box;
   border: 1px solid $highlight-dark-color;
@@ -44,15 +48,20 @@ input, select {
   min-width: 55px;
   height: 26px !important;
   font-weight: 300;
+  margin-right: 8px !important;
   &.date-range-input {
     width: calc(100% - 68px);
-    margin-right: 8px !important;
 
     &.date-range-input-empty {
       font-size: 12px;
       font-weight: bold;
-      // color: $accent-color;
+      color: $accent;
       padding-left: 10px;
     }
   }
+}
+
+.highlight-filter {
+  background: $accent;
+  color: white;
 }

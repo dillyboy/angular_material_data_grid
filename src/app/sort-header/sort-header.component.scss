@@ -1,4 +1,9 @@
 .layout-container {
   margin: 0 -8px;
   height: 35px;
+
+  #header-text {
+    font-weight: bold;
+    max-width: calc(100% - 28px);
+  }
 }

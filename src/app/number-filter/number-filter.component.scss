@@ -1,3 +1,9 @@
+@import "../../scss/variables";
+
+.placeholder {
+  color: $placeholder-color;
+}
+
 .mat-stroked-button {
   line-height: 26px;
   font-size: 12px;
@@ -7,6 +13,17 @@
   ::ng-deep .mat-button-wrapper {
     display: flex !important;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
   }
 }
+
+.mat-select-arrow {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid;
+  margin: 0 4px;
+}
+

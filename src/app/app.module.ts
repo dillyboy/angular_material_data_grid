@@ -15,6 +15,7 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ColumnFilterPipe } from './pipes/column-filter.pipe';
+import { SearchPipe } from './pipes/search.pipe';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
@@ -32,6 +33,7 @@ import { NumberFilterComponent } from './number-filter/number-filter.component';
     PaginationComponent,
     ConfirmationComponent,
     ColumnFilterPipe,
+    SearchPipe,
     SortHeaderComponent,
     FilterHeaderComponent,
     MultiSelectComponent,

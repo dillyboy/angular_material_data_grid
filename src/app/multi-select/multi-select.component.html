@@ -1,20 +1,20 @@
-<mat-select #mySelect [formControl]="toppings" multiple>
+<mat-select placeholder="None Selected" #mySelect [formControl]="selection" [multiple]="multiple" xPosition="after" (selectionChange)="selectionChange()">
     <mat-select-trigger>
-        {{toppings.value ? toppings.value[0] : ''}}
-        <span *ngIf="toppings.value?.length > 1" class="additional-selection">
-        (+{{toppings.value.length - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
+        {{selection.value ? selection.value[0]?.text || selection.value.text : ''}}
+        <span *ngIf="selection.value?.length > 1" class="additional-selection">
+        (+{{selection.value.length - 1}} {{selection.value?.length === 2 ? 'other' : 'others'}})
       </span>
     </mat-select-trigger>
     <div class="layout-container mt-2">
         <div>
-            <button mat-stroked-button type="button" (click)="close()" class="mr-2 mat-primary">Filter</button>
-            <button mat-stroked-button type="button" (click)="toggle()" class="mat-accent">Select {{allSelected ? 'None': 'All'}}</button>
+            <button *ngIf="multiple" mat-stroked-button type="button" (click)="close()" class="mr-2 mat-primary">Filter</button>
+            <button *ngIf="multiple" mat-stroked-button type="button" (click)="toggle()" class="mat-accent">Select {{allSelected ? 'None': 'All'}}</button>
         </div>
 
         <button mat-stroked-button type="button" class="mat-warn">Reset</button>
     </div>
-    <input class="" placeholder="Search..."/>
-    <div style="max-height: 180px;overflow-y: scroll">
-        <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+    <input class="" placeholder="Search..." [(ngModel)]="searchFilter"/>
+    <div id="list-container" >
+        <mat-option *ngFor="let item of selectionList | search:searchFilter" [value]="item">{{item.text}}</mat-option>
     </div>
 </mat-select>

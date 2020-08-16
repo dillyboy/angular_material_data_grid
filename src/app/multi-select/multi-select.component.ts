@@ -9,25 +9,38 @@ import { FormControl } from '@angular/forms';
 export class MultiSelectComponent implements OnInit {
 
   @ViewChild('mySelect') mySelect;
-  toppings = new FormControl();
-  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+  selection = new FormControl();
+  selectionList: any[] = [
+    {text : 'Female', value: 'female'},
+    {text : 'Male', value: 'male'}];
   allSelected = false;
+  searchFilter = '';
+  multiple = true;
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  selectionChange(): void {
+    if (this.selection.value?.length === this.selectionList.length) {
+      this.allSelected = true;
+    } else {
+      this.allSelected = false;
+    }
+  }
+
   close(): void {
-    console.log(this.toppings.value);
+    console.log(this.selection.value);
     this.mySelect.close();
   }
 
   toggle(): void {
+    this.searchFilter = '';
     this.allSelected = !this.allSelected;
     if (this.allSelected) {
-      this.toppings.setValue(this.toppingList);
+      this.selection.setValue(this.selectionList);
     } else {
-      this.toppings.setValue([]);
+      this.selection.setValue([]);
     }
   }
 

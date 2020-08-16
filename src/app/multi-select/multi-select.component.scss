@@ -14,8 +14,6 @@
   line-height: 26px;
   background: white;
   box-sizing: border-box;
-
-
 }
 
 input {
@@ -39,6 +37,11 @@ input {
 .additional-selection {
   opacity: 0.75;
   font-size: 0.75em;
+}
+
+#list-container {
+  max-height: 180px;
+  overflow-y: scroll;
 }
 
 ::ng-deep .cdk-overlay-pane {

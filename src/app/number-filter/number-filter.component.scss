@@ -4,7 +4,15 @@
   color: $placeholder-color;
 }
 
-.mat-stroked-button {
+.filter-container {
+  width: 260px;
+  min-height: 60px;
+  display: block;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.filter-open-btn {
   line-height: 26px;
   font-size: 12px;
   padding: 0 4px;
@@ -25,5 +33,22 @@
   border-right: 5px solid transparent;
   border-top: 5px solid;
   margin: 0 4px;
+}
+
+.mat-select, input {
+  border: 1px solid rgba(118, 118, 118, 0.26);
+  border-radius: 4px;
+  padding: 0 4px;
+  height: 26px;
+  line-height: 26px;
+  background: white;
+  box-sizing: border-box;
+  margin: 8px 0;
+  width: 100%;
+}
+
+input {
+  width: calc(50% - 4px);
+  margin: 0;
 }
 

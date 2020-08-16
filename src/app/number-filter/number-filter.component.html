@@ -1,10 +1,26 @@
-<button mat-stroked-button type="button" class="layout-container" [matMenuTriggerFor]="numberFilterMenu">
+<button class="filter-open-btn layout-container" mat-stroked-button type="button" [matMenuTriggerFor]="numberFilterMenu">
     <span class="placeholder font-weight-normal">None Selected</span>
     <div class="mat-select-arrow"></div>
 </button>
 
 <mat-menu #numberFilterMenu="matMenu">
-    <div class="column-control-container" (click)="$event.stopPropagation()">
-        abc
+    <div class="filter-container" (click)="$event.stopPropagation()">
+        <div class="layout-container">
+            <button mat-stroked-button type="button" (click)="close()" class="mr-2 mat-primary mat-small-stroked-button">Filter</button>
+            <button mat-stroked-button type="button" class="mat-warn mat-small-stroked-button">Reset</button>
+        </div>
+        <div class="layout-container">
+            <mat-select [formControl]="selection" placeholder="Logic">
+                <mat-option *ngFor="let item of numericFilterTypes" [value]="item.value">{{item.text}}</mat-option>
+            </mat-select>
+        </div>
+
+        <div *ngIf="selection.value === 'between'" class="layout-container">
+            <input type="text" placeholder="From">
+            <input type="text" placeholder="To">
+        </div>
+        <div *ngIf="selection.value !== 'between'" class="layout-container">
+            <input type="text" placeholder="Value" class="w-100">
+        </div>
     </div>
 </mat-menu>

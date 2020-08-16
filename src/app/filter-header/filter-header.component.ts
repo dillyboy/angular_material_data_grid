@@ -24,15 +24,6 @@ export class FilterHeaderComponent implements OnInit {
 
   selectedStringFilterType = 'contains';
 
-  numericFilterTypes = [
-    {key: 'eq', display: 'Is equal to', selected: false},
-    {key: 'neq', display: 'Is not equal to', selected: false},
-    {key: 'greaterorequal', display: 'Is greater than or equal to', selected: false},
-    {key: 'greaterthan', display: 'Is greater than', selected: false},
-    {key: 'lessthanorequal', display: 'Is less than or equal to', selected: false},
-    {key: 'lessthan', display: 'Is less than', selected: false}
-  ];
-
   range = new FormGroup({
     start: new FormControl(),
     end: new FormControl()

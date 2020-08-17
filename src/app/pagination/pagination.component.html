@@ -1,7 +1,7 @@
 <div class="layout-container" style="height: 40px;">
     <div class="buttons-container">
         <button mat-icon-button aria-label="pagination" [disabled]="currentPage === 1 || loadingData" (click)="pageChange(1)">
-            <mat-icon class="material-icons-outlined">skip_previous</mat-icon>
+            <mat-icon>skip_previous</mat-icon>
         </button>
         <button mat-icon-button aria-label="pagination" [disabled]="currentPage === 1 || loadingData" (click)="pageChange(currentPage - 1)">
             <mat-icon class="material-icons-outlined">keyboard_arrow_left</mat-icon>
@@ -23,7 +23,7 @@
             <mat-icon class="material-icons-outlined">keyboard_arrow_right</mat-icon>
         </button>
         <button mat-icon-button aria-label="pagination" [disabled]="currentPage === pages || loadingData" (click)="pageChange(pages)">
-            <mat-icon class="material-icons-outlined">skip_next_outline</mat-icon>
+            <mat-icon>skip_next_outline</mat-icon>
         </button>
     </div>
 

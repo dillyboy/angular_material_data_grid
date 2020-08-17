@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatMenuTrigger } from '@angular/material/menu';
 
@@ -9,7 +9,6 @@ import { MatMenuTrigger } from '@angular/material/menu';
 })
 export class NumberFilterComponent {
 
-  @Input() heading: any = { display: null, type: 'string', sort: '', filterType: null, disableSorting: false, disableFiltering: false};
   @Output() filter: any = new EventEmitter<any>();
   numericFilterTypes = [
     {value: 'between', text: 'Is between'},
@@ -78,7 +77,7 @@ export class NumberFilterComponent {
   }
 
   private close(value: string): void {
-    this.filter.emit({field: this.heading.fieldName, operator: this.selection.value, value});
+    this.filter.emit({ operator: this.selection.value, value });
     this.menu.closeMenu();
   }
 

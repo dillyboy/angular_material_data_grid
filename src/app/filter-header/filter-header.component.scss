@@ -1,18 +1,5 @@
 @import "../../scss/variables";
 
-.mat-icon-button {
-  width: 26px;
-  height: 26px;
-  line-height: 26px;
-  border-radius: 2px;
-  font-weight: 400;
-
-  mat-icon {
-    opacity: .6;
-    font-size: 20px;
-  }
-}
-
 .filter-component {
   margin: 0 -8px;
   padding: 4px 8px;
@@ -21,32 +8,5 @@
   width: 100%;
   position: relative;
   align-items: center;
-
-  .elem-right-margin {
-    margin-right: 8px;
-  }
-}
-input, select {
-  border-radius: 4px;
-  padding: 0 4px;
-  box-sizing: border-box;
-  border: 1px solid $highlight-dark-color;
-  outline: 0;
-  font: inherit;
-  line-height: 1.42857143em;
-  display: inline-flex;
-  vertical-align: middle;
-  position: relative;
-  //-webkit-appearance: none;
-  margin-right: 0 !important;
-  width: calc(100% - 68px);
-  min-width: 55px;
-  height: 26px !important;
-  font-weight: 300;
-  margin-right: 8px !important;
 }
 
-.highlight-filter {
-  background: $accent;
-  color: white;
-}

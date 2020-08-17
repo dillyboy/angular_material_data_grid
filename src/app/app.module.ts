@@ -26,6 +26,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { MultiSelectComponent } from './multi-select/multi-select.component';
 import { NumberFilterComponent } from './number-filter/number-filter.component';
+import { DateFilterComponent } from './date-filter/date-filter.component';
+import { StringFilterComponent } from './string-filter/string-filter.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { NumberFilterComponent } from './number-filter/number-filter.component';
     SortHeaderComponent,
     FilterHeaderComponent,
     MultiSelectComponent,
-    NumberFilterComponent
+    NumberFilterComponent,
+    DateFilterComponent,
+    StringFilterComponent
   ],
   imports: [
     BrowserModule,

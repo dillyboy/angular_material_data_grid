@@ -94,4 +94,8 @@ export class FilterHeaderComponent implements OnInit {
     }
   }
 
+  filterObjCreated(ev): void {
+    console.log(ev);
+  }
+
 }

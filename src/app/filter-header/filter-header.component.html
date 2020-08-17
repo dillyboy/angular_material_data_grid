@@ -35,7 +35,7 @@
     </ng-container>
 
     <ng-container *ngIf="heading.type === 'number' && heading.disableFiltering !== true">
-        <app-number-filter class="w-100"></app-number-filter>
+        <app-number-filter class="w-100" [heading]="heading" (filter)="filterObjCreated($event)"></app-number-filter>
     </ng-container>
 
 </div>

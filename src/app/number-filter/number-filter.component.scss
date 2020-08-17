@@ -45,10 +45,26 @@
   box-sizing: border-box;
   margin: 8px 0;
   width: 100%;
+  font-size: 12px;
+}
+
+.mat-select.focus-visible {
+  border: 2px solid $primary;
 }
 
 input {
   width: calc(50% - 4px);
   margin: 0;
 }
+
+.invalid-range-error {
+  color: $warn;
+  font-size: 12px;
+}
+
+input.ng-invalid.ng-touched
+{
+  border: 2px solid $warn !important;
+}
+
 

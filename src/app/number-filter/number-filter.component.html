@@ -1,26 +1,30 @@
-<button class="filter-open-btn layout-container" mat-stroked-button type="button" [matMenuTriggerFor]="numberFilterMenu">
+<button class="filter-open-btn layout-container" mat-stroked-button type="button" #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="numberFilterMenu" (menuOpened)="menuOpened()">
     <span class="placeholder font-weight-normal">None Selected</span>
     <div class="mat-select-arrow"></div>
 </button>
 
 <mat-menu #numberFilterMenu="matMenu">
-    <div class="filter-container" (click)="$event.stopPropagation()">
+    <div class="filter-container" (click)="$event.stopPropagation()" (keydown.tab)="$event.stopPropagation()" (keydown.shift.tab)="$event.stopPropagation()">
         <div class="layout-container">
-            <button mat-stroked-button type="button" (click)="close()" class="mr-2 mat-primary mat-small-stroked-button">Filter</button>
-            <button mat-stroked-button type="button" class="mat-warn mat-small-stroked-button">Reset</button>
+            <button mat-stroked-button type="button" (click)="validate()" class="mr-2 mat-primary mat-small-stroked-button">Filter</button>
+            <button mat-stroked-button type="button" (click)="reset(true)" class="mat-warn mat-small-stroked-button">Reset</button>
         </div>
         <div class="layout-container">
-            <mat-select [formControl]="selection" placeholder="Logic">
+            <mat-select [formControl]="selection" placeholder="Logic" (selectionChange)="reset()">
                 <mat-option *ngFor="let item of numericFilterTypes" [value]="item.value">{{item.text}}</mat-option>
             </mat-select>
         </div>
 
-        <div *ngIf="selection.value === 'between'" class="layout-container">
-            <input type="text" placeholder="From">
-            <input type="text" placeholder="To">
+        <div [formGroup]="range" *ngIf="selection.value === 'between'" class="layout-container" (keyup.enter)="validate()">
+            <input #fromElement type="number" placeholder="From" formControlName="from">
+            <input type="number" placeholder="To" formControlName="to" >
         </div>
         <div *ngIf="selection.value !== 'between'" class="layout-container">
-            <input type="text" placeholder="Value" class="w-100">
+            <input #valueElement type="number" placeholder="Value" [formControl]="value" (keyup.enter)="validate()" class="w-100">
+        </div>
+        <div class="layout-container mt-2">
+            <span *ngIf="invalidRangeValue" class="invalid-range-error">Invalid range entered</span>
+            <span *ngIf="invalidValue" class="invalid-range-error">Invalid value entered</span>
         </div>
     </div>
 </mat-menu>

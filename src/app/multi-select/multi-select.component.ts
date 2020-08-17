@@ -11,8 +11,8 @@ export class MultiSelectComponent implements OnInit {
   @ViewChild('mySelect') mySelect;
   selection = new FormControl();
   selectionList: any[] = [
-    {text : 'Female', value: 'female'},
-    {text : 'Male', value: 'male'}];
+    {text : 'Female', value: 'FEMALE'},
+    {text : 'Male', value: 'MALE'}];
   allSelected = false;
   searchFilter = '';
   multiple = true;
@@ -30,7 +30,11 @@ export class MultiSelectComponent implements OnInit {
   }
 
   close(): void {
-    console.log(this.selection.value);
+    const values = this.selection.value?.map(val => val.value);
+    const value = values?.toString();
+    if (value) {
+      console.log({operator: 'eq', value});
+    }
     this.mySelect.close();
   }
 

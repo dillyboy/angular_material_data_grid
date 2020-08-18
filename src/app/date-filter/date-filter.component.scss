@@ -44,12 +44,10 @@ input, select {
   margin-right: 8px !important;
   &.date-range-input {
     width: calc(100% - 68px);
+    font-size: 12px;
+    font-weight: bold;
+    color: $accent;
+    padding-left: 10px;
 
-    &.date-range-input-empty {
-      font-size: 12px;
-      font-weight: bold;
-      color: $accent;
-      padding-left: 10px;
-    }
   }
 }

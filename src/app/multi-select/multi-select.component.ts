@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ApiResponseModel } from '../api-response.model';
 import { HttpClient } from '@angular/common/http';
@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class MultiSelectComponent implements OnInit {
 
+  @Output() filter: any = new EventEmitter<any>();
   @Input() filterConfig: any = {
     selectionMode: null,
     source: null,
@@ -53,7 +54,7 @@ export class MultiSelectComponent implements OnInit {
       this.allSelected = false;
     }
     if (this.multiple === false) {
-      console.log({operator: 'eq', value: this.selection.value.value});
+      this.filter.emit({operator: 'eq', value: this.selection.value.value});
       this.mySelect.close();
     }
 
@@ -63,7 +64,7 @@ export class MultiSelectComponent implements OnInit {
     const values = this.selection.value?.map(val => val.value);
     const value = values?.toString();
     if (value) {
-      console.log({operator: 'eq', value});
+      this.filter.emit({operator: 'eq', value});
       this.filterApplied = true;
     }
     this.mySelect.close();
@@ -85,7 +86,7 @@ export class MultiSelectComponent implements OnInit {
     } else {
       this.selection.setValue(null);
     }
-    console.log({operator: 'eq', value: null});
+    this.filter.emit({operator: 'eq', value: null});
     this.filterApplied = false;
     this.mySelect.close();
   }

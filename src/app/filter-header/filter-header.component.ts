@@ -24,7 +24,7 @@ export class FilterHeaderComponent implements OnInit {
   }
 
   filterObjCreated(ev): void {
-    console.log(ev);
+    console.log({field: this.heading.display, ...ev});
   }
 
 }

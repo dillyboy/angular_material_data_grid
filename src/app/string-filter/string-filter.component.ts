@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-string-filter',
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StringFilterComponent implements OnInit {
 
+  @Output() filter: any = new EventEmitter<any>();
   filterParam = '';
   filterApplied = false;
 
@@ -35,8 +36,7 @@ export class StringFilterComponent implements OnInit {
 
   createFilterObj(): void {
     if (this.filterParam) {
-      const filterObj = { operator: this.selectedStringFilterType, value: this.filterParam };
-      console.log(filterObj);
+      this.filter.emit({ operator: this.selectedStringFilterType, value: this.filterParam });
       this.filterApplied = true;
     }
   }
@@ -44,6 +44,7 @@ export class StringFilterComponent implements OnInit {
   removeFilter(): void {
     this.filterParam = '';
     this.selectedStringFilterType = 'contains';
+    this.filter.emit({ operator: this.selectedStringFilterType, value: null });
     this.filterApplied = false;
   }
 

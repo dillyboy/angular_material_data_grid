@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -8,6 +8,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class DateFilterComponent {
 
+  @Output() filter: any = new EventEmitter<any>();
   filterParam = '';
   filterApplied = false;
   range = new FormGroup({
@@ -20,12 +21,15 @@ export class DateFilterComponent {
   applyFilter(filterType): void {
     console.log(filterType);
     this.filterParam = 'Filter Applied';
+    this.filter.emit( {operator: 'between', value: filterType} );
+    this.filterApplied = true;
   }
 
   removeFilter(): void {
     this.range.controls.start.setValue(null);
     this.range.controls.end.setValue(null);
     this.filterParam = '';
+    this.filter.emit( {operator: 'between', value: null} );
     this.filterApplied = false;
   }
 
@@ -33,8 +37,8 @@ export class DateFilterComponent {
     const {start, end} = this.range.value;
     if (start && end) {
       this.filterParam = `${this.formatDate(start)}-${this.formatDate(end)}`;
-      // this.filter.emit( {operator: 'between', value: this.filterParam} );
-      console.log({operator: 'between', value: this.filterParam});
+      this.filter.emit( {operator: 'between', value: this.filterParam} );
+      this.filterApplied = true;
     }
   }
 

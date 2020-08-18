@@ -1,6 +1,6 @@
 <mat-select placeholder="None Selected" #mySelect [formControl]="selection" [multiple]="multiple" xPosition="after" (selectionChange)="selectionChange()">
     <mat-select-trigger>
-        {{selection.value ? selection.value[0]?.text || selection.value.text : ''}}
+        <span [ngClass]="{'accent-color font-weight-bold': filterApplied}">{{selection.value ? selection.value[0]?.text || selection.value.text : ''}}</span>
         <span *ngIf="selection.value?.length > 1" class="additional-selection">
         (+{{selection.value.length - 1}} {{selection.value?.length === 2 ? 'other' : 'others'}})
       </span>

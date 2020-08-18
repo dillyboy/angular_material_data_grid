@@ -26,6 +26,7 @@ export class MultiSelectComponent implements OnInit {
   allSelected = false;
   searchFilter = '';
   multiple = true;
+  filterApplied = false;
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
@@ -63,6 +64,7 @@ export class MultiSelectComponent implements OnInit {
     const value = values?.toString();
     if (value) {
       console.log({operator: 'eq', value});
+      this.filterApplied = true;
     }
     this.mySelect.close();
   }
@@ -84,6 +86,7 @@ export class MultiSelectComponent implements OnInit {
       this.selection.setValue(null);
     }
     console.log({operator: 'eq', value: null});
+    this.filterApplied = false;
     this.mySelect.close();
   }
 

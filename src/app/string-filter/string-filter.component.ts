@@ -43,6 +43,7 @@ export class StringFilterComponent implements OnInit {
 
   removeFilter(): void {
     this.filterParam = '';
+    this.selectedStringFilterType = 'contains';
     this.filterApplied = false;
   }
 

@@ -10,6 +10,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 export class NumberFilterComponent {
 
   @Output() filter: any = new EventEmitter<any>();
+  filterApplied = false;
   numericFilterTypes = [
     {value: 'between', text: 'Is between'},
     {value: 'eq', text: 'Is equal to'},
@@ -78,6 +79,11 @@ export class NumberFilterComponent {
 
   private close(value: string): void {
     this.filter.emit({ operator: this.selection.value, value });
+    if (value) {
+      this.filterApplied = true;
+    } else {
+      this.filterApplied = false;
+    }
     this.menu.closeMenu();
   }
 

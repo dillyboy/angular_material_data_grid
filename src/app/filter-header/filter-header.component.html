@@ -11,7 +11,7 @@
         </ng-container>
 
         <ng-container *ngIf="heading.type === 'string' && heading.filterType === 'multi-select'">
-            <app-multi-select class="w-100" [heading]="heading"></app-multi-select>
+            <app-multi-select class="w-100" [filterConfig]="heading.other"></app-multi-select>
         </ng-container>
 
         <ng-container *ngIf="heading.type === 'number'">

@@ -11,7 +11,7 @@
             <button *ngIf="multiple" mat-stroked-button type="button" (click)="toggle()" class="mat-small-stroked-button mat-accent">Select {{allSelected ? 'None': 'All'}}</button>
         </div>
 
-        <button mat-stroked-button type="button" class="mat-warn mat-small-stroked-button">Reset</button>
+        <button mat-stroked-button type="button" (click)="reset()" class="mat-warn mat-small-stroked-button">Reset</button>
     </div>
     <input class="" placeholder="Search..." [(ngModel)]="searchFilter"/>
     <div id="list-container" >

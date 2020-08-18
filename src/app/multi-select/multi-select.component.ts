@@ -10,22 +10,14 @@ import { HttpClient } from '@angular/common/http';
 })
 export class MultiSelectComponent implements OnInit {
 
-  @Input() heading: any = {
-    display: null,
-    type: 'string',
-    sort: '',
-    filterType: null,
-    disableSorting: false,
-    disableFiltering: false,
-    other: {
-      selectionMode: null,
-      source: null,
-      url: null,
-      optionsObject: [],
-      key: null,
-      value: null,
-      stringList: null
-    }
+  @Input() filterConfig: any = {
+    selectionMode: null,
+    source: null,
+    url: null,
+    optionsObject: [],
+    key: null,
+    value: null,
+    stringList: null
   };
 
   @ViewChild('mySelect') mySelect;
@@ -37,19 +29,19 @@ export class MultiSelectComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.multiple = this.heading.other.selectionMode === 'multiple' ? true : false;
+    this.multiple = this.filterConfig.selectionMode === 'multiple' ? true : false;
 
-    if (this.heading.other.source === 'external') {
-      this.http.get<ApiResponseModel>(this.heading.other.url).subscribe(data => {
+    if (this.filterConfig.source === 'external') {
+      this.http.get<ApiResponseModel>(this.filterConfig.url).subscribe(data => {
         if (data.statusCode === 200) {
-          const {key, value} = this.heading.other;
+          const {key, value} = this.filterConfig;
           this.selectionList = data.payload.map(item => {
             return {text : item[key], value: item[value]};
           });
         }
       });
     } else { // internal
-      this.selectionList = this.heading.other.optionsObject;
+      this.selectionList = this.filterConfig.optionsObject;
     }
   }
 
@@ -83,6 +75,16 @@ export class MultiSelectComponent implements OnInit {
     } else {
       this.selection.setValue([]);
     }
+  }
+
+  reset(): void {
+    if (this.multiple) {
+      this.selection.setValue([]);
+    } else {
+      this.selection.setValue(null);
+    }
+    console.log({operator: 'eq', value: null});
+    this.mySelect.close();
   }
 
 }

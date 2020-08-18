@@ -10,6 +10,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ApiResponseModel } from './api-response.model';
 import { MatDialog } from '@angular/material/dialog';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -24,15 +25,34 @@ export class AppComponent implements AfterContentInit{
     {fieldName: 'first_name', display: 'First Name', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%'},
     {fieldName: 'email', display: 'Email', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%'},
     {fieldName: 'gender', display: 'Gender', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%',
-      filterType: 'multi-select', other: { selectionMode: 'single', source: 'internal', url: 'gender', stringList: true}},
+      filterType: 'multi-select',
+      other: {
+        selectionMode: 'single',
+        source: 'internal',
+        url: 'gender',
+        optionsObject: [
+          {text : 'Female', value: 'FEMALE'},
+          {text : 'Male', value: 'MALE'}
+        ],
+        stringList: true
+      }
+    },
     {fieldName: 'date_of_birth', display: 'Date Of Birth', type: 'date', minWidth: '160px', maxWidth: '160px', width: '12.25%'},
     {fieldName: 'ip_address', display: 'IP Address', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%'},
     {fieldName: 'car', display: 'Car', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%'},
     {fieldName: 'phone', display: 'Phone', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%'},
     {fieldName: 'movie_taste', display: 'Movie Taste', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%', show: false},
     {fieldName: 'country', display: 'Country', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%',
-      filterType: 'multi-select', other: { selectionMode: 'multiple', source: 'external', url: `countries`,
-        key: 'displayName', value: 'value', stringList: true}, show: true},
+      filterType: 'multi-select',  show: true,
+      other: {
+        selectionMode: 'multiple',
+        source: 'external',
+        url: `${environment.api}countries`,
+        key: 'displayName',
+        value: 'value',
+        stringList: true
+      }
+    },
     {fieldName: 'city', display: 'City', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%', show: false},
     {fieldName: 'company', display: 'Company', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%', show: false},
     {fieldName: 'iban', display: 'Iban', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%', show: false},
@@ -207,7 +227,8 @@ export class AppComponent implements AfterContentInit{
   pageChanged({pageNo, recordsPerPage, sort = null, sortField = null}): void {
     this.recordsPerPage = recordsPerPage;
     this.loadingData = true;
-    const url = 'https://angular-grid.herokuapp.com/getUsers';
+    const url = `${environment.api}getUsers`;
+    // const url = './assets/data.json';
     const body = {
       entity: {},
       page: pageNo,
@@ -218,6 +239,7 @@ export class AppComponent implements AfterContentInit{
     console.log(body);
 
     this.http.post<ApiResponseModel>(url, body).subscribe(data => {
+    // this.http.get<ApiResponseModel>(url).subscribe(data => {
       this.selectedRows = [];
       this.response = data.payload;
       console.log(this.response.gridData);

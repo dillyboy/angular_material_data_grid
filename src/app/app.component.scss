@@ -25,10 +25,6 @@
   background: white;
 }
 
-::ng-deep.column-item {
-  height: 26px !important;
-}
-
 .cdk-drag-placeholder {
   opacity: 0;
 }
@@ -94,6 +90,22 @@
       width: 40px;
     }
 
+    .empty-records {
+      position: absolute;
+      top: calc(50% - 25px);
+      z-index: 1;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      font-size: 18px;
+      min-width: 40px;
+      margin: 0 auto;
+      right: 0;
+      left: 0;
+      width: 170px;
+      padding: 10px;
+      border-radius: 4px;
+    }
+
     .horizontal-scroll {
       width: 100%;
       cdk-virtual-scroll-viewport {
@@ -133,6 +145,9 @@
       &:hover {
         transition:all ease 0.1s;
         background-color: $highlight-dark-color;
+      }
+      &.empty:hover {
+        background-color: inherit;
       }
       &.rowSelected {
         background: rgba(0, 153, 255, 0.3) !important;

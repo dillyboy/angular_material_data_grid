@@ -19,6 +19,9 @@
     <button *ngIf="scrollRemainingDistanceToRight !== 0" mat-button (click)="scrollRight()" aria-label="navigate right" class="navigate-right-btn">
       <mat-icon class="fs-40 navigate-icons">chevron_right</mat-icon>
     </button>
+    <div class="empty-records" *ngIf="response.gridData.length === 0 && !loadingData">
+      No Records Available
+    </div>
     <div class="horizontal-scroll">
       <table [ngStyle]="{'left': '-' + scrollRemainingDistanceToLeft + 'px'}" >
         <thead>
@@ -42,6 +45,10 @@
               <tr *cdkVirtualFor="let item of response.gridData; let odd=odd;" (mouseover)="overSelect($event, item)" [ngClass]="{ odd: odd, rowSelected: item.gridItemSelected == true}">
                 <td *ngIf="selection" class="selection animated" #selection (mousedown)="startSelect(item, selection)"><mat-checkbox [(ngModel)]="item['gridItemSelected']" (ngModelChange)="gridItemSelectionChanged()"></mat-checkbox></td>
                 <td *ngFor="let heading of headings | columnFilter;">{{item[heading.fieldName]}}</td>
+              </tr>
+              <tr class="empty" *ngIf="response.gridData.length === 0" [ngStyle]="{'height': 'calc(100vh - ' +offsetTop+ 'px)' }">
+                <td *ngIf="selection" class="selection animated"></td>
+                <td *ngFor="let heading of headings | columnFilter;"></td>
               </tr>
             </tbody>
           </table>

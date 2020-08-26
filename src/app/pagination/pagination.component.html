@@ -19,10 +19,10 @@
         <button mat-icon-button aria-label="pagination" disabled *ngIf="!pagesOnDisplay.includes(pages)">
             <mat-icon class="material-icons-outlined">more_horiz</mat-icon>
         </button>
-        <button mat-icon-button aria-label="pagination" [disabled]="currentPage === pages || loadingData" (click)="pageChange(currentPage + 1)">
+        <button mat-icon-button aria-label="pagination" [disabled]="currentPage === pages || noOfTotalRecords === 0 || loadingData" (click)="pageChange(currentPage + 1)">
             <mat-icon class="material-icons-outlined">keyboard_arrow_right</mat-icon>
         </button>
-        <button mat-icon-button aria-label="pagination" [disabled]="currentPage === pages || loadingData" (click)="pageChange(pages)">
+        <button mat-icon-button aria-label="pagination" [disabled]="currentPage === pages || noOfTotalRecords === 0  || loadingData" (click)="pageChange(pages)">
             <mat-icon>skip_next_outline</mat-icon>
         </button>
     </div>

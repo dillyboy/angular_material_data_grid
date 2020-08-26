@@ -77,6 +77,12 @@ export class AppComponent implements AfterContentInit{
   offsetTop = null;
   scrollRemainingDistanceToLeft = 0;
   scrollRemainingDistanceToRight = null;
+  currentPage = 1;
+  sortObj = {
+    sort: null,
+    sortField: null
+  };
+  filters = [];
 
   // Window resize listener
   @HostListener('window:resize', ['$event'])
@@ -154,11 +160,27 @@ export class AppComponent implements AfterContentInit{
       sort: this.headings[index]?.sort,
       sortField: this.headings[index]?.sort ? this.headings[index]?.fieldName : null
     };
-    this.pageChanged({pageNo: 1, recordsPerPage: this.recordsPerPage, ...sortObj});
+    this.sortObj = sortObj;
+    this.pageChanged({pageNo: 1, recordsPerPage: this.recordsPerPage});
   }
 
   filter(ev): void {
-    console.log(ev);
+    let filterIndex = null;
+    this.filters.forEach((filter, i) => {
+      if (filter.field === ev.field) {
+        filterIndex = i;
+      }
+    });
+    if (filterIndex !== null) {
+      if (ev.value) {
+        this.filters[filterIndex] = ev;
+      } else {
+        this.filters.splice(filterIndex, 1);
+      }
+    } else {
+      this.filters.push(ev);
+    }
+    this.pageChanged({pageNo: 1, recordsPerPage: this.recordsPerPage});
   }
 
   allGridItemsSelectionChanged(): void {
@@ -227,14 +249,15 @@ export class AppComponent implements AfterContentInit{
   pageChanged({pageNo, recordsPerPage, sort = null, sortField = null}): void {
     this.recordsPerPage = recordsPerPage;
     this.loadingData = true;
+    this.currentPage = pageNo;
     const url = `${environment.api}getUsers`;
     // const url = './assets/data.json';
     const body = {
       entity: {},
-      page: pageNo,
+      page: this.currentPage,
       perPage: recordsPerPage,
-      sort,
-      sortField
+      filters: this.filters,
+      ...this.sortObj
     };
     console.log(body);
 

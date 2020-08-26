@@ -55,6 +55,7 @@ export class MultiSelectComponent implements OnInit {
     }
     if (this.multiple === false) {
       this.filter.emit({operator: 'eq', value: this.selection.value.value});
+      this.filterApplied = true;
       this.mySelect.close();
     }
 

@@ -49,6 +49,6 @@
       </cdk-virtual-scroll-viewport>
     </div>
 
-    <app-pagination [loadingData]="loadingData" [noOfTotalRecords]="response.totalCount" [noOfRecords]="response.gridData.length" [noOfSelectedRow]="selectedRows.length" (pageChanged)="pageChanged($event)"></app-pagination>
+    <app-pagination [loadingData]="loadingData" [noOfTotalRecords]="response.totalCount" [noOfRecords]="response.gridData.length" [noOfSelectedRow]="selectedRows.length" [currentPage]="currentPage" (pageChanged)="pageChanged($event)"></app-pagination>
   </mat-card>
 </div>

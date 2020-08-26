@@ -15,10 +15,11 @@ export class PaginationComponent implements OnInit, OnChanges {
   @Input() loadingData = true;
   @Input() noOfRecords = 0;
   @Input() noOfSelectedRow = 0;
+  @Input() currentPage = 1;
   recordsPerPage = 100;
   newRecordsPerPage = 100;
   pages = 0;
-  currentPage = 1;
+  // currentPage = 1;
   pagesOnDisplay = [];
   pageInfoDisplayText = '';
   discardSelectionConfirmationObj = {

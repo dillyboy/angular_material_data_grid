@@ -84,6 +84,8 @@ export class AppComponent implements AfterContentInit{
   };
   filters = [];
 
+  fullscreen = false;
+
   // Window resize listener
   @HostListener('window:resize', ['$event'])
   onResize(event): void {
@@ -101,15 +103,16 @@ export class AppComponent implements AfterContentInit{
   }
 
   private calculateGridWidth(): void {
-    const gridContainer = document.getElementById('grid-container');
+    const gridContainer = document.getElementById('grid');
     this.gridWidth = gridContainer.clientWidth;
     const heightOfHeaderAndFooter = 112;
-    const extraSpace = 25;
+    const extraSpace = this.fullscreen ? -24 : 24;
     let totalOffset = gridContainer.offsetTop + heightOfHeaderAndFooter + extraSpace;
     if (this.columnControl) {
       totalOffset += 24; // heightOfColumnControlBtn
     }
     this.offsetTop = totalOffset;
+    this.changeDetectorRef.detectChanges();
   }
 
   scrollLeft(): void {
@@ -269,6 +272,13 @@ export class AppComponent implements AfterContentInit{
       this.loadingData = false;
       this.changeDetectorRef.detectChanges();
       document.getElementById('scrollViewport').scrollTop = 0;
+    });
+  }
+
+  toggleFullScreen(ev): void {
+    this.fullscreen = ev;
+    setTimeout(() => { // wait until dom adjusts
+      this.calculateGridWidth();
     });
   }
 }

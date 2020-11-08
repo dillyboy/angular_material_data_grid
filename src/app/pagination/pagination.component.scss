@@ -1,7 +1,8 @@
 @import "../../scss/variables";
 
 .layout-container {
-  border-top: 1px solid $highlight-color;
+  border-top: 1px solid $highlight-dark-color;
+  background: $highlight-color;
 
   .buttons-container {
     color: $primary;
@@ -17,6 +18,10 @@
         color: white;
       }
     }
+  }
+
+  .full-screen-btn {
+    color: $primary;
   }
 
 }

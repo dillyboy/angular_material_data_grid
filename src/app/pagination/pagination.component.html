@@ -28,6 +28,10 @@
     </div>
 
     <div>
+        <button mat-icon-button aria-label="pagination" class="full-screen-btn" (click)="fullscreen = !fullscreen;toggleFullScreen.emit(fullscreen)">
+            <mat-icon *ngIf="!fullscreen">fullscreen</mat-icon>
+            <mat-icon  *ngIf="fullscreen">fullscreen_exit</mat-icon>
+        </button>
         <select id="pageLimit" name="pageLimit" [disabled]="loadingData"  [(ngModel)]="newRecordsPerPage" (ngModelChange)="recordsPerPageChanged()">
             <option [ngValue]="50">50</option>
             <option [ngValue]="100">100</option>

@@ -12,7 +12,7 @@
       </div>
     </div>
   </mat-menu>
-  <mat-card id="grid">
+  <mat-card id="grid" [ngClass]="{'fullscreen': fullscreen}">
     <button *ngIf="scrollRemainingDistanceToLeft !== 0" mat-button (click)="scrollLeft()" aria-label="navigate left" class="navigate-left-btn">
       <mat-icon class="fs-40 navigate-icons">chevron_left</mat-icon>
     </button>
@@ -56,6 +56,14 @@
       </cdk-virtual-scroll-viewport>
     </div>
 
-    <app-pagination [loadingData]="loadingData" [noOfTotalRecords]="response.totalCount" [noOfRecords]="response.gridData.length" [noOfSelectedRow]="selectedRows.length" [currentPage]="currentPage" (pageChanged)="pageChanged($event)"></app-pagination>
+    <app-pagination
+            [loadingData]="loadingData"
+            [noOfTotalRecords]="response.totalCount"
+            [noOfRecords]="response.gridData.length"
+            [noOfSelectedRow]="selectedRows.length"
+            [currentPage]="currentPage"
+            (pageChanged)="pageChanged($event)"
+            (toggleFullScreen)="toggleFullScreen($event)">
+    </app-pagination>
   </mat-card>
 </div>

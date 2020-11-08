@@ -10,6 +10,7 @@ import { ConfirmationComponent } from '../confirmation/confirmation.component';
 export class PaginationComponent implements OnInit, OnChanges {
 
   @Output() pageChanged: any = new EventEmitter<any>();
+  @Output() toggleFullScreen: any = new EventEmitter<any>();
 
   @Input() noOfTotalRecords = 0;
   @Input() loadingData = true;
@@ -31,6 +32,7 @@ export class PaginationComponent implements OnInit, OnChanges {
       cancel_text: 'CANCEL'
     }
   } as const;
+  fullscreen = false;
 
   constructor(public dialog: MatDialog) { }
 

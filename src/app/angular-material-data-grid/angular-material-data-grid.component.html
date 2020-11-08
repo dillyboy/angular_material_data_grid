@@ -25,7 +25,7 @@
         <div class="horizontal-scroll">
             <table [ngStyle]="{'left': '-' + scrollRemainingDistanceToLeft + 'px'}" >
                 <thead>
-                <th *ngIf="selection" class="selection"><mat-checkbox [(ngModel)]="allGridItemsSelected" (ngModelChange)="allGridItemsSelectionChanged()"></mat-checkbox></th>
+                <th *ngIf="selection" class="selection"><mat-checkbox [(ngModel)]="allGridItemsSelected" (ngModelChange)="gridItemSelectionChanged(true)"></mat-checkbox></th>
                 <th *ngFor="let heading of headings | columnFilter;">
                     <app-sort-header [heading]="heading" (filter)="sort($event)"></app-sort-header>
                 </th>

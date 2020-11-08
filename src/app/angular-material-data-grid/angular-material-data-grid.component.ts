@@ -223,15 +223,53 @@ export class AngularMaterialDataGridComponent implements AfterContentInit{
     console.log(body);
 
     this.http.post<ApiResponseModel>(this.url, body).subscribe(data => {
-      // this.http.get<ApiResponseModel>(url).subscribe(data => {
+
+      const gridData = this.linkCreationInterceptor(data.payload.gridData);
       this.selectedRows = [];
-      this.response = data.payload;
-      console.log(this.response.gridData);
+      this.response = {gridData, totalCount: data.payload.totalCount};
       this.responseEmit.emit(this.response);
       this.loadingData = false;
       this.changeDetectorRef.detectChanges();
       document.getElementById('scrollViewport').scrollTop = 0;
     });
+  }
+
+  private linkCreationInterceptor(gridData): any[] {
+
+    const urlHeadings = [];
+    this.headings.forEach(heading => {
+      if (heading.type === 'url') {
+        urlHeadings.push({
+          type: heading.fieldName,
+          urlTemplate: heading.other?.urlTemplate,
+          queryParams: heading.other?.queryParams
+        });
+      }
+    });
+
+    const items = gridData.map(item => {
+      const obj = {};
+      urlHeadings.forEach(heading => {
+        const splitUrl = heading.urlTemplate.split('/');
+        const newUrl = [];
+        splitUrl.forEach(urlItem => {
+          if (urlItem.includes(':')) {
+            urlItem = item[urlItem.substring(1)];
+          }
+          newUrl.push(urlItem);
+        });
+        obj[heading.type + 'Link'] = newUrl.join('/');
+        if (heading.queryParams) {
+          const objParams = {};
+          Object.keys(heading.queryParams).forEach(field => {
+            objParams[field] = item[heading.queryParams[field]];
+          });
+          obj[heading.type + 'QueryParams'] = objParams;
+        }
+      });
+      return {...item, ...obj};
+    });
+    return items;
   }
 
   toggleFullScreen(ev): void {

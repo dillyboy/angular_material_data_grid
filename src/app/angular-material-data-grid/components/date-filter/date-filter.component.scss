@@ -1,8 +1,4 @@
-@import "../../scss/variables";
-
-.elem-right-margin {
-  margin-right: 8px;
-}
+@import "../../../../scss/variables";
 
 .mat-icon-button {
   width: 26px;
@@ -16,6 +12,17 @@
     font-size: 20px;
   }
 }
+
+mat-date-range-input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.elem-right-margin {
+  margin-right: 8px;
+}
+
 
 input, select {
   border-radius: 4px;
@@ -35,9 +42,12 @@ input, select {
   height: 26px !important;
   font-weight: 300;
   margin-right: 8px !important;
-}
+  &.date-range-input {
+    width: calc(100% - 68px);
+    font-size: 12px;
+    font-weight: bold;
+    color: $accent;
+    padding-left: 10px;
 
-.highlight-filter {
-  background: $accent;
-  color: white;
+  }
 }

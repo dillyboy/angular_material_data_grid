@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ApiResponseModel } from '../api-response.model';
+import { ApiResponseModel } from '../../api-response.model';
 import { HttpClient } from '@angular/common/http';
 
 @Component({

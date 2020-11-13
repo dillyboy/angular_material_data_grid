@@ -8,9 +8,16 @@
 
         <ng-container *ngIf="heading.type === 'string' || heading.type === 'url'">
             <ng-container [ngSwitch]="heading.filterType">
-                <app-multi-select  *ngSwitchCase="'multi-select'" class="w-100" [filterConfig]="heading.other" (filter)="filterObjCreated($event)"></app-multi-select>
-                <app-tag-filter    *ngSwitchCase="'tag'" class="w-100" ></app-tag-filter>
-                <app-string-filter *ngSwitchDefault (filter)="filterObjCreated($event)"></app-string-filter>
+                <app-multi-select *ngSwitchCase="'multi-select'"
+                        class="w-100" [filterConfig]="heading.other"
+                        (filter)="filterObjCreated($event)">
+                </app-multi-select>
+                <app-tag-filter *ngSwitchCase="'tag'"
+                        class="w-100" >
+                </app-tag-filter>
+                <app-string-filter *ngSwitchDefault
+                        (filter)="filterObjCreated($event)">
+                </app-string-filter>
             </ng-container>
         </ng-container>
 

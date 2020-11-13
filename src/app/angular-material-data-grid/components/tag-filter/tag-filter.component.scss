@@ -35,21 +35,6 @@
   margin: 0 4px;
 }
 
-
-.mat-select.focus-visible {
-  border: 2px solid $primary;
-}
-
-input {
-  width: calc(50% - 4px);
-  margin: 0;
-}
-
-.invalid-range-error {
-  color: $warn;
-  font-size: 12px;
-}
-
 .tag-input {
   width: calc(100% - 30px);
 }

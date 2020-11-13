@@ -38,7 +38,7 @@ export class TagFilterComponent implements OnInit {
       if (value.length <= maxLength) {
         if (this.tagValues.indexOf(value) === -1) {
           this.tagValues.push(value);
-          this.tagValue.setErrors(null);
+          // this.tagValue.setErrors(null);
         } else {
           this.tagValue.setErrors({invalid: true});
           this.error = 'Value already entered';
@@ -47,9 +47,8 @@ export class TagFilterComponent implements OnInit {
         this.tagValue.setErrors({invalid: true});
         this.error = 'Value too large';
       }
-      this.tagValue.updateValueAndValidity();
     }
-    console.log(this.tagValues);
+    console.log(this.tagValue);
     this.tagValue.setValue('');
   }
 

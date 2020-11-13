@@ -13,7 +13,10 @@ export class TagFilterComponent implements OnInit {
   tagValue = new FormControl('', []);
   tagValues = [];
   error = '';
-  constructor() { }
+  constructor() {
+    this.tagValue.markAsDirty();
+    this.tagValue.markAsTouched();
+  }
 
   ngOnInit(): void {
   }
@@ -40,11 +43,15 @@ export class TagFilterComponent implements OnInit {
           this.tagValues.push(value);
           // this.tagValue.setErrors(null);
         } else {
-          this.tagValue.setErrors({invalid: true});
+          setTimeout(() => {
+            this.tagValue.setErrors({invalid: true});
+          });
           this.error = 'Value already entered';
         }
       } else {
-        this.tagValue.setErrors({invalid: true});
+        setTimeout(() => {
+          this.tagValue.setErrors({invalid: true});
+        });
         this.error = 'Value too large';
       }
     }

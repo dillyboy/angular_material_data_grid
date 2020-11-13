@@ -1,0 +1,55 @@
+@import "../../../../scss/variables";
+
+.placeholder {
+  color: $placeholder-color;
+}
+
+.filter-container {
+  width: 260px;
+  min-height: 60px;
+  display: block;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.filter-open-btn {
+  line-height: 26px;
+  font-size: 12px;
+  padding: 0 4px;
+  width: 100%;
+  background: white;
+  ::ng-deep .mat-button-wrapper {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+.mat-select-arrow {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid;
+  margin: 0 4px;
+}
+
+
+.mat-select.focus-visible {
+  border: 2px solid $primary;
+}
+
+input {
+  width: calc(50% - 4px);
+  margin: 0;
+}
+
+.invalid-range-error {
+  color: $warn;
+  font-size: 12px;
+}
+
+.tag-input {
+  width: calc(100% - 30px);
+}

@@ -6,12 +6,12 @@
             <app-date-filter (filter)="filterObjCreated($event)"></app-date-filter>
         </ng-container>
 
-        <ng-container *ngIf="heading.type === 'string' && heading.filterType !== 'multi-select'">
-            <app-string-filter (filter)="filterObjCreated($event)"></app-string-filter>
-        </ng-container>
-
-        <ng-container *ngIf="heading.type === 'string' && heading.filterType === 'multi-select'">
-            <app-multi-select class="w-100" [filterConfig]="heading.other" (filter)="filterObjCreated($event)"></app-multi-select>
+        <ng-container *ngIf="heading.type === 'string' || heading.type === 'url'">
+            <ng-container [ngSwitch]="heading.filterType">
+                <app-multi-select  *ngSwitchCase="'multi-select'" class="w-100" [filterConfig]="heading.other" (filter)="filterObjCreated($event)"></app-multi-select>
+                <app-tag-filter    *ngSwitchCase="'tag'" class="w-100" ></app-tag-filter>
+                <app-string-filter *ngSwitchDefault (filter)="filterObjCreated($event)"></app-string-filter>
+            </ng-container>
         </ng-container>
 
         <ng-container *ngIf="heading.type === 'number'">

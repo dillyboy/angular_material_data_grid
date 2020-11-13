@@ -1,8 +1,3 @@
-<app-angular-material-data-grid
-    [headings]="headings"
-    [selection]="true"
-    [url]="url"
-    (responseEmit)="responseReceived($event)"
-    (selectionEmit)="selectionChanged($event)"
-    (filtersChangedEmit)="filtersChanged($event)">
-</app-angular-material-data-grid>
+<div #loadContainer class="load-container">
+    <router-outlet></router-outlet>
+</div>

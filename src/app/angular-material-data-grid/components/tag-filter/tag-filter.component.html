@@ -1,0 +1,34 @@
+<button class="filter-open-btn layout-container" mat-stroked-button type="button" #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="numberFilterMenu" (menuOpened)="menuOpened()">
+    <span *ngIf="!filterApplied" class="placeholder font-weight-normal">None Selected</span>
+    <span *ngIf="filterApplied" class="accent-color">Filter Applied</span>
+    <div class="mat-select-arrow"></div>
+</button>
+
+<mat-menu #numberFilterMenu="matMenu">
+    <div class="filter-container" (click)="$event.stopPropagation()" (keydown.tab)="$event.stopPropagation()" (keydown.shift.tab)="$event.stopPropagation()">
+        <div class="layout-container">
+            <button mat-stroked-button type="button" (click)="validate()" class="mr-2 mat-primary mat-small-stroked-button">Filter</button>
+            <button mat-stroked-button type="button" (click)="reset(true)" class="mat-warn mat-small-stroked-button">Reset</button>
+        </div>
+        <div class="layout-container mt-2">
+            <mat-form-field class="tag-input">
+                <mat-label>Add Tag</mat-label>
+                <input matInput type="text" [formControl]="tagValue" (keydown.enter)="addTagValue($event);">
+                <mat-error>{{error}}</mat-error>
+            </mat-form-field>
+            <mat-icon class="fs-16 cursor-pointer" mat-ripple color="primary" (click)="addTagValue($event);">add</mat-icon>
+        </div>
+        <div class="layout-container">
+            <mat-divider class="w-100"></mat-divider>
+        </div>
+        <p class="text-center mt-2 text-muted" *ngIf="tagValues.length === 0">No Tags entered</p>
+        <div class="p-3" *ngIf="tagValues.length > 0;let i = index">
+            <mat-chip-list>
+                <mat-chip *ngFor="let tag of tagValues" [removable]="true" (removed)="tagValues.splice(i, 1)" [selectable]="false">
+                    {{tag}} <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+            </mat-chip-list>
+        </div>
+
+    </div>
+</mat-menu>

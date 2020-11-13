@@ -181,4 +181,37 @@
   margin: 2rem;
 }
 
+.link {
+  color: $primary;
+  background-color: transparent;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+  font-size: 12px;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.icon-external-link {
+  color: $primary;
+  cursor: pointer;
+  margin-left: 8px;
+  height: auto;
+}
+
+.link-disabled {
+  pointer-events: none;
+}
+
+.icon-external-link {
+  position: relative;
+  top: 3px;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 @include pulse-animation();

@@ -278,4 +278,15 @@ export class AngularMaterialDataGridComponent implements AfterContentInit{
       this.calculateGridWidth();
     });
   }
+
+  openLinkInNewTab(link, params = {}): void {
+    let paramString = '?';
+    // if (isEmpty(params)) {
+    //   paramString = '';
+    // }
+    Object.keys(params).forEach(key => {
+      paramString += key + '=' + params[key];
+    });
+    window.open(link + paramString);
+  }
 }

@@ -7,8 +7,16 @@
   padding: 0 8px;
 }
 
+.text-left {
+  text-align: left;
+}
+
 .text-right {
   text-align: right;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .m-0 {
@@ -96,6 +104,10 @@
   width: 100% !important;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .font-weight-normal {
   font-weight: normal;
 }
@@ -131,4 +143,8 @@
 .mat-option {
   height: 26px !important;
   padding: 0 10px !important;
+}
+
+.text-muted {
+  opacity: .6;
 }

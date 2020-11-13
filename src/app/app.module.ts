@@ -6,15 +6,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialDataGridModule } from './angular-material-data-grid/angular-material-data-grid.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './token-interceptor.service';
+import { AppRoutingModule } from './app.routing.module';
+import { HomeComponent } from './pages/home/home.component';
+import { DetailComponent } from './pages/detail/detail.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    DetailComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AngularMaterialDataGridModule
+    AngularMaterialDataGridModule,
+    AppRoutingModule
   ],
   providers: [
     {

@@ -44,7 +44,16 @@
                         <tbody (window:mouseup)="endSelect()">
                         <tr *cdkVirtualFor="let item of response.gridData; let odd=odd;" (mouseover)="overSelect($event, item)" [ngClass]="{ odd: odd, rowSelected: item.gridItemSelected == true}">
                             <td *ngIf="selection" class="selection animated" #selection (mousedown)="startSelect(item, selection)"><mat-checkbox [(ngModel)]="item['gridItemSelected']" (ngModelChange)="gridItemSelectionChanged()"></mat-checkbox></td>
-                            <td *ngFor="let heading of headings | columnFilter;">{{item[heading.fieldName]}}</td>
+                            <td *ngFor="let heading of headings | columnFilter;">
+
+                                <ng-container [ngSwitch]="heading.type">
+                                    <span *ngSwitchCase="'url'">
+                                        <a class="link" [ngClass]="{'link-disabled': loadingData}" *ngIf="heading.other && heading.other['urlTemplate']" [routerLink]="item[heading.fieldName + 'Link']"  [queryParams]="item[heading.fieldName + 'QueryParams']">{{item[heading.fieldName]}}</a>
+                                        <mat-icon class="fs-12 icon-external-link" [ngClass]="{'link-disabled': loadingData}" *ngIf="heading.other && heading.other.openTab && item[heading.fieldName]" (click)="openLinkInNewTab(item[heading.fieldName + 'Link'], item[heading.fieldName + 'QueryParams'])">launch</mat-icon>
+                                    </span>
+                                    <span *ngSwitchDefault [title]="item[heading.title] ? item[heading.title] : item[heading.fieldName]"> {{item[heading.fieldName]}}</span>
+                                </ng-container>
+                            </td>
                         </tr>
                         <tr class="empty" *ngIf="response.gridData.length === 0" [ngStyle]="{'height': 'calc(100vh - ' +offsetTop+ 'px)' }">
                             <td *ngIf="selection" class="selection animated"></td>

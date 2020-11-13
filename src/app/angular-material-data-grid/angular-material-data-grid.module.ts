@@ -26,6 +26,12 @@ import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
+import { RouterModule } from '@angular/router';
+import { TagFilterComponent } from './components/tag-filter/tag-filter.component';
+import { MatDividerModule} from '@angular/material/divider';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule} from '@angular/material/form-field';
 
 
 @NgModule({
@@ -40,7 +46,8 @@ import { MatSelectModule } from '@angular/material/select';
     MultiSelectComponent,
     NumberFilterComponent,
     DateFilterComponent,
-    StringFilterComponent
+    StringFilterComponent,
+    TagFilterComponent
   ],
   imports: [
     CommonModule,
@@ -60,7 +67,12 @@ import { MatSelectModule } from '@angular/material/select';
     MatDatepickerModule,
     MatNativeDateModule,
     MatTooltipModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDividerModule,
+    MatChipsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    RouterModule
   ],
   entryComponents: [
     ConfirmationComponent

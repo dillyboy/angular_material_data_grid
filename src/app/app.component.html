@@ -14,7 +14,20 @@
 </div>
 <mat-drawer-container autosize>
     <mat-drawer #drawer class="sidenav" mode="side">
-        <p>Auto-resizing sidenav</p>
+        <mat-accordion>
+            <mat-expansion-panel expanded>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Grid
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-selection-list dense [multiple]="false" >
+                    <mat-list-option *ngFor="let item of links" [value]="item" [selected]="item === selectedLink">
+                        <span class="item-text">{{item}}</span>
+                    </mat-list-option>
+                </mat-selection-list>
+            </mat-expansion-panel>
+        </mat-accordion>
     </mat-drawer>
     <router-outlet></router-outlet>
 </mat-drawer-container>

@@ -1,21 +1,50 @@
+@import "../scss/variables";
 .header {
   height: 45px;
   width: 100%;
   padding-top: 4px;
   padding-bottom: 4px;
+  z-index: 3;
+  position: fixed;
+  background-color: white;
 }
 
 mat-drawer-container {
+  padding-top: 56px;
   background-color: white;
   .sidenav {
-    background: #2262C6;
+    background-color: $primary;
     border-right: none;
     width: 200px;
     border-top-right-radius: 60px;
     z-index: 0 !important;
     position: fixed;
     top: 53px;
-    padding: 15px;
     color: white;
+    padding-top: 50px;
+  }
+}
+
+mat-expansion-panel {
+  background-color: transparent;
+  box-shadow: none !important;
+  color: white;
+}
+
+mat-panel-title {
+  color: white;
+}
+
+mat-list-option {
+  border-radius: 50px;
+  .item-text {
+    color: white;
+  }
+}
+
+mat-list-option[aria-selected="true"] {
+  background: white;
+  .item-text {
+    color: black !important;
   }
 }

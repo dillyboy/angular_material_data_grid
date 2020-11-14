@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   darkMode = false;
+  links = ['Overview', 'Basics'];
+  selectedLink = 'Overview';
+
+  constructor() {
+  }
+  changePage(): void {
+    console.log('change');
+  }
 }

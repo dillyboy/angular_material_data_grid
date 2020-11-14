@@ -12,7 +12,8 @@ export class HomeComponent{
 
   headings = [
     {fieldName: 'uid', display: 'ID', type: 'number', minWidth: '160px', maxWidth: '160px', width: '12.25%', filter: true,
-      disableSorting: true},
+      disableSorting: true,
+      align: 'right'},
     {fieldName: 'first_name', display: 'First Name', type: 'url', minWidth: '160px', maxWidth: '160px', width: '12.25%',
       other: {openTab: true, urlTemplate: '/detail/:uid', queryParams: {myEmail: 'email'}}, filterType: 'tag'},
     {fieldName: 'email', display: 'Email', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%'},
@@ -60,7 +61,9 @@ export class HomeComponent{
           {display: 'Edit User', icon: 'edit', disableField: `disableAction`},
           {display: 'Delete User', icon: 'delete', disableField: `disableAction`},
         ]
-      }},
+      },
+      align: 'center'
+    },
   ];
 
   responseReceived(data): void {

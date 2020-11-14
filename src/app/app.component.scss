@@ -5,10 +5,12 @@
   padding: 4px 0 4px 0;
   z-index: 3;
   position: fixed;
+  top: 0;
+  border-radius: 0;
 }
 
 mat-drawer-container {
-  padding-top: 56px;
+  padding-top: 53px;
   background-color: white;
   .sidenav {
     background-color: mat-color($mat-indigo, 700);

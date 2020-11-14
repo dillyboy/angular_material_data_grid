@@ -27,11 +27,11 @@ export class AngularMaterialDataGridComponent implements AfterContentInit{
   @Input() headings: any = [];
   @Input() selection = true;
   @Input() url = '';
+  @Input() columnControl = true;
   allGridItemsSelected = false;
   loadingData = true;
   response = { gridData: [], totalCount: 0};
   recordsPerPage = 0;
-  columnControl = true;
   selectionStarted = false;
   selectionTimeoutHandler: any;
   allCheckBoxesSelected = false;
@@ -66,12 +66,13 @@ export class AngularMaterialDataGridComponent implements AfterContentInit{
   }
 
   private calculateGridWidth(): void {
-    const gridContainer = document.getElementById('grid');
+    const gridContainer = document.getElementById('grid-container');
     this.gridWidth = gridContainer.clientWidth;
-    const heightOfHeaderAndFooter = 112;
-    const extraSpace = this.fullscreen ? -24 : 24;
-    let totalOffset = gridContainer.offsetTop + heightOfHeaderAndFooter + extraSpace;
-    if (this.columnControl) {
+    const heightOfHeaderAndFooter = 114;
+    const heightToTop = this.fullscreen ? 0 : gridContainer.getBoundingClientRect().top;
+    const otherOffset = this.fullscreen ? 0 : gridContainer.offsetTop;
+    let totalOffset = heightOfHeaderAndFooter + heightToTop + otherOffset;
+    if (this.columnControl && !this.fullscreen) {
       totalOffset += 24; // heightOfColumnControlBtn
     }
     this.offsetTop = totalOffset;

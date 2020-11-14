@@ -5,8 +5,8 @@
         </button>
         <div class="d-inline-flex">
             <mat-slide-toggle [(ngModel)]="darkMode" (ngModelChange)="themeChanged()" labelPosition="before">
-                <span *ngIf="!darkMode">Light</span>
-                <span *ngIf="darkMode">Dark</span>
+                <span *ngIf="!darkMode"><mat-icon class="position-relative mr-2" style="top:8px">wb_sunny</mat-icon>Light</span>
+                <span *ngIf="darkMode"><mat-icon class="position-relative mr-2" style="top:8px">nights_stay</mat-icon>Dark</span>
             </mat-slide-toggle>
         </div>
 

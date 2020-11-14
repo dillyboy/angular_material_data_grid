@@ -11,12 +11,17 @@ export class AppComponent {
   selectedLink = 'Overview';
 
   constructor(private renderer: Renderer2) {
+    this.darkMode = (localStorage.getItem('darkMode')  === 'true');
+    if (this.darkMode) {
+      this.renderer.addClass(document.body, 'darkMode');
+    }
   }
   changePage(): void {
     console.log('change');
   }
 
   themeChanged(): void {
+    localStorage.setItem('darkMode', this.darkMode.toString());
     if (this.darkMode) {
       this.renderer.addClass(document.body, 'darkMode');
     } else {

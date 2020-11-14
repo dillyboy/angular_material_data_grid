@@ -5,7 +5,7 @@
   background: $highlight-color;
 
   .buttons-container {
-    color: $primary;
+    color: $accent;
     .mat-icon-button {
       width: 26px;
       height: 26px;
@@ -14,14 +14,14 @@
       margin-right: 6px;
       font-weight: 400;
       &.highlight {
-        background: $primary;
+        background: $accent;
         color: white;
       }
     }
   }
 
   .full-screen-btn {
-    color: $primary;
+    color: $accent;
   }
 
 }

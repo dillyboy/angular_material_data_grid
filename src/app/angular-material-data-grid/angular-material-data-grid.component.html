@@ -5,9 +5,8 @@
             <div class="column-item" *ngFor="let heading of headings" cdkDrag>
                 <div class="d-inline-flex">
                     <mat-icon>drag_indicator</mat-icon>
-                    <mat-checkbox *ngIf="heading.show === undefined" disabled checked="true"></mat-checkbox>
-                    <mat-checkbox *ngIf="heading.show !== undefined" [(ngModel)]="heading.show" (ngModelChange)="updateColumns()"></mat-checkbox>
-                    <span class="ml-3">{{heading.display}}</span>
+                    <mat-checkbox *ngIf="heading.show === undefined" disabled checked="true"><span class="ml-3">{{heading.display}}</span></mat-checkbox>
+                    <mat-checkbox *ngIf="heading.show !== undefined" [(ngModel)]="heading.show" (ngModelChange)="updateColumns()"><span class="ml-3">{{heading.display}}</span></mat-checkbox>
                 </div>
             </div>
         </div>

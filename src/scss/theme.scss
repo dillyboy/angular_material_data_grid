@@ -13,6 +13,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $serverbind-grid-primary: mat-palette($mat-indigo);
+$serverbind-grid-primary-dark: mat-palette($mat-indigo, 400);
 $serverbind-grid-accent: mat-palette($mat-amber, 800, 700, 900);
 
 // The warn palette is optional (defaults to red).
@@ -30,7 +31,7 @@ $serverbind-grid-theme: mat-light-theme((
 
 $serverbind-grid-dark-theme: mat-dark-theme((
         color: (
-                primary: $serverbind-grid-primary,
+                primary: $serverbind-grid-primary-dark,
                 accent: $serverbind-grid-accent,
                 warn: $serverbind-grid-warn,
         )

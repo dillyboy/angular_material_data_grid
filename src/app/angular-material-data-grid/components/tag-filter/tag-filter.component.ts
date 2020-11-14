@@ -59,4 +59,42 @@ export class TagFilterComponent implements OnInit {
     this.tagValue.setValue('');
   }
 
+  stringPaste(stringList, event): void {
+    event.preventDefault();
+
+    stringList = stringList.replace(/	/g, ',');
+    stringList = stringList.replace(/\n/ig, ',');
+    stringList = stringList.replace(/\\t/g, ',');
+    stringList = stringList.replace(/\\n/g, ',');
+    stringList = stringList.replace(/[\r\n]/g, ',');
+
+    let validPaste = true;
+    const list = stringList.split(',').filter(Boolean); // remove empty strings
+
+    const formattedList = [];
+    let error = '';
+    list.forEach(item => {
+      item = item.trim();
+      if (item.length <= 15) {
+        formattedList.push(item);
+      } else {
+        validPaste = false;
+
+        if (!(item.length <= 15)) {
+          error = 'A single value cannot be more than 15 characters';
+        }
+      }
+    });
+
+    if (validPaste) {
+      const allTagValues = [ ...this.tagValues, ...new Set(formattedList)]; // make sure to remove duplicates before pushing
+      this.tagValues = [ ...new Set(allTagValues)];
+    } else {
+      setTimeout(() => {
+        this.tagValue.setErrors({invalid: true});
+      });
+      this.error = error;
+    }
+  }
+
 }

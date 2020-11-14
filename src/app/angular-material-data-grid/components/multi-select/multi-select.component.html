@@ -13,7 +13,14 @@
 
         <button mat-stroked-button type="button" (click)="reset()" class="mat-warn mat-small-stroked-button">Reset</button>
     </div>
-    <input class="" placeholder="Search..." [(ngModel)]="searchFilter"/>
+    <div class="layout-container mt-2">
+        <mat-form-field class="w-100">
+            <input matInput placeholder="Search..." [(ngModel)]="searchFilter"/>
+            <button mat-button *ngIf="searchFilter" matSuffix mat-icon-button aria-label="Clear" (click)="searchFilter=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
     <div id="list-container" >
         <mat-option *ngFor="let item of selectionList | search:searchFilter" [value]="item">{{item.text}}</mat-option>
     </div>

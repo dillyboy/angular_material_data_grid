@@ -10,24 +10,6 @@
   box-sizing: border-box;
 }
 
-input {
-  border-radius: 4px;
-  padding: 0 4px;
-  box-sizing: border-box;
-  border: 1px solid rgba(118, 118, 118, 0.26);
-  outline: 0;
-  font: inherit;
-  line-height: 1.42857143em;
-  display: inline-flex;
-  vertical-align: middle;
-  position: relative;
-  width: calc(100% - 17px);
-  min-width: 55px;
-  height: 26px !important;
-  font-weight: 300;
-  margin: 8px !important;
-}
-
 .additional-selection {
   opacity: 0.75;
   font-size: 0.75em;

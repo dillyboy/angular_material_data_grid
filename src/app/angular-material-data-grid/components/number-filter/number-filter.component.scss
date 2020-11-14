@@ -35,24 +35,7 @@
   margin: 0 4px;
 }
 
-.mat-select, input {
-  border: 1px solid rgba(118, 118, 118, 0.26);
-  border-radius: 4px;
-  padding: 0 4px;
-  height: 26px;
-  line-height: 26px;
-  background: white;
-  box-sizing: border-box;
-  margin: 8px 0;
-  width: 100%;
-  font-size: 12px;
-}
-
-.mat-select.focus-visible {
-  border: 2px solid $primary;
-}
-
-input {
+mat-form-field {
   width: calc(50% - 4px);
   margin: 0;
 }
@@ -61,10 +44,4 @@ input {
   color: $warn;
   font-size: 12px;
 }
-
-input.ng-invalid.ng-touched
-{
-  border: 2px solid $warn !important;
-}
-
 

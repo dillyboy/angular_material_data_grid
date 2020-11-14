@@ -74,4 +74,7 @@ export class HomeComponent{
   filtersChanged(data): void {
     console.log(data);
   }
+  buttonClick(ev): void {
+    console.log(ev);
+  }
 }

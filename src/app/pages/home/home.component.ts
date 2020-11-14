@@ -54,6 +54,13 @@ export class HomeComponent{
     {fieldName: 'username', display: 'Username', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%', show: false},
     {fieldName: 'profession', display: 'Profession', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%', show: false},
     {fieldName: 'state', display: 'State', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%', show: false},
+    {fieldName: 'actions', display: '', type: 'button-group', minWidth: '170px', maxWidth: '170px', width: '15%',
+      other: { mainButton: {display: 'Options', icon: 'expand_more'},
+        buttons: [
+          {display: 'Edit User', icon: 'edit', disableField: `disableAction`},
+          {display: 'Delete User', icon: 'delete', disableField: `disableAction`},
+        ]
+      }},
   ];
 
   responseReceived(data): void {

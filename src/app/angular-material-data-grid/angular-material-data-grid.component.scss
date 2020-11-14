@@ -217,4 +217,17 @@
   }
 }
 
+.button-group-btn {
+  line-height: 19px;
+  height: 19px;
+  font-size: 12px;
+  color: $accent;
+
+  mat-icon {
+    height: 20px;
+    width: 20px;
+    font-size: 18px;
+  }
+}
+
 @include pulse-animation();

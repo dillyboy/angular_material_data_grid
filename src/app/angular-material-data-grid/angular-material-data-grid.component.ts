@@ -23,6 +23,7 @@ export class AngularMaterialDataGridComponent implements AfterContentInit{
   @Output() responseEmit: any = new EventEmitter<any>();
   @Output() selectionEmit: any = new EventEmitter<any>();
   @Output() filtersChangedEmit: any = new EventEmitter<any>();
+  @Output() urlClickEmit: any = new EventEmitter<any>();
 
   @Input() headings: any = [];
   @Input() selection = true;
@@ -289,5 +290,13 @@ export class AngularMaterialDataGridComponent implements AfterContentInit{
       paramString += key + '=' + params[key];
     });
     window.open(link + paramString);
+  }
+
+  goToLink(fieldName, item, click?, index?): void {
+    if (click) {
+      this.urlClickEmit.emit({fieldName, item, click, index});
+    } else {
+      this.urlClickEmit.emit({fieldName, item});
+    }
   }
 }

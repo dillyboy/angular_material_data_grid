@@ -1,3 +1,20 @@
-<div #loadContainer class="load-container">
-    <router-outlet></router-outlet>
+<div class="header">
+    <div class="layout-container">
+        <button type="button" mat-icon-button (click)="drawer.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <div class="d-inline-flex">
+            <mat-slide-toggle [(ngModel)]="darkMode" labelPosition="before">
+                <span *ngIf="!darkMode">Light</span>
+                <span *ngIf="darkMode">Dark</span>
+            </mat-slide-toggle>
+        </div>
+
+    </div>
 </div>
+<mat-drawer-container autosize>
+    <mat-drawer #drawer class="sidenav" mode="side">
+        <p>Auto-resizing sidenav</p>
+    </mat-drawer>
+    <router-outlet></router-outlet>
+</mat-drawer-container>

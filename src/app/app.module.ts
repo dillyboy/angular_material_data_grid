@@ -9,6 +9,11 @@ import { TokenInterceptorService } from './token-interceptor.service';
 import { AppRoutingModule } from './app.routing.module';
 import { HomeComponent } from './pages/home/home.component';
 import { DetailComponent } from './pages/detail/detail.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +25,12 @@ import { DetailComponent } from './pages/detail/detail.component';
     BrowserModule,
     BrowserAnimationsModule,
     AngularMaterialDataGridModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSlideToggleModule,
+    FormsModule
   ],
   providers: [
     {

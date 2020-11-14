@@ -1,0 +1,21 @@
+.header {
+  height: 45px;
+  width: 100%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+mat-drawer-container {
+  background-color: white;
+  .sidenav {
+    background: #2262C6;
+    border-right: none;
+    width: 200px;
+    border-top-right-radius: 60px;
+    z-index: 0 !important;
+    position: fixed;
+    top: 53px;
+    padding: 15px;
+    color: white;
+  }
+}

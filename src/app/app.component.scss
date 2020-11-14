@@ -2,18 +2,16 @@
 .header {
   height: 45px;
   width: 100%;
-  padding-top: 4px;
-  padding-bottom: 4px;
+  padding: 4px 0 4px 0;
   z-index: 3;
   position: fixed;
-  background-color: white;
 }
 
 mat-drawer-container {
   padding-top: 56px;
   background-color: white;
   .sidenav {
-    background-color: $primary;
+    background-color: mat-color($mat-indigo, 700);
     border-right: none;
     width: 200px;
     border-top-right-radius: 60px;
@@ -26,7 +24,7 @@ mat-drawer-container {
 }
 
 mat-expansion-panel {
-  background-color: transparent;
+  background-color: transparent !important;
   box-shadow: none !important;
   color: white;
 }

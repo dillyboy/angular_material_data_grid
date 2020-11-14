@@ -28,7 +28,19 @@ $serverbind-grid-theme: mat-light-theme((
         )
 ));
 
+$serverbind-grid-dark-theme: mat-dark-theme((
+        color: (
+                primary: $serverbind-grid-primary,
+                accent: $serverbind-grid-accent,
+                warn: $serverbind-grid-warn,
+        )
+));
+
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($serverbind-grid-theme);
+ @include angular-material-theme($serverbind-grid-theme);
+
+.darkMode {
+  @include angular-material-theme($serverbind-grid-dark-theme);
+}

@@ -1,19 +1,19 @@
-<div class="header">
+<mat-card class="header">
     <div class="layout-container">
         <button type="button" mat-icon-button (click)="drawer.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
         <div class="d-inline-flex">
-            <mat-slide-toggle [(ngModel)]="darkMode" labelPosition="before">
+            <mat-slide-toggle [(ngModel)]="darkMode" (ngModelChange)="themeChanged()" labelPosition="before">
                 <span *ngIf="!darkMode">Light</span>
                 <span *ngIf="darkMode">Dark</span>
             </mat-slide-toggle>
         </div>
 
     </div>
-</div>
-<mat-drawer-container autosize>
-    <mat-drawer #drawer class="sidenav" mode="side">
+</mat-card>
+<mat-drawer-container autosize style="min-height: 100vh">
+    <mat-drawer #drawer class="sidenav" mode="side" opened>
         <mat-accordion>
             <mat-expansion-panel expanded>
                 <mat-expansion-panel-header>

@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { MatRippleModule } from '@angular/material/core';
     FormsModule,
     MatExpansionModule,
     MatRippleModule,
-    MatListModule
+    MatListModule,
+    MatCardModule
   ],
   providers: [
     {

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { HeadingType } from '../../angular-material-data-grid/interfaces/heading-type';
+
 
 @Component({
   selector: 'app-home',
@@ -10,24 +12,27 @@ export class HomeComponent{
 
   url = `${environment.api}getUsers`;
 
-  headings = [
+  headings: HeadingType[] = [
     {fieldName: 'uid', display: 'ID', type: 'number', minWidth: '160px', maxWidth: '160px', width: '12.25%', filter: true,
-      disableSorting: true,
-      align: 'right'},
+      disableSorting: true, align: 'right'},
     {fieldName: 'first_name', display: 'First Name', type: 'url', minWidth: '160px', maxWidth: '160px', width: '12.25%',
-      other: {openTab: true, urlTemplate: '/detail/:uid', queryParams: {myEmail: 'email'}}, filterType: 'tag'},
+      other: {
+        openTab: true,
+        urlTemplate: '/detail/:uid',
+        queryParams: {userEmail: 'email'}
+      },
+      filterType: 'tag'
+    },
     {fieldName: 'email', display: 'Email', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%'},
     {fieldName: 'gender', display: 'Gender', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%',
       filterType: 'multi-select',
       other: {
         selectionMode: 'single',
         source: 'internal',
-        url: 'gender',
         optionsObject: [
           {text : 'Female', value: 'FEMALE'},
           {text : 'Male', value: 'MALE'}
-        ],
-        stringList: true
+        ]
       }
     },
     {fieldName: 'date_of_birth', display: 'Date Of Birth', type: 'date', minWidth: '160px', maxWidth: '160px', width: '12.25%'},
@@ -42,8 +47,7 @@ export class HomeComponent{
         source: 'external',
         url: `${environment.api}countries`,
         key: 'displayName',
-        value: 'value',
-        stringList: true
+        value: 'value'
       }
     },
     {fieldName: 'city', display: 'City', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%', show: false},
@@ -56,14 +60,18 @@ export class HomeComponent{
     {fieldName: 'profession', display: 'Profession', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%', show: false},
     {fieldName: 'state', display: 'State', type: 'string', minWidth: '160px', maxWidth: '160px', width: '12.25%', show: false},
     {fieldName: 'actions', display: '', type: 'button-group', minWidth: '170px', maxWidth: '170px', width: '15%',
-      other: { mainButton: {display: 'Options', icon: 'expand_more'},
+      other: {
+        mainButton: {
+          display: 'Options',
+          icon: 'expand_more'
+        },
         buttons: [
           {display: 'Edit User', icon: 'edit', disableField: `disableAction`},
           {display: 'Delete User', icon: 'delete', disableField: `disableAction`},
         ]
       },
-      align: 'center'
-    },
+      align: 'center', disableSorting: true,
+    }
   ];
 
   responseReceived(data): void {

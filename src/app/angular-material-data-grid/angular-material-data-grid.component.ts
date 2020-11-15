@@ -13,6 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { ApiResponseModel } from './api-response.model';
 import GridResponseInterface from './interfaces/grid-response';
+import GridHeadingInterface from './interfaces/grid-heading-type';
 
 @Component({
   selector: 'app-angular-material-data-grid',
@@ -26,7 +27,7 @@ export class AngularMaterialDataGridComponent implements AfterContentInit{
   @Output() filtersChangedEmit: any = new EventEmitter<any>();
   @Output() buttonClickEmit: any = new EventEmitter<any>();
 
-  @Input() headings: any = [];
+  @Input() headings: GridHeadingInterface[] = [];
   @Input() selection = true;
   @Input() url = '';
   @Input() columnControl = true;
@@ -245,7 +246,8 @@ export class AngularMaterialDataGridComponent implements AfterContentInit{
         urlHeadings.push({
           type: heading.fieldName,
           urlTemplate: heading.other?.urlTemplate,
-          queryParams: heading.other?.queryParams
+          queryParams: heading.other?.queryParams,
+          source: heading.other?.source,
         });
       }
     });
@@ -263,10 +265,19 @@ export class AngularMaterialDataGridComponent implements AfterContentInit{
         });
         obj[heading.type + 'Link'] = newUrl.join('/');
         if (heading.queryParams) {
-          const objParams = {};
-          Object.keys(heading.queryParams).forEach(field => {
-            objParams[field] = item[heading.queryParams[field]];
-          });
+          let objParams = null;
+          if (heading.source === 'external') {
+            objParams = '';
+            Object.keys(heading.queryParams).forEach(field => {
+              objParams += field + '=' + item[heading.queryParams[field]];
+            });
+          } else {
+            objParams = {};
+            Object.keys(heading.queryParams).forEach(field => {
+              objParams[field] = item[heading.queryParams[field]];
+            });
+          }
+
           obj[heading.type + 'QueryParams'] = objParams;
         }
       });
@@ -291,6 +302,14 @@ export class AngularMaterialDataGridComponent implements AfterContentInit{
       paramString += key + '=' + params[key];
     });
     window.open(link + paramString);
+  }
+
+  openExternalLinkInNewTab(link, params): void {
+    if (params) {
+      window.open(link + '?' + params);
+    } else {
+      window.open(link);
+    }
   }
 
   goToLink(fieldName, item, click?): void {

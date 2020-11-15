@@ -70,4 +70,9 @@ export default interface GridHeadingInterface {
      *         and action buttons in the grid
      */
     other?: OtherConfigType;
+
+    /**
+     * sort - This field is autofilled by the grid system, do not set values manually
+     */
+    sort?: string;
 }

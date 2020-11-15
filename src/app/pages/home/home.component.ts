@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import GridHeadingType from '../../angular-material-data-grid/interfaces/grid-heading-type';
-import GridResponseInterface from '../../angular-material-data-grid/interfaces/grid-response';
-import GridFilterItemInterface from '../../angular-material-data-grid/interfaces/grid-filter-item';
-import GirdButtonClickInterface from '../../angular-material-data-grid/interfaces/gird-button-click-interface';
+import {
+  GridHeadingType,
+  GridResponseInterface,
+  GridFilterItemInterface,
+  GirdButtonClickInterface
+} from '../../angular-material-data-grid/angular-material-data-grid-interfaces';
 
 
 @Component({
@@ -78,18 +80,19 @@ export class HomeComponent{
     }
   ];
 
-  responseReceived(data: GridResponseInterface): void {
-    console.log(data);
+  responseReceived(response: GridResponseInterface): void {
+    console.log(response);
   }
 
-  selectionChanged(data: any[]): void {
-    console.log(data);
+  selectionChanged(items: any[]): void {
+    console.log(items);
   }
 
-  filtersChanged(data: GridFilterItemInterface[]): void {
-    console.log(data);
+  filtersChanged(filters: GridFilterItemInterface[]): void {
+    console.log(filters);
   }
 
-  buttonClick(ev: GirdButtonClickInterface): void {
+  buttonClick(button: GirdButtonClickInterface): void {
+    console.log(button);
   }
 }

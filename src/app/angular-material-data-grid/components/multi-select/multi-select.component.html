@@ -1,4 +1,4 @@
-<mat-select placeholder="None Selected" #mySelect [formControl]="selection" [multiple]="multiple" xPosition="after" (selectionChange)="selectionChange()">
+<mat-select placeholder="Unfiltered" #mySelect [formControl]="selection" [multiple]="multiple" xPosition="after" (selectionChange)="selectionChange()" (opened)="menuOpened()">
     <mat-select-trigger>
         <span [ngClass]="{'accent-color font-weight-bold': filterApplied}">{{selection.value ? selection.value[0]?.text || selection.value.text : ''}}</span>
         <span *ngIf="selection.value?.length > 1" class="additional-selection">
@@ -15,7 +15,7 @@
     </div>
     <div class="layout-container mt-2">
         <mat-form-field class="w-100">
-            <input matInput placeholder="Search..." [(ngModel)]="searchFilter"/>
+            <input matInput #fromElement placeholder="Search..." [(ngModel)]="searchFilter"/>
             <button mat-button *ngIf="searchFilter" matSuffix mat-icon-button aria-label="Clear" (click)="searchFilter=''">
                 <mat-icon>close</mat-icon>
             </button>

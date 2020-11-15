@@ -13,7 +13,8 @@
                         (filter)="filterObjCreated($event)">
                 </app-multi-select>
                 <app-tag-filter *ngSwitchCase="'tag'"
-                        class="w-100" >
+                        class="w-100"
+                        (filter)="filterObjCreated($event)">
                 </app-tag-filter>
                 <app-string-filter *ngSwitchDefault
                         (filter)="filterObjCreated($event)">

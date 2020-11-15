@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ApiResponseModel } from '../../api-response.model';
 import { HttpClient } from '@angular/common/http';
@@ -22,6 +22,7 @@ export class MultiSelectComponent implements OnInit {
   };
 
   @ViewChild('mySelect') mySelect;
+  @ViewChild('fromElement') fromElement: ElementRef;
   selection = new FormControl();
   selectionList: any[] = [];
   allSelected = false;
@@ -45,6 +46,9 @@ export class MultiSelectComponent implements OnInit {
     } else { // internal
       this.selectionList = this.filterConfig.optionsObject;
     }
+  }
+  menuOpened(): void {
+    this.fromElement.nativeElement.focus();
   }
 
   selectionChange(): void {

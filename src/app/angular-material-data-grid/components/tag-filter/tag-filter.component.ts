@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'app-tag-filter',
@@ -9,6 +10,9 @@ import { FormControl } from '@angular/forms';
 export class TagFilterComponent implements OnInit {
 
   @Input() numbersOnly = false;
+  @Output() filter: any = new EventEmitter<any>();
+  @ViewChild('menuTrigger') menu: MatMenuTrigger;
+  @ViewChild('fromElement') fromElement: ElementRef;
   filterApplied = false;
   tagValue = new FormControl('', []);
   tagValues = [];
@@ -22,12 +26,24 @@ export class TagFilterComponent implements OnInit {
   }
 
   menuOpened(): void {
+    this.fromElement.nativeElement.focus();
   }
 
   validate(): void {
+    if (this.tagValues.length > 0) {
+      this.filter.emit({ operator: 'eq', value: this.tagValues.join() });
+      this.filterApplied = true;
+    } else {
+      this.filterApplied = false;
+    }
+    this.menu.closeMenu();
   }
 
-  reset(bool): void {
+  reset(): void {
+    this.tagValues = [];
+    this.filter.emit({ operator: 'eq', value: null });
+    this.filterApplied = false;
+    this.menu.closeMenu();
   }
 
   addTagValue(event): void {

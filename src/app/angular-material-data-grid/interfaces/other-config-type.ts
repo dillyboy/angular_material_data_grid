@@ -34,6 +34,7 @@ export interface OtherConfigType {
      * MULTI-SELECT CONFIGURATION
      * source - Multi-select source can either be internal or external. If the source is internal;
      *          url, key and value fields are not needed. However, optionsObject is essential when the source is internal
+     *          IMPORTANT - source can also be used for url builder - if external is given external links can be opened
      */
     source?: 'internal' | 'external';
     /**

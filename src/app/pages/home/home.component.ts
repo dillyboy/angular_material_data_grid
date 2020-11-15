@@ -18,7 +18,7 @@ export class HomeComponent{
   url = `${environment.api}getUsers`;
 
   headings: GridHeadingInterface[] = [
-    {fieldName: 'uid', display: 'ID', type: 'number', minWidth: '160px', maxWidth: '160px', width: '12.25%', filter: true,
+    {fieldName: 'uid', display: 'ID', type: 'number', minWidth: '160px', maxWidth: '160px', width: '12.25%',
       disableSorting: true, align: 'right'},
     {fieldName: 'first_name', display: 'First Name', type: 'url', minWidth: '160px', maxWidth: '160px', width: '12.25%',
       other: {

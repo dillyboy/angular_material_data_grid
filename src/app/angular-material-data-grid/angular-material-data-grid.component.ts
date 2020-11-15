@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { ApiResponseModel } from './api-response.model';
+import GridResponseInterface from './interfaces/grid-response';
 
 @Component({
   selector: 'app-angular-material-data-grid',
@@ -20,7 +21,7 @@ import { ApiResponseModel } from './api-response.model';
 })
 export class AngularMaterialDataGridComponent implements AfterContentInit{
 
-  @Output() responseEmit: any = new EventEmitter<any>();
+  @Output() responseEmit: any = new EventEmitter<GridResponseInterface>();
   @Output() selectionEmit: any = new EventEmitter<any>();
   @Output() filtersChangedEmit: any = new EventEmitter<any>();
   @Output() buttonClickEmit: any = new EventEmitter<any>();
@@ -31,7 +32,7 @@ export class AngularMaterialDataGridComponent implements AfterContentInit{
   @Input() columnControl = true;
   allGridItemsSelected = false;
   loadingData = true;
-  response = { gridData: [], totalCount: 0};
+  response: GridResponseInterface = { gridData: [], totalCount: 0};
   recordsPerPage = 0;
   selectionStarted = false;
   selectionTimeoutHandler: any;

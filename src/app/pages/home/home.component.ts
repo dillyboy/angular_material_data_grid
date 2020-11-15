@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HeadingType } from '../../angular-material-data-grid/interfaces/heading-type';
+import GridHeadingType from '../../angular-material-data-grid/interfaces/grid-heading-type';
+import GridResponseInterface from '../../angular-material-data-grid/interfaces/grid-response';
+import GridFilterItemInterface from '../../angular-material-data-grid/interfaces/grid-filter-item';
+import GirdButtonClickInterface from '../../angular-material-data-grid/interfaces/gird-button-click-interface';
 
 
 @Component({
@@ -12,7 +15,7 @@ export class HomeComponent{
 
   url = `${environment.api}getUsers`;
 
-  headings: HeadingType[] = [
+  headings: GridHeadingType[] = [
     {fieldName: 'uid', display: 'ID', type: 'number', minWidth: '160px', maxWidth: '160px', width: '12.25%', filter: true,
       disableSorting: true, align: 'right'},
     {fieldName: 'first_name', display: 'First Name', type: 'url', minWidth: '160px', maxWidth: '160px', width: '12.25%',
@@ -63,29 +66,30 @@ export class HomeComponent{
       other: {
         mainButton: {
           display: 'Options',
-          icon: 'expand_more'
+          icon: 'expand_more',
+          disableField: `archived`
         },
         buttons: [
-          {display: 'Edit User', icon: 'edit', disableField: `disableAction`},
-          {display: 'Delete User', icon: 'delete', disableField: `disableAction`},
+          {display: 'Edit User', icon: 'edit', disableField: `archived`},
+          {display: 'Delete User', icon: 'delete', disableField: `archived`},
         ]
       },
       align: 'center', disableSorting: true,
     }
   ];
 
-  responseReceived(data): void {
+  responseReceived(data: GridResponseInterface): void {
     console.log(data);
   }
 
-  selectionChanged(data): void {
+  selectionChanged(data: any[]): void {
     console.log(data);
   }
 
-  filtersChanged(data): void {
+  filtersChanged(data: GridFilterItemInterface[]): void {
     console.log(data);
   }
-  buttonClick(ev): void {
-    console.log(ev);
+
+  buttonClick(ev: GirdButtonClickInterface): void {
   }
 }

@@ -1,6 +1,6 @@
 import { OtherConfigType } from './other-config-type';
 
-export default interface GridHeadingType {
+export default interface GridHeadingInterface {
     /**
      * fieldName - This refers to field name mapping which gets returned from the server.
      *             The column value will be bound with this mapping

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import {
-  GridHeadingType,
+  GridHeadingInterface,
   GridResponseInterface,
   GridFilterItemInterface,
   GirdButtonClickInterface
@@ -17,7 +17,7 @@ export class HomeComponent{
 
   url = `${environment.api}getUsers`;
 
-  headings: GridHeadingType[] = [
+  headings: GridHeadingInterface[] = [
     {fieldName: 'uid', display: 'ID', type: 'number', minWidth: '160px', maxWidth: '160px', width: '12.25%', filter: true,
       disableSorting: true, align: 'right'},
     {fieldName: 'first_name', display: 'First Name', type: 'url', minWidth: '160px', maxWidth: '160px', width: '12.25%',

@@ -25,13 +25,13 @@
       <table [ngStyle]="{'left': '-' + scrollRemainingDistanceToLeft + 'px'}" >
         <thead>
         <th *ngIf="selection" class="selection"><mat-checkbox [(ngModel)]="allGridItemsSelected" (ngModelChange)="gridItemSelectionChanged(true)"></mat-checkbox></th>
-        <th *ngFor="let heading of headings | columnFilter;">
+        <th *ngFor="let heading of headings | columnFilter;" [style.width]="heading.width">
           <app-sort-header [heading]="heading" (filter)="sort($event)"></app-sort-header>
         </th>
         </thead>
         <thead>
         <th *ngIf="selection" class="selection"></th>
-        <th *ngFor="let heading of headings | columnFilter;">
+        <th *ngFor="let heading of headings | columnFilter;" [style.width]="heading.width">
           <app-filter-header [heading]="heading" (filter)="filter($event)"></app-filter-header>
         </th>
         </thead>
@@ -43,7 +43,7 @@
             <tbody (window:mouseup)="endSelect()">
             <tr *cdkVirtualFor="let item of response.gridData; let odd=odd;" (mouseover)="overSelect($event, item)" [ngClass]="{ odd: odd, rowSelected: item.gridItemSelected == true}">
               <td *ngIf="selection" class="selection animated" #selection (mousedown)="startSelect(item, selection)"><mat-checkbox [(ngModel)]="item['gridItemSelected']" (ngModelChange)="gridItemSelectionChanged()"></mat-checkbox></td>
-              <td *ngFor="let heading of headings | columnFilter;" [style.textAlign]="heading.align">
+              <td *ngFor="let heading of headings | columnFilter;" [style.textAlign]="heading.align" [style.width]="heading.width">
 
                 <ng-container [ngSwitch]="heading.type">
                   <!--URL TYPE-->
@@ -84,7 +84,7 @@
             </tr>
             <tr class="empty" *ngIf="response.gridData.length === 0" [ngStyle]="{'height': 'calc(100vh - ' +offsetTop+ 'px)' }">
               <td *ngIf="selection" class="selection animated"></td>
-              <td *ngFor="let heading of headings | columnFilter;"></td>
+              <td *ngFor="let heading of headings | columnFilter;" [style.width]="heading.width"></td>
             </tr>
             </tbody>
           </table>

@@ -19,19 +19,9 @@ export default interface GridHeadingInterface {
     type: 'string' | 'number' | 'url' | 'date' | 'button-group';
 
     /**
-     * minWidth - This refers to the column's minimum width which can be given as a px value. Eg: '150px'
-     */
-    minWidth: string;
-
-    /**
-     * maxWidth - This refers to the column's maximum width which can be given as a px value. Eg: '150px'
-     */
-    maxWidth: string;
-
-    /**
      * width - This refers to the column's width which can be given as a px value or a percentage. Eg: '150px' or '25%'
      */
-    width: string;
+    width?: string;
 
     /**
      * filter - This boolean value determines if the filter is shown or hidden. By default this goes as true

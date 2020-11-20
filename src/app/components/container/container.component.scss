@@ -1,0 +1,50 @@
+@import "../../../scss/variables";
+.header {
+  height: 45px;
+  width: 100%;
+  padding: 4px 0 4px 0;
+  z-index: 3;
+  position: fixed;
+  top: 0;
+  border-radius: 0;
+}
+
+mat-drawer-container {
+  padding-top: 53px;
+  background-color: white;
+  .sidenav {
+    background: #42a5f5 linear-gradient(145deg, #0d47a1, #1976d2);
+    border-right: none;
+    width: 200px;
+    border-top-right-radius: 60px;
+    z-index: 0 !important;
+    position: fixed;
+    top: 53px;
+    color: white;
+    padding-top: 50px;
+  }
+}
+
+mat-expansion-panel {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  color: white;
+}
+
+mat-panel-title {
+  color: white;
+}
+
+mat-list-option {
+  border-radius: 50px;
+  .item-text {
+    color: white;
+  }
+}
+
+mat-list-option[aria-selected="true"] {
+  background: white;
+  .item-text {
+    color: black !important;
+  }
+}

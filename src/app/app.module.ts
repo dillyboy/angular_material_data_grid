@@ -18,12 +18,16 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
+import { OverviewComponent } from './pages/overview/overview.component';
+import { ContainerComponent } from './components/container/container.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    OverviewComponent,
     HomeComponent,
-    DetailComponent
+    DetailComponent,
+    ContainerComponent
   ],
   imports: [
     BrowserModule,

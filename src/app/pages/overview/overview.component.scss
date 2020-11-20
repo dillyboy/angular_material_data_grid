@@ -1,0 +1,45 @@
+.background-sky {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  min-height: 380px;
+  height: 40vh;
+  max-height: 560px;
+  box-sizing: border-box;
+  padding: 48px 48px 32px;
+  overflow: hidden;
+  transform: skewY(4deg);
+  transform-origin: 100%;
+  background: #1976d2 linear-gradient(145deg, #0d47a1, #42a5f5);
+  color: #fff;
+  z-index: -1;
+}
+
+.main-text-holder {
+  color: white;
+  padding-top: 100px;
+  h1 {
+    font-size: 30px;
+  }
+  p {
+    font-size: 16px;
+    opacity: .6;
+  }
+  button {
+    padding: 2px 34px 0;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 40px;
+    background-color: #fff;
+    border-radius: 48px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+    box-sizing: border-box;
+    cursor: pointer;
+    color: #1976d2;
+    border: none;
+    outline: none;
+  }
+}

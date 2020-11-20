@@ -71,7 +71,7 @@ export class HomeComponent{
           disableField: `archived`
         },
         buttons: [
-          {display: 'Edit User', icon: 'edit', disableField: `archived`},
+          {display: 'Edit User', icon: 'edit', disableField: 'disableEdit'},
           {display: 'Delete User', icon: 'delete', disableField: `archived`},
         ]
       },
@@ -80,7 +80,12 @@ export class HomeComponent{
   ];
 
   responseReceived(response: GridResponseInterface): void {
-    console.log(response);
+    response.gridData.forEach(item => {
+      // item.date_of_birth = item.date_of_birth.substring(0, 10);
+      if (item.uid === 16) {
+        item.disableEdit = true;
+      }
+    });
   }
 
   selectionChanged(items: any[]): void {

@@ -6,7 +6,7 @@ import {
   Input,
   Output,
   EventEmitter,
-  Renderer2
+  Renderer2, AfterViewInit, ViewChild, ElementRef
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
@@ -20,7 +20,7 @@ import GridHeadingInterface from './interfaces/grid-heading-type';
   templateUrl: './angular-material-data-grid.component.html',
   styleUrls: ['./angular-material-data-grid.component.scss']
 })
-export class AngularMaterialDataGridComponent implements AfterContentInit{
+export class AngularMaterialDataGridComponent implements AfterViewInit{
 
   @Output() responseEmit: any = new EventEmitter<GridResponseInterface>();
   @Output() selectionEmit: any = new EventEmitter<any>();
@@ -52,6 +52,8 @@ export class AngularMaterialDataGridComponent implements AfterContentInit{
 
   fullscreen = false;
 
+  @ViewChild('gridContainer') gridContainer: ElementRef;
+
   // Window resize listener
   @HostListener('window:resize', ['$event'])
   onResize(): void {
@@ -64,12 +66,14 @@ export class AngularMaterialDataGridComponent implements AfterContentInit{
               public dialog: MatDialog) {
   }
 
-  ngAfterContentInit(): void {
-    this.calculateGridWidth();
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.calculateGridWidth();
+    });
   }
 
   private calculateGridWidth(): void {
-    const gridContainer = document.getElementById('grid-container');
+    const gridContainer = this.gridContainer.nativeElement;
     this.gridWidth = gridContainer.clientWidth;
     const heightOfHeaderAndFooter = 114;
     const heightToTop = this.fullscreen ? 0 : gridContainer.getBoundingClientRect().top;

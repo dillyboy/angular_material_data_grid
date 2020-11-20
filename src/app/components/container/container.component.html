@@ -1,0 +1,33 @@
+<mat-card class="header">
+  <div class="layout-container">
+    <button type="button" mat-icon-button (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div class="d-inline-flex">
+      <mat-slide-toggle [(ngModel)]="darkMode" (ngModelChange)="themeChanged()" labelPosition="before">
+        <span *ngIf="!darkMode"><mat-icon class="position-relative mr-2" style="top:7px">wb_sunny</mat-icon>Light</span>
+        <span *ngIf="darkMode"><mat-icon class="position-relative mr-2" style="top:7px">nights_stay</mat-icon>Dark</span>
+      </mat-slide-toggle>
+    </div>
+
+  </div>
+</mat-card>
+<mat-drawer-container autosize style="min-height: 100vh">
+  <mat-drawer #drawer class="sidenav" mode="side" opened>
+    <mat-accordion>
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Grid
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-selection-list dense [multiple]="false" >
+          <mat-list-option *ngFor="let item of links" [value]="item" [selected]="item === selectedLink">
+            <span class="item-text">{{item}}</span>
+          </mat-list-option>
+        </mat-selection-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-drawer>
+  <router-outlet></router-outlet>
+</mat-drawer-container>

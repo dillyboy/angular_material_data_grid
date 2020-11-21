@@ -24,6 +24,7 @@ import { IntroductionComponent } from './pages/introduction/introduction.compone
 import { InstallationComponent } from './pages/installation/installation.component';
 import { BasicUsageComponent } from './pages/basic-usage/basic-usage.component';
 import { HIGHLIGHT_OPTIONS, HighlightModule } from 'ngx-highlightjs';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { HIGHLIGHT_OPTIONS, HighlightModule } from 'ngx-highlightjs';
     MatRippleModule,
     MatListModule,
     MatCardModule,
+    MatTabsModule,
     HighlightModule
   ],
   providers: [

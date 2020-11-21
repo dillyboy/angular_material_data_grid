@@ -1,7 +1,4 @@
-@import '~@angular/material/theming';
-
-$primary: mat-color($mat-indigo, 400);
-$accent: mat-color($mat-amber, 800);
+@import './variables';
 
 .layout-container {
   display: flex !important;

@@ -79,7 +79,6 @@ import { MatFormFieldModule} from '@angular/material/form-field';
   ],
   exports: [
     AngularMaterialDataGridComponent
-
   ]
 })
 export class AngularMaterialDataGridModule { }

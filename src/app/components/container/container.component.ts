@@ -1,6 +1,6 @@
 import { Component, Renderer2 } from '@angular/core';
 import { navigation } from './navigation';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-container',
@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 export class ContainerComponent {
   darkMode = false;
   sidePanelNavigation = navigation;
+  routerEvents = null;
+  currentNav = '';
   links = ['Demo', 'Introduction', 'Installation', 'Basic Usage'];
   // Client Side Pagination
   // Server Side Pagination
@@ -17,14 +19,17 @@ export class ContainerComponent {
   // Column reordering and optional columns
   selectedLink = 'Demo';
 
-  constructor(private renderer: Renderer2, private router: Router) {
+  constructor(private renderer: Renderer2, private router: Router, private route: ActivatedRoute) {
     this.darkMode = (localStorage.getItem('darkMode')  === 'true');
     if (this.darkMode) {
       this.renderer.addClass(document.body, 'darkMode');
     }
-  }
-  changePage(): void {
-    console.log('change');
+
+    this.routerEvents = this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.currentNav = event.url.split('?')[0];
+      }
+    });
   }
 
   themeChanged(): void {
@@ -39,6 +44,10 @@ export class ContainerComponent {
   goToRoute(item): void {
     this.selectedLink = item.headingName;
     this.router.navigate([item.route]);
+  }
+
+  ngOnDestroy() {
+    this.routerEvents.unsubscribe();
   }
 
 }

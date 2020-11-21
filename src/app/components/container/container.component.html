@@ -15,7 +15,7 @@
 <mat-drawer-container autosize style="min-height: 100vh">
   <mat-drawer #drawer class="sidenav" mode="side" opened>
     <mat-accordion>
-      <mat-expansion-panel expanded *ngFor="let panel of sidePanelNavigation">
+      <mat-expansion-panel [expanded]="panel.openWhen.includes(currentNav)" *ngFor="let panel of sidePanelNavigation">
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{panel.panelHeading}}
@@ -24,7 +24,7 @@
         <div *ngFor="let item of panel.children"
              mat-ripple
              class="sidenav-option"
-             [ngClass]="{'selected' : item.headingName === selectedLink}"
+             [ngClass]="{'selected' : item.highLightWhen.includes(currentNav)}"
              (click)="goToRoute(item)">
           {{item.headingName}}
         </div>

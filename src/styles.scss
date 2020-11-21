@@ -3,23 +3,11 @@
 /* You can add global styles to this file, and also import other style files */
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue",
-  sans-serif;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
   font-size: 12px;
-  &.darkMode {
-    .mat-select, input, .filter-open-btn {
-      background: #424242;
-      color: white;
-    }
-    .cdk-drag-preview {
-      background: #424242;
-    }
-    .mat-menu-panel {
-      color: white;
-    }
-  }
 }
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
+@import "app/angular-material-data-grid/angular-material-data-grid-utilities";
 @import "scss/utilities";
 @import "scss/material-overrides";
 @import "scss/theme";

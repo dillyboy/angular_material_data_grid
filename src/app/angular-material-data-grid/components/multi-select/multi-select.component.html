@@ -1,4 +1,4 @@
-<mat-select placeholder="Unfiltered" #mySelect [formControl]="selection" [multiple]="multiple" xPosition="after" (selectionChange)="selectionChange()" (opened)="menuOpened()">
+<mat-select class="modified-mat-select" placeholder="Unfiltered" #mySelect [formControl]="selection" [multiple]="multiple" xPosition="after" (selectionChange)="selectionChange()" (opened)="menuOpened()">
     <mat-select-trigger>
         <span [ngClass]="{'accent-color font-weight-bold': filterApplied}">{{selection.value ? selection.value[0]?.text || selection.value.text : ''}}</span>
         <span *ngIf="selection.value?.length > 1" class="additional-selection">

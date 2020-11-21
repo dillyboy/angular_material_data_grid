@@ -17,7 +17,7 @@
   }
 }
 
-input, select {
+.modified-input {
   border-radius: 4px;
   padding: 0 4px;
   box-sizing: border-box;
@@ -40,4 +40,8 @@ input, select {
 .highlight-filter {
   background: $accent;
   color: white;
+}
+
+.accent-color {
+  color: $accent !important;
 }

@@ -2,7 +2,7 @@ export const navigation = [
   {
     panelHeading: 'Getting Started',
     panelIcon: '',
-    openWhen: ['/gettingStarted/home'],
+    openWhen: ['/gettingStarted/demo', '/gettingStarted/introduction', '/gettingStarted/installation', '/gettingStarted/basicUsage'],
     children: [
       {
         headingName: 'Demo',

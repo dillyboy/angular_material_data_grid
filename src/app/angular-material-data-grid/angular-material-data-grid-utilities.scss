@@ -74,14 +74,6 @@ $accent: mat-color($mat-amber, 800);
   padding: .75rem !important;
 }
 
-.p-4 {
-  padding: 1rem !important;
-}
-
-.p-5 {
-  padding: 1.5rem !important;
-}
-
 .position-relative {
   position: relative !important;
 }
@@ -181,4 +173,17 @@ $accent: mat-color($mat-amber, 800);
 
 .text-muted {
   opacity: .6;
+}
+
+body {
+  &.darkMode {
+    .modified-mat-select, .modified-input, .filter-open-btn {
+      background: #424242;
+      color: white;
+    }
+    .cdk-drag-preview, .mat-menu-panel {
+      color: white;
+      background: #424242;
+    }
+  }
 }

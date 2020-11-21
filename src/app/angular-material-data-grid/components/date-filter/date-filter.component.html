@@ -1,5 +1,5 @@
-<input *ngIf="filterParam === 'Filter Applied'" readonly class="date-range-input" type="text" name="filter" value="Is Empty">
-<input *ngIf="filterParam !== 'Filter Applied'" readonly class="date-range-input" type="text" [(ngModel)]="filterParam" [matTooltip]="filterParam" name="filter" (click)="picker.open()">
+<input *ngIf="filterParam === 'Filter Applied'" readonly class="modified-input date-range-input" type="text" name="filter" value="Is Empty">
+<input *ngIf="filterParam !== 'Filter Applied'" readonly class="modified-input date-range-input" type="text" [(ngModel)]="filterParam" [matTooltip]="filterParam" name="filter" (click)="picker.open()">
 <button mat-icon-button type="button" class="elem-right-margin" matTooltip="Is Empty" [disabled]="filterParam === 'Filter Applied'" (click)="applyFilter('blank')">
     <mat-icon class="material-icons-outlined">more_horiz</mat-icon>
 </button>

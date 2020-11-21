@@ -29,11 +29,14 @@ mat-expansion-panel {
   background-color: transparent !important;
   box-shadow: none !important;
   color: white;
+  .mat-expansion-panel-header-title {
+    color: white;
+  }
 }
 
 .sidenav-option {
-  height: 40px;
-  line-height: 40px;
+  height: 36px;
+  line-height: 36px;
   color: white;
   padding: 0 16px;
   border-radius: 50px;

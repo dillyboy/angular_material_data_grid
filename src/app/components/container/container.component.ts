@@ -1,4 +1,6 @@
 import { Component, Renderer2 } from '@angular/core';
+import { navigation } from './navigation';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-container',
@@ -7,10 +9,15 @@ import { Component, Renderer2 } from '@angular/core';
 })
 export class ContainerComponent {
   darkMode = false;
-  links = ['Overview', 'Basics'];
-  selectedLink = 'Overview';
+  sidePanelNavigation = navigation;
+  links = ['Demo', 'Introduction', 'Installation', 'Basic Usage'];
+  // Client Side Pagination
+  // Server Side Pagination
+  // Filters & Sorting
+  // Column reordering and optional columns
+  selectedLink = 'Demo';
 
-  constructor(private renderer: Renderer2) {
+  constructor(private renderer: Renderer2, private router: Router) {
     this.darkMode = (localStorage.getItem('darkMode')  === 'true');
     if (this.darkMode) {
       this.renderer.addClass(document.body, 'darkMode');
@@ -27,6 +34,11 @@ export class ContainerComponent {
     } else {
       this.renderer.removeClass(document.body, 'darkMode');
     }
+  }
+
+  goToRoute(item): void {
+    this.selectedLink = item.headingName;
+    this.router.navigate([item.route]);
   }
 
 }

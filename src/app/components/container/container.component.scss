@@ -31,20 +31,16 @@ mat-expansion-panel {
   color: white;
 }
 
-mat-panel-title {
+.sidenav-option {
+  height: 40px;
+  line-height: 40px;
   color: white;
-}
-
-mat-list-option {
+  padding: 0 16px;
   border-radius: 50px;
-  .item-text {
-    color: white;
-  }
-}
-
-mat-list-option[aria-selected="true"] {
-  background: white;
-  .item-text {
+  cursor: pointer;
+  font-size: 12px;
+  &.selected {
+    background: white;
     color: black !important;
   }
 }

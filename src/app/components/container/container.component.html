@@ -15,17 +15,19 @@
 <mat-drawer-container autosize style="min-height: 100vh">
   <mat-drawer #drawer class="sidenav" mode="side" opened>
     <mat-accordion>
-      <mat-expansion-panel expanded>
+      <mat-expansion-panel expanded *ngFor="let panel of sidePanelNavigation">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            Grid
+            {{panel.panelHeading}}
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-selection-list dense [multiple]="false" >
-          <mat-list-option *ngFor="let item of links" [value]="item" [selected]="item === selectedLink">
-            <span class="item-text">{{item}}</span>
-          </mat-list-option>
-        </mat-selection-list>
+        <div *ngFor="let item of panel.children"
+             mat-ripple
+             class="sidenav-option"
+             [ngClass]="{'selected' : item.headingName === selectedLink}"
+             (click)="goToRoute(item)">
+          {{item.headingName}}
+        </div>
       </mat-expansion-panel>
     </mat-accordion>
   </mat-drawer>

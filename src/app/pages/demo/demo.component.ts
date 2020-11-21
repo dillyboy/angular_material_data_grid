@@ -1,19 +1,18 @@
 import { Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import {
-  GridHeadingInterface,
-  GridResponseInterface,
+  GirdButtonClickInterface,
   GridFilterItemInterface,
-  GirdButtonClickInterface
+  GridHeadingInterface,
+  GridResponseInterface
 } from '../../angular-material-data-grid/angular-material-data-grid-interfaces';
 
-
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-demo',
+  templateUrl: './demo.component.html',
+  styleUrls: ['./demo.component.scss']
 })
-export class HomeComponent{
+export class DemoComponent {
 
   url = `${environment.api}getUsers`;
 
@@ -22,7 +21,7 @@ export class HomeComponent{
     {fieldName: 'first_name', display: 'First Name', type: 'url', width: '120px',
       other: {
         openTab: true,
-        urlTemplate: '/detail/:uid',
+        urlTemplate: '/gettingStarted/demo/:uid',
         queryParams: {userEmail: 'email'}
       },
       filterType: 'tag'

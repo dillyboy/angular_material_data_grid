@@ -6,8 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialDataGridModule } from './angular-material-data-grid/angular-material-data-grid.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './token-interceptor.service';
-import { AppRoutingModule } from './app.routing.module';
-import { HomeComponent } from './pages/home/home.component';
+import { AppRoutingModule } from './routing/app.routing.module';
 import { DetailComponent } from './pages/detail/detail.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,14 +19,21 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { OverviewComponent } from './pages/overview/overview.component';
 import { ContainerComponent } from './components/container/container.component';
+import { DemoComponent } from './pages/demo/demo.component';
+import { IntroductionComponent } from './pages/introduction/introduction.component';
+import { InstallationComponent } from './pages/installation/installation.component';
+import { BasicUsageComponent } from './pages/basic-usage/basic-usage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OverviewComponent,
-    HomeComponent,
+    DemoComponent,
     DetailComponent,
-    ContainerComponent
+    ContainerComponent,
+    IntroductionComponent,
+    InstallationComponent,
+    BasicUsageComponent
   ],
   imports: [
     BrowserModule,

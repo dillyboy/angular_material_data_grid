@@ -23,6 +23,7 @@ import { DemoComponent } from './pages/demo/demo.component';
 import { IntroductionComponent } from './pages/introduction/introduction.component';
 import { InstallationComponent } from './pages/installation/installation.component';
 import { BasicUsageComponent } from './pages/basic-usage/basic-usage.component';
+import { HIGHLIGHT_OPTIONS, HighlightModule } from 'ngx-highlightjs';
 
 @NgModule({
   declarations: [
@@ -48,13 +49,20 @@ import { BasicUsageComponent } from './pages/basic-usage/basic-usage.component';
     MatExpansionModule,
     MatRippleModule,
     MatListModule,
-    MatCardModule
+    MatCardModule,
+    HighlightModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
+    },
+    {
+      provide: HIGHLIGHT_OPTIONS,
+      useValue: {
+        fullLibraryLoader: () => import('highlight.js'),
+      }
     }
   ],
   bootstrap: [AppComponent]

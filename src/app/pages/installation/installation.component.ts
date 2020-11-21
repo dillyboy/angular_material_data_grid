@@ -25,7 +25,7 @@ imports: [
 <app-angular-material-data-grid
     [headings]="headings"
     [url]="url"
-    (responseEmit)="responseReceived($event)>
+    (responseEmit)="responseReceived($event)">
 </app-angular-material-data-grid>`,
     ts: `
 import {

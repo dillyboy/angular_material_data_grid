@@ -1,0 +1,63 @@
+<div class="content">
+  <h1>Button Group Builder</h1>
+
+  <p>The grid system makes it really easy to configure buttons within a column. If one button is configured it will
+     be shown as intended, however if multiple buttons are configured it will be contained within a MatMenu.
+     Buttons can be individually disabled based on a row item's field that will be a boolean.
+     To get the Button click events refer to the
+    <a routerLink="/gettingStarted/propertiesAndEvents">Properties & Events</a> section's @Output buttonClickEmit.</p>
+
+  <div class="d-inline-flex" style="align-items: center">
+    <p class="mr-3 pt-3">interface:</p>  <code highlight="OtherConfigType" class="d-inline-block"></code>
+  </div>
+  <mat-card class="mt-3">
+    <table class="simple-table">
+      <tr>
+        <th width="400px">Name</th>
+        <th>Description</th>
+      </tr>
+      <tr class="odd">
+        <td><code highlight="mainButton: ButtonConfigType"></code></td>
+        <td>If buttons array (see below) has more than one object (button) mainButton configuration is essential,
+          This refers to to the menu button which will contain the buttons if there are more than one button.
+          It uses MatMenu for this purpose.</td>
+      </tr>
+      <tr>
+        <td><code highlight="buttons: ButtonConfigType[]"></code></td>
+        <td>This array contains the button elements. If one button is there it will be displayed in the column,
+          if multiple are there it will be inside the mat menu.</td>
+      </tr>
+    </table>
+  </mat-card>
+  <br><br>
+
+  <div class="d-inline-flex" style="align-items: center">
+    <p class="mr-3 pt-3">interface:</p>  <code highlight="ButtonConfigType" class="d-inline-block"></code>
+  </div>
+  <mat-card class="mt-3">
+    <table class="simple-table">
+      <tr>
+        <th width="400px">Name</th>
+        <th>Description</th>
+      </tr>
+      <tr class="odd">
+        <td><code highlight="display: string"></code></td>
+        <td>Button Text.</td>
+      </tr>
+      <tr>
+        <td><code highlight="icon: string"></code></td>
+        <td>Button icon from the material icons list. <a href="https://material.io/resources/icons">https://material.io/resources/icons</a></td>
+      </tr>
+      <tr class="odd">
+        <td><code highlight="disableField: string"></code></td>
+        <td>If there is a reason to disable a given button based on a certain calculation or a certain logic, a row's
+          field can be given which will contain a boolean value. If it is true this button will get disabled.
+          Eg: a user object may have a field called 'archived' which if true this button can be disabled.</td>
+      </tr>
+    </table>
+  </mat-card>
+  <br><br>
+
+  <p>Example of an internal and external source url type configuration.</p>
+  <pre><code [highlight]="ts"></code></pre>
+</div>

@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NumericFilterComponent implements OnInit {
 
+  ts = `
+headings: GridHeading[] = [
+  ...
+  { fieldName: 'uid', display: 'ID', type: 'number' },
+]
+`;
   constructor() { }
 
   ngOnInit(): void {

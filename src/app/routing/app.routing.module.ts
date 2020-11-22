@@ -13,6 +13,8 @@ import { MultiSelectFilterComponent } from '../pages/multi-select-filter/multi-s
 import { TagFilterComponent } from '../pages/tag-filter/tag-filter.component';
 import { NumericFilterComponent } from '../pages/numeric-filter/numeric-filter.component';
 import { DateRangeFilterComponent } from '../pages/date-range-filter/date-range-filter.component';
+import { ButtonGroupBuilderComponent } from '../pages/button-group-builder/button-group-builder.component';
+import { UrlBuilderComponent } from '../pages/url-builder/url-builder.component';
 
 const routes: Routes = [
   { path: '' , redirectTo: 'overview', pathMatch: 'full' },
@@ -34,6 +36,8 @@ const routes: Routes = [
       { path: 'tagFilter', component: TagFilterComponent },
       { path: 'numericFilter', component: NumericFilterComponent },
       { path: 'dateRangeFilter', component: DateRangeFilterComponent },
+      { path: 'urlBuilder', component: UrlBuilderComponent },
+      { path: 'buttonGroupBuilder', component: ButtonGroupBuilderComponent },
     ]
   }
 ];

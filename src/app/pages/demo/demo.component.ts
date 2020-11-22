@@ -80,7 +80,7 @@ export class DemoComponent {
 
   responseReceived(response: GridResponse): void {
     response.gridData.forEach(item => {
-      // item.date_of_birth = item.date_of_birth.substring(0, 10);
+      item.date_of_birth = item.date_of_birth.substring(0, 10);
       if (item.uid === 16) {
         item.disableEdit = true;
       }

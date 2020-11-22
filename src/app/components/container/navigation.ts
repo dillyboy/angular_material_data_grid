@@ -44,7 +44,9 @@ export const navigation = [
       '/columnsAndFilters/multiSelectFilter',
       '/columnsAndFilters/tagFilter',
       '/columnsAndFilters/numericFilter',
-      '/columnsAndFilters/dateRangeFilter'
+      '/columnsAndFilters/dateRangeFilter',
+      '/columnsAndFilters/urlBuilder',
+      '/columnsAndFilters/buttonGroupBuilder'
     ],
     children: [
       {
@@ -82,6 +84,18 @@ export const navigation = [
         headingIcon: '',
         highLightWhen: ['/columnsAndFilters/dateRangeFilter'],
         route: '/columnsAndFilters/dateRangeFilter'
+      },
+      {
+        headingName: 'URL Builder',
+        headingIcon: '',
+        highLightWhen: ['/columnsAndFilters/urlBuilder'],
+        route: '/columnsAndFilters/urlBuilder'
+      },
+      {
+        headingName: 'Button Group Builder',
+        headingIcon: '',
+        highLightWhen: ['/columnsAndFilters/buttonGroupBuilder'],
+        route: '/columnsAndFilters/buttonGroupBuilder'
       }
     ]
   }

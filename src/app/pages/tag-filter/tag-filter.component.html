@@ -1,8 +1,16 @@
 <div class="content">
   <h1>Tag Filter</h1>
 
-  <p>Each column should contain a <b>fieldName</b> which maps to the data attribute, a <b>display</b> value
-    for that column and also a data <b>type</b> which can be either<br>
-    'string' | 'url' | 'number' | 'date' | 'button-group'</p>
-  <p>A very basic column configuration looks like the object below</p>
+  <p>A tag filter is similar to a multi-select filter but is used if there are a very large number of possible
+    values which cannot be displayed in a multi-filter's list of options. Eg: Social Security Numbers.
+    A column with the type of string or url can contain this Tag Filter. To add this filter to a
+    column it is essential to add filterType as <a routerLink="/columnsAndFilters/overview">'tag'.</a>
+  </p>
+  <br>
+  <p>Example of a tag filter configuration.</p>
+  <pre><code [highlight]="ts"></code></pre>
+  <br> <br>
+  <p>This is a sample filter object sent through the tag filter within the <a routerLink="/gettingStarted/introduction">filters array</a> in the grid request.
+    Notice that when multiple values are sent through this filter, it goes as a comma separated string.</p>
+  <code highlight="{ field: 'first_name', operator: 'eq', value: 'foss,dun' }" class="d-inline-block"></code>
 </div>

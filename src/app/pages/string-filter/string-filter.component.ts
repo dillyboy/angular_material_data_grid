@@ -6,7 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./string-filter.component.scss']
 })
 export class StringFilterComponent implements OnInit {
-
+  ts = `
+headings: GridHeading[] = [
+  ...
+  { fieldName: 'email', display: 'Email', type: 'string' },
+]
+`;
   constructor() { }
 
   ngOnInit(): void {

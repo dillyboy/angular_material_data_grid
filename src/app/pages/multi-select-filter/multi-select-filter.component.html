@@ -1,8 +1,9 @@
 <div class="content">
   <h1>Multi Select Filter</h1>
 
-  <p>A column with the type of string or url can contain this Multi Select Filter. To add this filter to a
-    column it is essential to add filterType as <a routerLink="/columnsAndFilters/overview">'multi-select'.</a>
+  <p>A multi-select filter type is an advanced filter which can either have one or more filter values given to a
+    single column. A column with the type of string or url can contain this Multi Select Filter. To add this filter
+    to a column it is essential to add filterType as <a routerLink="/columnsAndFilters/overview">'multi-select'.</a>
     This can be configured to have a single selection or multiple selection of filter values.</p>
 
   <div class="d-inline-flex" style="align-items: center">
@@ -44,10 +45,10 @@
   </mat-card>
   <br><br>
 
-  <p>Example of an internal and external source multi-filter configuration.</p>
+  <p>Example of an internal and external source multi-select filter configuration.</p>
   <pre><code [highlight]="ts"></code></pre>
   <br> <br>
-  <p>This is a sample filter object sent through the multi filter within the <a routerLink="/gettingStarted/introduction">filters array</a> in the grid request.
-    Notice that when multiple values are sent through this filter it goes as a comma separated string.</p>
-  <code highlight="{ field: 'country', operator: 'eq',value: 'Australia,Sri Lanka' }" class="d-inline-block"></code>
+  <p>This is a sample filter object sent through the multi-select filter within the <a routerLink="/gettingStarted/introduction">filters array</a> in the grid request.
+    Notice that when multiple values are sent through this filter, it goes as a comma separated string.</p>
+  <code highlight="{ field: 'country', operator: 'eq', value: 'Australia,Sri Lanka' }" class="d-inline-block"></code>
 </div>

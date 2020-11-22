@@ -1,8 +1,13 @@
 <div class="content">
   <h1>Date Range Filter</h1>
 
-  <p>Each column should contain a <b>fieldName</b> which maps to the data attribute, a <b>display</b> value
-    for that column and also a data <b>type</b> which can be either<br>
-    'string' | 'url' | 'number' | 'date' | 'button-group'</p>
-  <p>A very basic column configuration looks like the object below</p>
+  <p>The date-range filter can be used to select a range between two days with the MatDatepicker.
+    This filter will be automatically present when the column type is <b>date</b>.</p>
+
+  <br>
+  <p>Example of a date-range filter configuration.</p>
+  <pre><code [highlight]="ts"></code></pre>
+  <br>
+  <p>This is a sample filter object sent through the date-range filter within the <a routerLink="/gettingStarted/introduction">filters array</a> in the grid request.</p>
+  <code highlight="{ field: 'date_of_birth', operator: 'between', value: '06/01/1992-06/26/1992' }" class="d-inline-block"></code>
 </div>

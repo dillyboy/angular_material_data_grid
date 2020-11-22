@@ -7,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TagFilterComponent implements OnInit {
 
+  ts = `
+headings: GridHeading[] = [
+  ...
+  { fieldName: 'first_name', display: 'First Name', type: 'string', filterType: 'tag' },
+]
+`;
+
   constructor() { }
 
   ngOnInit(): void {

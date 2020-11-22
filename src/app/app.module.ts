@@ -31,6 +31,8 @@ import { MultiSelectFilterComponent } from './pages/multi-select-filter/multi-se
 import { TagFilterComponent } from './pages/tag-filter/tag-filter.component';
 import { NumericFilterComponent } from './pages/numeric-filter/numeric-filter.component';
 import { DateRangeFilterComponent } from './pages/date-range-filter/date-range-filter.component';
+import { UrlBuilderComponent } from './pages/url-builder/url-builder.component';
+import { ButtonGroupBuilderComponent } from './pages/button-group-builder/button-group-builder.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { DateRangeFilterComponent } from './pages/date-range-filter/date-range-f
     MultiSelectFilterComponent,
     TagFilterComponent,
     NumericFilterComponent,
-    DateRangeFilterComponent
+    DateRangeFilterComponent,
+    UrlBuilderComponent,
+    ButtonGroupBuilderComponent
   ],
   imports: [
     BrowserModule,

@@ -28,6 +28,7 @@ export class ContainerComponent {
     this.routerEvents = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.currentNav = event.url.split('?')[0];
+        window.scrollTo(0, 0);
       }
     });
   }

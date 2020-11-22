@@ -1,0 +1,54 @@
+<div class="content">
+  <h1>Numeric Filter</h1>
+
+  <p>The numeric filter can be used to enter a search parameter to a certain field and search with different operators.</p>
+
+  <mat-card class="mt-3">
+    <table class="simple-table">
+      <tr>
+        <th width="160px">Operator</th>
+        <th width="160px">Operator Value</th>
+        <th>Description</th>
+      </tr>
+      <tr class="odd">
+        <td>Is between</td>
+        <td>between</td>
+        <td>Data in the column should be between the filter parameter. This does not include the start value and the end
+          value given.</td>
+      </tr>
+      <tr>
+        <td>Is equal to</td>
+        <td>eq</td>
+        <td>Data in the column should exactly match with the filter parameter.</td>
+      </tr>
+      <tr class="odd">
+        <td>Is not equal to</td>
+        <td>neq</td>
+        <td>Data in the column should not be equal with the filter parameter.</td>
+      </tr>
+      <tr>
+        <td>Is greater than or equal to</td>
+        <td>greaterorequal</td>
+        <td>Data in the column should be greater than or equal to the filter parameter.</td>
+      </tr>
+      <tr class="odd">
+        <td>Is greater than</td>
+        <td>greaterthan</td>
+        <td>Data in the column should be greater than the filter parameter.</td>
+      </tr>
+      <tr>
+        <td>Is less than or equal to</td>
+        <td>lessthanorequal</td>
+        <td>Data in the column should be less than or equal to the filter parameter.</td>
+      </tr>
+      <tr class="odd">
+        <td>Is less than</td>
+        <td>lessthan</td>
+        <td>Data in the column should be less than the filter parameter.</td>
+      </tr>
+    </table>
+  </mat-card>
+  <br><br>
+  <p>This is a sample filter object sent through the numeric filter within the <a routerLink="/gettingStarted/introduction">filters array</a> in the grid request.</p>
+  <code highlight="{ field: 'uid', operator: 'between' value: '2-10' }" class="d-inline-block"></code>
+</div>

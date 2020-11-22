@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import {
-  GirdButtonClickInterface,
-  GridFilterItemInterface,
-  GridHeadingInterface,
-  GridResponseInterface
+  GirdButtonClick,
+  GridFilterItem,
+  GridHeading,
+  GridResponse
 } from '../../angular-material-data-grid/angular-material-data-grid-interfaces';
 
 @Component({
@@ -16,15 +16,14 @@ export class DemoComponent {
 
   url = `${environment.api}getUsers`;
 
-  headings: GridHeadingInterface[] = [
+  headings: GridHeading[] = [
     {fieldName: 'uid', display: 'ID', type: 'number', width: '100px', disableSorting: true, align: 'right'},
-    {fieldName: 'first_name', display: 'First Name', type: 'url', width: '120px',
+    {fieldName: 'first_name', display: 'First Name', type: 'string', width: '120px',
       other: {
         openTab: true,
         urlTemplate: '/gettingStarted/demo/:uid',
         queryParams: {userEmail: 'email'}
       },
-      filterType: 'tag'
     },
     {fieldName: 'email', display: 'Email', type: 'string', width: '180px'},
     {fieldName: 'gender', display: 'Gender', type: 'string', width: '100px',
@@ -78,7 +77,7 @@ export class DemoComponent {
     }
   ];
 
-  responseReceived(response: GridResponseInterface): void {
+  responseReceived(response: GridResponse): void {
     response.gridData.forEach(item => {
       // item.date_of_birth = item.date_of_birth.substring(0, 10);
       if (item.uid === 16) {
@@ -91,11 +90,11 @@ export class DemoComponent {
     console.log(items);
   }
 
-  filtersChanged(filters: GridFilterItemInterface[]): void {
+  filtersChanged(filters: GridFilterItem[]): void {
     console.log(filters);
   }
 
-  buttonClick(button: GirdButtonClickInterface): void {
+  buttonClick(button: GirdButtonClick): void {
     console.log(button);
   }
 }

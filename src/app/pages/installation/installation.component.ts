@@ -28,14 +28,11 @@ imports: [
     (responseEmit)="responseReceived($event)">
 </app-angular-material-data-grid>`,
     ts: `
-import {
-  GridHeadingInterface,
-  GridResponseInterface
-} from '../../angular-material-data-grid/angular-material-data-grid-interfaces';
+// import { GridHeading, GridResponse } from './angular-material-data-grid/angular-material-data-grid-interfaces';
 
 url = 'https://angular-grid.herokuapp.com/getUsers'; // add your POST endpoint here later
 
-headings: GridHeadingInterface[] = [
+headings: GridHeading[] = [
   {fieldName: 'uid', display: 'ID', type: 'number', width: '100px', disableSorting: true, align: 'right'},
   {fieldName: 'first_name', display: 'First Name', type: 'string', width: '120px'},
   {fieldName: 'email', display: 'Email', type: 'string', width: '180px'},
@@ -53,7 +50,7 @@ headings: GridHeadingInterface[] = [
   {fieldName: 'date_of_birth', display: 'Date Of Birth', type: 'date', width: '150px'}
 ]
 
-responseReceived(response: GridResponseInterface): void {
+responseReceived(response: GridResponse): void {
   console.log(response); // If necessary manipulate the data or use data in the parent component
 }
 `,

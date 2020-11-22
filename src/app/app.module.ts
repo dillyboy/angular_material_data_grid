@@ -22,9 +22,15 @@ import { ContainerComponent } from './components/container/container.component';
 import { DemoComponent } from './pages/demo/demo.component';
 import { IntroductionComponent } from './pages/introduction/introduction.component';
 import { InstallationComponent } from './pages/installation/installation.component';
-import { BasicUsageComponent } from './pages/basic-usage/basic-usage.component';
+import { PropertiesAndEventsComponent } from './pages/properties-and-events/properties-and-events.component';
 import { HIGHLIGHT_OPTIONS, HighlightModule } from 'ngx-highlightjs';
 import { MatTabsModule } from '@angular/material/tabs';
+import { ColumnsAndFiltersComponent } from './pages/columns-and-filters/columns-and-filters.component';
+import { StringFilterComponent } from './pages/string-filter/string-filter.component';
+import { MultiSelectFilterComponent } from './pages/multi-select-filter/multi-select-filter.component';
+import { TagFilterComponent } from './pages/tag-filter/tag-filter.component';
+import { NumericFilterComponent } from './pages/numeric-filter/numeric-filter.component';
+import { DateRangeFilterComponent } from './pages/date-range-filter/date-range-filter.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +41,13 @@ import { MatTabsModule } from '@angular/material/tabs';
     ContainerComponent,
     IntroductionComponent,
     InstallationComponent,
-    BasicUsageComponent
+    PropertiesAndEventsComponent,
+    ColumnsAndFiltersComponent,
+    StringFilterComponent,
+    MultiSelectFilterComponent,
+    TagFilterComponent,
+    NumericFilterComponent,
+    DateRangeFilterComponent
   ],
   imports: [
     BrowserModule,

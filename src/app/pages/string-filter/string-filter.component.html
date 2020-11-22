@@ -1,0 +1,48 @@
+<div class="content">
+  <h1>String Filter</h1>
+
+  <p>The string filter can be used to enter a search parameter to a certain field and search with different operators.</p>
+
+  <mat-card class="mt-3">
+    <table class="simple-table">
+      <tr>
+        <th width="150px">Operator</th>
+        <th width="150px">Operator Value</th>
+        <th>Description</th>
+      </tr>
+      <tr class="odd">
+        <td>Is equal to</td>
+        <td>eq</td>
+        <td>Data in the column should exactly match the filter parameter. (Not case-sensitive)</td>
+      </tr>
+      <tr>
+        <td>Is not equal to</td>
+        <td>neq</td>
+        <td>Data in the column should not match the filter parameter.</td>
+      </tr>
+      <tr class="odd">
+        <td>Contains</td>
+        <td>contains</td>
+        <td>Data in the column should contain the filter parameter somewhere in the value.</td>
+      </tr>
+      <tr>
+        <td>Starts with</td>
+        <td>startswith</td>
+        <td>Data in the column should exactly start with the filter parameter. (Not case-sensitive)</td>
+      </tr>
+      <tr>
+        <td>Ends with</td>
+        <td>endswith</td>
+        <td>Data in the column should exactly end with the filter parameter. (Not case-sensitive)</td>
+      </tr>
+      <tr class="odd">
+        <td>Is Empty</td>
+        <td>blank</td>
+        <td>Data in the column should be null or empty.</td>
+      </tr>
+    </table>
+  </mat-card>
+  <br><br>
+  <p>This is a sample filter object sent through the string filter within the <a routerLink="/gettingStarted/introduction">filters array</a> in the grid request.</p>
+  <code highlight="{ field: 'first_name', operator: 'contains' value: 'foss' }" class="d-inline-block"></code>
+</div>

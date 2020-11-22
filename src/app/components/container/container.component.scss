@@ -42,6 +42,10 @@ mat-expansion-panel {
   border-radius: 50px;
   cursor: pointer;
   font-size: 12px;
+
+  &:hover {
+    background: $highlight-dark-color;
+  }
   &.selected {
     background: white;
     color: black !important;

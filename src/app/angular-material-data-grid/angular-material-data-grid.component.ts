@@ -14,6 +14,8 @@ import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { ApiResponseModel } from './api-response.model';
 import GridResponseInterface from './interfaces/grid-response';
 import GridHeadingInterface from './interfaces/grid-heading-type';
+import GridFilterItemInterface from './interfaces/grid-filter-item';
+import GirdButtonClickInterface from './interfaces/gird-button-click-interface';
 
 @Component({
   selector: 'app-angular-material-data-grid',
@@ -23,14 +25,14 @@ import GridHeadingInterface from './interfaces/grid-heading-type';
 export class AngularMaterialDataGridComponent implements AfterViewInit{
 
   @Output() responseEmit: any = new EventEmitter<GridResponseInterface>();
-  @Output() selectionEmit: any = new EventEmitter<any>();
-  @Output() filtersChangedEmit: any = new EventEmitter<any>();
-  @Output() buttonClickEmit: any = new EventEmitter<any>();
+  @Output() selectionEmit: any = new EventEmitter<any[]>();
+  @Output() filtersChangedEmit: any = new EventEmitter<GridFilterItemInterface[]>();
+  @Output() buttonClickEmit: any = new EventEmitter<GirdButtonClickInterface>();
 
   @Input() headings: GridHeadingInterface[] = [];
-  @Input() selection = true;
   @Input() url = '';
-  @Input() columnControl = true;
+  @Input() selection = false;
+  @Input() columnControl = false;
   allGridItemsSelected = false;
   loadingData = true;
   response: GridResponseInterface = { gridData: [], totalCount: 0};

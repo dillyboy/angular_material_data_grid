@@ -3,4 +3,9 @@ import GridFilterItemInterface from './interfaces/grid-filter-item';
 import GridResponseInterface from './interfaces/grid-response';
 import GirdButtonClickInterface from './interfaces/gird-button-click-interface';
 
-export { GridHeadingInterface, GridFilterItemInterface, GridResponseInterface, GirdButtonClickInterface };
+export {
+  GridHeadingInterface as GridHeading,
+  GridFilterItemInterface as GridFilterItem,
+  GridResponseInterface as GridResponse,
+  GirdButtonClickInterface as GirdButtonClick
+};

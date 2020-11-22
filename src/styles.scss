@@ -5,6 +5,10 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   font-size: 12px;
+
+  a {
+    color: inherit;
+  }
 }
 
 .content {
@@ -22,3 +26,34 @@ body {
 @import "scss/utilities";
 @import "scss/material-overrides";
 @import "scss/theme";
+
+.simple-table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+  position: relative;
+  border: 1px solid $highlight-dark-color;
+
+  th, td {
+    padding: 8px;
+    border-left: 1px solid $highlight-dark-color;
+    text-align: start;
+    font-weight: normal;
+  }
+  th {
+    border-bottom: 1px solid $highlight-dark-color;
+    height: 34px;
+    font-weight: bold;
+  }
+  tr {
+    &:hover {
+      transition:all ease 0.1s;
+      background-color: $highlight-dark-color;
+    }
+  }
+
+  .odd {
+    background-color: $highlight-color;
+  }
+}
+

@@ -39,12 +39,12 @@ export class MultiSelectComponent implements OnInit {
         if (data.statusCode === 200) {
           const {key, value} = this.filterConfig;
           this.selectionList = data.payload.map(item => {
-            return {text : item[key], value: item[value]};
+            return {text : item[key], value: item[value], hide: false};
           });
         }
       });
     } else { // internal
-      this.selectionList = this.filterConfig.optionsObject;
+      this.selectionList = this.filterConfig.optionsObject.map(item => ({...item, hide: false}));
     }
   }
   menuOpened(): void {
@@ -77,6 +77,7 @@ export class MultiSelectComponent implements OnInit {
 
   toggle(): void {
     this.searchFilter = '';
+    this.changeSearch();
     this.allSelected = !this.allSelected;
     if (this.allSelected) {
       this.selection.setValue(this.selectionList);
@@ -94,6 +95,12 @@ export class MultiSelectComponent implements OnInit {
     this.filter.emit({operator: 'eq', value: null});
     this.filterApplied = false;
     this.mySelect.close();
+  }
+
+  changeSearch(): void {
+    this.selectionList.forEach((value, i) => {
+      value.hide = !value.text.toLowerCase().includes(this.searchFilter.toLowerCase());
+    });
   }
 
 }

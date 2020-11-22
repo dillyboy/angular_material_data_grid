@@ -18,12 +18,13 @@ export class DemoComponent {
 
   headings: GridHeading[] = [
     {fieldName: 'uid', display: 'ID', type: 'number', width: '100px', disableSorting: true, align: 'right'},
-    {fieldName: 'first_name', display: 'First Name', type: 'string', width: '120px',
+    {fieldName: 'first_name', display: 'First Name', type: 'url', width: '120px',
       other: {
         openTab: true,
         urlTemplate: '/gettingStarted/demo/:uid',
         queryParams: {userEmail: 'email'}
       },
+      filterType: 'tag'
     },
     {fieldName: 'email', display: 'Email', type: 'string', width: '180px'},
     {fieldName: 'gender', display: 'Gender', type: 'string', width: '100px',

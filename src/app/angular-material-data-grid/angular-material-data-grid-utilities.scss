@@ -99,6 +99,10 @@
   display: block !important;
 }
 
+.d-none {
+  display: none !important;
+}
+
 .fs-12 {
   font-size: 12px;
 }
@@ -181,6 +185,9 @@ body {
     .cdk-drag-preview, .mat-menu-panel {
       color: white;
       background: #424242;
+    }
+    mat-form-field {
+      color: white;
     }
   }
 }

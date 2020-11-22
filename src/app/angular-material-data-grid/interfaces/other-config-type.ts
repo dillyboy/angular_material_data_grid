@@ -44,7 +44,7 @@ export interface OtherConfigType {
     optionsObject?: MultiSelectOptionsType[];
     /**
      * MULTI-SELECT CONFIGURATION
-     * url - The url is needed if the source is external
+     * url - The url of a GET request needed if the source is external which should return an array of objects.
      */
     url?: string;
     /**

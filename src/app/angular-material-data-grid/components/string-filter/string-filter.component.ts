@@ -27,7 +27,7 @@ export class StringFilterComponent implements OnInit {
   }
 
   changeStringFilter(ev): void {
-    if (ev.code === 'Enter') {
+    if (ev.code === 'Enter' || this.filterParam === '') {
       this.createFilterObj();
     } else {
       this.filterApplied = false;
@@ -35,10 +35,8 @@ export class StringFilterComponent implements OnInit {
   }
 
   createFilterObj(): void {
-    if (this.filterParam) {
-      this.filter.emit({ operator: this.selectedStringFilterType, value: this.filterParam });
-      this.filterApplied = true;
-    }
+    this.filter.emit({ operator: this.selectedStringFilterType, value: this.filterParam });
+    this.filterApplied = this.filterParam ? true : false;
   }
 
   removeFilter(): void {

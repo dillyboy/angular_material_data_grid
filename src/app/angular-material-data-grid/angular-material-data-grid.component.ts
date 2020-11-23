@@ -154,7 +154,9 @@ export class AngularMaterialDataGridComponent implements AfterViewInit{
         this.filters.splice(filterIndex, 1);
       }
     } else {
-      this.filters.push(ev);
+      if (ev.value) {
+        this.filters.push(ev);
+      }
     }
     this.filtersChangedEmit.emit(this.filters);
     this.pageChanged({pageNo: 1, recordsPerPage: this.recordsPerPage});

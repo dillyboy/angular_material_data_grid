@@ -103,44 +103,49 @@ export const navigation = [
     panelHeading: 'Grid Features',
     panelIcon: '',
     openWhen: [
-      '/gridFeatures/demo',
+      '/features/columnControl',
+      '/features/itemSelection',
+      '/features/pagination',
+      '/features/theming',
+      '/features/fixedHeader',
+      '/features/virtualScrolling'
     ],
     children: [
       {
         headingName: 'Column Control',
         headingIcon: '',
-        highLightWhen: ['/gridFeatures/demo'],
-        route: '/gridFeatures/demo'
+        highLightWhen: ['/features/columnControl'],
+        route: '/features/columnControl'
       },
       {
         headingName: 'Item Selection',
         headingIcon: '',
-        highLightWhen: ['/gridFeatures/demo'],
-        route: '/gridFeatures/demo'
+        highLightWhen: ['/features/itemSelection'],
+        route: '/features/itemSelection'
       },
       {
         headingName: 'Pagination',
         headingIcon: '',
-        highLightWhen: ['/gridFeatures/demo'],
-        route: '/gridFeatures/demo'
+        highLightWhen: ['/features/pagination'],
+        route: '/features/pagination'
       },
       {
         headingName: 'Theming',
         headingIcon: '',
-        highLightWhen: ['/gridFeatures/demo'],
-        route: '/gridFeatures/demo'
+        highLightWhen: ['/features/theming'],
+        route: '/features/theming'
       },
       {
         headingName: 'Fixed Header',
         headingIcon: '',
-        highLightWhen: ['/gridFeatures/demo'],
-        route: '/gridFeatures/demo'
+        highLightWhen: ['/features/fixedHeader'],
+        route: '/features/fixedHeader'
       },
       {
         headingName: 'Virtual Scrolling',
         headingIcon: '',
-        highLightWhen: ['/gridFeatures/demo'],
-        route: '/gridFeatures/demo'
+        highLightWhen: ['/features/virtualScrolling'],
+        route: '/features/virtualScrolling'
       }
     ]
   },

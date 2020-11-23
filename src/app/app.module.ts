@@ -33,6 +33,12 @@ import { NumericFilterComponent } from './pages/numeric-filter/numeric-filter.co
 import { DateRangeFilterComponent } from './pages/date-range-filter/date-range-filter.component';
 import { UrlBuilderComponent } from './pages/url-builder/url-builder.component';
 import { ButtonGroupBuilderComponent } from './pages/button-group-builder/button-group-builder.component';
+import { ColumnControlComponent } from './pages/column-control/column-control.component';
+import { ItemSelectionComponent } from './pages/item-selection/item-selection.component';
+import { PaginationComponent } from './pages/pagination/pagination.component';
+import { ThemingComponent } from './pages/theming/theming.component';
+import { FixedHeaderComponent } from './pages/fixed-header/fixed-header.component';
+import { VirtualScrollingComponent } from './pages/virtual-scrolling/virtual-scrolling.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +57,13 @@ import { ButtonGroupBuilderComponent } from './pages/button-group-builder/button
     NumericFilterComponent,
     DateRangeFilterComponent,
     UrlBuilderComponent,
-    ButtonGroupBuilderComponent
+    ButtonGroupBuilderComponent,
+    ColumnControlComponent,
+    ItemSelectionComponent,
+    PaginationComponent,
+    ThemingComponent,
+    FixedHeaderComponent,
+    VirtualScrollingComponent
   ],
   imports: [
     BrowserModule,

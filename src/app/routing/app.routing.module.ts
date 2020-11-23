@@ -15,6 +15,12 @@ import { NumericFilterComponent } from '../pages/numeric-filter/numeric-filter.c
 import { DateRangeFilterComponent } from '../pages/date-range-filter/date-range-filter.component';
 import { ButtonGroupBuilderComponent } from '../pages/button-group-builder/button-group-builder.component';
 import { UrlBuilderComponent } from '../pages/url-builder/url-builder.component';
+import { ColumnControlComponent } from '../pages/column-control/column-control.component';
+import { ItemSelectionComponent } from '../pages/item-selection/item-selection.component';
+import { PaginationComponent } from '../pages/pagination/pagination.component';
+import { ThemingComponent } from '../pages/theming/theming.component';
+import { FixedHeaderComponent } from '../pages/fixed-header/fixed-header.component';
+import { VirtualScrollingComponent } from '../pages/virtual-scrolling/virtual-scrolling.component';
 
 const routes: Routes = [
   { path: '' , redirectTo: 'overview', pathMatch: 'full' },
@@ -38,6 +44,16 @@ const routes: Routes = [
       { path: 'dateRangeFilter', component: DateRangeFilterComponent },
       { path: 'urlBuilder', component: UrlBuilderComponent },
       { path: 'buttonGroupBuilder', component: ButtonGroupBuilderComponent },
+    ]
+  },
+  { path: 'features', component: ContainerComponent,
+    children: [
+      { path: 'columnControl', component: ColumnControlComponent },
+      { path: 'itemSelection', component: ItemSelectionComponent },
+      { path: 'pagination', component: PaginationComponent },
+      { path: 'theming', component: ThemingComponent },
+      { path: 'fixedHeader', component: FixedHeaderComponent },
+      { path: 'virtualScrolling', component: VirtualScrollingComponent },
     ]
   }
 ];

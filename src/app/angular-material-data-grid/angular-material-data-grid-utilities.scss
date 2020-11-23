@@ -176,6 +176,10 @@
   opacity: .6;
 }
 
+.customSelectPosition {
+  margin: 25px 0px;
+}
+
 body {
   &.darkMode {
     .modified-mat-select, .modified-input, .filter-open-btn {

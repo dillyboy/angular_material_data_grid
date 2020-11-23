@@ -63,7 +63,7 @@ export interface OtherConfigType {
 
     /**
      * GRID ACTION BUTTONS CONFIGURATION
-     * mainButton - if buttons array has more than one object (button) this is essential, This refers to to the menu button which will
+     * mainButton - if buttons array has more than one object (button) this is essential, This refers to the menu button which will
      *              contain the buttons if there are more than one button. It uses MatMenu for this purpose
      */
     mainButton?: ButtonConfigType;

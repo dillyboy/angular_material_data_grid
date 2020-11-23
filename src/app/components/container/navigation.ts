@@ -98,5 +98,50 @@ export const navigation = [
         route: '/columnsAndFilters/buttonGroupBuilder'
       }
     ]
-  }
+  },
+  {
+    panelHeading: 'Grid Features',
+    panelIcon: '',
+    openWhen: [
+      '/gridFeatures/demo',
+    ],
+    children: [
+      {
+        headingName: 'Column Control',
+        headingIcon: '',
+        highLightWhen: ['/gridFeatures/demo'],
+        route: '/gridFeatures/demo'
+      },
+      {
+        headingName: 'Item Selection',
+        headingIcon: '',
+        highLightWhen: ['/gridFeatures/demo'],
+        route: '/gridFeatures/demo'
+      },
+      {
+        headingName: 'Pagination',
+        headingIcon: '',
+        highLightWhen: ['/gridFeatures/demo'],
+        route: '/gridFeatures/demo'
+      },
+      {
+        headingName: 'Theming',
+        headingIcon: '',
+        highLightWhen: ['/gridFeatures/demo'],
+        route: '/gridFeatures/demo'
+      },
+      {
+        headingName: 'Fixed Header',
+        headingIcon: '',
+        highLightWhen: ['/gridFeatures/demo'],
+        route: '/gridFeatures/demo'
+      },
+      {
+        headingName: 'Virtual Scrolling',
+        headingIcon: '',
+        highLightWhen: ['/gridFeatures/demo'],
+        route: '/gridFeatures/demo'
+      }
+    ]
+  },
 ];

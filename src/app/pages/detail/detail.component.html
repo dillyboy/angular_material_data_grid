@@ -1,1 +1,11 @@
-<p>detail works!</p>
+<div class="content">
+  <h1>User Detail Sample Page</h1>
+
+  <p>This page is a demonstration to exhibit the power of the <a routerLink="/columnsAndFilters/urlBuilder">URL builder</a>
+    with extremely little effort.</p>
+
+  <h3>Params: {{urlExtracts.params | json}}</h3>
+  <h3>Query Params: {{urlExtracts.queryParams | json}}</h3>
+
+  <button mat-stroked-button type="button" color="accent" routerLink="/gettingStarted/demo">Go Back</button>
+</div>

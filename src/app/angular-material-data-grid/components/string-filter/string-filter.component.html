@@ -1,4 +1,4 @@
-<input class="modified-input" type="text" name="filter" [(ngModel)]="filterParam" [ngClass]="{'font-weight-bold accent-color': filterApplied}" (keyup)="changeStringFilter($event)">
+<input class="modified-input" type="text" name="filter" placeholder="Unfiltered" [(ngModel)]="filterParam" [ngClass]="{'font-weight-bold accent-color': filterApplied}" (keyup)="changeStringFilter($event)">
 <button mat-icon-button type="button" class="elem-right-margin" matTooltip="Filtration Logic" [matMenuTriggerFor]="stringFilterMenu">
     <mat-icon class="material-icons-outlined">filter_alt</mat-icon>
 </button>

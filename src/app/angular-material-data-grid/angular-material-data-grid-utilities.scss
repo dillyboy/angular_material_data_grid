@@ -136,7 +136,7 @@
 }
 
 .font-weight-normal {
-  font-weight: normal;
+  font-weight: normal !important;
 }
 
 .font-weight-bold {
@@ -192,6 +192,11 @@ body {
     }
     mat-form-field {
       color: white;
+    }
+
+    .modified-input::placeholder  {
+      color: white;
+      opacity: 0.6;
     }
   }
 }

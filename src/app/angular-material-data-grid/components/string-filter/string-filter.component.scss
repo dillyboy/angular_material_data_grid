@@ -35,6 +35,9 @@
   height: 26px !important;
   font-weight: 300;
   margin-right: 8px !important;
+  &::placeholder  {
+    font-weight: 400;
+  }
 }
 
 .highlight-filter {

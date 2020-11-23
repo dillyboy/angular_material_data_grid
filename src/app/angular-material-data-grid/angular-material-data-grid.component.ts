@@ -1,12 +1,14 @@
 import {
-  AfterContentInit,
-  ChangeDetectorRef,
   Component,
   HostListener,
   Input,
   Output,
   EventEmitter,
-  Renderer2, AfterViewInit, ViewChild, ElementRef
+  ChangeDetectorRef,
+  Renderer2,
+  AfterViewInit,
+  ViewChild,
+  ElementRef
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
@@ -33,6 +35,7 @@ export class AngularMaterialDataGridComponent implements AfterViewInit{
   @Input() url = '';
   @Input() selection = false;
   @Input() columnControl = false;
+
   allGridItemsSelected = false;
   loadingData = true;
   response: GridResponseInterface = { gridData: [], totalCount: 0};
@@ -277,8 +280,9 @@ export class AngularMaterialDataGridComponent implements AfterViewInit{
           if (heading.source === 'external') {
             objParams = '';
             Object.keys(heading.queryParams).forEach(field => {
-              objParams += field + '=' + item[heading.queryParams[field]];
+              objParams += field + '=' + item[heading.queryParams[field]] + '&';
             });
+            objParams = objParams.slice(0, -1);
           } else {
             objParams = {};
             Object.keys(heading.queryParams).forEach(field => {

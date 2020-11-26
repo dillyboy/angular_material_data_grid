@@ -17,7 +17,6 @@ import { ButtonGroupBuilderComponent } from '../pages/button-group-builder/butto
 import { UrlBuilderComponent } from '../pages/url-builder/url-builder.component';
 import { ColumnControlComponent } from '../pages/column-control/column-control.component';
 import { ItemSelectionComponent } from '../pages/item-selection/item-selection.component';
-import { PaginationComponent } from '../pages/pagination/pagination.component';
 import { ThemingComponent } from '../pages/theming/theming.component';
 import { FixedHeaderComponent } from '../pages/fixed-header/fixed-header.component';
 import { VirtualScrollingComponent } from '../pages/virtual-scrolling/virtual-scrolling.component';
@@ -50,7 +49,6 @@ const routes: Routes = [
     children: [
       { path: 'columnControl', component: ColumnControlComponent },
       { path: 'itemSelection', component: ItemSelectionComponent },
-      { path: 'pagination', component: PaginationComponent },
       { path: 'theming', component: ThemingComponent },
       { path: 'fixedHeader', component: FixedHeaderComponent },
       { path: 'virtualScrolling', component: VirtualScrollingComponent },

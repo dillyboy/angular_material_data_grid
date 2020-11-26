@@ -4,24 +4,18 @@
   border-top: 1px solid $highlight-dark-color;
   background: $highlight-color;
 
-  .buttons-container {
-    color: $accent;
-    .mat-icon-button {
-      width: 26px;
-      height: 26px;
-      line-height: 26px;
-      border-radius: 2px;
-      margin-right: 6px;
-      font-weight: 400;
-      &.highlight {
-        background: $accent;
-        color: white;
-      }
-    }
-  }
 
-  .full-screen-btn {
-    color: $accent;
+  .mat-icon-button {
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    border-radius: 2px;
+    margin-right: 6px;
+    font-weight: 400;
+    &.highlight {
+      background: $accent;
+      color: white;
+    }
   }
 
 }

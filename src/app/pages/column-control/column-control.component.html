@@ -1,1 +1,18 @@
-<p>column-control works!</p>
+<div class="content">
+  <h1>Column Control</h1>
+
+  <p>When data grids have a large number of columns, some can be made optional so the users would not get
+    overwhelmed. These can be shown if the user wishes and the user can also customize the view by re-ordering
+    the columns. These options are given if the <a routerLink="/gettingStarted/propertiesAndEvents">columnControl</a>
+    input is set to true, by default it is false.
+  </p>
+  <img src="./assets/column_reordering.png" alt="" style="width: 200px;">
+  <p>As per the example above,</p>
+  <p>* The disabled checkboxes are fields that will be always shown - this is if
+    the <b>show</b> attribute is not given in the column configuration.</p>
+  <p>* The enabled checkboxes are fields that can be shown if the user wishes to. It may also be preconfigured
+  this way if the <b>show</b> attribute is true or false.</p>
+  <p>* Any of the fields can be dragged and dropped in a particular order which will help the user to
+    customize the grid. This configuration can also be saved as a user preference later.</p>
+  <pre><code [highlight]="ts"></code></pre>
+</div>

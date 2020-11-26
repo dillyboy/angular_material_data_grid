@@ -105,7 +105,6 @@ export const navigation = [
     openWhen: [
       '/features/columnControl',
       '/features/itemSelection',
-      '/features/pagination',
       '/features/theming',
       '/features/fixedHeader',
       '/features/virtualScrolling'
@@ -122,12 +121,6 @@ export const navigation = [
         headingIcon: '',
         highLightWhen: ['/features/itemSelection'],
         route: '/features/itemSelection'
-      },
-      {
-        headingName: 'Pagination',
-        headingIcon: '',
-        highLightWhen: ['/features/pagination'],
-        route: '/features/pagination'
       },
       {
         headingName: 'Theming',

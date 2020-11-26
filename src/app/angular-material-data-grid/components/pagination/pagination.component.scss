@@ -13,7 +13,7 @@
     margin-right: 6px;
     font-weight: 400;
     &.highlight {
-      background: $accent;
+      @include accent-background-color();
       color: white;
     }
   }
@@ -22,5 +22,5 @@
 
 #selection-amount {
   font-weight: bold;
-  color: $accent;
+  @include accent-color();
 }

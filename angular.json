@@ -31,7 +31,10 @@
               "src/styles.scss",
               "./node_modules/highlight.js/styles/atom-one-light.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "highlight.js",
+            ]
           },
           "configurations": {
             "production": {

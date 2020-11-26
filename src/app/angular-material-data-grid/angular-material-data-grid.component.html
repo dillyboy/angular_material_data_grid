@@ -61,13 +61,13 @@
                   <!--BUTTON GROUP-->
                   <span *ngSwitchCase="'button-group'">
                     <ng-container *ngIf="heading.other && heading.other.buttons.length === 1">
-                      <button [disabled]="item[heading.other.buttons[0].disableField]" class="button-group-btn mr-2" type="button" mat-button (click)="goToLink(heading.fieldName, item, heading.other.buttons[0].display)">
+                      <button [disabled]="item[heading.other.buttons[0].disableField]" color="primary" class="button-group-btn mr-2" type="button" mat-button (click)="goToLink(heading.fieldName, item, heading.other.buttons[0].display)">
                         <mat-icon class="mr-2">{{heading.other.buttons[0].icon}}</mat-icon>
                         {{heading.other.buttons[0].display}}
                       </button>
                     </ng-container>
                     <ng-container *ngIf="heading.other && heading.other.buttons.length > 1">
-                      <button class="button-group-btn" mat-button [matMenuTriggerFor]="gridButtonListMenu" [disabled]="item[heading.other.mainButton.disableField]"> {{heading.other.mainButton.display}} <mat-icon>{{heading.other.mainButton.icon}}</mat-icon></button>
+                      <button class="button-group-btn" mat-button color="primary" [matMenuTriggerFor]="gridButtonListMenu" [disabled]="item[heading.other.mainButton.disableField]"> {{heading.other.mainButton.display}} <mat-icon>{{heading.other.mainButton.icon}}</mat-icon></button>
                       <mat-menu #gridButtonListMenu="matMenu" xPosition="before">
                         <button *ngFor="let btn of heading.other.buttons" [disabled]="item[btn.disableField]" mat-menu-item (click)="goToLink(heading.fieldName, item, btn.display)">
                           <mat-icon class="mr-2 fs-20">{{btn.icon}}</mat-icon>

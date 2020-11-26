@@ -22,10 +22,12 @@ body {
 
 
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
+@import "scss/theme";
+@import "app/angular-material-data-grid/variables";
 @import "app/angular-material-data-grid/angular-material-data-grid-utilities";
+
 @import "scss/utilities";
 @import "scss/material-overrides";
-@import "scss/theme";
 
 .simple-table {
   border-collapse: collapse;

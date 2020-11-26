@@ -1,5 +1,11 @@
 @import './variables';
 
+.mat-small-stroked-button {
+  line-height: 26px !important;
+  height: 26px !important;
+  font-size: 12px !important;
+}
+
 .layout-container {
   display: flex !important;
   justify-content: space-between;
@@ -148,11 +154,11 @@
 }
 
 .primary-color {
-  color: $primary;
+  @include primary-color();
 }
 
 .accent-color {
-  color: $accent;
+  @include accent-color();
 }
 
 .text-truncate {

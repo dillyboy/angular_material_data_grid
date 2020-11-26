@@ -41,10 +41,10 @@
 }
 
 .highlight-filter {
-  background: $accent;
+  @include accent-background-color();
   color: white;
 }
 
 .accent-color {
-  color: $accent !important;
+  @include accent-color();
 }

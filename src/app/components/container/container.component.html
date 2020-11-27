@@ -1,8 +1,14 @@
 <mat-card class="header">
   <div class="layout-container">
-    <button type="button" mat-icon-button (click)="drawer.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
+    <div>
+      <button type="button" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <button type="button" mat-icon-button routerLink="/overview" class="ml-3">
+        <img src="./assets/logo.png" alt="" width="40px">
+      </button>
+    </div>
+
     <div class="d-inline-flex">
       <mat-slide-toggle [(ngModel)]="darkMode" (ngModelChange)="themeChanged()" labelPosition="before">
         <span *ngIf="!darkMode"><mat-icon class="position-relative mr-2" style="top:7px">wb_sunny</mat-icon>Light</span>

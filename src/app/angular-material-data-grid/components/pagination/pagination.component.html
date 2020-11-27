@@ -57,7 +57,7 @@
             </mat-select>
         </mat-form-field>
         <span *ngIf="noOfSelectedRow">
-            <span class="grid-filter-applied-color font-weight-bold">{{noOfSelectedRow}} Selected</span>
+            <a mat-button color="accent" disableRipple class="grid-filter-applied-color font-weight-bold">{{noOfSelectedRow}} Selected</a>
             <span class="ml-2 mr-2">|</span>
         </span>{{pageInfoDisplayText}}
     </div>

@@ -9,16 +9,27 @@
         <button mat-icon-button aria-label="pagination" disabled *ngIf="!pagesOnDisplay.includes(1)">
             <mat-icon class="material-icons-outlined">more_horiz</mat-icon>
         </button>
-        <button
+        <ng-container *ngFor="let page of pagesOnDisplay">
+            <button *ngIf="currentPage !== page"
                 mat-icon-button
                 aria-label="pagination"
                 color="accent"
-                *ngFor="let page of pagesOnDisplay"
-                [ngClass]="{'highlight': currentPage === page}"
                 [disabled]="loadingData"
                 (click)="pageChange(page)">
-            {{page}}
-        </button>
+                {{page}}
+            </button>
+
+            <button *ngIf="currentPage === page"
+                mat-flat-button
+                aria-label="pagination"
+                color="accent"
+                class="active"
+                [disabled]="loadingData"
+                (click)="pageChange(page)">
+                {{page}}
+            </button>
+        </ng-container>
+
         <button mat-icon-button aria-label="pagination" disabled *ngIf="!pagesOnDisplay.includes(pages)">
             <mat-icon class="material-icons-outlined">more_horiz</mat-icon>
         </button>
@@ -46,7 +57,7 @@
             </mat-select>
         </mat-form-field>
         <span *ngIf="noOfSelectedRow">
-            <span id="selection-amount">{{noOfSelectedRow}} Selected</span>
+            <span class="grid-filter-applied-color font-weight-bold">{{noOfSelectedRow}} Selected</span>
             <span class="ml-2 mr-2">|</span>
         </span>{{pageInfoDisplayText}}
     </div>

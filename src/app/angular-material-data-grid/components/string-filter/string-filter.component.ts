@@ -1,49 +1,74 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'app-string-filter',
   templateUrl: './string-filter.component.html',
   styleUrls: ['./string-filter.component.scss']
 })
-export class StringFilterComponent implements OnInit {
+export class StringFilterComponent {
 
   @Output() filter: any = new EventEmitter<any>();
-  filterParam = '';
   filterApplied = false;
-
   stringFilterTypes = [
-    {key: 'eq', display: 'Is equal to'},
-    {key: 'neq', display: 'Is not equal to'},
-    {key: 'contains', display: 'Contains'},
-    {key: 'startswith', display: 'Starts with'},
-    {key: 'endswith', display: 'Ends with'},
-    {key: 'blank', display: 'Is Empty'},
+    {value: 'eq', text: 'Is equal to'},
+    {value: 'neq', text: 'Is not equal to'},
+    {value: 'contains', text: 'Contains'},
+    {value: 'startswith', text: 'Starts with'},
+    {value: 'endswith', text: 'Ends with'},
+    {value: 'blank', text: 'Is Empty'},
   ];
-  selectedStringFilterType = 'contains';
+  selection = new FormControl('contains', Validators.required);
+  value = new FormControl(null, [Validators.required]);
+  invalidValue = false;
+  @ViewChild('menuTrigger') menu: MatMenuTrigger;
+  @ViewChild('fromElement') fromElement: ElementRef;
+  @ViewChild('valueElement') valueElement: ElementRef;
 
   constructor() { }
 
-  ngOnInit(): void {
+  menuOpened(): void {
+    this.valueElement.nativeElement.focus();
   }
 
-  changeStringFilter(ev): void {
-    if (ev.code === 'Enter' || this.filterParam === '') {
-      this.createFilterObj();
+  changeSelection(): void{
+    if (this.selection.value === 'blank') {
+      this.value.setValue('');
+      this.value.disable();
     } else {
-      this.filterApplied = false;
+      this.value.enable();
     }
   }
 
-  createFilterObj(): void {
-    this.filter.emit({ operator: this.selectedStringFilterType, value: this.filterParam });
-    this.filterApplied = this.filterParam ? true : false;
+  reset(emit?): void {
+    this.invalidValue = false;
+    this.value.setValue(null);
+
+    if (emit) {
+      this.close(null);
+    }
   }
 
-  removeFilter(): void {
-    this.filterParam = '';
-    this.selectedStringFilterType = 'contains';
-    this.filter.emit({ operator: this.selectedStringFilterType, value: null });
-    this.filterApplied = false;
+  validate(): void {
+    if (this.value.valid) {
+      this.invalidValue = false;
+      this.close(this.value.value);
+    } else if (this.selection.value === 'blank') {
+      this.close('blank');
+    }else {
+      this.invalidValue = true;
+    }
+  }
+
+  private close(value: string): void {
+    this.filter.emit({ operator: this.selection.value, value });
+    if (value) {
+      this.filterApplied = true;
+    } else {
+      this.filterApplied = false;
+    }
+    this.menu.closeMenu();
   }
 
 }

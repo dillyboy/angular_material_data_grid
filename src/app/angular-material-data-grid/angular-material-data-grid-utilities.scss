@@ -153,14 +153,6 @@
   display: none !important;
 }
 
-.primary-color {
-  @include primary-color();
-}
-
-.accent-color {
-  @include accent-color();
-}
-
 .text-truncate {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -184,6 +176,16 @@
 
 .customSelectPosition {
   margin: 25px 0px;
+}
+
+.link {
+  .mat-button-wrapper {
+    &:hover {
+      text-decoration: underline;
+      //user-select: auto;
+      //-webkit-user-select: auto;
+    }
+  }
 }
 
 body {

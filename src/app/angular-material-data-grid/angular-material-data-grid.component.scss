@@ -183,7 +183,6 @@
 }
 
 .link {
-  @include primary-color();
   background-color: transparent;
   cursor: pointer;
   overflow: hidden;
@@ -192,13 +191,15 @@
   font-weight: 500;
   font-size: 12px;
   text-decoration: none;
-  &:hover {
-    text-decoration: underline;
-  }
+  padding: 0;
+  min-width: auto;
+  line-height: normal;
+  border-radius: 0;
+  display: inline;
+
 }
 
 .icon-external-link {
-  @include primary-color();
   cursor: pointer;
   margin-left: 8px;
   height: auto;

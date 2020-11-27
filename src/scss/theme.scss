@@ -12,8 +12,8 @@ $mat-theme-ignore-duplication-warnings: true;
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$serverbind-grid-primary: mat-palette($mat-indigo);
-$serverbind-grid-primary-dark: mat-palette($mat-indigo, 400);
+$serverbind-grid-primary: mat-palette($mat-blue);
+$serverbind-grid-primary-dark: mat-palette($mat-blue, 400);
 $serverbind-grid-accent: mat-palette($mat-amber, 800, 700, 900);
 
 // The warn palette is optional (defaults to red).

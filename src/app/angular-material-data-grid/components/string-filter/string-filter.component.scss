@@ -1,50 +1,43 @@
 @import './../../variables';
 
-.elem-right-margin {
-  margin-right: 8px;
+.placeholder {
+  opacity: .6;
 }
 
-.mat-icon-button {
-  width: 26px;
-  height: 26px;
-  line-height: 26px;
-  border-radius: 2px;
-  font-weight: 400;
-
-  mat-icon {
-    opacity: .6;
-    font-size: 20px;
-  }
-}
-
-.modified-input {
+.filter-container {
+  width: 260px;
+  min-height: 60px;
+  display: block;
   border-radius: 4px;
+  overflow: hidden;
+  font-size: 12px;
+}
+
+.filter-open-btn {
+  line-height: 26px;
+  font-size: 12px;
   padding: 0 4px;
-  box-sizing: border-box;
-  border: 1px solid $highlight-dark-color;
-  outline: 0;
-  font: inherit;
-  line-height: 1.42857143em;
-  display: inline-flex;
-  vertical-align: middle;
-  position: relative;
-  //-webkit-appearance: none;
-  margin-right: 0 !important;
-  width: calc(100% - 68px);
-  min-width: 55px;
-  height: 26px !important;
-  font-weight: 300;
-  margin-right: 8px !important;
-  &::placeholder  {
-    font-weight: 400;
+  width: 100%;
+  background: white;
+  ::ng-deep .mat-button-wrapper {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
   }
 }
 
-.highlight-filter {
-  @include accent-background-color();
-  color: white;
+.mat-select-arrow {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid;
+  margin: 0 4px;
 }
 
-.accent-color {
-  @include accent-color();
+.invalid-error {
+  color: $warn;
+  font-size: 12px;
 }
+

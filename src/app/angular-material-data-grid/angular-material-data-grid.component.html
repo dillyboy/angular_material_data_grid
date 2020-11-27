@@ -49,12 +49,12 @@
                   <!--URL TYPE-->
                   <span *ngSwitchCase="'url'">
                     <ng-container *ngIf="heading.other.source === 'external'; else internalLink">
-                      <a class="link" [ngClass]="{'link-disabled': loadingData}" *ngIf="heading.other && heading.other['urlTemplate']" [href]="item[heading.fieldName + 'Link'] + (item[heading.fieldName + 'QueryParams'] ? '?' + item[heading.fieldName + 'QueryParams'] : '')">{{item[heading.fieldName]}}</a>
-                      <mat-icon class="fs-12 icon-external-link" [ngClass]="{'link-disabled': loadingData}" *ngIf="heading.other && heading.other.openTab && item[heading.fieldName]" (click)="openExternalLinkInNewTab(item[heading.fieldName + 'Link'], item[heading.fieldName + 'QueryParams'])">launch</mat-icon>
+                      <a mat-button disableRipple color="primary" class="link" [ngClass]="{'link-disabled': loadingData}" *ngIf="heading.other && heading.other['urlTemplate']" [href]="item[heading.fieldName + 'Link'] + (item[heading.fieldName + 'QueryParams'] ? '?' + item[heading.fieldName + 'QueryParams'] : '')">{{item[heading.fieldName]}}</a>
+                      <mat-icon color="primary" class="fs-12 icon-external-link" [ngClass]="{'link-disabled': loadingData}" *ngIf="heading.other && heading.other.openTab && item[heading.fieldName]" (click)="openExternalLinkInNewTab(item[heading.fieldName + 'Link'], item[heading.fieldName + 'QueryParams'])">launch</mat-icon>
                     </ng-container>
                     <ng-template #internalLink>
-                      <a class="link" [ngClass]="{'link-disabled': loadingData}" *ngIf="heading.other && heading.other['urlTemplate']" [routerLink]="item[heading.fieldName + 'Link']" [queryParams]="item[heading.fieldName + 'QueryParams']">{{item[heading.fieldName]}}</a>
-                      <mat-icon class="fs-12 icon-external-link" [ngClass]="{'link-disabled': loadingData}" *ngIf="heading.other && heading.other.openTab && item[heading.fieldName]" (click)="openLinkInNewTab(item[heading.fieldName + 'Link'], item[heading.fieldName + 'QueryParams'])">launch</mat-icon>
+                      <a mat-button disableRipple color="primary" class="link" [ngClass]="{'link-disabled': loadingData}" *ngIf="heading.other && heading.other['urlTemplate']" [routerLink]="item[heading.fieldName + 'Link']" [queryParams]="item[heading.fieldName + 'QueryParams']">{{item[heading.fieldName]}}</a>
+                      <mat-icon color="primary" class="fs-12 icon-external-link" [ngClass]="{'link-disabled': loadingData}" *ngIf="heading.other && heading.other.openTab && item[heading.fieldName]" (click)="openLinkInNewTab(item[heading.fieldName + 'Link'], item[heading.fieldName + 'QueryParams'])">launch</mat-icon>
                     </ng-template>
                   </span>
 

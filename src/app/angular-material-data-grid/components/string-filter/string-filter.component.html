@@ -1,11 +1,30 @@
-<input class="modified-input" type="text" name="filter" placeholder="Unfiltered" [(ngModel)]="filterParam" [ngClass]="{'font-weight-bold accent-color': filterApplied}" (keyup)="changeStringFilter($event)">
-<button mat-icon-button type="button" class="elem-right-margin" matTooltip="Filtration Logic" [matMenuTriggerFor]="stringFilterMenu">
-    <mat-icon class="material-icons-outlined">filter_alt</mat-icon>
-</button>
-<button mat-icon-button type="button" *ngIf="filterParam.length !== 0" matTooltip="Reset" (click)="removeFilter()">
-    <mat-icon class="material-icons-outlined">cancel</mat-icon>
+<button class="filter-open-btn layout-container" [color]="filterApplied ? 'accent': 'none'" mat-stroked-button type="button" #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="numberFilterMenu" (menuOpened)="menuOpened()">
+    <span *ngIf="!filterApplied" class="placeholder font-weight-normal">Unfiltered</span>
+    <span *ngIf="filterApplied">Filter Applied</span>
+    <div class="mat-select-arrow"></div>
 </button>
 
-<mat-menu #stringFilterMenu="matMenu" xPosition="before">
-    <button mat-menu-item *ngFor="let item of stringFilterTypes" [ngClass]="{'highlight-filter': selectedStringFilterType === item.key}" (click)="selectedStringFilterType = item.key;createFilterObj()">{{item.display}}</button>
+<mat-menu #numberFilterMenu="matMenu">
+    <div class="filter-container" (click)="$event.stopPropagation()" (keydown.tab)="$event.stopPropagation()" (keydown.shift.tab)="$event.stopPropagation()">
+        <div class="layout-container">
+            <button mat-stroked-button type="button" (click)="validate()" class="mr-2 mat-primary mat-small-stroked-button">Filter</button>
+            <button mat-stroked-button type="button" (click)="reset(true)" class="mat-warn mat-small-stroked-button">Reset</button>
+        </div>
+        <div class="layout-container">
+            <mat-form-field class="w-100 mt-3">
+                <mat-select [formControl]="selection" placeholder="Logic" (selectionChange)="changeSelection()">
+                    <mat-option *ngFor="let item of stringFilterTypes" [value]="item.value">{{item.text}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="layout-container">
+            <mat-form-field class="w-100">
+                <input matInput #valueElement type="text" placeholder="Value" [formControl]="value" (keyup.enter)="validate()">
+            </mat-form-field>
+        </div>
+        <div class="layout-container">
+            <span *ngIf="invalidValue" class="invalid-error">Invalid value entered</span>
+        </div>
+    </div>
 </mat-menu>

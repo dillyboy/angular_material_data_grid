@@ -5,22 +5,19 @@
   background: $highlight-color;
 
 
-  .mat-icon-button {
+  .mat-icon-button, .mat-flat-button {
     width: 26px;
     height: 26px;
     line-height: 26px;
     border-radius: 2px;
     margin-right: 6px;
     font-weight: 400;
-    &.highlight {
-      @include accent-background-color();
+    min-width: 26px;
+    padding: 0;
+    &.active {
       color: white;
     }
   }
 
 }
 
-#selection-amount {
-  font-weight: bold;
-  @include accent-color();
-}

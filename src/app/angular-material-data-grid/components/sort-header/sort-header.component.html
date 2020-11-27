@@ -2,8 +2,8 @@
     <span id="header-text" class="text-truncate"> {{heading.display}}</span>
     <ng-container *ngIf="!heading.disableSorting">
         <mat-icon *ngIf="!heading.sort"           class="sort-icon" matTooltip="Sort Ascending">sort</mat-icon>
-        <mat-icon *ngIf="heading.sort === 'asc'"  class="accent-color" matTooltip="Sort Descending">arrow_upward</mat-icon>
-        <mat-icon *ngIf="heading.sort === 'desc'" class="accent-color" matTooltip="Remove Sort">arrow_downward</mat-icon>
+        <mat-icon *ngIf="heading.sort === 'asc'"  color="accent" matTooltip="Sort Descending">arrow_upward</mat-icon>
+        <mat-icon *ngIf="heading.sort === 'desc'" color="accent" matTooltip="Remove Sort">arrow_downward</mat-icon>
     </ng-container>
 </div>
 

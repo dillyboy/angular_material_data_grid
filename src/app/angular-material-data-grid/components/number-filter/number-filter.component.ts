@@ -26,6 +26,7 @@ export class NumberFilterComponent {
     to: new FormControl(null, [Validators.required, Validators.pattern('^[0-9]*$')])
   });
   value = new FormControl(null, [Validators.required, Validators.pattern('^[0-9]*$')]);
+  filterParam = '';
   invalidRangeValue = false;
   invalidValue = false;
   @ViewChild('menuTrigger') menu: MatMenuTrigger;
@@ -48,6 +49,7 @@ export class NumberFilterComponent {
     this.range.controls.from.setValue(null);
     this.range.controls.to.setValue(null);
     this.value.setValue(null);
+    this.filterParam = '';
 
     if (emit) {
       this.close(null);
@@ -60,6 +62,7 @@ export class NumberFilterComponent {
         const {from, to} = this.range.value;
         if (from < to) {
           this.invalidRangeValue = false;
+          this.filterParam = from + '-' + to;
           this.close(from + '-' + to);
         } else {
           this.invalidRangeValue = true;
@@ -70,6 +73,7 @@ export class NumberFilterComponent {
     } else {
       if (this.value.valid) {
         this.invalidValue = false;
+        this.filterParam = this.value.value;
         this.close(this.value.value);
       } else {
         this.invalidValue = true;

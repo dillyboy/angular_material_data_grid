@@ -1,6 +1,6 @@
 <button class="filter-open-btn layout-container" [color]="filterApplied ? 'accent': 'none'" mat-stroked-button type="button" #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="numberFilterMenu" (menuOpened)="menuOpened()">
     <span *ngIf="!filterApplied" class="placeholder font-weight-normal">Unfiltered</span>
-    <span *ngIf="filterApplied">Filter Applied</span>
+    <span *ngIf="filterApplied">{{value.value}}</span>
     <div class="mat-select-arrow"></div>
 </button>
 

@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatMenuTrigger } from '@angular/material/menu';
+import { MatDatepicker } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-date-filter',
@@ -9,37 +11,76 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class DateFilterComponent {
 
   @Output() filter: any = new EventEmitter<any>();
-  filterParam = '';
   filterApplied = false;
+  dateFilterTypes = [
+    {value: 'between', text: 'Is Between'},
+    {value: 'blank', text: 'Is Empty'},
+  ];
+
   range = new FormGroup({
     start: new FormControl(),
     end: new FormControl()
   });
+  selection = new FormControl('between', Validators.required);
+  value = new FormControl(null, [Validators.required]);
+  invalidValue = false;
+  @ViewChild('menuTrigger') menu: MatMenuTrigger;
+  @ViewChild('fromElement') fromElement: ElementRef;
+  @ViewChild('picker') picker: MatDatepicker<any>;
 
   constructor() { }
 
-  applyFilter(filterType): void {
-    console.log(filterType);
-    this.filterParam = 'Filter Applied';
-    this.filter.emit( {operator: 'between', value: filterType} );
-    this.filterApplied = true;
+  menuOpened(): void {
+    setTimeout(() => {
+      this.picker.open();
+    }, 100);
+
   }
 
-  removeFilter(): void {
+  changeSelection(): void{
+    if (this.selection.value === 'blank') {
+      this.value.disable();
+    } else {
+      this.value.enable();
+    }
+  }
+
+  reset(emit?): void {
+    this.invalidValue = false;
+    this.value.setValue(null);
+    this.selection.setValue('between');
     this.range.controls.start.setValue(null);
     this.range.controls.end.setValue(null);
-    this.filterParam = '';
-    this.filter.emit( {operator: 'between', value: null} );
-    this.filterApplied = false;
+    if (emit) {
+      this.close(null);
+    }
   }
 
-  dateRangeChange(): void {
-    const {start, end} = this.range.value;
-    if (start && end) {
-      this.filterParam = `${this.formatDate(start)}-${this.formatDate(end)}`;
-      this.filter.emit( {operator: 'between', value: this.filterParam} );
-      this.filterApplied = true;
+  validate(): void {
+    if (this.range.valid && this.selection.value !== 'blank') {
+      this.invalidValue = false;
+      const {start, end} = this.range.value;
+      if (start && end) {
+        this.value.setValue(`${this.formatDate(start)}-${this.formatDate(end)}`);
+        this.filter.emit( {operator: 'between', value: this.value.value} );
+      }
+      this.close(this.value.value);
+    } else if (this.selection.value === 'blank') {
+      this.value.setValue(`Is Empty`);
+      this.close('blank');
+    }else {
+      this.invalidValue = true;
     }
+  }
+
+  private close(value: string): void {
+    this.filter.emit({ operator: this.selection.value, value });
+    if (value) {
+      this.filterApplied = true;
+    } else {
+      this.filterApplied = false;
+    }
+    this.menu.closeMenu();
   }
 
   private formatDate(date): void {

@@ -34,7 +34,6 @@ export class StringFilterComponent {
 
   changeSelection(): void{
     if (this.selection.value === 'blank') {
-      this.value.setValue('');
       this.value.disable();
     } else {
       this.value.enable();
@@ -43,6 +42,7 @@ export class StringFilterComponent {
 
   reset(emit?): void {
     this.invalidValue = false;
+    this.selection.setValue('contains');
     this.value.setValue(null);
 
     if (emit) {

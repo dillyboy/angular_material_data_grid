@@ -1,6 +1,9 @@
 <button class="filter-open-btn layout-container" mat-stroked-button [color]="filterApplied ? 'accent': 'none'" type="button" #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="numberFilterMenu" (menuOpened)="menuOpened()">
     <span *ngIf="!filterApplied" class="placeholder font-weight-normal">Unfiltered</span>
-    <span *ngIf="filterApplied" class="accent-color">Filter Applied</span>
+    <span *ngIf="filterApplied" class="text-truncate">{{tagValues ? tagValues[0] : null }}</span>
+    <span *ngIf="filterApplied && tagValues?.length > 1" class="additional-selection text-truncate">
+      (+{{tagValues.length - 1}} {{tagValues?.length === 2 ? 'other' : 'others'}})
+    </span>
     <div class="mat-select-arrow"></div>
 </button>
 

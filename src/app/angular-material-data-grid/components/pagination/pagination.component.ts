@@ -37,7 +37,7 @@ export class PaginationComponent implements OnInit, OnChanges {
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.pageChanged.emit({pageNo: 1, recordsPerPage: this.recordsPerPage}); // initial request trigger
+    // this.pageChanged.emit({pageNo: 1, recordsPerPage: this.recordsPerPage}); // initial request trigger
   }
 
   ngOnChanges(changes: SimpleChanges): void {

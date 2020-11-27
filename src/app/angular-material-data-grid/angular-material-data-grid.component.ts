@@ -8,7 +8,9 @@ import {
   Renderer2,
   AfterViewInit,
   ViewChild,
-  ElementRef
+  ElementRef,
+  OnChanges,
+  SimpleChanges
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
@@ -24,7 +26,7 @@ import GirdButtonClickInterface from './interfaces/gird-button-click-interface';
   templateUrl: './angular-material-data-grid.component.html',
   styleUrls: ['./angular-material-data-grid.component.scss']
 })
-export class AngularMaterialDataGridComponent implements AfterViewInit{
+export class AngularMaterialDataGridComponent implements AfterViewInit, OnChanges {
 
   @Output() responseEmit: any = new EventEmitter<GridResponseInterface>();
   @Output() selectionEmit: any = new EventEmitter<any[]>();
@@ -35,11 +37,13 @@ export class AngularMaterialDataGridComponent implements AfterViewInit{
   @Input() url = '';
   @Input() selection = false;
   @Input() columnControl = false;
+  @Input() entity = null;
+  @Input() transparency = false;
 
   allGridItemsSelected = false;
-  loadingData = true;
+  loadingData = false;
   response: GridResponseInterface = { gridData: [], totalCount: 0};
-  recordsPerPage = 0;
+  recordsPerPage = 100;
   selectionStarted = false;
   selectionTimeoutHandler: any;
   allCheckBoxesSelected = false;
@@ -75,6 +79,12 @@ export class AngularMaterialDataGridComponent implements AfterViewInit{
     setTimeout(() => {
       this.calculateGridWidth();
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.entity?.currentValue || changes.headings?.currentValue) {
+      this.pageChanged({pageNo: 1, recordsPerPage: this.recordsPerPage});
+    }
   }
 
   private calculateGridWidth(): void {
@@ -222,14 +232,15 @@ export class AngularMaterialDataGridComponent implements AfterViewInit{
   }
 
   // page change event
-  pageChanged({pageNo, recordsPerPage, sort = null, sortField = null}): void {
+  pageChanged({pageNo, recordsPerPage}): void {
     this.recordsPerPage = recordsPerPage;
     this.loadingData = true;
     this.currentPage = pageNo;
+    this.changeDetectorRef.detectChanges();
 
     // const url = './assets/data.json';
     const body = {
-      entity: {},
+      entity: this.entity,
       page: this.currentPage,
       perPage: recordsPerPage,
       filters: this.filters,

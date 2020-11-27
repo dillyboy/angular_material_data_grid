@@ -58,6 +58,10 @@
     position: relative;
     padding: 0px;
 
+    &.grid-transparency {
+      background: rgb(255 255 255 / 90%);
+    }
+
     .grid-nav-btns {
       position: absolute;
       top: calc(50% - 25px);

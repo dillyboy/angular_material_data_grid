@@ -11,7 +11,7 @@
       </div>
     </div>
   </mat-menu>
-  <mat-card id="grid" [ngClass]="{'fullscreen': fullscreen}">
+  <mat-card id="grid" [ngClass]="{'fullscreen': fullscreen, 'grid-transparency': transparency}">
     <button *ngIf="scrollRemainingDistanceToLeft !== 0" mat-button (click)="scrollLeft()" aria-label="navigate left" class="navigate-left-btn">
       <mat-icon class="fs-40 navigate-icons">chevron_left</mat-icon>
     </button>

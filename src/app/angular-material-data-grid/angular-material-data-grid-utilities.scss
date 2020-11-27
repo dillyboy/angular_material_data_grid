@@ -209,5 +209,11 @@ body {
     .additional-selection {
       color: white;
     }
+
+    #grid {
+      &.grid-transparency {
+        background: rgb(66 66 66 / 90%) !important;
+      }
+    }
   }
 }

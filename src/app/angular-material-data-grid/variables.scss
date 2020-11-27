@@ -4,7 +4,3 @@ $warn: mat-color($mat-red, 600);
 $highlight-color: rgba(118, 118, 118, 0.1);
 $highlight-dark-color: rgba(118, 118, 118, 0.3);
 
-@mixin accent-color($accent: mat-color($mat-amber, 800)) {
-  color: $accent !important;
-}
-

@@ -1,5 +1,13 @@
 @import './../../variables';
 
+.filter-value {
+  padding: 0;
+  display: inline;
+  min-width: auto;
+  font-size: 12px;
+  line-height: normal;
+}
+
 .modified-mat-select {
   border: 1px solid $highlight-dark-color;
   border-radius: 4px;

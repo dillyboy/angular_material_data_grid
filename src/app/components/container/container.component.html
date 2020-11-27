@@ -10,7 +10,7 @@
     </div>
 
     <div class="d-inline-flex">
-      <mat-slide-toggle [(ngModel)]="darkMode" (ngModelChange)="themeChanged()" labelPosition="before">
+      <mat-slide-toggle [(ngModel)]="darkMode" (ngModelChange)="themeChanged()" labelPosition="before" class="mr-3">
         <span *ngIf="!darkMode"><mat-icon class="position-relative mr-2" style="top:7px">wb_sunny</mat-icon>Light</span>
         <span *ngIf="darkMode"><mat-icon class="position-relative mr-2" style="top:7px">nights_stay</mat-icon>Dark</span>
       </mat-slide-toggle>

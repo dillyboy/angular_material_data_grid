@@ -1,6 +1,8 @@
-import { Component, OnDestroy, Renderer2 } from '@angular/core';
+import { Component, OnDestroy, Renderer2, ViewChild } from '@angular/core';
 import { navigation } from './navigation';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { Platform } from '@angular/cdk/platform';
+import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-container',
@@ -18,8 +20,10 @@ export class ContainerComponent implements OnDestroy {
   // Filters & Sorting
   // Column reordering and optional columns
   selectedLink = 'Demo';
+  mobile = false;
+  @ViewChild('drawer') drawer: MatDrawer;
 
-  constructor(private renderer: Renderer2, private router: Router, private route: ActivatedRoute) {
+  constructor(private renderer: Renderer2, private router: Router, private platform: Platform) {
     this.darkMode = (localStorage.getItem('darkMode')  === 'true');
     if (this.darkMode) {
       this.renderer.addClass(document.body, 'darkMode');
@@ -33,6 +37,11 @@ export class ContainerComponent implements OnDestroy {
         window.scrollTo(0, 0);
       }
     });
+
+    if (this.platform.ANDROID || this.platform.IOS) {
+      this.mobile = true;
+      this.drawer.close();
+    }
   }
 
   themeChanged(): void {
@@ -47,6 +56,9 @@ export class ContainerComponent implements OnDestroy {
   goToRoute(item): void {
     this.selectedLink = item.headingName;
     this.router.navigate([item.route]);
+    if (this.mobile) {
+      this.drawer.close();
+    }
   }
 
   ngOnDestroy(): void {

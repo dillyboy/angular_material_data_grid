@@ -1,4 +1,4 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Component, OnDestroy, Renderer2 } from '@angular/core';
 import { navigation } from './navigation';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
   templateUrl: './container.component.html',
   styleUrls: ['./container.component.scss']
 })
-export class ContainerComponent {
+export class ContainerComponent implements OnDestroy {
   darkMode = false;
   sidePanelNavigation = navigation;
   routerEvents = null;
@@ -49,7 +49,7 @@ export class ContainerComponent {
     this.router.navigate([item.route]);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.routerEvents.unsubscribe();
   }
 

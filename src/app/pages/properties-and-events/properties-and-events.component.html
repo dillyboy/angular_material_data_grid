@@ -16,7 +16,8 @@
       <tr class="odd">
         <td><code highlight="@Input() headings: GridHeading[]"></code></td>
         <td>This is a required input that should be provided in order to create a grid component.
-          Each array item represents a column's configuration.</td>
+          Each array item represents a column's configuration. Everytime a new array is assigned to this input a new
+          gird request will be sent.</td>
       </tr>
       <tr>
         <td><code highlight="@Input() url: string"></code></td>
@@ -32,6 +33,18 @@
         <td><code highlight="@Input() columnControl: boolean"></code></td>
         <td>This is an optional input which will allow the user to reorder and also show/hide optional
           columns if enabled. By default it's false which means these column options are disabled to end users.
+        </td>
+      </tr>
+      <tr class="odd">
+        <td><code highlight="@Input() entity: any"></code></td>
+        <td>This is an optional input (object) which can be used to send additional data to the POST endpoint.
+          Everytime this object is changed a new request will be sent automatically which also makes it ideal to
+          programmatically re-initialise the grid by just assigning an empty object if necessary.</td>
+      </tr>
+      <tr class="">
+        <td><code highlight="@Input() transparency: boolean"></code></td>
+        <td>This is an optional input which will give the grid an aesthetic upgrade for unique UI preferences but
+          does not offer any additional functionality. (It makes the data grid slightly transparent.)
         </td>
       </tr>
       <tr class="odd">

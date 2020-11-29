@@ -45,6 +45,10 @@
   margin-bottom: .5rem !important;
 }
 
+.mb-3 {
+  margin-bottom: .75rem !important;
+}
+
 .ml-2 {
   margin-left: .5rem !important;
 }
@@ -75,6 +79,10 @@
 
 .p-3 {
   padding: .75rem !important;
+}
+
+.pb-3 {
+  padding-bottom: .75rem !important;
 }
 
 .position-relative {
@@ -159,11 +167,11 @@
   white-space: nowrap;
 }
 
-.mat-menu-item {
-  height: 26px !important;
-  line-height: 26px !important;
-  font-size: 12px !important;
-}
+//.mat-menu-item {
+//  height: 26px !important;
+//  line-height: 26px !important;
+//  font-size: 12px !important;
+//}
 
 .mat-option {
   height: 26px !important;

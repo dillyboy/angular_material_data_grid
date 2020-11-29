@@ -1,4 +1,4 @@
-import { Component, OnDestroy, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, Renderer2, ViewChild } from '@angular/core';
 import { navigation } from './navigation';
 import { NavigationEnd, Router } from '@angular/router';
 import { Platform } from '@angular/cdk/platform';
@@ -9,7 +9,7 @@ import { MatDrawer } from '@angular/material/sidenav';
   templateUrl: './container.component.html',
   styleUrls: ['./container.component.scss']
 })
-export class ContainerComponent implements OnDestroy {
+export class ContainerComponent implements AfterViewInit , OnDestroy {
   darkMode = false;
   sidePanelNavigation = navigation;
   routerEvents = null;
@@ -37,7 +37,9 @@ export class ContainerComponent implements OnDestroy {
         window.scrollTo(0, 0);
       }
     });
+  }
 
+  ngAfterViewInit(): void {
     if (this.platform.ANDROID || this.platform.IOS) {
       this.mobile = true;
       this.drawer.close();

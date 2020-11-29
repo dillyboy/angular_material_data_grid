@@ -7,66 +7,68 @@
     <p class="mr-3 pt-3">Selector:</p>  <code [highlight]="selector" class="d-inline-block"></code>
   </div>
 
-  <mat-card class="mt-3">
-    <table class="simple-table">
-      <tr>
-        <th width="400px">Name</th>
-        <th>Description</th>
-      </tr>
-      <tr class="odd">
-        <td><code highlight="@Input() headings: GridHeading[]"></code></td>
-        <td>This is a required input that should be provided in order to create a grid component.
-          Each array item represents a column's configuration. Everytime a new array is assigned to this input a new
-          gird request will be sent.</td>
-      </tr>
-      <tr>
-        <td><code highlight="@Input() url: string"></code></td>
-        <td>This is a required input which should contain a POST endpoint which accepts a grid request and
-          return a grid response as specified in the <a routerLink="/gettingStarted/introduction">introduction page</a>.</td>
-      </tr>
-      <tr class="odd">
-        <td><code highlight="@Input() selection: boolean"></code></td>
-        <td>This is an optional input which will make the grid items selectable. By default it's false
-          which means selection is disabled to end users.</td>
-      </tr>
-      <tr class="">
-        <td><code highlight="@Input() columnControl: boolean"></code></td>
-        <td>This is an optional input which will allow the user to reorder and also show/hide optional
-          columns if enabled. By default it's false which means these column options are disabled to end users.
-        </td>
-      </tr>
-      <tr class="odd">
-        <td><code highlight="@Input() entity: any"></code></td>
-        <td>This is an optional input (object) which can be used to send additional data to the POST endpoint.
-          Everytime this object is changed a new request will be sent automatically which also makes it ideal to
-          programmatically re-initialise the grid by just assigning an empty object if necessary.</td>
-      </tr>
-      <tr class="">
-        <td><code highlight="@Input() transparency: boolean"></code></td>
-        <td>This is an optional input which will give the grid an aesthetic upgrade for unique UI preferences but
-          does not offer any additional functionality. (It makes the data grid slightly transparent.)
-        </td>
-      </tr>
-      <tr class="odd">
-        <td><code highlight="@Output() responseEmit: EventEmitter<GridResponse>"></code></td>
-        <td>The responseEmit returns the data when it is received from the backend. It contains the
-          records, total number of pages and also an other object which can be used to send additional
-          data.</td>
-      </tr>
-      <tr>
-        <td><code highlight="@Output() selectionEmit: EventEmitter<any[]>"></code></td>
-        <td>The selectionEmit outputs the selected records to the parent component.</td>
-      </tr>
-      <tr class="odd">
-        <td><code highlight="@Output() filtersChangedEmit: EventEmitter<GridFilterItem[]>"></code></td>
-        <td>This returns the filter objects created by the grid system when the user adds filters.</td>
-      </tr>
-      <tr>
-        <td><code highlight="@Output() buttonClickEmit: EventEmitter<GirdButtonClick>"></code></td>
-        <td>This returns the button click along with the record which the click occurred so that
-          any operations can be performed on the parent component.</td>
-      </tr>
-    </table>
+  <mat-card class="simple-table-container">
+    <div>
+      <table class="simple-table">
+        <tr>
+          <th width="400px">Name</th>
+          <th>Description</th>
+        </tr>
+        <tr class="odd">
+          <td><code highlight="@Input() headings: GridHeading[]"></code></td>
+          <td>This is a required input that should be provided in order to create a grid component.
+            Each array item represents a column's configuration. Everytime a new array is assigned to this input a new
+            gird request will be sent.</td>
+        </tr>
+        <tr>
+          <td><code highlight="@Input() url: string"></code></td>
+          <td>This is a required input which should contain a POST endpoint which accepts a grid request and
+            return a grid response as specified in the <a routerLink="/gettingStarted/introduction">introduction page</a>.</td>
+        </tr>
+        <tr class="odd">
+          <td><code highlight="@Input() selection: boolean"></code></td>
+          <td>This is an optional input which will make the grid items selectable. By default it's false
+            which means selection is disabled to end users.</td>
+        </tr>
+        <tr class="">
+          <td><code highlight="@Input() columnControl: boolean"></code></td>
+          <td>This is an optional input which will allow the user to reorder and also show/hide optional
+            columns if enabled. By default it's false which means these column options are disabled to end users.
+          </td>
+        </tr>
+        <tr class="odd">
+          <td><code highlight="@Input() entity: any"></code></td>
+          <td>This is an optional input (object) which can be used to send additional data to the POST endpoint.
+            Everytime this object is changed a new request will be sent automatically which also makes it ideal to
+            programmatically re-initialise the grid by just assigning an empty object if necessary.</td>
+        </tr>
+        <tr class="">
+          <td><code highlight="@Input() transparency: boolean"></code></td>
+          <td>This is an optional input which will give the grid an aesthetic upgrade for unique UI preferences but
+            does not offer any additional functionality. (It makes the data grid slightly transparent.)
+          </td>
+        </tr>
+        <tr class="odd">
+          <td><code highlight="@Output() responseEmit: EventEmitter<GridResponse>"></code></td>
+          <td>The responseEmit returns the data when it is received from the backend. It contains the
+            records, total number of pages and also an other object which can be used to send additional
+            data.</td>
+        </tr>
+        <tr>
+          <td><code highlight="@Output() selectionEmit: EventEmitter<any[]>"></code></td>
+          <td>The selectionEmit outputs the selected records to the parent component.</td>
+        </tr>
+        <tr class="odd">
+          <td><code highlight="@Output() filtersChangedEmit: EventEmitter<GridFilterItem[]>"></code></td>
+          <td>This returns the filter objects created by the grid system when the user adds filters.</td>
+        </tr>
+        <tr>
+          <td><code highlight="@Output() buttonClickEmit: EventEmitter<GirdButtonClick>"></code></td>
+          <td>This returns the button click along with the record which the click occurred so that
+            any operations can be performed on the parent component.</td>
+        </tr>
+      </table>
+    </div>
   </mat-card>
 
 

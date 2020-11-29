@@ -8,35 +8,37 @@
   <div class="d-inline-flex" style="align-items: center">
     <p class="mr-3 pt-3">interface:</p>  <code highlight="OtherConfigType" class="d-inline-block"></code>
   </div>
-  <mat-card class="mt-3">
-    <table class="simple-table">
-      <tr>
-        <th width="300px">Name</th>
-        <th>Description</th>
-      </tr>
-      <tr class="odd">
-        <td><code highlight="urlTemplate: string"></code></td>
-        <td>This refers to the internal route (url) of the angular application. Eg: '/detail/:uid'.
-          If the character ':' is used within the url provided the word next to it will be treated as a
-          variable which will be replaced by the data retrieved. For example '/detail/:uid' will be replaced
-          with '/detail/1' or '/detail/2' depending on the uid value</td>
-      </tr>
-      <tr>
-        <td><code highlight="source: 'internal' | 'external'"></code></td>
-        <td>The source should be given as internal for internal routes within the angular application which
-          uses the RouterModule. If external is given external links can be opened. By default internal is given.</td>
-      </tr>
-      <tr class="odd">
-        <td><code highlight="queryParams?: object"></code></td>
-        <td>This is an optional object that can be provided to build query params. Eg: {{ '{ ' }}userEmail: 'email'{{ ' }' }}
-          The url may end like this '?userEmail=fzute0@reverbnation.com'</td>
-      </tr>
-      <tr>
-        <td><code highlight="openTab: boolean"></code></td>
-        <td>An optional feature which determines if there is an open tab icon next to the url which will open
-          the url in a separate tab in the browser (if clicked)</td>
-      </tr>
-    </table>
+  <mat-card class="simple-table-container">
+    <div>
+      <table class="simple-table">
+        <tr>
+          <th width="300px">Name</th>
+          <th>Description</th>
+        </tr>
+        <tr class="odd">
+          <td><code highlight="urlTemplate: string"></code></td>
+          <td>This refers to the internal route (url) of the angular application. Eg: '/detail/:uid'.
+            If the character ':' is used within the url provided the word next to it will be treated as a
+            variable which will be replaced by the data retrieved. For example '/detail/:uid' will be replaced
+            with '/detail/1' or '/detail/2' depending on the uid value</td>
+        </tr>
+        <tr>
+          <td><code highlight="source: 'internal' | 'external'"></code></td>
+          <td>The source should be given as internal for internal routes within the angular application which
+            uses the RouterModule. If external is given external links can be opened. By default internal is given.</td>
+        </tr>
+        <tr class="odd">
+          <td><code highlight="queryParams?: object"></code></td>
+          <td>This is an optional object that can be provided to build query params. Eg: {{ '{ ' }}userEmail: 'email'{{ ' }' }}
+            The url may end like this '?userEmail=fzute0@reverbnation.com'</td>
+        </tr>
+        <tr>
+          <td><code highlight="openTab: boolean"></code></td>
+          <td>An optional feature which determines if there is an open tab icon next to the url which will open
+            the url in a separate tab in the browser (if clicked)</td>
+        </tr>
+      </table>
+    </div>
   </mat-card>
   <br><br>
 

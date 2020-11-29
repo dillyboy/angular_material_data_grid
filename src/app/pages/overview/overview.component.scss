@@ -19,9 +19,10 @@
 }
 
 .main-logo {
-  width: 350px;
+  min-width: 100px;
+  width: 25%;
   position: absolute;
-  left: 200px;
+  left: 20%;
   top: 50px;
 }
 
@@ -48,5 +49,35 @@
     color: #1976d2;
     border: none;
     outline: none;
+  }
+}
+
+.feature {
+  padding: 16px;
+  max-width: 800px;
+  margin: 0 auto;
+
+  img {
+    max-width: 200px;
+    margin: 30px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  .logo-container {
+    display: none;
+  }
+
+  .main-text-holder {
+    text-align: center;
+    width: 100%;
+  }
+
+  .layout-container {
+    flex-direction: column;
+    img {
+      order: 2;
+    }
   }
 }

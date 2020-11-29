@@ -1,12 +1,12 @@
 <div class="layout-container" style="height: 40px;">
     <div class="buttons-container">
-        <button mat-icon-button aria-label="pagination" color="accent" [disabled]="currentPage === 1 || loadingData" (click)="pageChange(1)">
+        <button mat-icon-button class="desktop" aria-label="pagination" color="accent" [disabled]="currentPage === 1 || loadingData" (click)="pageChange(1)">
             <mat-icon>skip_previous</mat-icon>
         </button>
         <button mat-icon-button aria-label="pagination" color="accent" [disabled]="currentPage === 1 || loadingData" (click)="pageChange(currentPage - 1)">
             <mat-icon class="material-icons-outlined">keyboard_arrow_left</mat-icon>
         </button>
-        <button mat-icon-button aria-label="pagination" disabled *ngIf="!pagesOnDisplay.includes(1)">
+        <button mat-icon-button class="desktop" aria-label="pagination" disabled *ngIf="!pagesOnDisplay.includes(1)">
             <mat-icon class="material-icons-outlined">more_horiz</mat-icon>
         </button>
         <ng-container *ngFor="let page of pagesOnDisplay">
@@ -14,6 +14,7 @@
                 mat-icon-button
                 aria-label="pagination"
                 color="accent"
+                class="desktop"
                 [disabled]="loadingData"
                 (click)="pageChange(page)">
                 {{page}}
@@ -30,23 +31,23 @@
             </button>
         </ng-container>
 
-        <button mat-icon-button aria-label="pagination" disabled *ngIf="!pagesOnDisplay.includes(pages)">
+        <button mat-icon-button class="desktop" aria-label="pagination" disabled *ngIf="!pagesOnDisplay.includes(pages)">
             <mat-icon class="material-icons-outlined">more_horiz</mat-icon>
         </button>
         <button mat-icon-button aria-label="pagination" color="accent" [disabled]="currentPage === pages || noOfTotalRecords === 0 || loadingData" (click)="pageChange(currentPage + 1)">
             <mat-icon class="material-icons-outlined">keyboard_arrow_right</mat-icon>
         </button>
-        <button mat-icon-button aria-label="pagination" color="accent" [disabled]="currentPage === pages || noOfTotalRecords === 0  || loadingData" (click)="pageChange(pages)">
+        <button mat-icon-button class="desktop" aria-label="pagination" color="accent" [disabled]="currentPage === pages || noOfTotalRecords === 0  || loadingData" (click)="pageChange(pages)">
             <mat-icon>skip_next_outline</mat-icon>
         </button>
     </div>
 
     <div>
-        <button mat-icon-button aria-label="pagination" color="accent" class="full-screen-btn mr-2" (click)="fullscreen = !fullscreen;toggleFullScreen.emit(fullscreen)">
+        <button mat-icon-button aria-label="pagination" color="accent" class="full-screen-btn desktop mr-2" (click)="fullscreen = !fullscreen;toggleFullScreen.emit(fullscreen)">
             <mat-icon *ngIf="!fullscreen">fullscreen</mat-icon>
             <mat-icon *ngIf="fullscreen">fullscreen_exit</mat-icon>
         </button>
-        <p class="text-muted d-inline mr-2">Items per page:</p>
+        <p class="desktop text-muted d-inline mr-2">Items per page:</p>
         <mat-form-field style="width: 70px;height: 42px;" class="mr-4">
             <mat-select [disabled]="loadingData"  [(ngModel)]="newRecordsPerPage" (ngModelChange)="recordsPerPageChanged()">
                 <mat-option [value]="50">50</mat-option>
@@ -56,7 +57,7 @@
                 <mat-option [value]="1000">1000</mat-option>
             </mat-select>
         </mat-form-field>
-        <span *ngIf="noOfSelectedRow">
+        <span class="desktop" *ngIf="noOfSelectedRow">
             <a mat-button color="accent" disableRipple class="grid-filter-applied-color font-weight-bold">{{noOfSelectedRow}} Selected</a>
             <span class="ml-2 mr-2">|</span>
         </span>{{pageInfoDisplayText}}

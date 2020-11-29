@@ -29,3 +29,9 @@
   line-height: normal;
   cursor: inherit;
 }
+
+@media screen and (max-width: 768px) {
+  .desktop {
+    display: none !important;
+  }
+}

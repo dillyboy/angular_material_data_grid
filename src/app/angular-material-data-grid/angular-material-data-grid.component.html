@@ -37,7 +37,7 @@
         </thead>
       </table>
       <mat-progress-bar *ngIf="loadingData" mode="indeterminate" class="position-absolute"></mat-progress-bar>
-      <cdk-virtual-scroll-viewport id="scrollViewport"  minBufferPx="400" maxBufferPx="400" [ngStyle]="{'height': 'calc(100vh - ' +offsetTop+ 'px)' }" [itemSize]="20" (scroll)="scrollChanged($event)">
+      <cdk-virtual-scroll-viewport #cdkVirtualScrollViewport id="scrollViewport"  minBufferPx="400" maxBufferPx="400" [ngStyle]="{'height': 'calc(100vh - ' +offsetTop+ 'px)' }" [itemSize]="20" (scroll)="scrollChanged($event)">
         <div class="vertical-scroll">
           <table>
             <tbody (window:mouseup)="endSelect()">

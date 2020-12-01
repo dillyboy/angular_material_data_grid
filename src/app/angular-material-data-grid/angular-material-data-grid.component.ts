@@ -20,6 +20,7 @@ import GridResponseInterface from './interfaces/grid-response';
 import GridHeadingInterface from './interfaces/grid-heading-type';
 import GridFilterItemInterface from './interfaces/grid-filter-item';
 import GirdButtonClickInterface from './interfaces/gird-button-click-interface';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-angular-material-data-grid',
@@ -52,6 +53,7 @@ export class AngularMaterialDataGridComponent implements AfterViewInit, OnChange
   offsetTop = null;
   scrollRemainingDistanceToLeft = 0;
   scrollRemainingDistanceToRight = null;
+  horizontalScrollBarWidth = null;
   currentPage = 1;
   sortObj = {
     sort: null,
@@ -62,6 +64,7 @@ export class AngularMaterialDataGridComponent implements AfterViewInit, OnChange
   fullscreen = false;
 
   @ViewChild('gridContainer') gridContainer: ElementRef;
+  @ViewChild('cdkVirtualScrollViewport') cdkVirtualScrollViewport: CdkVirtualScrollViewport;
 
   // Window resize listener
   @HostListener('window:resize', ['$event'])
@@ -89,6 +92,9 @@ export class AngularMaterialDataGridComponent implements AfterViewInit, OnChange
 
   private calculateGridWidth(): void {
     const gridContainer = this.gridContainer.nativeElement;
+    const {offsetWidth, clientWidth} = this.cdkVirtualScrollViewport.elementRef.nativeElement;
+    this.horizontalScrollBarWidth = offsetWidth - clientWidth + 'px';
+    console.log(this.horizontalScrollBarWidth);
     this.gridWidth = gridContainer.clientWidth;
     const heightOfHeaderAndFooter = 114;
     const heightToTop = this.fullscreen ? 0 : gridContainer.getBoundingClientRect().top;

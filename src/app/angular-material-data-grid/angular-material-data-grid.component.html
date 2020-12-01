@@ -15,7 +15,7 @@
     <button *ngIf="scrollRemainingDistanceToLeft !== 0" mat-button (click)="scrollLeft()" aria-label="navigate left" class="navigate-left-btn">
       <mat-icon class="fs-40 navigate-icons">chevron_left</mat-icon>
     </button>
-    <button *ngIf="scrollRemainingDistanceToRight !== 0" mat-button (click)="scrollRight()" aria-label="navigate right" class="navigate-right-btn">
+    <button *ngIf="scrollRemainingDistanceToRight !== 0" mat-button (click)="scrollRight()" aria-label="navigate right" class="navigate-right-btn" [ngStyle]="{'margin-right': horizontalScrollBarWidth + 'px'}">
       <mat-icon class="fs-40 navigate-icons">chevron_right</mat-icon>
     </button>
     <div class="empty-records" *ngIf="response.gridData.length === 0 && !loadingData">

@@ -124,7 +124,7 @@ export class AngularMaterialDataGridComponent implements AfterViewInit, OnChange
     } else {
       elem = document.getElementById('scrollViewport') as HTMLElement;
     }
-    this.scrollRemainingDistanceToLeft = elem.scrollLeft + this.horizontalScrollBarWidth;
+    this.scrollRemainingDistanceToLeft = elem.scrollLeft;
     this.scrollRemainingDistanceToRight = elem.scrollWidth - elem.scrollLeft - this.gridWidth;
   }
 

@@ -43,12 +43,12 @@
     </div>
 
     <div>
-        <button mat-icon-button aria-label="pagination" color="accent" class="full-screen-btn desktop mr-2" (click)="fullscreen = !fullscreen;toggleFullScreen.emit(fullscreen)">
+        <button mat-icon-button aria-label="pagination" color="accent" class="full-screen-btn desktop amdg-mr-2" (click)="fullscreen = !fullscreen;toggleFullScreen.emit(fullscreen)">
             <mat-icon *ngIf="!fullscreen">fullscreen</mat-icon>
             <mat-icon *ngIf="fullscreen">fullscreen_exit</mat-icon>
         </button>
-        <p class="desktop text-muted d-inline mr-2">Items per page:</p>
-        <mat-form-field style="width: 70px;height: 42px;" class="mr-4">
+        <p class="desktop text-muted d-inline amdg-mr-2">Items per page:</p>
+        <mat-form-field style="width: 70px;height: 42px;" class="amdg-mr-4">
             <mat-select [disabled]="loadingData"  [(ngModel)]="newRecordsPerPage" (ngModelChange)="recordsPerPageChanged()">
                 <mat-option [value]="50">50</mat-option>
                 <mat-option [value]="100">100</mat-option>
@@ -59,7 +59,7 @@
         </mat-form-field>
         <span class="desktop" *ngIf="noOfSelectedRow">
             <a mat-button color="accent" disableRipple class="grid-filter-applied-color font-weight-bold">{{noOfSelectedRow}} Selected</a>
-            <span class="ml-2 mr-2">|</span>
+            <span class="amdg-ml-2 amdg-mr-2">|</span>
         </span>{{pageInfoDisplayText}}
     </div>
 </div>

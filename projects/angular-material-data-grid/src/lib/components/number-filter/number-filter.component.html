@@ -7,11 +7,11 @@
 <mat-menu #numberFilterMenu="matMenu" class="overflow-hidden">
     <div class="filter-container" (click)="$event.stopPropagation()" (keydown.tab)="$event.stopPropagation()" (keydown.shift.tab)="$event.stopPropagation()">
         <div class="amdg-layout-container">
-            <button mat-stroked-button type="button" (click)="validate()" class="mr-2 mat-primary amdg-small-stroked-button">Filter</button>
+            <button mat-stroked-button type="button" (click)="validate()" class="amdg-mr-2 mat-primary amdg-small-stroked-button">Filter</button>
             <button mat-stroked-button type="button" (click)="reset(true)" class="mat-warn amdg-small-stroked-button">Reset</button>
         </div>
         <div class="amdg-layout-container">
-            <mat-form-field class="w-100 mt-3">
+            <mat-form-field class="w-100 amdg-mt-3">
                 <mat-select [formControl]="selection" placeholder="Logic">
                     <mat-option *ngFor="let item of numericFilterTypes" [value]="item.value">{{item.text}}</mat-option>
                 </mat-select>

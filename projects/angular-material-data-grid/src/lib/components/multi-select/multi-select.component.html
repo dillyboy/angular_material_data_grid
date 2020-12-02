@@ -15,15 +15,15 @@
         (+{{selection.value.length - 1}} {{selection.value?.length === 2 ? 'other' : 'others'}})
       </span>
   </mat-select-trigger>
-  <div class="amdg-layout-container mt-2">
+  <div class="amdg-layout-container amdg-mt-2">
     <div>
-      <button *ngIf="multiple" mat-stroked-button type="button" (click)="close()" class="amdg-small-stroked-button mr-2 mat-primary">Filter</button>
+      <button *ngIf="multiple" mat-stroked-button type="button" (click)="close()" class="amdg-small-stroked-button amdg-mr-2 mat-primary">Filter</button>
       <button *ngIf="multiple" mat-stroked-button type="button" (click)="toggle()" class="amdg-small-stroked-button mat-accent">Select {{allSelected ? 'None': 'All'}}</button>
     </div>
 
     <button mat-stroked-button type="button" (click)="reset()" class="mat-warn amdg-small-stroked-button">Reset</button>
   </div>
-  <div class="amdg-layout-container mt-2">
+  <div class="amdg-layout-container amdg-mt-2">
     <mat-form-field class="w-100">
       <input matInput #fromElement placeholder="Search..." [(ngModel)]="searchFilter" (ngModelChange)="changeSearch()"/>
       <button mat-button *ngIf="searchFilter" matSuffix mat-icon-button aria-label="Clear" (click)="searchFilter='';changeSearch()  ">

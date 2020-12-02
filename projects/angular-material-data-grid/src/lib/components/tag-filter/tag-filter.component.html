@@ -10,10 +10,10 @@
 <mat-menu #numberFilterMenu="matMenu" class="overflow-hidden">
     <div class="filter-container" (click)="$event.stopPropagation()" (keydown.tab)="$event.stopPropagation()" (keydown.shift.tab)="$event.stopPropagation()">
         <div class="amdg-layout-container">
-            <button mat-stroked-button type="button" (click)="validate()" class="mr-2 mat-primary amdg-small-stroked-button">Filter</button>
+            <button mat-stroked-button type="button" (click)="validate()" class="amdg-mr-2 mat-primary amdg-small-stroked-button">Filter</button>
             <button mat-stroked-button type="button" (click)="reset()" class="mat-warn amdg-small-stroked-button">Reset</button>
         </div>
-        <div class="amdg-layout-container mt-2">
+        <div class="amdg-layout-container amdg-mt-2">
             <mat-form-field class="tag-input">
                 <mat-label>Add Tag</mat-label>
                 <input matInput #fromElement type="text" [formControl]="tagValue" (keydown.enter)="addTagValue($event);" (paste)="stringPaste($event.clipboardData.getData('Text'), $event)">
@@ -24,8 +24,8 @@
         <div class="amdg-layout-container">
             <mat-divider class="w-100"></mat-divider>
         </div>
-        <p class="text-center mt-2 text-muted" *ngIf="tagValues.length === 0">No Tags entered</p>
-        <div class="tags-container p-3" *ngIf="tagValues.length > 0;let i = index">
+        <p class="text-center amdg-mt-2 text-muted" *ngIf="tagValues.length === 0">No Tags entered</p>
+        <div class="tags-container amdg-p-3" *ngIf="tagValues.length > 0;let i = index">
             <mat-chip-list>
                 <mat-chip *ngFor="let tag of tagValues" [removable]="true" (removed)="tagValues.splice(i, 1)" [selectable]="false">
                     {{tag}} <mat-icon matChipRemove>cancel</mat-icon>

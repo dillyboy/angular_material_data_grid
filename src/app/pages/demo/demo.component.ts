@@ -5,7 +5,7 @@ import {
   GridFilterItem,
   GridHeading,
   GridResponse
-} from '../../angular-material-data-grid/angular-material-data-grid-interfaces';
+} from '../../../../projects/angular-material-data-grid/src/lib/angular-material-data-grid-interfaces';
 
 @Component({
   selector: 'app-demo',

@@ -94,8 +94,7 @@ export class AngularMaterialDataGridComponent implements AfterViewInit, OnChange
     const gridContainer = this.gridContainer.nativeElement;
     const {offsetWidth, clientWidth} = this.cdkVirtualScrollViewport.elementRef.nativeElement;
     this.horizontalScrollBarWidth = offsetWidth - clientWidth;
-    console.log(this.horizontalScrollBarWidth);
-    this.gridWidth = gridContainer.clientWidth;
+    this.gridWidth = offsetWidth;
     const heightOfHeaderAndFooter = 114;
     const heightToTop = this.fullscreen ? 0 : gridContainer.getBoundingClientRect().top;
     const otherOffset = this.fullscreen ? 0 : gridContainer.offsetTop;
@@ -125,7 +124,7 @@ export class AngularMaterialDataGridComponent implements AfterViewInit, OnChange
       elem = document.getElementById('scrollViewport') as HTMLElement;
     }
     this.scrollRemainingDistanceToLeft = elem.scrollLeft;
-    this.scrollRemainingDistanceToRight = elem.scrollWidth - elem.scrollLeft - this.gridWidth;
+    this.scrollRemainingDistanceToRight = Math.trunc(elem.scrollWidth - elem.scrollLeft - this.gridWidth + this.horizontalScrollBarWidth);
   }
 
   updateColumns(): void {

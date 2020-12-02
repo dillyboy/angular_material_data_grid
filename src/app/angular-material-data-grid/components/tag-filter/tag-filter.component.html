@@ -7,7 +7,7 @@
     <div class="mat-select-arrow"></div>
 </button>
 
-<mat-menu #numberFilterMenu="matMenu">
+<mat-menu #numberFilterMenu="matMenu" class="overflow-hidden">
     <div class="filter-container" (click)="$event.stopPropagation()" (keydown.tab)="$event.stopPropagation()" (keydown.shift.tab)="$event.stopPropagation()">
         <div class="layout-container">
             <button mat-stroked-button type="button" (click)="validate()" class="mr-2 mat-primary mat-small-stroked-button">Filter</button>
@@ -25,7 +25,7 @@
             <mat-divider class="w-100"></mat-divider>
         </div>
         <p class="text-center mt-2 text-muted" *ngIf="tagValues.length === 0">No Tags entered</p>
-        <div class="p-3" *ngIf="tagValues.length > 0;let i = index">
+        <div class="tags-container p-3" *ngIf="tagValues.length > 0;let i = index">
             <mat-chip-list>
                 <mat-chip *ngFor="let tag of tagValues" [removable]="true" (removed)="tagValues.splice(i, 1)" [selectable]="false">
                     {{tag}} <mat-icon matChipRemove>cancel</mat-icon>

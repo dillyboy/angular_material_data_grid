@@ -4,7 +4,7 @@
     <div class="mat-select-arrow"></div>
 </button>
 
-<mat-menu #numberFilterMenu="matMenu">
+<mat-menu #numberFilterMenu="matMenu" class="overflow-hidden">
     <div class="filter-container" (click)="$event.stopPropagation()" (keydown.tab)="$event.stopPropagation()" (keydown.shift.tab)="$event.stopPropagation()">
         <div class="layout-container">
             <button mat-stroked-button type="button" (click)="validate()" class="mr-2 mat-primary mat-small-stroked-button">Filter</button>

@@ -174,12 +174,20 @@
   padding: 0 10px !important;
 }
 
+.mat-select-value {
+  text-align: left;
+}
+
 .text-muted {
   opacity: .6;
 }
 
 .customSelectPosition {
   margin: 25px 0px;
+}
+
+.overflow-hidden {
+  overflow: hidden !important;
 }
 
 .link {

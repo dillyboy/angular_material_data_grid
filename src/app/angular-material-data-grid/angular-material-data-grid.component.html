@@ -1,6 +1,6 @@
 <div id="grid-container" #gridContainer>
   <button *ngIf="columnControl" mat-raised-button id="column-control-btn" [matMenuTriggerFor]="columnControlMenu">Column Control<mat-icon>expand_more</mat-icon></button>
-  <mat-menu #columnControlMenu="matMenu">
+  <mat-menu #columnControlMenu="matMenu" class="overflow-hidden">
     <div class="column-control-container" (click)="$event.stopPropagation()" cdkDropList (cdkDropListDropped)="columnDrop($event)">
       <div class="column-item" *ngFor="let heading of headings" cdkDrag>
         <div class="d-inline-flex">
@@ -15,14 +15,14 @@
     <button *ngIf="scrollRemainingDistanceToLeft !== 0" mat-button (click)="scrollLeft()" aria-label="navigate left" class="navigate-left-btn">
       <mat-icon class="fs-40 navigate-icons">chevron_left</mat-icon>
     </button>
-    <button *ngIf="scrollRemainingDistanceToRight !== 0" mat-button (click)="scrollRight()" aria-label="navigate right" class="navigate-right-btn" [ngStyle]="{'margin-right': horizontalScrollBarWidth + 'px'}">
+    <button *ngIf="scrollRemainingDistanceToRight !== 0 && response.gridData.length !== 0" mat-button (click)="scrollRight()" aria-label="navigate right" class="navigate-right-btn" [ngStyle]="{'margin-right': horizontalScrollBarWidth + 'px'}">
       <mat-icon class="fs-40 navigate-icons">chevron_right</mat-icon>
     </button>
     <div class="empty-records" *ngIf="response.gridData.length === 0 && !loadingData">
       No Records Available
     </div>
     <div class="horizontal-scroll">
-      <table [ngStyle]="{'left': '-' + scrollRemainingDistanceToLeft + 'px'}" >
+      <table [ngStyle]="{'left': '-' + scrollRemainingDistanceToLeft + 'px', 'width': 'calc(100% - ' + horizontalScrollBarWidth + 'px)' }" >
         <thead>
         <th *ngIf="selection" class="selection"><mat-checkbox [(ngModel)]="allGridItemsSelected" (ngModelChange)="gridItemSelectionChanged(true)"></mat-checkbox></th>
         <th *ngFor="let heading of headings | columnFilter;" [style.width]="heading.width">

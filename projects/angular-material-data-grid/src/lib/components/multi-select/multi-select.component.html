@@ -8,9 +8,9 @@
     (selectionChange)="selectionChange()"
     (opened)="menuOpened()"
     [disableOptionCentering]="true"
-    panelClass="customSelectPosition">
+    panelClass="amdg-custom-select-position">
   <mat-select-trigger>
-    <a mat-button disableRipple color="accent" class="filter-value" [ngClass]="{'grid-filter-applied-color font-weight-bold': filterApplied}">{{selection.value ? selection.value[0]?.text || selection.value.text : ''}}</a>
+    <a mat-button disableRipple color="accent" class="filter-value" [ngClass]="{'grid-filter-applied-color amdg-font-weight-bold': filterApplied}">{{selection.value ? selection.value[0]?.text || selection.value.text : ''}}</a>
     <span *ngIf="selection.value?.length > 1" class="additional-selection">
         (+{{selection.value.length - 1}} {{selection.value?.length === 2 ? 'other' : 'others'}})
       </span>
@@ -24,7 +24,7 @@
     <button mat-stroked-button type="button" (click)="reset()" class="mat-warn amdg-small-stroked-button">Reset</button>
   </div>
   <div class="amdg-layout-container amdg-mt-2">
-    <mat-form-field class="w-100">
+    <mat-form-field class="amdg-w-100">
       <input matInput #fromElement placeholder="Search..." [(ngModel)]="searchFilter" (ngModelChange)="changeSearch()"/>
       <button mat-button *ngIf="searchFilter" matSuffix mat-icon-button aria-label="Clear" (click)="searchFilter='';changeSearch()  ">
         <mat-icon>close</mat-icon>
@@ -32,6 +32,6 @@
     </mat-form-field>
   </div>
   <div id="list-container" >
-    <mat-option *ngFor="let item of selectionList" [value]="item" [ngClass]="{'d-none': item.hide}">{{item.text}}</mat-option>
+    <mat-option class="amdg-mat-option" *ngFor="let item of selectionList" [value]="item" [ngClass]="{'amdg-d-none': item.hide}">{{item.text}}</mat-option>
   </div>
 </mat-select>

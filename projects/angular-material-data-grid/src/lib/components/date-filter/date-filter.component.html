@@ -1,6 +1,6 @@
 <button class="filter-open-btn amdg-layout-container" [color]="filterApplied ? 'accent': 'none'" mat-stroked-button type="button" #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="numberFilterMenu" (menuOpened)="menuOpened()">
-    <span *ngIf="!filterApplied" class="text-truncate placeholder font-weight-normal">Unfiltered</span>
-    <span *ngIf="filterApplied" class="text-truncate" [matTooltip]="value.value">{{value.value}}</span>
+    <span *ngIf="!filterApplied" class="amdg-text-truncate placeholder amdg-font-weight-normal">Unfiltered</span>
+    <span *ngIf="filterApplied" class="amdg-text-truncate" [matTooltip]="value.value">{{value.value}}</span>
     <div class="mat-select-arrow"></div>
 </button>
 
@@ -11,15 +11,15 @@
             <button mat-stroked-button type="button" (click)="reset(true)" class="mat-warn amdg-small-stroked-button">Reset</button>
         </div>
         <div class="amdg-layout-container">
-            <mat-form-field class="w-100 amdg-mt-3">
+            <mat-form-field class="amdg-w-100 amdg-mt-3">
                 <mat-select [formControl]="selection" placeholder="Logic" (selectionChange)="changeSelection()">
-                    <mat-option *ngFor="let item of dateFilterTypes" [value]="item.value">{{item.text}}</mat-option>
+                    <mat-option class="amdg-mat-option" *ngFor="let item of dateFilterTypes" [value]="item.value">{{item.text}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
 
         <div class="amdg-layout-container">
-            <mat-form-field class="w-100">
+            <mat-form-field class="amdg-w-100">
                 <mat-label>Enter a date range</mat-label>
                 <mat-date-range-input [formGroup]="range" [rangePicker]="picker" [disabled]="selection.value === 'blank'">
                     <input readonly matStartDate formControlName="start" placeholder="Start date" (click)="picker.open()">

@@ -111,13 +111,13 @@ export class AngularMaterialDataGridComponent implements AfterViewInit, OnChange
   }
 
   scrollLeft(): void {
-    const scrollLeft = document.getElementById('scrollViewport').scrollLeft;
-    document.getElementById('scrollViewport').scrollLeft = scrollLeft - this.gridWidth * 80 / 100;
+    const scrollLeft = document.getElementById('amdgScrollViewport').scrollLeft;
+    document.getElementById('amdgScrollViewport').scrollLeft = scrollLeft - this.gridWidth * 80 / 100;
   }
 
   scrollRight(): void {
-    const scrollLeft = document.getElementById('scrollViewport').scrollLeft;
-    document.getElementById('scrollViewport').scrollLeft = this.gridWidth * 80 / 100 + scrollLeft;
+    const scrollLeft = document.getElementById('amdgScrollViewport').scrollLeft;
+    document.getElementById('amdgScrollViewport').scrollLeft = this.gridWidth * 80 / 100 + scrollLeft;
   }
 
   scrollChanged(ev?): void {
@@ -125,7 +125,7 @@ export class AngularMaterialDataGridComponent implements AfterViewInit, OnChange
     if (ev) {
       elem = ev.target;
     } else {
-      elem = document.getElementById('scrollViewport') as HTMLElement;
+      elem = document.getElementById('amdgScrollViewport') as HTMLElement;
     }
     this.scrollRemainingDistanceToLeft = elem.scrollLeft;
     this.scrollRemainingDistanceToRight = Math.trunc(elem.scrollWidth - elem.scrollLeft - this.gridWidth + this.horizontalScrollBarWidth);
@@ -200,13 +200,13 @@ export class AngularMaterialDataGridComponent implements AfterViewInit, OnChange
   // Multiple Selection logic
   startSelect(item, element): void {
     this.selectionTimeoutHandler = setTimeout(() => {
-      this.renderer.addClass(element, 'pulse');
+      this.renderer.addClass(element, 'amdg-pulse');
       this.selectionStarted = true;
       item.gridItemSelected = true;
       this.selectionTimeoutHandler = null;
 
       setTimeout(() => {
-        this.renderer.removeClass(element, 'pulse');
+        this.renderer.removeClass(element, 'amdg-pulse');
       }, 1000);
     }, 350);
   }
@@ -265,7 +265,7 @@ export class AngularMaterialDataGridComponent implements AfterViewInit, OnChange
       this.responseEmit.emit(this.response);
       this.loadingData = false;
       this.changeDetectorRef.detectChanges();
-      document.getElementById('scrollViewport').scrollTop = 0;
+      document.getElementById('amdgScrollViewport').scrollTop = 0;
       setTimeout(() => {
         this.calculateGridWidth();
       }, 100);

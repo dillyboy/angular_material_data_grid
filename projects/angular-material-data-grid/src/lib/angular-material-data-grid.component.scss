@@ -1,6 +1,6 @@
 @import './variables';
 
-.column-control-container {
+.amdg-column-control-container {
   width: 260px;
   padding: 0 9px;
   min-height: 60px;
@@ -32,15 +32,15 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.column-control-container:last-child {
+.amdg-column-control-container:last-child {
   border: none;
 }
 
-.column-control-container.cdk-drop-list-dragging .column-item:not(.cdk-drag-placeholder) {
+.amdg-column-control-container.cdk-drop-list-dragging .column-item:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-#grid-container {
+#amdg-grid-container {
   margin: 1.5rem;
   #column-control-btn {
     border-bottom-left-radius: 0px;
@@ -174,19 +174,15 @@
   }
 }
 
-.selection {
+.amdg-selection {
   width: 18px !important;
 }
 
-#scrollViewport {
+#amdgScrollViewport {
   scroll-behavior: smooth;
 }
 
-.grid-container {
-  margin: 2rem;
-}
-
-.link {
+.amdg-link {
   background-color: transparent;
   cursor: pointer;
   overflow: hidden;
@@ -203,25 +199,22 @@
 
 }
 
-.icon-external-link {
-  cursor: pointer;
-  margin-left: 8px;
-  height: auto;
-}
-
-.link-disabled {
+.amdg-link-disabled {
   pointer-events: none;
 }
 
-.icon-external-link {
+.amdg-icon-external-link {
   position: relative;
   top: 3px;
+  cursor: pointer;
+  margin-left: 8px;
+  height: auto;
   &:hover {
     text-decoration: none;
   }
 }
 
-.button-group-btn {
+.amdg-button-group-btn {
   line-height: 19px;
   height: 19px;
   font-size: 12px;
@@ -233,8 +226,8 @@
   }
 }
 
-@mixin pulse-animation() {
-  @-webkit-keyframes pulse {
+@mixin amdg-pulse-animation() {
+  @-webkit-keyframes amdg-pulse {
     from {
       -webkit-transform: scale3d(1, 1, 1);
       transform: scale3d(1, 1, 1);
@@ -251,7 +244,7 @@
     }
   }
 
-  @keyframes pulse {
+  @keyframes amdg-pulse {
     from {
       -webkit-transform: scale3d(1, 1, 1);
       transform: scale3d(1, 1, 1);
@@ -268,13 +261,13 @@
     }
   }
 
-  .pulse {
-    -webkit-animation-name: pulse;
-    animation-name: pulse;
+  .amdg-pulse {
+    -webkit-animation-name: amdg-pulse;
+    animation-name: amdg-pulse;
   }
 }
 
-.animated {
+.amdg-animated {
   -webkit-animation-duration: 1s;
   animation-duration: 1s;
   -webkit-animation-fill-mode: both;
@@ -282,4 +275,4 @@
 
 }
 
-@include pulse-animation();
+@include amdg-pulse-animation();

@@ -1,6 +1,6 @@
 <button class="filter-open-btn amdg-layout-container" [color]="filterApplied ? 'accent': 'none'" mat-stroked-button type="button" #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="numberFilterMenu" (menuOpened)="menuOpened()">
-    <span *ngIf="!filterApplied" class="placeholder font-weight-normal">Unfiltered</span>
-    <span *ngIf="filterApplied" class="text-truncate">{{value.value}}</span>
+    <span *ngIf="!filterApplied" class="placeholder amdg-font-weight-normal">Unfiltered</span>
+    <span *ngIf="filterApplied" class="amdg-text-truncate">{{value.value}}</span>
     <div class="mat-select-arrow"></div>
 </button>
 
@@ -11,15 +11,15 @@
             <button mat-stroked-button type="button" (click)="reset(true)" class="mat-warn amdg-small-stroked-button">Reset</button>
         </div>
         <div class="amdg-layout-container">
-            <mat-form-field class="w-100 amdg-mt-3">
+            <mat-form-field class="amdg-w-100 amdg-mt-3">
                 <mat-select [formControl]="selection" placeholder="Logic" (selectionChange)="changeSelection()">
-                    <mat-option *ngFor="let item of stringFilterTypes" [value]="item.value">{{item.text}}</mat-option>
+                    <mat-option class="amdg-mat-option" *ngFor="let item of stringFilterTypes" [value]="item.value">{{item.text}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
 
         <div class="amdg-layout-container">
-            <mat-form-field class="w-100">
+            <mat-form-field class="amdg-w-100">
                 <input matInput #valueElement type="text" placeholder="Value" [formControl]="value" (keyup.enter)="validate()">
             </mat-form-field>
         </div>

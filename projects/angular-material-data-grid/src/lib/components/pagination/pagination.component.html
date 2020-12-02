@@ -47,18 +47,18 @@
             <mat-icon *ngIf="!fullscreen">fullscreen</mat-icon>
             <mat-icon *ngIf="fullscreen">fullscreen_exit</mat-icon>
         </button>
-        <p class="desktop text-muted d-inline amdg-mr-2">Items per page:</p>
+        <p class="desktop text-muted amdg-d-inline amdg-mr-2">Items per page:</p>
         <mat-form-field style="width: 70px;height: 42px;" class="amdg-mr-4">
             <mat-select [disabled]="loadingData"  [(ngModel)]="newRecordsPerPage" (ngModelChange)="recordsPerPageChanged()">
-                <mat-option [value]="50">50</mat-option>
-                <mat-option [value]="100">100</mat-option>
-                <mat-option [value]="250">250</mat-option>
-                <mat-option [value]="500">500</mat-option>
-                <mat-option [value]="1000">1000</mat-option>
+                <mat-option class="amdg-mat-option" [value]="50">50</mat-option>
+                <mat-option class="amdg-mat-option" [value]="100">100</mat-option>
+                <mat-option class="amdg-mat-option" [value]="250">250</mat-option>
+                <mat-option class="amdg-mat-option" [value]="500">500</mat-option>
+                <mat-option class="amdg-mat-option" [value]="1000">1000</mat-option>
             </mat-select>
         </mat-form-field>
         <span class="desktop" *ngIf="noOfSelectedRow">
-            <a mat-button color="accent" disableRipple class="grid-filter-applied-color font-weight-bold">{{noOfSelectedRow}} Selected</a>
+            <a mat-button color="accent" disableRipple class="grid-filter-applied-color amdg-font-weight-bold">{{noOfSelectedRow}} Selected</a>
             <span class="amdg-ml-2 amdg-mr-2">|</span>
         </span>{{pageInfoDisplayText}}
     </div>

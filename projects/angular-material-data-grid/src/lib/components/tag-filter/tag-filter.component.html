@@ -1,4 +1,4 @@
-<button class="filter-open-btn layout-container" mat-stroked-button [color]="filterApplied ? 'accent': 'none'" type="button" #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="numberFilterMenu" (menuOpened)="menuOpened()">
+<button class="filter-open-btn amdg-layout-container" mat-stroked-button [color]="filterApplied ? 'accent': 'none'" type="button" #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="numberFilterMenu" (menuOpened)="menuOpened()">
     <span *ngIf="!filterApplied" class="placeholder font-weight-normal">Unfiltered</span>
     <span *ngIf="filterApplied" class="text-truncate">{{tagValues ? tagValues[0] : null }}</span>
     <span *ngIf="filterApplied && tagValues?.length > 1" class="additional-selection text-truncate">
@@ -9,11 +9,11 @@
 
 <mat-menu #numberFilterMenu="matMenu" class="overflow-hidden">
     <div class="filter-container" (click)="$event.stopPropagation()" (keydown.tab)="$event.stopPropagation()" (keydown.shift.tab)="$event.stopPropagation()">
-        <div class="layout-container">
-            <button mat-stroked-button type="button" (click)="validate()" class="mr-2 mat-primary mat-small-stroked-button">Filter</button>
-            <button mat-stroked-button type="button" (click)="reset()" class="mat-warn mat-small-stroked-button">Reset</button>
+        <div class="amdg-layout-container">
+            <button mat-stroked-button type="button" (click)="validate()" class="mr-2 mat-primary amdg-small-stroked-button">Filter</button>
+            <button mat-stroked-button type="button" (click)="reset()" class="mat-warn amdg-small-stroked-button">Reset</button>
         </div>
-        <div class="layout-container mt-2">
+        <div class="amdg-layout-container mt-2">
             <mat-form-field class="tag-input">
                 <mat-label>Add Tag</mat-label>
                 <input matInput #fromElement type="text" [formControl]="tagValue" (keydown.enter)="addTagValue($event);" (paste)="stringPaste($event.clipboardData.getData('Text'), $event)">
@@ -21,7 +21,7 @@
             </mat-form-field>
             <mat-icon class="fs-16 cursor-pointer" mat-ripple color="primary" (click)="addTagValue($event);">add</mat-icon>
         </div>
-        <div class="layout-container">
+        <div class="amdg-layout-container">
             <mat-divider class="w-100"></mat-divider>
         </div>
         <p class="text-center mt-2 text-muted" *ngIf="tagValues.length === 0">No Tags entered</p>

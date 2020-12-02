@@ -1,6 +1,6 @@
 @import './../../variables';
 
-.layout-container {
+.amdg-layout-container {
   border-top: 1px solid $highlight-dark-color;
   background: $highlight-color;
 
@@ -28,6 +28,10 @@
   font-size: 12px;
   line-height: normal;
   cursor: inherit;
+}
+
+.text-muted {
+  opacity: .6;
 }
 
 @media screen and (max-width: 768px) {

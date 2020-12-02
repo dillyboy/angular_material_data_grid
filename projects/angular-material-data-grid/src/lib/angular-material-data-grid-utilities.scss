@@ -1,20 +1,16 @@
 @import './variables';
 
-.mat-small-stroked-button {
+.amdg-small-stroked-button {
   line-height: 26px !important;
   height: 26px !important;
   font-size: 12px !important;
 }
 
-.layout-container {
+.amdg-layout-container {
   display: flex !important;
   justify-content: space-between;
   align-items: center;
   padding: 0 8px;
-}
-
-.text-left {
-  text-align: left;
 }
 
 .text-right {
@@ -176,10 +172,6 @@
 
 .mat-select-value {
   text-align: left;
-}
-
-.text-muted {
-  opacity: .6;
 }
 
 .customSelectPosition {

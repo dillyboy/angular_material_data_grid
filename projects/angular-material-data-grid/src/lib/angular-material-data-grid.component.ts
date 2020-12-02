@@ -10,7 +10,8 @@ import {
   ViewChild,
   ElementRef,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
+  ViewEncapsulation
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
@@ -26,7 +27,9 @@ import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 @Component({
   selector: 'amdg-angular-material-data-grid',
   templateUrl: './angular-material-data-grid.component.html',
-  styleUrls: ['./angular-material-data-grid.component.scss']
+  styleUrls: ['./angular-material-data-grid.component.scss',
+    './angular-material-data-grid-utilities.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AngularMaterialDataGridComponent implements AfterViewInit, OnChanges {
 

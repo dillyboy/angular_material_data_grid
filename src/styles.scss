@@ -20,16 +20,36 @@ body {
   }
 }
 
+.layout-container {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.p-3 {
+  padding: .75rem !important;
+}
+
+.mt-2 {
+  margin-top: .5rem !important;
+}
+
+.text-muted {
+  opacity: .6;
+}
+
 
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
 @import "scss/theme";
-@import "scss/variables";
-@import "app/angular-material-data-grid/angular-material-data-grid-utilities";
-
-//.grid-filter-applied-color {
-//  color: #98c379 !important;
-//}
 @import "scss/material-overrides";
+
+$highlight-color: rgba(118, 118, 118, 0.1);
+$highlight-dark-color: rgba(118, 118, 118, 0.26);
 
 .simple-table-container {
   overflow: hidden;

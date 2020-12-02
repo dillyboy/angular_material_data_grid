@@ -5,3 +5,4 @@
 export * from './lib/angular-material-data-grid.service';
 export * from './lib/angular-material-data-grid.component';
 export * from './lib/angular-material-data-grid.module';
+export * from './lib/angular-material-data-grid-interfaces';

@@ -1,11 +1,6 @@
 import { Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import {
-  GirdButtonClick,
-  GridFilterItem,
-  GridHeading,
-  GridResponse
-} from '../../../../projects/angular-material-data-grid/src/lib/angular-material-data-grid-interfaces';
+import { GirdButtonClick, GridFilterItem, GridHeading, GridResponse } from 'angular-material-data-grid';
 
 @Component({
   selector: 'app-demo',

@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^11.0.0",
-    "@angular/core": "^11.0.0"
+    "@angular/core": "^11.0.0",
+    "@angular/cdk": "^11.0.0",
+    "@angular/forms": "~11.0.0",
+    "@angular/material": "^11.0.0"
   },
   "dependencies": {
     "tslib": "^2.0.0"

@@ -126,6 +126,46 @@
           }
         }
       }
+    },
+    "angular-material-data-grid": {
+      "projectType": "library",
+      "root": "projects/angular-material-data-grid",
+      "sourceRoot": "projects/angular-material-data-grid/src",
+      "prefix": "amdg",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/angular-material-data-grid/tsconfig.lib.json",
+            "project": "projects/angular-material-data-grid/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/angular-material-data-grid/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/angular-material-data-grid/src/test.ts",
+            "tsConfig": "projects/angular-material-data-grid/tsconfig.spec.json",
+            "karmaConfig": "projects/angular-material-data-grid/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/angular-material-data-grid/tsconfig.lib.json",
+              "projects/angular-material-data-grid/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "serverbind-grid"
 }

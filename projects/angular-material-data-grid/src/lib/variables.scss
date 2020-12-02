@@ -1,0 +1,6 @@
+@import '~@angular/material/theming';
+
+$warn: mat-color($mat-red, 600);
+$highlight-color: rgba(118, 118, 118, 0.1);
+$highlight-dark-color: rgba(118, 118, 118, 0.3);
+

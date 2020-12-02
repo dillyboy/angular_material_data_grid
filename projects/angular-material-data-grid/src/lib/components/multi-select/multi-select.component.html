@@ -1,0 +1,37 @@
+<mat-select
+    class="modified-mat-select"
+    placeholder="Unfiltered"
+    #mySelect
+    [formControl]="selection"
+    [multiple]="multiple"
+    xPosition="after"
+    (selectionChange)="selectionChange()"
+    (opened)="menuOpened()"
+    [disableOptionCentering]="true"
+    panelClass="customSelectPosition">
+  <mat-select-trigger>
+    <a mat-button disableRipple color="accent" class="filter-value" [ngClass]="{'grid-filter-applied-color font-weight-bold': filterApplied}">{{selection.value ? selection.value[0]?.text || selection.value.text : ''}}</a>
+    <span *ngIf="selection.value?.length > 1" class="additional-selection">
+        (+{{selection.value.length - 1}} {{selection.value?.length === 2 ? 'other' : 'others'}})
+      </span>
+  </mat-select-trigger>
+  <div class="layout-container mt-2">
+    <div>
+      <button *ngIf="multiple" mat-stroked-button type="button" (click)="close()" class="mat-small-stroked-button mr-2 mat-primary">Filter</button>
+      <button *ngIf="multiple" mat-stroked-button type="button" (click)="toggle()" class="mat-small-stroked-button mat-accent">Select {{allSelected ? 'None': 'All'}}</button>
+    </div>
+
+    <button mat-stroked-button type="button" (click)="reset()" class="mat-warn mat-small-stroked-button">Reset</button>
+  </div>
+  <div class="layout-container mt-2">
+    <mat-form-field class="w-100">
+      <input matInput #fromElement placeholder="Search..." [(ngModel)]="searchFilter" (ngModelChange)="changeSearch()"/>
+      <button mat-button *ngIf="searchFilter" matSuffix mat-icon-button aria-label="Clear" (click)="searchFilter='';changeSearch()  ">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div id="list-container" >
+    <mat-option *ngFor="let item of selectionList" [value]="item" [ngClass]="{'d-none': item.hide}">{{item.text}}</mat-option>
+  </div>
+</mat-select>

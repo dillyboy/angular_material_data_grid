@@ -1,0 +1,32 @@
+<div class="filter-component">
+    <ng-container *ngIf="heading.disableFiltering !== true">
+
+
+        <ng-container *ngIf="heading.type == 'date'">
+            <app-date-filter class="w-100" (filter)="filterObjCreated($event)"></app-date-filter>
+        </ng-container>
+
+        <ng-container *ngIf="heading.type === 'string' || heading.type === 'url'">
+            <ng-container [ngSwitch]="heading.filterType">
+                <app-multi-select *ngSwitchCase="'multi-select'"
+                        class="w-100" [filterConfig]="heading.other"
+                        (filter)="filterObjCreated($event)">
+                </app-multi-select>
+                <app-tag-filter *ngSwitchCase="'tag'"
+                        class="w-100"
+                        (filter)="filterObjCreated($event)">
+                </app-tag-filter>
+                <app-string-filter *ngSwitchDefault
+                        class="w-100"
+                        (filter)="filterObjCreated($event)">
+                </app-string-filter>
+            </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="heading.type === 'number'">
+            <app-number-filter class="w-100" (filter)="filterObjCreated($event)"></app-number-filter>
+        </ng-container>
+
+
+    </ng-container>
+</div>

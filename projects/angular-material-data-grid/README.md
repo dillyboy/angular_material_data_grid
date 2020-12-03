@@ -1,24 +1,37 @@
-# AngularMaterialDataGrid
+# Advanced Angular Material Data Grid System
+#### Inspired by Kendo UI Grid
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.0.
+The initial purpose of creating this data grid was to make it easy for developers to easily create highly advanced data grids with server-side pagination along with multiple filters and sorting with minimum effort and time. In order to make this possible a tight integration between the back-end data-source and the front-end component should be agreed upon. This gives the ability to stay focused on advanced functionality and the creation of data grids with only configurations while staying opinionated. Moreover, the solutions provided by reputed vendors were expensive which makes open-source software more attractive to many clients. This product is 100% open source.
 
-## Code scaffolding
+Refer to the [Documentation](https://angular-grid.herokuapp.com/) page.
 
-Run `ng generate component component-name --project angular-material-data-grid` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project angular-material-data-grid`.
-> Note: Don't forget to add `--project angular-material-data-grid` or else it will be added to the default project in your `angular.json` file. 
 
-## Build
+<hr />
 
-Run `ng build angular-material-data-grid` to build the project. The build artifacts will be stored in the `dist/` directory.
+#### Installation
 
-## Publishing
+1. Install Angular Material
 
-After building your library with `ng build angular-material-data-grid`, go to the dist folder `cd dist/angular-material-data-grid` and run `npm publish`.
+    - `ng add @angular/material`
 
-## Running unit tests
+2. Install Angular Material Data Grid
 
-Run `ng test angular-material-data-grid` to execute the unit tests via [Karma](https://karma-runner.github.io).
+    - `npm i angular-material-data-grid`
 
-## Further help
+3. Import Module
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+    - `import { AngularMaterialDataGridModule } from 'angular-material-data-grid';`
+
+    - `imports: [ ..,   AngularMaterialDataGridModule]`
+
+4. Usage (Basic)
+    ###### HTML
+   - <code><amdg-angular-material-data-grid <br>
+         &nbsp;&nbsp;&nbsp;&nbsp;[headings]="headings"<br>
+         &nbsp;&nbsp;&nbsp;&nbsp;[url]="url"<br>
+         &nbsp;&nbsp;&nbsp;&nbsp;(responseEmit)="responseReceived($event)"><br>
+         </amdg-angular-material-data-grid></code>
+         
+    ###### TypeScript
+    [Check here](https://angular-grid.herokuapp.com/gettingStarted/installation)
+

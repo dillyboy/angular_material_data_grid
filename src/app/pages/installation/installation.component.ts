@@ -9,11 +9,7 @@ export class InstallationComponent implements OnInit {
 
   angularMaterial = `ng add @angular/material`;
   modules = `
-import {
-  AngularMaterialDataGridModule
-} from './angular-material-data-grid/angular-material-data-grid.module'
-
-// location may change depending on placement
+import { AngularMaterialDataGridModule } from 'angular-material-data-grid';
 
 imports: [
     ...
@@ -22,13 +18,13 @@ imports: [
 
   usage = {
     html: `
-<app-angular-material-data-grid
+<amdg-angular-material-data-grid
     [headings]="headings"
     [url]="url"
     (responseEmit)="responseReceived($event)">
-</app-angular-material-data-grid>`,
+</amdg-angular-material-data-grid>`,
     ts: `
-// import { GridHeading, GridResponse } from './angular-material-data-grid/angular-material-data-grid-interfaces';
+// import { GridHeading, GridResponse } from 'angular-material-data-grid';
 
 url = 'https://angular-grid.herokuapp.com/getUsers'; // add your POST endpoint here later
 
@@ -53,10 +49,7 @@ headings: GridHeading[] = [
 responseReceived(response: GridResponse): void {
   console.log(response); // If necessary manipulate the data or use data in the parent component
 }
-`,
-    css: `@import "app/angular-material-data-grid/angular-material-data-grid-utilities";
-// add this to your styles.css file`
-  };
+`};
   constructor() { }
 
   ngOnInit(): void {

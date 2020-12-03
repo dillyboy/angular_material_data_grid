@@ -184,18 +184,18 @@
 
 .amdg-link {
   background-color: transparent;
-  cursor: pointer;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  cursor: pointer !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
   font-weight: 500;
   font-size: 12px;
-  text-decoration: none;
-  padding: 0;
-  min-width: auto;
-  line-height: normal;
-  border-radius: 0;
-  display: inline;
+  text-decoration: none !important;
+  padding: 0 !important;
+  min-width: auto !important;
+  line-height: normal !important;
+  border-radius: 0 !important;
+  display: inline !important;
 
 }
 
@@ -208,14 +208,14 @@
   top: 3px;
   cursor: pointer;
   margin-left: 8px;
-  height: auto;
+  height: auto !important;
   &:hover {
     text-decoration: none;
   }
 }
 
 .amdg-button-group-btn {
-  line-height: 19px;
+  line-height: 19px !important;
   height: 19px;
   font-size: 12px;
 

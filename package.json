@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "lib:build": "ng build angular-material-data-grid",
-    "lib:package": "cd dist/angular-material-data-grid && npm pack"
+    "lib:package": "cd dist/angular-material-data-grid && npm publish"
   },
   "private": true,
   "dependencies": {

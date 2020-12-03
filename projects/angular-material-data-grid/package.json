@@ -1,6 +1,6 @@
 {
   "name": "angular-material-data-grid",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "peerDependencies": {
     "@angular/common": "^11.0.0",
     "@angular/core": "^11.0.0",

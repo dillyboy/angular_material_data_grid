@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
-  selector: 'app-tag-filter',
+  selector: 'amdg-tag-filter',
   templateUrl: './tag-filter.component.html',
   styleUrls: ['./tag-filter.component.scss']
 })

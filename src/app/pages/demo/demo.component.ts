@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { GirdButtonClick, GridFilterItem, GridHeading, GridResponse } from 'angular-material-data-grid';
 
+
 @Component({
   selector: 'app-demo',
   templateUrl: './demo.component.html',
@@ -60,8 +61,8 @@ export class DemoComponent {
     {fieldName: 'postal_code', display: 'Postal Code', type: 'string', width: '120px', show: false},
     {fieldName: 'company', display: 'Company', type: 'string', width: '120px', show: false},
     {fieldName: 'products', display: 'Products', type: 'string', width: '170px', show: false},
-    {fieldName: 'latitude', display: 'Latitude', type: 'string', width: '120px', show: false},
-    {fieldName: 'longitude', display: 'Longitude', type: 'string', width: '120px', show: false},
+    {fieldName: 'latitude', display: 'Latitude', type: 'string', width: '120px', show: false, disableFiltering: true},
+    {fieldName: 'longitude', display: 'Longitude', type: 'string', width: '120px', show: false, disableFiltering: true},
     {fieldName: 'currency', display: 'Currency', type: 'string', width: '120px', show: false},
     {fieldName: 'currency_code', display: 'Currency Code', type: 'string', width: '120px', show: false},
     {fieldName: 'username', display: 'Username', type: 'string', width: '120px', show: false},

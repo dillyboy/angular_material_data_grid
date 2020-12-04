@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-filter-header',
+  selector: 'amdg-filter-header',
   templateUrl: './filter-header.component.html',
   styleUrls: ['./filter-header.component.scss']
 })

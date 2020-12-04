@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
-  selector: 'app-number-filter',
+  selector: 'amdg-number-filter',
   templateUrl: './number-filter.component.html',
   styleUrls: ['./number-filter.component.scss']
 })

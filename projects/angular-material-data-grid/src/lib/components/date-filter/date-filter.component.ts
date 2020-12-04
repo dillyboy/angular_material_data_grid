@@ -4,7 +4,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { MatDatepicker } from '@angular/material/datepicker';
 
 @Component({
-  selector: 'app-date-filter',
+  selector: 'amdg-date-filter',
   templateUrl: './date-filter.component.html',
   styleUrls: ['./date-filter.component.scss']
 })

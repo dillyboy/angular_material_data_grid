@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
-  selector: 'app-string-filter',
+  selector: 'amdg-string-filter',
   templateUrl: './string-filter.component.html',
   styleUrls: ['./string-filter.component.scss']
 })
@@ -36,6 +36,9 @@ export class StringFilterComponent {
     if (this.selection.value === 'blank') {
       this.value.disable();
     } else {
+      if (this.value.value === 'Is Empty') {
+        this.value.setValue('');
+      }
       this.value.enable();
     }
   }
@@ -44,6 +47,7 @@ export class StringFilterComponent {
     this.invalidValue = false;
     this.selection.setValue('contains');
     this.value.setValue(null);
+    this.value.enable();
 
     if (emit) {
       this.close(null);
@@ -55,6 +59,7 @@ export class StringFilterComponent {
       this.invalidValue = false;
       this.close(this.value.value);
     } else if (this.selection.value === 'blank') {
+      this.value.setValue('Is Empty');
       this.close('blank');
     }else {
       this.invalidValue = true;

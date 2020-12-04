@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-sort-header',
+  selector: 'amdg-sort-header',
   templateUrl: './sort-header.component.html',
   styleUrls: ['./sort-header.component.scss']
 })

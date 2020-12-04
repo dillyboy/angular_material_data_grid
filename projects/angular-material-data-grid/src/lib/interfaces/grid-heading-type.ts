@@ -24,9 +24,10 @@ export default interface GridHeadingInterface {
     width?: string;
 
     /**
-     * filter - This boolean value determines if the filter is shown or hidden. By default this goes as true
+     * disableFiltering - This boolean value determines if the filter is shown or hidden.
+     *                    By default filtering is enabled which means it goes as false
      */
-    filter?: boolean;
+    disableFiltering?: boolean;
 
     /**
      * disableSorting - This boolean value determines if sorting is enabled/disabled.

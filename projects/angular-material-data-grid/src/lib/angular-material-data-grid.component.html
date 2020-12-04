@@ -39,13 +39,13 @@
         <thead>
         <th *ngIf="selection" class="amdg-selection"><mat-checkbox [(ngModel)]="allGridItemsSelected" (ngModelChange)="gridItemSelectionChanged(true)"></mat-checkbox></th>
         <th *ngFor="let heading of headings | columnFilter;" [style.width]="heading.width">
-          <app-sort-header [heading]="heading" (filter)="sort($event)"></app-sort-header>
+          <amdg-sort-header [heading]="heading" (filter)="sort($event)"></amdg-sort-header>
         </th>
         </thead>
         <thead>
         <th *ngIf="selection" class="amdg-selection"></th>
         <th *ngFor="let heading of headings | columnFilter;" [style.width]="heading.width">
-          <app-filter-header [heading]="heading" (filter)="filter($event)"></app-filter-header>
+          <amdg-filter-header [heading]="heading" (filter)="filter($event)"></amdg-filter-header>
         </th>
         </thead>
       </table>
@@ -105,7 +105,7 @@
       </cdk-virtual-scroll-viewport>
     </div>
 
-    <app-pagination
+    <amdg-pagination
         [loadingData]="loadingData"
         [noOfTotalRecords]="response.totalCount"
         [noOfRecords]="response.gridData.length"
@@ -113,6 +113,6 @@
         [currentPage]="currentPage"
         (pageChanged)="pageChanged($event)"
         (toggleFullScreen)="toggleFullScreen($event)">
-    </app-pagination>
+    </amdg-pagination>
   </mat-card>
 </div>

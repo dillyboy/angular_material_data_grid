@@ -4,7 +4,7 @@ import { ApiResponseModel } from '../../api-response.model';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-multi-select',
+  selector: 'amdg-multi-select',
   templateUrl: './multi-select.component.html',
   styleUrls: ['./multi-select.component.scss']
 })

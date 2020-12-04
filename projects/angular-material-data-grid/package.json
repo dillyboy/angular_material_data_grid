@@ -1,6 +1,6 @@
 {
   "name": "angular-material-data-grid",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "peerDependencies": {
     "@angular/common": "^11.0.0",
     "@angular/core": "^11.0.0",
@@ -10,5 +10,24 @@
   },
   "dependencies": {
     "tslib": "^2.0.0"
-  }
+  },
+  "keywords": [
+    "angular",
+    "angular material",
+    "material design",
+    "angular material data grid",
+    "data grid",
+    "server side pagination",
+    "kendo grid",
+    "kendo",
+    "virtual scrolling",
+    "column reordering",
+    "material theming"
+  ],
+  "author": {
+    "name" : "Dilshan Nadeesha Liyanage",
+    "email" : "dilshan.liyanage@hotmail.co.uk",
+    "url" : "https://dilshan.pro"
+  },
+  "license": "MIT"
 }

@@ -1,17 +1,22 @@
 @import './variables';
 
 .amdg-column-control-container {
-  width: 260px;
-  padding: 0 9px;
-  min-height: 60px;
-  display: block;
-  border-radius: 4px;
+  max-height: 420px;
   overflow: hidden;
-  div div mat-icon {
-    font-size: 18px;
-    top: 2px;
-    position: relative;
-    cursor: move;
+  .amdg-cdk-drop-list {
+    width: 260px;
+    padding: 0 9px;
+    min-height: 60px;
+    display: block;
+    border-radius: 4px;
+    max-height: 350px;
+    overflow: scroll;
+    div div mat-icon {
+      font-size: 18px;
+      top: 2px;
+      position: relative;
+      cursor: move;
+    }
   }
 }
 
@@ -32,11 +37,11 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.amdg-column-control-container:last-child {
+.amdg-cdk-drop-list:last-child {
   border: none;
 }
 
-.amdg-column-control-container.cdk-drop-list-dragging .column-item:not(.cdk-drag-placeholder) {
+.amdg-cdk-drop-list.cdk-drop-list-dragging .column-item:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 

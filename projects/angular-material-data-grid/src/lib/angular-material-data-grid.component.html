@@ -1,12 +1,25 @@
 <div id="amdg-grid-container" #gridContainer>
   <button *ngIf="columnControl" mat-raised-button id="column-control-btn" [matMenuTriggerFor]="columnControlMenu">Column Control<mat-icon>expand_more</mat-icon></button>
   <mat-menu #columnControlMenu="matMenu" class="overflow-hidden">
-    <div class="amdg-column-control-container" (click)="$event.stopPropagation()" cdkDropList (cdkDropListDropped)="columnDrop($event)">
-      <div class="column-item" *ngFor="let heading of headings" cdkDrag>
-        <div class="amdg-d-inline-flex">
-          <mat-icon>drag_indicator</mat-icon>
-          <mat-checkbox *ngIf="heading.show === undefined" disabled checked="true"><span class="amdg-ml-3">{{heading.display}}<span *ngIf="!heading.display" style="font-style: italic">Unnamed</span></span></mat-checkbox>
-          <mat-checkbox *ngIf="heading.show !== undefined" [(ngModel)]="heading.show" (ngModelChange)="updateColumns()"><span class="amdg-ml-3">{{heading.display}} <span *ngIf="!heading.display" style="font-style: italic">Unnamed</span></span></mat-checkbox>
+    <div class="amdg-column-control-container" (click)="$event.stopPropagation()">
+      <div class="amdg-p-3">
+        <mat-form-field class="amdg-w-100 amdg-fs-12">
+          <mat-label>Search Columns</mat-label>
+          <mat-icon matPrefix class="amdg-mr-2">search</mat-icon>
+          <input matInput type="text" [(ngModel)]="columnSearchParam">
+          <button mat-button *ngIf="columnSearchParam" matSuffix mat-icon-button aria-label="Clear" (click)="columnSearchParam=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+
+      <div class="amdg-cdk-drop-list" cdkDropList (cdkDropListDropped)="columnDrop($event)" [cdkDropListDisabled]="columnSearchParam.length === 0 ? false: true">
+        <div class="column-item" *ngFor="let heading of headings | columnSearchFilter: columnSearchParam" cdkDrag>
+          <div class="amdg-d-inline-flex">
+            <mat-icon [ngStyle]="{'opacity': columnSearchParam.length === 0 ? 1: 0}">drag_indicator</mat-icon>
+            <mat-checkbox *ngIf="heading.show === undefined" disabled checked="true"><span class="amdg-ml-3">{{heading.display}}<span *ngIf="!heading.display" style="font-style: italic">Unnamed</span></span></mat-checkbox>
+            <mat-checkbox *ngIf="heading.show !== undefined" [(ngModel)]="heading.show" (ngModelChange)="updateColumns()"><span class="amdg-ml-3">{{heading.display}} <span *ngIf="!heading.display" style="font-style: italic">Unnamed</span></span></mat-checkbox>
+          </div>
         </div>
       </div>
     </div>

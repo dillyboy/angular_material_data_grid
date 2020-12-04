@@ -5,6 +5,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { ColumnFilterPipe } from './components/pipes/column-filter.pipe';
 import { SearchPipe } from './components/pipes/search.pipe';
+import { ColumnSearchFilterPipe } from './components/pipes/column-search-filter.pipe';
 import { SortHeaderComponent } from './components/sort-header/sort-header.component';
 import { FilterHeaderComponent } from './components/filter-header/filter-header.component';
 import { StringFilterComponent } from './components/string-filter/string-filter.component';
@@ -40,6 +41,7 @@ import { MatFormFieldModule} from '@angular/material/form-field';
     ConfirmationComponent,
     ColumnFilterPipe,
     SearchPipe,
+    ColumnSearchFilterPipe,
     SortHeaderComponent,
     FilterHeaderComponent,
     MultiSelectComponent,

@@ -45,6 +45,7 @@ export class AngularMaterialDataGridComponent implements AfterViewInit, OnChange
   @Input() entity = null;
   @Input() transparency = false;
 
+  columnSearchParam = '';
   allGridItemsSelected = false;
   loadingData = false;
   response: GridResponseInterface = { gridData: [], totalCount: 0};

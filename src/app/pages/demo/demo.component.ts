@@ -14,7 +14,7 @@ export class DemoComponent {
 
   headings: GridHeading[] = [
     {fieldName: 'id', display: 'ID', type: 'number', width: '100px', disableSorting: true, align: 'right'},
-    {fieldName: 'full_name', display: 'Full Name', type: 'url', width: '140px',
+    {fieldName: 'full_name', display: 'Full Name', type: 'url', width: '160px',
       other: {
         openTab: true,
         urlTemplate: '/gettingStarted/demo/:id',

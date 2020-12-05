@@ -66,4 +66,6 @@ export default interface GridHeadingInterface {
      * sort - This field is autofilled by the grid system, do not set values manually
      */
     sort?: string;
+
+    editable?: boolean;
 }

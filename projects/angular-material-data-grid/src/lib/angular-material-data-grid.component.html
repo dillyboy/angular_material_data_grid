@@ -90,8 +90,24 @@
                     </ng-container>
                   </span>
 
+                  <span *ngSwitchCase="'date'">
+                    <ng-container *ngIf="heading.editable">
+                      <amdg-date-input [initialValue]="item[heading.fieldName]"></amdg-date-input>
+                    </ng-container>
+                    <ng-container *ngIf="!heading.editable">
+                      {{item[heading.fieldName]}}
+                    </ng-container>
+                  </span>
+
                   <!--ANY OTHER TYPE-->
-                  <span *ngSwitchDefault [title]="item[heading.title] ? item[heading.title] : item[heading.fieldName]"> {{item[heading.fieldName]}}</span>
+                  <span *ngSwitchDefault [title]="item[heading.title] ? item[heading.title] : item[heading.fieldName]">
+                    <ng-container *ngIf="heading.editable">
+                      <amdg-string-input [initialValue]="item[heading.fieldName]" [filterType]="heading.filterType"></amdg-string-input>
+                    </ng-container>
+                    <ng-container *ngIf="!heading.editable">
+                       {{item[heading.fieldName]}}
+                    </ng-container>
+                  </span>
                 </ng-container>
               </td>
             </tr>

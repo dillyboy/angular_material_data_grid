@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { GirdButtonClick, GridFilterItem, GridHeading, GridResponse } from 'angular-material-data-grid';
+import { GirdButtonClick, GridFilterItem, GridHeading, GridResponse }
+  from '../../../../projects/angular-material-data-grid/src/lib/angular-material-data-grid-interfaces';
+// import { GirdButtonClick, GridFilterItem, GridHeading, GridResponse } from 'angular-material-data-grid';
 
 
 @Component({
@@ -22,7 +24,7 @@ export class DemoComponent {
       },
       filterType: 'tag'
     },
-    {fieldName: 'first_name', display: 'First Name', type: 'string', width: '120px', filterType: 'tag', show: false},
+    {fieldName: 'first_name', display: 'First Name', type: 'string', width: '120px', filterType: 'tag', show: false, editable: true},
     {fieldName: 'last_name', display: 'Last Name', type: 'string', width: '120px', filterType: 'tag', show: false},
     {fieldName: 'email', display: 'Email', type: 'string', width: '180px'},
     {fieldName: 'gender', display: 'Gender', type: 'string', width: '100px',
@@ -37,7 +39,7 @@ export class DemoComponent {
       }
     },
     {fieldName: 'race', display: 'Race', type: 'string', width: '150px', show: false},
-    {fieldName: 'date_of_birth', display: 'Date Of Birth', type: 'date', width: '130px'},
+    {fieldName: 'date_of_birth', display: 'Date Of Birth', type: 'date', width: '130px', editable: true},
     {fieldName: 'ip_address', display: 'IP Address', type: 'string', width: '130px'},
     {fieldName: 'car', display: 'Car', type: 'string', width: '130px'},
     {fieldName: 'car_model', display: 'Car Model', type: 'string', width: '130px', show: false},

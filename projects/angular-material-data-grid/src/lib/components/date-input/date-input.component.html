@@ -1,0 +1,5 @@
+<mat-form-field class="amdg-w-100">
+  <input readonly matInput [matDatepicker]="picker" [formControl]="value" (click)="picker.open()" (dateChange)="datedChanged()">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>

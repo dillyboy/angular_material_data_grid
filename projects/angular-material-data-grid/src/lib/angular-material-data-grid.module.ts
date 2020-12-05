@@ -33,6 +33,8 @@ import { MatDividerModule} from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule} from '@angular/material/form-field';
+import { DateInputComponent } from './components/date-input/date-input.component';
+import { StringInputComponent } from './components/string-input/string-input.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { MatFormFieldModule} from '@angular/material/form-field';
     NumberFilterComponent,
     DateFilterComponent,
     StringFilterComponent,
-    TagFilterComponent
+    TagFilterComponent,
+    DateInputComponent,
+    StringInputComponent
   ],
   imports: [
     CommonModule,

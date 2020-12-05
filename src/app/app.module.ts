@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AngularMaterialDataGridModule } from 'angular-material-data-grid';
+// import { AngularMaterialDataGridModule } from 'angular-material-data-grid';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { AppRoutingModule } from './routing/app.routing.module';
@@ -38,6 +38,7 @@ import { ItemSelectionComponent } from './pages/item-selection/item-selection.co
 import { ThemingComponent } from './pages/theming/theming.component';
 import { FixedHeaderComponent } from './pages/fixed-header/fixed-header.component';
 import { VirtualScrollingComponent } from './pages/virtual-scrolling/virtual-scrolling.component';
+import {AngularMaterialDataGridModule} from '../../projects/angular-material-data-grid/src/lib/angular-material-data-grid.module';
 
 @NgModule({
   declarations: [

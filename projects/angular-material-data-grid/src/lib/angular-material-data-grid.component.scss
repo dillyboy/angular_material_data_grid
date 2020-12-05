@@ -10,7 +10,7 @@
     display: block;
     border-radius: 4px;
     max-height: 350px;
-    overflow: scroll;
+    overflow: auto;
     div div mat-icon {
       font-size: 18px;
       top: 2px;
@@ -152,6 +152,7 @@
       font-weight: normal;
     }
     tr {
+      height: 20px;
       &:hover {
         transition:all ease 0.1s;
         background-color: $highlight-dark-color;

@@ -1,6 +1,6 @@
 <div id="amdg-grid-container" #gridContainer>
   <button *ngIf="columnControl" mat-raised-button id="column-control-btn" [matMenuTriggerFor]="columnControlMenu">Column Control<mat-icon>expand_more</mat-icon></button>
-  <mat-menu #columnControlMenu="matMenu" class="overflow-hidden">
+  <mat-menu #columnControlMenu="matMenu" class="amdg-overflow-hidden">
     <div class="amdg-column-control-container" (click)="$event.stopPropagation()">
       <div class="amdg-p-3">
         <mat-form-field class="amdg-w-100 amdg-fs-12">

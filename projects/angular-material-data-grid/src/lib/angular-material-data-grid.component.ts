@@ -14,6 +14,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { MatDialog } from '@angular/material/dialog';
 import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { ApiResponseModel } from './api-response.model';
@@ -21,14 +22,13 @@ import GridResponseInterface from './interfaces/grid-response';
 import GridHeadingInterface from './interfaces/grid-heading-type';
 import GridFilterItemInterface from './interfaces/grid-filter-item';
 import GirdButtonClickInterface from './interfaces/gird-button-click-interface';
-import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 
 @Component({
   selector: 'amdg-angular-material-data-grid',
   templateUrl: './angular-material-data-grid.component.html',
   styleUrls: ['./angular-material-data-grid.component.scss',
-    './angular-material-data-grid-utilities.scss'],
+              './angular-material-data-grid-utilities.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class AngularMaterialDataGridComponent implements AfterViewInit, OnChanges {
@@ -65,6 +65,7 @@ export class AngularMaterialDataGridComponent implements AfterViewInit, OnChange
     sortField: null
   };
   filters = [];
+  gridPostSubscription = null;
 
   fullscreen = false;
 
@@ -243,12 +244,17 @@ export class AngularMaterialDataGridComponent implements AfterViewInit, OnChange
 
   // page change event
   pageChanged({pageNo, recordsPerPage}): void {
+
+    if (this.gridPostSubscription) {
+      this.gridPostSubscription.unsubscribe();
+      this.gridPostSubscription = null;
+    }
+
     this.recordsPerPage = recordsPerPage;
     this.loadingData = true;
     this.currentPage = pageNo;
     this.changeDetectorRef.detectChanges();
 
-    // const url = './assets/data.json';
     const body = {
       entity: this.entity,
       page: this.currentPage,
@@ -258,7 +264,7 @@ export class AngularMaterialDataGridComponent implements AfterViewInit, OnChange
     };
     console.log(body);
 
-    this.http.post<ApiResponseModel>(this.url, body).subscribe(data => {
+    this.gridPostSubscription = this.http.post<ApiResponseModel>(this.url, body).subscribe(data => {
 
       const gridData = this.linkCreationInterceptor(data.payload.gridData);
       this.selectedRows = [];

@@ -3,7 +3,7 @@
 
 ![Sample UI](https://angular-grid.herokuapp.com/assets/grid_background.png)
 
-####Features
+#### Features
 - Easy to integrate server-side pagination (Tested with very large data sets)
 - Built in virtual scrolling
 - Advanced multi-filtering features

@@ -109,6 +109,7 @@ export class AngularMaterialDataGridComponent implements AfterViewInit, OnChange
       totalOffset += 24; // heightOfColumnControlBtn
     }
     this.offsetTop = totalOffset;
+    this.scrollChanged();
     this.changeDetectorRef.detectChanges();
   }
 

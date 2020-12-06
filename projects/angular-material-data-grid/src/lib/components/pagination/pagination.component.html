@@ -43,7 +43,7 @@
     </div>
 
     <div>
-        <button mat-icon-button aria-label="pagination" color="accent" class="full-screen-btn desktop amdg-mr-2" (click)="fullscreen = !fullscreen;toggleFullScreen.emit(fullscreen)">
+        <button mat-icon-button aria-label="pagination" class="full-screen-btn desktop amdg-mr-2" matTooltip="Toggle Fullscreen" (click)="fullscreen = !fullscreen;toggleFullScreen.emit(fullscreen)">
             <mat-icon *ngIf="!fullscreen">fullscreen</mat-icon>
             <mat-icon *ngIf="fullscreen">fullscreen_exit</mat-icon>
         </button>

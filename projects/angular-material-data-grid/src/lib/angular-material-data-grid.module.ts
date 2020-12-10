@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AngularMaterialDataGridComponent } from './angular-material-data-grid.component';
+import { ServerBindGridComponent } from './grids/server-bind-grid/server-bind-grid.component';
+import { GridComponent } from './grids/grid/grid.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { ColumnFilterPipe } from './components/pipes/column-filter.pipe';
@@ -36,7 +37,6 @@ import { MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
-    AngularMaterialDataGridComponent,
     PaginationComponent,
     ConfirmationComponent,
     ColumnFilterPipe,
@@ -48,7 +48,9 @@ import { MatFormFieldModule} from '@angular/material/form-field';
     NumberFilterComponent,
     DateFilterComponent,
     StringFilterComponent,
-    TagFilterComponent
+    TagFilterComponent,
+    ServerBindGridComponent,
+    GridComponent
   ],
   imports: [
     CommonModule,
@@ -78,6 +80,6 @@ import { MatFormFieldModule} from '@angular/material/form-field';
   entryComponents: [
     ConfirmationComponent
   ],
-  exports: [AngularMaterialDataGridComponent]
+  exports: [ServerBindGridComponent, GridComponent]
 })
 export class AngularMaterialDataGridModule { }

@@ -68,6 +68,12 @@
           <td>This returns the button click along with the record which the click occurred so that
             any operations can be performed on the parent component.</td>
         </tr>
+        <tr class="odd">
+          <td><code highlight="@Output() headingsChangedEmit: EventEmitter<GridHeadingInterface[]>"></code></td>
+          <td>This output will only happen if the columnControl is set to true.
+            This returns the headings array which was modified by the user. This is useful to save
+            the user's column preference for a return visit.</td>
+        </tr>
       </table>
     </div>
   </mat-card>

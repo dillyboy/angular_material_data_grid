@@ -35,11 +35,11 @@ Refer to the [Documentation](https://angular-grid.herokuapp.com/) page.
 
 4. Usage (Basic)
     ###### HTML
-   - <code><amdg-angular-material-data-grid <br>
+   - <code><amdg-server-bind-grid <br>
          &nbsp;&nbsp;&nbsp;&nbsp;[headings]="headings"<br>
          &nbsp;&nbsp;&nbsp;&nbsp;[url]="url"<br>
          &nbsp;&nbsp;&nbsp;&nbsp;(responseEmit)="responseReceived($event)"><br>
-         </amdg-angular-material-data-grid></code>
+         </amdg-server-bind-grid></code>
          
     ###### TypeScript
     [Check here](https://angular-grid.herokuapp.com/gettingStarted/installation)

@@ -1,39 +1,38 @@
 import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
+  ElementRef,
+  EventEmitter,
   HostListener,
   Input,
-  Output,
-  EventEmitter,
-  ChangeDetectorRef,
-  Renderer2,
-  AfterViewInit,
-  ViewChild,
-  ElementRef,
   OnChanges,
+  Output,
+  Renderer2,
   SimpleChanges,
-  ViewEncapsulation,
-  ChangeDetectionStrategy
+  ViewChild,
+  ViewEncapsulation
 } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { MatDialog } from '@angular/material/dialog';
-import { moveItemInArray } from '@angular/cdk/drag-drop';
-import { ApiResponseModel } from './api-response.model';
-import GridResponseInterface from './interfaces/grid-response';
-import GridHeadingInterface from './interfaces/grid-heading-type';
-import GridFilterItemInterface from './interfaces/grid-filter-item';
-import GirdButtonClickInterface from './interfaces/gird-button-click-interface';
-
+import GridResponseInterface from '../../interfaces/grid-response';
+import GridFilterItemInterface from '../../interfaces/grid-filter-item';
+import GirdButtonClickInterface from '../../interfaces/gird-button-click-interface';
+import GridHeadingInterface from '../../interfaces/grid-heading-type';
+import {CdkVirtualScrollViewport} from '@angular/cdk/scrolling';
+import {HttpClient} from '@angular/common/http';
+import {MatDialog} from '@angular/material/dialog';
+import {moveItemInArray} from '@angular/cdk/drag-drop';
+import {ApiResponseModel} from '../../api-response.model';
 
 @Component({
-  selector: 'amdg-angular-material-data-grid',
-  templateUrl: './angular-material-data-grid.component.html',
-  styleUrls: ['./angular-material-data-grid.component.scss',
-              './angular-material-data-grid-utilities.scss'],
+  selector: 'amdg-server-bind-grid',
+  templateUrl: './server-bind-grid.component.html',
+  styleUrls: ['./server-bind-grid.component.scss',
+    '../../angular-material-data-grid-utilities.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
-export class AngularMaterialDataGridComponent implements AfterViewInit, OnChanges {
+export class ServerBindGridComponent implements AfterViewInit, OnChanges {
 
   @Output() responseEmit: any = new EventEmitter<GridResponseInterface>();
   @Output() selectionEmit: any = new EventEmitter<any[]>();

@@ -132,6 +132,11 @@
       "root": "projects/angular-material-data-grid",
       "sourceRoot": "projects/angular-material-data-grid/src",
       "prefix": "amdg",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",

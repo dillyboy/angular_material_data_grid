@@ -18,11 +18,11 @@ imports: [
 
   usage = {
     html: `
-<amdg-angular-material-data-grid
+<amdg-server-bind-grid
     [headings]="headings"
     [url]="url"
     (responseEmit)="responseReceived($event)">
-</amdg-angular-material-data-grid>`,
+</amdg-server-bind-grid>`,
     ts: `
 // import { GridHeading, GridResponse } from 'angular-material-data-grid';
 

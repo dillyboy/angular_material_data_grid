@@ -11,8 +11,10 @@
   </div>
 </div>
 
-<div class="text-center" style="padding-top: 130px">
-  <img src="./assets/grid_background.png" alt="" style="width: 80%">
+<div class="text-center position-relative" style="padding-top: 130px">
+  <img *ngIf="!playVideo" src="./assets/youtube.png" alt="" class="youtube" (click)="playVideo = true" matTooltip="Watch Introduction Video" matTooltipPosition="above">
+  <img *ngIf="!playVideo" src="./assets/grid_background.png" alt="" style="width: 80%">
+  <iframe *ngIf="playVideo" width="560" height="315" src="https://www.youtube.com/embed/2iOzH17yl6Q?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 

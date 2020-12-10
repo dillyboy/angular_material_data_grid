@@ -53,6 +53,18 @@
   }
 }
 
+.youtube {
+  width: 80px;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 50%;
+  text-align: center;
+  cursor: pointer;
+}
+
 .feature {
   padding: 16px;
   max-width: 800px;

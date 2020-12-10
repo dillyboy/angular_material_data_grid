@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialDataGridModule } from 'angular-material-data-grid';
+// import {AngularMaterialDataGridModule} from '../../projects/angular-material-data-grid/src/lib/angular-material-data-grid.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { AppRoutingModule } from './routing/app.routing.module';
@@ -12,6 +13,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
@@ -78,7 +80,8 @@ import { VirtualScrollingComponent } from './pages/virtual-scrolling/virtual-scr
     MatListModule,
     MatCardModule,
     MatTabsModule,
-    HighlightModule
+    HighlightModule,
+    MatTooltipModule
   ],
   providers: [
     {

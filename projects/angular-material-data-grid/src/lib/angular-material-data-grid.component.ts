@@ -11,7 +11,8 @@ import {
   ElementRef,
   OnChanges,
   SimpleChanges,
-  ViewEncapsulation
+  ViewEncapsulation,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
@@ -29,6 +30,7 @@ import GirdButtonClickInterface from './interfaces/gird-button-click-interface';
   templateUrl: './angular-material-data-grid.component.html',
   styleUrls: ['./angular-material-data-grid.component.scss',
               './angular-material-data-grid-utilities.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
 export class AngularMaterialDataGridComponent implements AfterViewInit, OnChanges {
@@ -37,6 +39,7 @@ export class AngularMaterialDataGridComponent implements AfterViewInit, OnChange
   @Output() selectionEmit: any = new EventEmitter<any[]>();
   @Output() filtersChangedEmit: any = new EventEmitter<GridFilterItemInterface[]>();
   @Output() buttonClickEmit: any = new EventEmitter<GirdButtonClickInterface>();
+  @Output() headingsChangedEmit: any = new EventEmitter<GridHeadingInterface[]>();
 
   @Input() headings: GridHeadingInterface[] = [];
   @Input() url = '';
@@ -140,6 +143,7 @@ export class AngularMaterialDataGridComponent implements AfterViewInit, OnChange
       this.scrollChanged(); // this is done to recalculate scrollRemainingDistanceToLeft & scrollRemainingDistanceToRight
                             // values which helps to show the auto scroll navigate buttons
       this.changeDetectorRef.detectChanges();
+      this.headingsChangedEmit.emit(this.headings);
     }, 100);
   }
 

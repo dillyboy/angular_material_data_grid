@@ -48,7 +48,7 @@
             <mat-icon *ngIf="fullscreen">fullscreen_exit</mat-icon>
         </button>
         <p class="desktop text-muted amdg-d-inline amdg-mr-2">Items per page:</p>
-        <mat-form-field style="width: 70px;height: 42px;" class="amdg-mr-4">
+        <mat-form-field class="amdg-pagination-selector amdg-mr-4">
             <mat-select [disabled]="loadingData"  [(ngModel)]="newRecordsPerPage" (ngModelChange)="recordsPerPageChanged()">
                 <mat-option class="amdg-mat-option" [value]="50">50</mat-option>
                 <mat-option class="amdg-mat-option" [value]="100">100</mat-option>

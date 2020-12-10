@@ -50,7 +50,7 @@ export class TagFilterComponent implements OnInit {
     event.stopPropagation();
     let maxLength = 9;
     if (!this.numbersOnly) {
-      maxLength = 15;
+      maxLength = 30;
     }
     const {value} = this.tagValue;
     if (value.trim()) {
@@ -91,13 +91,13 @@ export class TagFilterComponent implements OnInit {
     let error = '';
     list.forEach(item => {
       item = item.trim();
-      if (item.length <= 15) {
+      if (item.length <= 30) {
         formattedList.push(item);
       } else {
         validPaste = false;
 
-        if (!(item.length <= 15)) {
-          error = 'A single value cannot be more than 15 characters';
+        if (!(item.length <= 30)) {
+          error = 'A single value cannot be more than 30 characters';
         }
       }
     });

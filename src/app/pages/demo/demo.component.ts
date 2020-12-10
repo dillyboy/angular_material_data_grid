@@ -1,18 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { GirdButtonClick, GridFilterItem, GridHeading, GridResponse } from 'angular-material-data-grid';
-
 
 @Component({
   selector: 'app-demo',
   templateUrl: './demo.component.html',
   styleUrls: ['./demo.component.scss']
 })
-export class DemoComponent {
+export class DemoComponent implements OnInit {
 
   url = `${environment.api}getUsers`;
 
-  headings: GridHeading[] = [
+  GRID_ID = 'demoGrid' as const;
+
+  initialHeadings: GridHeading[] = [
     {fieldName: 'id', display: 'ID', type: 'number', width: '100px', disableSorting: true, align: 'right'},
     {fieldName: 'full_name', display: 'Full Name', type: 'url', width: '160px',
       other: {
@@ -89,7 +90,7 @@ export class DemoComponent {
     {fieldName: 'fda_code', display: 'FDA Code', type: 'string', width: '130px', show: false},
     {fieldName: 'suffix', display: 'Suffix', type: 'string', width: '130px', show: false},
     {fieldName: 'number', display: 'Number', type: 'number', width: '130px', show: false},
-    {fieldName: 'actions', display: '', type: 'button-group', width: '100px',
+    {fieldName: 'actions', display: '', type: 'button-group', width: '105px',
       other: {
         mainButton: {
           display: 'Options',
@@ -104,6 +105,17 @@ export class DemoComponent {
       align: 'center', disableSorting: true,
     }
   ];
+
+  headings: GridHeading[] = null;
+
+  ngOnInit(): void {
+    const demoGridUserPreference: GridHeading[] = JSON.parse(localStorage.getItem(this.GRID_ID));
+    if (demoGridUserPreference) {
+      this.headings = demoGridUserPreference;
+    } else {
+      this.headings = this.initialHeadings;
+    }
+  }
 
   responseReceived(response: GridResponse): void {
     response.gridData.forEach(item => {
@@ -124,5 +136,9 @@ export class DemoComponent {
 
   buttonClick(button: GirdButtonClick): void {
     console.log(button);
+  }
+
+  headingsConfigChanged(headings: GridHeading[]): void {
+    localStorage.setItem(this.GRID_ID, JSON.stringify(headings));
   }
 }

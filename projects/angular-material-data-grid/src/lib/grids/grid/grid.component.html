@@ -106,6 +106,8 @@
     </div>
 
     <amdg-client-pagination
+        [noOfTotalRecords]="response.gridData.length"
+        [noOfSelectedRow]="selectedRows.length"
         (toggleFullScreen)="toggleFullScreen($event)">
     </amdg-client-pagination>
   </mat-card>

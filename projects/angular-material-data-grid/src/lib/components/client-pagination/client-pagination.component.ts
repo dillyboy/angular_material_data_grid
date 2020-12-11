@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'amdg-client-pagination',
@@ -7,6 +7,8 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class ClientPaginationComponent implements OnInit {
 
+  @Input() noOfTotalRecords = null;
+  @Input() noOfSelectedRow = null;
   @Output() toggleFullScreen: any = new EventEmitter<any>();
   fullscreen = false;
   constructor() { }

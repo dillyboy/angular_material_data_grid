@@ -193,58 +193,41 @@ export class GridComponent implements AfterViewInit, OnChanges {
     console.log(this.filters);
 
     this.ngZone.runOutsideAngular(() => {
-      let filteredItems = [];
-      this.responseBackup.gridData.forEach(item => {
-        this.filters.forEach(filter => {
-          const itemValue = item[filter.field];
-          switch (filter.operator) {
-            case 'eq':
-              if (itemValue === filter.value) {
-                filteredItems.push(item);
-              }
-              break;
-            case 'neq':
-              if (itemValue !== filter.value) {
-                filteredItems.push(item);
-              }
-              break;
-            case 'greaterorequal':
-              if (itemValue >= filter.value) {
-                filteredItems.push(item);
-              }
-              break;
-            case 'greaterthan':
-              if (itemValue > filter.value) {
-                filteredItems.push(item);
-              }
-              break;
-            case 'lessthanorequal':
-              if (itemValue <= filter.value) {
-                filteredItems.push(item);
-              }
-              break;
-            case 'lessthan':
-              if (itemValue < filter.value) {
-                filteredItems.push(item);
-              }
-              break;
-            case 'between':
-              let [firstValue, secondValue] = filter.value.split('-');
-              firstValue = parseInt(firstValue, 10);
-              secondValue = parseInt(secondValue, 10);
-              if (itemValue > firstValue && itemValue < secondValue) {
-                filteredItems.push(item);
-              }
-              break;
+      const operators = {
+        between: (field, range) => {
+          const [min, max] = range.split('-').map(Number);
+          return min < field && field < max;
+        },
+        eq: (field, value) => {
+          if (value.includes(',')) {
+            return value.split(',').includes(field);
+          } else {
+            return field === value;
           }
-        });
-      });
-      if (filteredItems.length === 0) {
-        filteredItems = this.responseBackup.gridData;
-      }
-      console.log(filteredItems);
+        },
+        neq: (field, value) => field !== value,
+        greaterorequal: (field, value) => field >= value,
+        greaterthan: (field, value) => field > value,
+        lessthanorequal: (field, value) => field <= value,
+        lessthan: (field, value) => field < value,
+        contains: (field, value) => field.includes(value),
+        startswith: (field, value) => field.startsWith(value),
+        endswith: (field, value) => field.endsWith(value),
+        blank: field => !field,
+      };
+
+      const result = this.responseBackup.gridData.filter(o =>
+        this.filters.every(({ field, operator, value }) => {
+          let fieldItem = o[field];
+          if (typeof o[field] === 'string') {
+            fieldItem = fieldItem.toLowerCase();
+          }
+          return operators[operator](fieldItem, value.toLowerCase());
+        })
+      );
+
       this.ngZone.run(() => {
-        this.response.gridData = filteredItems;
+        this.response.gridData = result;
       });
     });
     // this.pageChanged({pageNo: 1, recordsPerPage: this.recordsPerPage});

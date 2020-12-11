@@ -7,5 +7,9 @@
       <mat-icon *ngIf="!fullscreen">fullscreen</mat-icon>
       <mat-icon *ngIf="fullscreen">fullscreen_exit</mat-icon>
     </button>
+    <span class="desktop" *ngIf="noOfSelectedRow">
+      <a mat-button color="accent" disableRipple class="grid-filter-applied-color amdg-font-weight-bold">{{noOfSelectedRow}} Selected</a>
+      <span class="amdg-ml-2 amdg-mr-2">|</span>
+    </span>{{noOfTotalRecords}} items
   </div>
 </div>

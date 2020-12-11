@@ -10,6 +10,7 @@ import { GirdButtonClick, GridFilterItem, GridHeading, GridResponse } from 'angu
 export class DemoComponent implements OnInit {
 
   url = `${environment.api}getUsers`;
+  // url = `./assets/data.json`;
 
   GRID_ID = 'demoGrid' as const;
 

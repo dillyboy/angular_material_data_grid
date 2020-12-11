@@ -1,0 +1,11 @@
+<div class="amdg-layout-container" style="height: 40px;">
+  <div class="buttons-container">
+  </div>
+
+  <div>
+    <button mat-icon-button aria-label="pagination" class="full-screen-btn desktop amdg-mr-2" matTooltip="Toggle Fullscreen" (click)="fullscreen = !fullscreen;toggleFullScreen.emit(fullscreen)">
+      <mat-icon *ngIf="!fullscreen">fullscreen</mat-icon>
+      <mat-icon *ngIf="fullscreen">fullscreen_exit</mat-icon>
+    </button>
+  </div>
+</div>

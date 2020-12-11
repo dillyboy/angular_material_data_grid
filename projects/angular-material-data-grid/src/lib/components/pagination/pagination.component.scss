@@ -34,12 +34,11 @@
   opacity: .6;
 }
 
-::ng-deep {
-  .amdg-pagination-selector {
-    font-size: 12px;
-    width: 70px;
-    height: 42px;
-  }
+
+.amdg-pagination-selector {
+  font-size: 12px;
+  width: 70px;
+  height: 42px;
 }
 
 @media screen and (max-width: 768px) {

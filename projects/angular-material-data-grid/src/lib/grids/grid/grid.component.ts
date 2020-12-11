@@ -7,6 +7,7 @@ import {
   EventEmitter,
   HostListener,
   Input,
+  NgZone,
   OnChanges,
   Output,
   Renderer2,
@@ -51,6 +52,7 @@ export class GridComponent implements AfterViewInit, OnChanges {
   allGridItemsSelected = false;
   loadingData = false;
   response: GridResponseInterface = { gridData: [], totalCount: 0};
+  responseBackup: GridResponseInterface = { gridData: [], totalCount: 0};
   recordsPerPage = 100;
   selectionStarted = false;
   selectionTimeoutHandler: any;
@@ -83,7 +85,8 @@ export class GridComponent implements AfterViewInit, OnChanges {
   constructor(private http: HttpClient,
               private changeDetectorRef: ChangeDetectorRef,
               private renderer: Renderer2,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private ngZone: NgZone) {
   }
 
   ngAfterViewInit(): void {
@@ -188,6 +191,62 @@ export class GridComponent implements AfterViewInit, OnChanges {
     }
     this.filtersChangedEmit.emit(this.filters);
     console.log(this.filters);
+
+    this.ngZone.runOutsideAngular(() => {
+      let filteredItems = [];
+      this.responseBackup.gridData.forEach(item => {
+        this.filters.forEach(filter => {
+          const itemValue = item[filter.field];
+          switch (filter.operator) {
+            case 'eq':
+              if (itemValue === filter.value) {
+                filteredItems.push(item);
+              }
+              break;
+            case 'neq':
+              if (itemValue !== filter.value) {
+                filteredItems.push(item);
+              }
+              break;
+            case 'greaterorequal':
+              if (itemValue >= filter.value) {
+                filteredItems.push(item);
+              }
+              break;
+            case 'greaterthan':
+              if (itemValue > filter.value) {
+                filteredItems.push(item);
+              }
+              break;
+            case 'lessthanorequal':
+              if (itemValue <= filter.value) {
+                filteredItems.push(item);
+              }
+              break;
+            case 'lessthan':
+              if (itemValue < filter.value) {
+                filteredItems.push(item);
+              }
+              break;
+            case 'between':
+              let [firstValue, secondValue] = filter.value.split('-');
+              firstValue = parseInt(firstValue, 10);
+              secondValue = parseInt(secondValue, 10);
+              if (itemValue > firstValue && itemValue < secondValue) {
+                filteredItems.push(item);
+              }
+              break;
+          }
+        });
+      });
+      if (filteredItems.length === 0) {
+        filteredItems = this.responseBackup.gridData;
+      }
+      console.log(filteredItems);
+      this.ngZone.run(() => {
+        this.response.gridData = filteredItems;
+      });
+    });
     // this.pageChanged({pageNo: 1, recordsPerPage: this.recordsPerPage});
   }
 
@@ -265,6 +324,7 @@ export class GridComponent implements AfterViewInit, OnChanges {
       const gridData = this.linkCreationInterceptor(data.payload.gridData);
       this.selectedRows = [];
       this.response = {gridData, totalCount: data.payload.totalCount};
+      this.responseBackup = {gridData, totalCount: data.payload.totalCount};
       this.responseEmit.emit(this.response);
       this.loadingData = false;
       this.changeDetectorRef.detectChanges();

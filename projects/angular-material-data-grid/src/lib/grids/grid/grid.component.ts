@@ -17,7 +17,7 @@ import {
 } from '@angular/core';
 import GridResponseInterface from '../../interfaces/grid-response';
 import GridFilterItemInterface from '../../interfaces/grid-filter-item';
-import GirdButtonClickInterface from '../../interfaces/gird-button-click-interface';
+import GridButtonClickInterface from '../../interfaces/grid-button-click-interface';
 import GridHeadingInterface from '../../interfaces/grid-heading-type';
 import {CdkVirtualScrollViewport} from '@angular/cdk/scrolling';
 import {HttpClient} from '@angular/common/http';
@@ -38,7 +38,7 @@ export class GridComponent implements AfterViewInit, OnChanges {
   @Output() responseEmit: any = new EventEmitter<GridResponseInterface>();
   @Output() selectionEmit: any = new EventEmitter<any[]>();
   @Output() filtersChangedEmit: any = new EventEmitter<GridFilterItemInterface[]>();
-  @Output() buttonClickEmit: any = new EventEmitter<GirdButtonClickInterface>();
+  @Output() buttonClickEmit: any = new EventEmitter<GridButtonClickInterface>();
   @Output() headingsChangedEmit: any = new EventEmitter<GridHeadingInterface[]>();
 
   @Input() headings: GridHeadingInterface[] = [];

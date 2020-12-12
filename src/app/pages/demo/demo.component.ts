@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { GirdButtonClick, GridFilterItem, GridHeading, GridResponse } from 'angular-material-data-grid';
+import { GridButtonClick, GridFilterItem, GridHeading, GridResponse } from 'angular-material-data-grid';
 
 @Component({
   selector: 'app-demo',
@@ -135,7 +135,7 @@ export class DemoComponent implements OnInit {
     console.log(filters);
   }
 
-  buttonClick(button: GirdButtonClick): void {
+  buttonClick(button: GridButtonClick): void {
     console.log(button);
   }
 

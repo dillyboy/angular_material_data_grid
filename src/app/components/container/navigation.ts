@@ -142,4 +142,26 @@ export const navigation = [
       }
     ]
   },
+  {
+    panelHeading: 'Examples',
+    panelIcon: '',
+    openWhen: [
+      '/examples/serverBindGrid',
+      '/examples/clientSidePagination'
+    ],
+    children: [
+      {
+        headingName: 'Server-bind Grid',
+        headingIcon: '',
+        highLightWhen: ['/examples/serverBindGrid'],
+        route: '/examples/serverBindGrid'
+      },
+      {
+        headingName: 'Client Side Pagination',
+        headingIcon: '',
+        highLightWhen: ['/examples/clientSidePagination'],
+        route: '/examples/clientSidePagination'
+      }
+    ]
+  },
 ];

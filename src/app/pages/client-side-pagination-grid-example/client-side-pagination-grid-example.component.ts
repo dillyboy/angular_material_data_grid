@@ -3,13 +3,13 @@ import { environment } from '../../../environments/environment';
 import { GridButtonClick, GridFilterItem, GridHeading, GridResponse } from 'angular-material-data-grid';
 
 @Component({
-  selector: 'app-demo',
-  templateUrl: './demo.component.html',
-  styleUrls: ['./demo.component.scss']
+  selector: 'app-client-side-pagination-grid-example',
+  templateUrl: './client-side-pagination-grid-example.component.html',
+  styleUrls: ['./client-side-pagination-grid-example.component.scss']
 })
-export class DemoComponent implements OnInit {
+export class ClientSidePaginationGridExampleComponent implements OnInit {
 
-  url = `${environment.api}getUsers`;
+  url = `./assets/data.json`;
 
   GRID_ID = 'demoGrid' as const;
 

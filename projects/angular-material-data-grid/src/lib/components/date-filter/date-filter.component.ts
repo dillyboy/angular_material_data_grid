@@ -13,7 +13,7 @@ export class DateFilterComponent {
   @Output() filter: any = new EventEmitter<any>();
   filterApplied = false;
   dateFilterTypes = [
-    {value: 'between', text: 'Is Between'},
+    {value: 'betweendates', text: 'Is Between'},
     {value: 'blank', text: 'Is Empty'},
   ];
 
@@ -21,7 +21,7 @@ export class DateFilterComponent {
     start: new FormControl(),
     end: new FormControl()
   });
-  selection = new FormControl('between', Validators.required);
+  selection = new FormControl('betweendates', Validators.required);
   value = new FormControl(null, [Validators.required]);
   invalidValue = false;
   @ViewChild('menuTrigger') menu: MatMenuTrigger;
@@ -48,7 +48,7 @@ export class DateFilterComponent {
   reset(emit?): void {
     this.invalidValue = false;
     this.value.setValue(null);
-    this.selection.setValue('between');
+    this.selection.setValue('betweendates');
     this.range.controls.start.setValue(null);
     this.range.controls.end.setValue(null);
     if (emit) {
@@ -62,7 +62,7 @@ export class DateFilterComponent {
       const {start, end} = this.range.value;
       if (start && end) {
         this.value.setValue(`${this.formatDate(start)}-${this.formatDate(end)}`);
-        this.filter.emit( {operator: 'between', value: this.value.value} );
+        this.filter.emit( {operator: 'betweendates', value: this.value.value} );
       }
       this.close(this.value.value);
     } else if (this.selection.value === 'blank') {

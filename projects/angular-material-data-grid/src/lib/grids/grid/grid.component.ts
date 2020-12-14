@@ -203,7 +203,7 @@ export class GridComponent implements AfterViewInit, OnChanges {
           return new Date(min) < new Date(field) && new Date(field) < new Date(max);
         },
         eq: (field, value) => {
-          if (value.includes(',')) {
+          if (typeof value === 'string' && value.includes(',')) {
             return value.split(',').includes(field);
           } else {
             return field === value;
@@ -226,7 +226,10 @@ export class GridComponent implements AfterViewInit, OnChanges {
           if (typeof o[field] === 'string') {
             fieldItem = fieldItem.toLowerCase();
           }
-          return operators[operator](fieldItem, value.toLowerCase());
+          if (typeof value === 'string') {
+            value = value.toLowerCase();
+          }
+          return operators[operator](fieldItem, value);
         })
       );
 

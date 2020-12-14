@@ -241,7 +241,7 @@ export class GridComponent implements AfterViewInit, OnChanges {
 
   gridItemSelectionChanged(all = false): void {
     this.selectedRows = [];
-    this.response.gridData.forEach(item => {
+    this.gridItems.forEach(item => {
       if (all) {
         item.gridItemSelected = this.allGridItemsSelected;
       }
@@ -284,9 +284,9 @@ export class GridComponent implements AfterViewInit, OnChanges {
   getSelection(): void {
     this.selectedRows = [];
     this.allCheckBoxesSelected = true;
-    for (let i = 0, len = this.response.gridData.length; i < len; i++) {
-      if (this.response.gridData[i].gridItemSelected === true) {
-        this.selectedRows.push(this.response.gridData[i]);
+    for (let i = 0, len = this.gridItems.length; i < len; i++) {
+      if (this.gridItems[i].gridItemSelected === true) {
+        this.selectedRows.push(this.gridItems[i]);
       } else {
         this.allCheckBoxesSelected = false;
       }
@@ -340,6 +340,7 @@ export class GridComponent implements AfterViewInit, OnChanges {
 
   pageChanged({pageNo, recordsPerPage}): void {
     this.loadingData = true;
+    this.selectedRows = [];
     this.changeDetectorRef.detectChanges();
     this.recordsPerPage = recordsPerPage;
     this.currentPage = pageNo;

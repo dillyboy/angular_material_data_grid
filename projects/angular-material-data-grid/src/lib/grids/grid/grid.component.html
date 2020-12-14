@@ -105,13 +105,14 @@
       </cdk-virtual-scroll-viewport>
     </div>
 
-    <amdg-client-pagination
+    <amdg-pagination
         [loadingData]="loadingData"
         [noOfTotalRecords]="response.gridData.length"
+        [noOfRecords]="response.gridData.length"
         [noOfSelectedRow]="selectedRows.length"
         [currentPage]="currentPage"
-        (toggleFullScreen)="toggleFullScreen($event)"
-        (pageChanged)="pageChanged($event)">
-    </amdg-client-pagination>
+        (pageChanged)="pageChanged($event)"
+        (toggleFullScreen)="toggleFullScreen($event)">
+    </amdg-pagination>
   </mat-card>
 </div>

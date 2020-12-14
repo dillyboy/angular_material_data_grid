@@ -28,10 +28,6 @@ export class ClientPaginationComponent implements OnInit, OnChanges {
     if (changes.loadingData?.currentValue === false) { // render pages buttons when data is loaded
       this.pageChange(this.currentPage, false); // render page buttons without an emit to parent
     }
-
-    if (changes.noOfTotalRecords) {
-      this.pageChange(this.currentPage, false);
-    }
   }
 
   pageChange(pageNo, notify = true): void {

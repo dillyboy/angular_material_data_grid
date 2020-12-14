@@ -313,12 +313,11 @@ export class GridComponent implements AfterViewInit, OnChanges {
       this.response = {gridData};
       this.responseBackup = {gridData};
       this.responseEmit.emit(this.response);
-      this.loadingData = false;
       this.pageChanged({pageNo: this.currentPage, recordsPerPage: this.recordsPerPage});
     });
   }
 
-  sortAscending(sortField): any {
+  private sortAscending(sortField): any {
     let sortOrder = 1;
     if (sortField[0] === '-') {
       sortOrder = -1;
@@ -334,6 +333,8 @@ export class GridComponent implements AfterViewInit, OnChanges {
   }
 
   pageChanged({pageNo, recordsPerPage}): void {
+    this.loadingData = true;
+    this.changeDetectorRef.detectChanges();
     this.recordsPerPage = recordsPerPage;
     this.currentPage = pageNo;
     const {sort, sortField} = this.sortObj;
@@ -357,6 +358,7 @@ export class GridComponent implements AfterViewInit, OnChanges {
       }
     }
     this.gridItems = gridItemsForDisplay;
+    this.loadingData = false;
     this.changeDetectorRef.detectChanges();
     document.getElementById('amdgScrollViewport').scrollTop = 0;
     setTimeout(() => {

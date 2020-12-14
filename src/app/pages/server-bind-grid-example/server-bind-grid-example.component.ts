@@ -1,19 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-import { environment } from '../../../environments/environment';
-import { GridButtonClick, GridFilterItem, GridHeading, GridResponse } from 'angular-material-data-grid';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-server-bind-grid-example',
   templateUrl: './server-bind-grid-example.component.html',
   styleUrls: ['./server-bind-grid-example.component.scss']
 })
-export class ServerBindGridExampleComponent implements OnInit {
 
-  url = `${environment.api}getUsers`;
-  // url = `./assets/data.json`;
+export class ServerBindGridExampleComponent {
 
-  GRID_ID = 'demoGrid' as const;
+  usage = {
+    html: `
+  <amdg-server-bind-grid
+      [headings]="headings"
+      [url]="url"
+      [selection]="true"
+      [columnControl]="true"
+      (responseEmit)="responseReceived($event)"
+      (selectionEmit)="selectionChanged($event)"
+      (filtersChangedEmit)="filtersChanged($event)"
+      (buttonClickEmit)="buttonClick($event)"
+      (headingsChangedEmit)="headingsConfigChanged($event)">
+  </amdg-server-bind-grid>`,
+    ts: `
+  /* POST endpoint URL */
+  url = 'https://angular-grid.herokuapp.com/getUsers';
 
+  /* Unique identifier can be used to save user's column preferences */
+  GRID_ID = 'demoServerBindGrid' as const;
+
+  /* Original column configuration */
   initialHeadings: GridHeading[] = [
     {fieldName: 'id', display: 'ID', type: 'number', width: '100px', disableSorting: true, align: 'right'},
     {fieldName: 'full_name', display: 'Full Name', type: 'url', width: '160px',
@@ -51,7 +66,7 @@ export class ServerBindGridExampleComponent implements OnInit {
       other: {
         selectionMode: 'multiple',
         source: 'external',
-        url: `${environment.api}countries`,
+        url: 'https://angular-grid.herokuapp.com/countries',
         key: 'displayName',
         value: 'value'
       }
@@ -96,20 +111,25 @@ export class ServerBindGridExampleComponent implements OnInit {
         mainButton: {
           display: 'Options',
           icon: 'expand_more',
-          disableField: `archived`
+          disableField: 'archived'
         },
         buttons: [
           {display: 'Edit User', icon: 'edit', disableField: 'disableEdit'},
-          {display: 'Delete User', icon: 'delete', disableField: `archived`},
+          {display: 'Delete User', icon: 'delete', disableField: 'archived'},
         ]
       },
       align: 'center', disableSorting: true,
     }
   ];
 
+  /* Column configuration which will be passed to grid */
   headings: GridHeading[] = null;
 
   ngOnInit(): void {
+    /* Custom code that can be used to either retrieve user's column preference from local storage
+       or from the original configuration based on availability.
+       This can also be done by calling an API endpoint in production application's so that the user
+       preferences will not be lost between sessions. */
     const demoGridUserPreference: GridHeading[] = JSON.parse(localStorage.getItem(this.GRID_ID));
     if (demoGridUserPreference) {
       this.headings = demoGridUserPreference;
@@ -119,6 +139,7 @@ export class ServerBindGridExampleComponent implements OnInit {
   }
 
   responseReceived(response: GridResponse): void {
+    /* Simple example of manipulating some data retrieved through the grid component */
     response.gridData.forEach(item => {
       item.date_of_birth = item.date_of_birth.substring(0, 10);
       if (item.uid === 16) {
@@ -140,6 +161,13 @@ export class ServerBindGridExampleComponent implements OnInit {
   }
 
   headingsConfigChanged(headings: GridHeading[]): void {
+    /* Saving the user's column preference in local storage */
     localStorage.setItem(this.GRID_ID, JSON.stringify(headings));
   }
+`};
+
+  scrollBottom(): void {
+    window.scrollTo(0, 1000);
+  }
+
 }

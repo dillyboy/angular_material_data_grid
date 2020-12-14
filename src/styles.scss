@@ -170,3 +170,59 @@ $highlight-dark-color: rgba(118, 118, 118, 0.26);
   }
 }
 
+.scroll-down-animation-button {
+  position: absolute;
+  right: 60px;
+  bottom: 60px;
+  background: rgba(0,0,0,.5);
+  color: white;
+  height: 50px;
+  width: 50px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 4px;
+  cursor: pointer;
+
+  .scroll-down-animation {
+    margin-left: 30px;
+    margin-top: 15px;
+  }
+}
+
+
+.scroll-down-animation span{
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-bottom: 2px solid white;
+  border-right: 2px solid white;
+  transform: rotate(45deg);
+  margin: -10px;
+  animation: scroll-down-animation 2s infinite;
+}
+
+.scroll-down-animation span:nth-child(2)
+{
+  animation-delay: -0.2s;
+}
+
+.scroll-down-animation span:nth-child(3)
+{
+  animation-delay: -0.4s;
+}
+
+@keyframes scroll-down-animation{
+
+  0%{
+    opacity: 0;
+    transform: rotate(45deg) translate(-10px, -10px);
+  }
+  50%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+    transform: rotate(45deg) translate(10px, 10px);
+  }
+}
+

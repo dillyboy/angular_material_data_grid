@@ -330,9 +330,6 @@ export class GridComponent implements AfterViewInit, OnChanges {
       sortField = sortField.substr(1);
     }
     return (a, b) => {
-      /* next line works with strings and numbers,
-       * and you may want to customize it to your needs
-       */
       const result = (a[sortField] < b[sortField]) ? -1 : (a[sortField] > b[sortField]) ? 1 : 0;
       return result * sortOrder;
     };

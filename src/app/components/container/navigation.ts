@@ -151,16 +151,16 @@ export const navigation = [
     ],
     children: [
       {
-        headingName: 'Server-bind Grid',
-        headingIcon: '',
-        highLightWhen: ['/examples/serverBindGrid'],
-        route: '/examples/serverBindGrid'
-      },
-      {
         headingName: 'Client Side Pagination',
         headingIcon: '',
         highLightWhen: ['/examples/clientSidePagination'],
         route: '/examples/clientSidePagination'
+      },
+      {
+        headingName: 'Server Side Pagination',
+        headingIcon: '',
+        highLightWhen: ['/examples/serverBindGrid'],
+        route: '/examples/serverBindGrid'
       }
     ]
   },

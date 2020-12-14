@@ -1,11 +1,25 @@
-<amdg-server-bind-grid
-    [headings]="headings"
-    [url]="url"
-    [selection]="true"
-    [columnControl]="true"
-    (responseEmit)="responseReceived($event)"
-    (selectionEmit)="selectionChanged($event)"
-    (filtersChangedEmit)="filtersChanged($event)"
-    (buttonClickEmit)="buttonClick($event)"
-    (headingsChangedEmit)="headingsConfigChanged($event)">
-</amdg-server-bind-grid>
+<div class="position-relative">
+  <app-demo></app-demo>
+
+  <div class="scroll-down-animation-button" mat-ripple (click)="scrollBottom()">
+    Code
+    <div class="scroll-down-animation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="content">
+  <mat-tab-group>
+    <mat-tab label="HTML">
+      <pre><code [highlight]="usage.html"></code></pre>
+    </mat-tab>
+    <mat-tab label="TS">
+      <pre><code [highlight]="usage.ts"></code></pre>
+    </mat-tab>
+  </mat-tab-group>
+</div>

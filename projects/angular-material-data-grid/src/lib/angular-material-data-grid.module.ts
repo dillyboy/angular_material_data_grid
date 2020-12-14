@@ -33,8 +33,7 @@ import { TagFilterComponent } from './components/tag-filter/tag-filter.component
 import { MatDividerModule} from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule} from '@angular/material/form-field';
-import { ClientPaginationComponent } from './components/client-pagination/client-pagination.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -51,8 +50,7 @@ import { ClientPaginationComponent } from './components/client-pagination/client
     StringFilterComponent,
     TagFilterComponent,
     ServerBindGridComponent,
-    GridComponent,
-    ClientPaginationComponent
+    GridComponent
   ],
   imports: [
     CommonModule,

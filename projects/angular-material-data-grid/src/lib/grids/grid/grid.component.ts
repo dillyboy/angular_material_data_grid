@@ -169,7 +169,7 @@ export class GridComponent implements AfterViewInit, OnChanges {
       sortField: this.headings[index]?.sort ? this.headings[index]?.fieldName : null
     };
     this.sortObj = sortObj;
-    // this.pageChanged({pageNo: 1, recordsPerPage: this.recordsPerPage});
+    this.pageChanged({pageNo: 1, recordsPerPage: this.recordsPerPage});
   }
 
   filter(ev): void {
@@ -191,7 +191,6 @@ export class GridComponent implements AfterViewInit, OnChanges {
       }
     }
     this.filtersChangedEmit.emit(this.filters);
-    console.log(this.filters);
 
     this.ngZone.runOutsideAngular(() => {
       const operators = {
@@ -319,20 +318,45 @@ export class GridComponent implements AfterViewInit, OnChanges {
     });
   }
 
+  sortAscending(sortField): any {
+    let sortOrder = 1;
+    if (sortField[0] === '-') {
+      sortOrder = -1;
+      sortField = sortField.substr(1);
+    }
+    return (a, b) => {
+      /* next line works with strings and numbers,
+       * and you may want to customize it to your needs
+       */
+      const result = (a[sortField] < b[sortField]) ? -1 : (a[sortField] > b[sortField]) ? 1 : 0;
+      return result * sortOrder;
+    };
+  }
+
   pageChanged({pageNo, recordsPerPage}): void {
     this.recordsPerPage = recordsPerPage;
     this.currentPage = pageNo;
+    const {sort, sortField} = this.sortObj;
+
+    const gridData = JSON.parse(JSON.stringify(this.response.gridData)); // get deep clone
+    if (sort && sortField) {
+      gridData.sort(this.sortAscending(sortField));
+      if (sort === 'desc') {
+        gridData.reverse(); // sort Descending
+      }
+    }
+
     const startingRecord = (this.recordsPerPage * this.currentPage) - this.recordsPerPage + 1;
     const endingRecord = this.recordsPerPage * this.currentPage;
-    const gridItems = [];
+    const gridItemsForDisplay = [];
     for (let i = startingRecord - 1; i < endingRecord; i++) {
-      if (this.response.gridData[i]) {
-        gridItems.push(this.response.gridData[i]);
+      if (gridData[i]) {
+        gridItemsForDisplay.push(gridData[i]);
       } else {
         break;
       }
     }
-    this.gridItems = gridItems;
+    this.gridItems = gridItemsForDisplay;
     this.changeDetectorRef.detectChanges();
     document.getElementById('amdgScrollViewport').scrollTop = 0;
     setTimeout(() => {

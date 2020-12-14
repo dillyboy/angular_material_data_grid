@@ -1,5 +1,5 @@
 export default interface GridResponseInterface {
     gridData: any[];
-    totalCount: number;
+    totalCount?: number;
     other?: any;
 }

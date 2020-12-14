@@ -51,8 +51,9 @@ export class GridComponent implements AfterViewInit, OnChanges {
   columnSearchParam = '';
   allGridItemsSelected = false;
   loadingData = false;
-  response: GridResponseInterface = { gridData: [], totalCount: 0};
-  responseBackup: GridResponseInterface = { gridData: [], totalCount: 0};
+  response: GridResponseInterface = { gridData: []};
+  responseBackup: GridResponseInterface = { gridData: []};
+  gridItems = [];
   recordsPerPage = 100;
   selectionStarted = false;
   selectionTimeoutHandler: any;
@@ -97,7 +98,7 @@ export class GridComponent implements AfterViewInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.entity?.currentValue || changes.headings?.currentValue) {
-      this.pageChanged({pageNo: 1, recordsPerPage: this.recordsPerPage});
+      this.getData({pageNo: 1, recordsPerPage: this.recordsPerPage});
     }
   }
 
@@ -234,7 +235,7 @@ export class GridComponent implements AfterViewInit, OnChanges {
         this.response.gridData = result;
       });
     });
-    // this.pageChanged({pageNo: 1, recordsPerPage: this.recordsPerPage});
+    this.pageChanged({pageNo: 1, recordsPerPage: this.recordsPerPage});
   }
 
   gridItemSelectionChanged(all = false): void {
@@ -294,7 +295,7 @@ export class GridComponent implements AfterViewInit, OnChanges {
   }
 
   // page change event
-  pageChanged({pageNo, recordsPerPage}): void {
+  getData({pageNo, recordsPerPage}): void {
 
     if (this.gridPostSubscription) {
       this.gridPostSubscription.unsubscribe();
@@ -310,16 +311,33 @@ export class GridComponent implements AfterViewInit, OnChanges {
 
       const gridData = this.linkCreationInterceptor(data.payload.gridData);
       this.selectedRows = [];
-      this.response = {gridData, totalCount: data.payload.totalCount};
-      this.responseBackup = {gridData, totalCount: data.payload.totalCount};
+      this.response = {gridData};
+      this.responseBackup = {gridData};
       this.responseEmit.emit(this.response);
       this.loadingData = false;
-      this.changeDetectorRef.detectChanges();
-      document.getElementById('amdgScrollViewport').scrollTop = 0;
-      setTimeout(() => {
-        this.calculateGridWidth();
-      }, 100);
+      this.pageChanged({pageNo: this.currentPage, recordsPerPage: this.recordsPerPage});
     });
+  }
+
+  pageChanged({pageNo, recordsPerPage}): void {
+    this.recordsPerPage = recordsPerPage;
+    this.currentPage = pageNo;
+    const startingRecord = (this.recordsPerPage * this.currentPage) - this.recordsPerPage + 1;
+    const endingRecord = this.recordsPerPage * this.currentPage;
+    const gridItems = [];
+    for (let i = startingRecord - 1; i < endingRecord; i++) {
+      if (this.response.gridData[i]) {
+        gridItems.push(this.response.gridData[i]);
+      } else {
+        break;
+      }
+    }
+    this.gridItems = gridItems;
+    this.changeDetectorRef.detectChanges();
+    document.getElementById('amdgScrollViewport').scrollTop = 0;
+    setTimeout(() => {
+      this.calculateGridWidth();
+    }, 100);
   }
 
   private linkCreationInterceptor(gridData): any[] {

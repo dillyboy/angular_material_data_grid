@@ -196,11 +196,11 @@ export class GridComponent implements AfterViewInit, OnChanges {
       const operators = {
         between: (field, range) => {
           const [min, max] = range.split('-').map(Number);
-          return min < field && field < max;
+          return min <= field && field <= max;
         },
         betweendates: (field, range) => {
           const [min, max] = range.split('-');
-          return new Date(min) < new Date(field) && new Date(field) < new Date(max);
+          return new Date(min) <= new Date(field) && new Date(field) <= new Date(max);
         },
         eq: (field, value) => {
           if (typeof value === 'string' && value.includes(',')) {

@@ -55,6 +55,9 @@ export class ClientPaginationComponent implements OnInit, OnChanges {
       }
     }
     this.pageInfoDisplayText = `${ (this.recordsPerPage * this.currentPage) - this.recordsPerPage + 1} - ${this.currentPage === this.pages ? this.noOfTotalRecords : this.recordsPerPage * this.currentPage} of ${this.noOfTotalRecords} items`;
+    if (this.noOfTotalRecords === 0) {
+      this.pageInfoDisplayText = '0 items';
+    }
     if (notify) {
       this.pageChanged.emit({pageNo: this.currentPage, recordsPerPage: this.recordsPerPage});
     }

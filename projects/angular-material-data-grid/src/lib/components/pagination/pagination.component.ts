@@ -88,6 +88,9 @@ export class PaginationComponent implements OnInit, OnChanges {
       }
     }
     this.pageInfoDisplayText = `${(this.noOfRecords * this.currentPage) - this.noOfRecords + 1} - ${this.currentPage === this.pages ? this.noOfTotalRecords : this.newRecordsPerPage * this.currentPage} of ${this.noOfTotalRecords} items`;
+    if (this.noOfTotalRecords === 0) {
+      this.pageInfoDisplayText = '0 items';
+    }
     if (notify) {
       this.pageChanged.emit({pageNo: this.currentPage, recordsPerPage: this.recordsPerPage});
     }

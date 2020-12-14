@@ -20,10 +20,9 @@ import GridFilterItemInterface from '../../interfaces/grid-filter-item';
 import GridButtonClickInterface from '../../interfaces/grid-button-click-interface';
 import GridHeadingInterface from '../../interfaces/grid-heading-type';
 import {CdkVirtualScrollViewport} from '@angular/cdk/scrolling';
-import {HttpClient} from '@angular/common/http';
 import {MatDialog} from '@angular/material/dialog';
 import {moveItemInArray} from '@angular/cdk/drag-drop';
-import {ApiResponseModel} from '../../api-response.model';
+import {GridService} from '../grid.service';
 
 @Component({
   selector: 'amdg-grid',
@@ -83,11 +82,11 @@ export class GridComponent implements AfterViewInit, OnChanges {
     this.calculateGridWidth();
   }
 
-  constructor(private http: HttpClient,
-              private changeDetectorRef: ChangeDetectorRef,
+  constructor(private changeDetectorRef: ChangeDetectorRef,
               private renderer: Renderer2,
               public dialog: MatDialog,
-              private ngZone: NgZone) {
+              private ngZone: NgZone,
+              private gridService: GridService) {
   }
 
   ngAfterViewInit(): void {
@@ -309,7 +308,11 @@ export class GridComponent implements AfterViewInit, OnChanges {
     this.currentPage = pageNo;
     this.changeDetectorRef.detectChanges();
 
-    this.gridPostSubscription = this.http.get<ApiResponseModel>(this.url).subscribe(data => {
+    const body = {
+      entity: this.entity
+    };
+
+    this.gridPostSubscription = this.gridService.getAnyPost(this.url, body).subscribe(data => {
 
       const gridData = this.linkCreationInterceptor(data.payload.gridData);
       this.selectedRows = [];

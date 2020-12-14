@@ -19,10 +19,9 @@ import GridFilterItemInterface from '../../interfaces/grid-filter-item';
 import GridButtonClickInterface from '../../interfaces/grid-button-click-interface';
 import GridHeadingInterface from '../../interfaces/grid-heading-type';
 import {CdkVirtualScrollViewport} from '@angular/cdk/scrolling';
-import {HttpClient} from '@angular/common/http';
 import {MatDialog} from '@angular/material/dialog';
 import {moveItemInArray} from '@angular/cdk/drag-drop';
-import {ApiResponseModel} from '../../api-response.model';
+import {GridService} from '../grid.service';
 
 @Component({
   selector: 'amdg-server-bind-grid',
@@ -80,10 +79,10 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
     this.calculateGridWidth();
   }
 
-  constructor(private http: HttpClient,
-              private changeDetectorRef: ChangeDetectorRef,
+  constructor(private changeDetectorRef: ChangeDetectorRef,
               private renderer: Renderer2,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private gridService: GridService) {
   }
 
   ngAfterViewInit(): void {
@@ -268,7 +267,7 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
     };
     console.log(body);
 
-    this.gridPostSubscription = this.http.post<ApiResponseModel>(this.url, body).subscribe(data => {
+    this.gridPostSubscription = this.gridService.getAnyPost(this.url, body).subscribe(data => {
 
       const gridData = this.linkCreationInterceptor(data.payload.gridData);
       this.selectedRows = [];

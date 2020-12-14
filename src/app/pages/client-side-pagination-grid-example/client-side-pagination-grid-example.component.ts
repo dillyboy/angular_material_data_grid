@@ -9,7 +9,7 @@ import { GridButtonClick, GridFilterItem, GridHeading, GridResponse } from 'angu
 })
 export class ClientSidePaginationGridExampleComponent implements OnInit {
 
-  url = `./assets/data.json`;
+  url = `${environment.api}getAllUsers`;
 
   GRID_ID = 'demoGrid' as const;
 

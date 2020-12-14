@@ -15,7 +15,7 @@
         <tr class="odd">
           <td>Is between</td>
           <td>between</td>
-          <td>Data in the column should be between the filter parameter. This does not include the start value and the end
+          <td>Data in the column should be between the filter parameter. This includes the start value and the end
             value given.</td>
         </tr>
         <tr>
@@ -56,7 +56,7 @@
   <pre><code [highlight]="ts"></code></pre>
   <br>
   <p>This is a sample filter object sent through the numeric filter within the <a routerLink="/gettingStarted/introduction">filters array</a> in the grid request.</p>
-  <code highlight="{ field: 'uid', operator: 'between' value: '2-10' }" class="d-inline-block"></code>
+  <code highlight="{ field: 'id', operator: 'between' value: '2-10' }" class="d-inline-block"></code>
   <p>or</p>
-  <code highlight="{ field: 'uid', operator: 'eq' value: 5 }" class="d-inline-block"></code>
+  <code highlight="{ field: 'id', operator: 'eq' value: 5 }" class="d-inline-block"></code>
 </div>

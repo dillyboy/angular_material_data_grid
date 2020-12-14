@@ -13,7 +13,7 @@ headings: GridHeading[] = [
   { fieldName: 'first_name', display: 'First Name', type: 'url',
     other: {
       openTab: true,
-      urlTemplate: '/gettingStarted/demo/:uid',
+      urlTemplate: '/gettingStarted/demo/:id',
       queryParams: {userEmail: 'email'}
     }
   },

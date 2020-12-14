@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'gettingStarted', component: ContainerComponent,
     children: [
       { path: 'demo', component: DemoComponent },
-      { path: 'demo/:uid', component: DetailComponent },
+      { path: 'demo/:id', component: DetailComponent },
       { path: 'introduction', component: IntroductionComponent },
       { path: 'installation', component: InstallationComponent },
       { path: 'propertiesAndEvents', component: PropertiesAndEventsComponent }

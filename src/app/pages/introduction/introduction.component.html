@@ -3,6 +3,7 @@
 
   <p>The initial purpose of creating this data grid was to make it easy for developers to easily create highly advanced
       data grids with server-side pagination along with multiple filters and sorting with minimum effort and time.
+      (Client Side Pagination is also present.)
       In order to make this possible a tight integration between the back-end data-source and the front-end component
       should be agreed upon. This gives the ability to stay focused on advanced functionality and the creation of data
       grids with only configurations while staying opinionated. Moreover, the solutions provided by reputed vendors were
@@ -18,7 +19,8 @@
   <h2>Grid Response</h2>
   <p>The grid response should contain a boolean value to determine if the request is a success or failure and more
     importantly the payload section should contain the requested amount of rows and also the total number of rows
-    which is present in the database.</p>
+    which is present in the database. Note that the total number of rows is not needed for client side paginated grids
+    but it is essential for server side pagination.</p>
   <pre><code [highlight]="gridResponseObj"></code></pre>
 </div>
 

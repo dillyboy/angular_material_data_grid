@@ -10,7 +10,7 @@ export class NumericFilterComponent implements OnInit {
   ts = `
 headings: GridHeading[] = [
   ...
-  { fieldName: 'uid', display: 'ID', type: 'number' },
+  { fieldName: 'id', display: 'ID', type: 'number' },
 ]
 `;
   constructor() { }

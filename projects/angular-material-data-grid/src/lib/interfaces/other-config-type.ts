@@ -4,10 +4,10 @@ import { MultiSelectOptionsType } from './multi-select-options-type';
 export interface OtherConfigType {
     /**
      * URL BUILDER
-     * urlTemplate - This refers to the internal route (url) of the angular application. Eg: '/detail/:uid'. If the character ':' is
+     * urlTemplate - This refers to the internal route (url) of the angular application. Eg: '/detail/:id'. If the character ':' is
      *               used within the url provided the word next to it will be treated as a variable which will be replaced by the
-     *               data retrieved. For example '/detail/:uid' will be replaced with '/detail/1' or '/detail/2' depending on the
-     *               uid value
+     *               data retrieved. For example '/detail/:id' will be replaced with '/detail/1' or '/detail/2' depending on the
+     *               id value
      */
     urlTemplate?: string;
     /**

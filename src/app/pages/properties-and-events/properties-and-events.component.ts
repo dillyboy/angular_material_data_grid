@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class PropertiesAndEventsComponent implements OnInit {
 
   importLine = `import { AngularMaterialDataGridModule } from 'angular-material-data-grid';`;
-  selector = 'amdg-server-bind-grid';
+
   constructor() { }
 
   ngOnInit(): void {

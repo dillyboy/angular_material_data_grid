@@ -142,7 +142,7 @@ export class ServerBindGridExampleComponent {
     /* Simple example of manipulating some data retrieved through the grid component */
     response.gridData.forEach(item => {
       item.date_of_birth = item.date_of_birth.substring(0, 10);
-      if (item.uid === 16) {
+      if (item.id === 16) {
         item.disableEdit = true;
       }
     });

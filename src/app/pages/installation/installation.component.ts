@@ -18,18 +18,23 @@ imports: [
 
   usage = {
     html: `
+<!--Use <amdg-grid> for client side paginated grids-->
+<!--Below is an example of a server side paginated grid-->
+
 <amdg-server-bind-grid
     [headings]="headings"
     [url]="url"
     (responseEmit)="responseReceived($event)">
-</amdg-server-bind-grid>`,
+</amdg-server-bind-grid>
+`,
     ts: `
 // import { GridHeading, GridResponse } from 'angular-material-data-grid';
 
 url = 'https://angular-grid.herokuapp.com/getUsers'; // add your POST endpoint here later
+/* Try https://angular-grid.herokuapp.com/getAllUsers for client side pagination*/
 
 headings: GridHeading[] = [
-  {fieldName: 'uid', display: 'ID', type: 'number', width: '100px', disableSorting: true, align: 'right'},
+  {fieldName: 'id', display: 'ID', type: 'number', width: '100px', disableSorting: true, align: 'right'},
   {fieldName: 'first_name', display: 'First Name', type: 'string', width: '120px'},
   {fieldName: 'email', display: 'Email', type: 'string', width: '180px'},
   {fieldName: 'gender', display: 'Gender', type: 'string', width: '100px',

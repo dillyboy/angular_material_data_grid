@@ -10,17 +10,18 @@ export class ServerBindGridExampleComponent {
 
   usage = {
     html: `
-  <amdg-server-bind-grid
+  <amdg-grid
       [headings]="headings"
       [url]="url"
       [selection]="true"
       [columnControl]="true"
+      [serverSidePagination]="true"
       (responseEmit)="responseReceived($event)"
       (selectionEmit)="selectionChanged($event)"
       (filtersChangedEmit)="filtersChanged($event)"
       (buttonClickEmit)="buttonClick($event)"
       (headingsChangedEmit)="headingsConfigChanged($event)">
-  </amdg-server-bind-grid>`,
+  </amdg-grid>`,
     ts: `
   /* POST endpoint URL */
   url = 'https://angular-grid.herokuapp.com/getUsers';

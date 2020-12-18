@@ -4,7 +4,7 @@
   <p>This document contains the API reference for the Grid Component.</p>
   <pre><code [highlight]="importLine"></code></pre>
   <div class="d-inline-flex" style="align-items: center">
-    <p class="mr-3 pt-3">Selector:</p>  <code highlight="amdg-server-bind-grid" class="d-inline-block mr-3"></code> or <code highlight="amdg-grid" class="d-inline-block ml-3"></code>
+    <p class="mr-3 pt-3">Selector:</p>  <code highlight="amdg-grid" class="d-inline-block mr-3"></code> or <code highlight="amdg-grid" class="d-inline-block ml-3"></code>
   </div>
 
   <mat-card class="simple-table-container">
@@ -43,32 +43,37 @@
             programmatically re-initialise the grid by just assigning an empty object if necessary.</td>
         </tr>
         <tr class="">
+          <td><code highlight="@Input() serverSidePagination: boolean"></code></td>
+          <td>By default the grid system is client side paginated. However if your backend supports server-side
+              pagination in accordance with this document, set this value to true.</td>
+        </tr>
+        <tr class="odd">
           <td><code highlight="@Input() transparency: boolean"></code></td>
           <td>This is an optional input which will give the grid an aesthetic upgrade for unique UI preferences but
             does not offer any additional functionality. (It makes the data grid slightly transparent.)
           </td>
         </tr>
-        <tr class="odd">
+        <tr class="">
           <td><code highlight="@Output() responseEmit: EventEmitter<GridResponse>"></code></td>
           <td>The responseEmit returns the data when it is received from the backend. It contains the
             records, total number of pages and also an other object (which can be used to send additional
             data.)</td>
         </tr>
-        <tr>
+        <tr class="odd">
           <td><code highlight="@Output() selectionEmit: EventEmitter<any[]>"></code></td>
           <td>The selectionEmit outputs the selected records to the parent component. This is only useful if the
             selection input is given as true.</td>
         </tr>
-        <tr class="odd">
+        <tr class="">
           <td><code highlight="@Output() filtersChangedEmit: EventEmitter<GridFilterItem[]>"></code></td>
           <td>This returns the filter objects created by the grid system when the user adds filters.</td>
         </tr>
-        <tr>
+        <tr class="odd">
           <td><code highlight="@Output() buttonClickEmit: EventEmitter<GridButtonClick>"></code></td>
           <td>This returns the button click along with the record which the click occurred so that
             any operations can be performed on the parent component.</td>
         </tr>
-        <tr class="odd">
+        <tr class="">
           <td><code highlight="@Output() headingsChangedEmit: EventEmitter<GridHeadingInterface[]>"></code></td>
           <td>This output will only happen if the columnControl is set to true.
             This returns the headings array which was modified by the user. This is useful to save

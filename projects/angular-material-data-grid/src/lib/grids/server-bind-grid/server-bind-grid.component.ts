@@ -25,7 +25,7 @@ import {moveItemInArray} from '@angular/cdk/drag-drop';
 import {GridService} from '../grid.service';
 
 @Component({
-  selector: 'amdg-server-bind-grid',
+  selector: 'amdg-grid',
   templateUrl: './server-bind-grid.component.html',
   styleUrls: ['./server-bind-grid.component.scss',
     '../../angular-material-data-grid-utilities.scss'],

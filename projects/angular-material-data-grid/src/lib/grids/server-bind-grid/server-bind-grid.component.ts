@@ -7,6 +7,7 @@ import {
   EventEmitter,
   HostListener,
   Input,
+  NgZone,
   OnChanges,
   Output,
   Renderer2,
@@ -45,11 +46,14 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
   @Input() columnControl = false;
   @Input() entity = null;
   @Input() transparency = false;
+  @Input() serverSidePagination = false;
 
   columnSearchParam = '';
   allGridItemsSelected = false;
   loadingData = false;
   response: GridResponseInterface = { gridData: [], totalCount: 0};
+  responseBackup: GridResponseInterface = { gridData: [], totalCount: 0};
+  gridItems = [];
   recordsPerPage = 100;
   selectionStarted = false;
   selectionTimeoutHandler: any;
@@ -82,6 +86,7 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
   constructor(private changeDetectorRef: ChangeDetectorRef,
               private renderer: Renderer2,
               public dialog: MatDialog,
+              private ngZone: NgZone,
               private gridService: GridService) {
   }
 
@@ -93,7 +98,7 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.entity?.currentValue || changes.headings?.currentValue) {
-      this.pageChanged({pageNo: 1, recordsPerPage: this.recordsPerPage});
+      this.getData({pageNo: 1, recordsPerPage: this.recordsPerPage});
     }
   }
 
@@ -164,7 +169,11 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
       sortField: this.headings[index]?.sort ? this.headings[index]?.fieldName : null
     };
     this.sortObj = sortObj;
-    this.pageChanged({pageNo: 1, recordsPerPage: this.recordsPerPage});
+    if (this.serverSidePagination) {
+      this.getData({pageNo: 1, recordsPerPage: this.recordsPerPage});
+    } else {
+      this.pageChanged({pageNo: 1, recordsPerPage: this.recordsPerPage});
+    }
   }
 
   filter(ev): void {
@@ -186,12 +195,62 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
       }
     }
     this.filtersChangedEmit.emit(this.filters);
-    this.pageChanged({pageNo: 1, recordsPerPage: this.recordsPerPage});
+
+    if (this.serverSidePagination === false) {
+      this.ngZone.runOutsideAngular(() => {
+        const operators = {
+          between: (field, range) => {
+            const [min, max] = range.split('-').map(Number);
+            return min <= field && field <= max;
+          },
+          betweendates: (field, range) => {
+            const [min, max] = range.split('-');
+            return new Date(min) <= new Date(field) && new Date(field) <= new Date(max);
+          },
+          eq: (field, value) => {
+            if (typeof value === 'string' && value.includes(',')) {
+              return value.split(',').includes(field);
+            } else {
+              return field === value;
+            }
+          },
+          neq: (field, value) => field !== value,
+          greaterorequal: (field, value) => field >= value,
+          greaterthan: (field, value) => field > value,
+          lessthanorequal: (field, value) => field <= value,
+          lessthan: (field, value) => field < value,
+          contains: (field, value) => field.includes(value),
+          startswith: (field, value) => field.startsWith(value),
+          endswith: (field, value) => field.endsWith(value),
+          blank: field => !field,
+        };
+
+        const result = this.responseBackup.gridData.filter(o =>
+            this.filters.every(({ field, operator, value }) => {
+              let fieldItem = o[field];
+              if (typeof o[field] === 'string') {
+                fieldItem = fieldItem.toLowerCase();
+              }
+              if (typeof value === 'string') {
+                value = value.toLowerCase();
+              }
+              return operators[operator](fieldItem, value);
+            })
+        );
+
+        this.ngZone.run(() => {
+          this.response.gridData = result;
+        });
+      });
+      this.pageChanged({pageNo: 1, recordsPerPage: this.recordsPerPage});
+    } else {
+      this.getData({pageNo: 1, recordsPerPage: this.recordsPerPage});
+    }
   }
 
   gridItemSelectionChanged(all = false): void {
     this.selectedRows = [];
-    this.response.gridData.forEach(item => {
+    this.gridItems.forEach(item => {
       if (all) {
         item.gridItemSelected = this.allGridItemsSelected;
       }
@@ -234,9 +293,9 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
   getSelection(): void {
     this.selectedRows = [];
     this.allCheckBoxesSelected = true;
-    for (let i = 0, len = this.response.gridData.length; i < len; i++) {
-      if (this.response.gridData[i].gridItemSelected === true) {
-        this.selectedRows.push(this.response.gridData[i]);
+    for (let i = 0, len = this.gridItems.length; i < len; i++) {
+      if (this.gridItems[i].gridItemSelected === true) {
+        this.selectedRows.push(this.gridItems[i]);
       } else {
         this.allCheckBoxesSelected = false;
       }
@@ -246,7 +305,7 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
   }
 
   // page change event
-  pageChanged({pageNo, recordsPerPage}): void {
+  getData({pageNo, recordsPerPage}): void {
 
     if (this.gridPostSubscription) {
       this.gridPostSubscription.unsubscribe();
@@ -258,13 +317,21 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
     this.currentPage = pageNo;
     this.changeDetectorRef.detectChanges();
 
-    const body = {
-      entity: this.entity,
-      page: this.currentPage,
-      perPage: recordsPerPage,
-      filters: this.filters,
-      ...this.sortObj
-    };
+    let body = null;
+    if (this.serverSidePagination) {
+      body = {
+        entity: this.entity,
+        page: this.currentPage,
+        perPage: recordsPerPage,
+        filters: this.filters,
+        ...this.sortObj
+      };
+    } else {
+      body = {
+        entity: this.entity
+      };
+    }
+
     console.log(body);
 
     this.gridPostSubscription = this.gridService.getAnyPost(this.url, body).subscribe(data => {
@@ -272,14 +339,68 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
       const gridData = this.linkCreationInterceptor(data.payload.gridData);
       this.selectedRows = [];
       this.response = {gridData, totalCount: data.payload.totalCount};
+      this.responseBackup = {gridData, totalCount: data.payload.totalCount};
+      this.gridItems = gridData;
       this.responseEmit.emit(this.response);
-      this.loadingData = false;
-      this.changeDetectorRef.detectChanges();
-      document.getElementById('amdgScrollViewport').scrollTop = 0;
-      setTimeout(() => {
-        this.calculateGridWidth();
-      }, 100);
+      if (this.serverSidePagination) {
+        this.loadingData = false;
+        this.changeDetectorRef.detectChanges();
+        document.getElementById('amdgScrollViewport').scrollTop = 0;
+        setTimeout(() => {
+          this.calculateGridWidth();
+        }, 100);
+      } else {
+        this.pageChanged({pageNo: this.currentPage, recordsPerPage: this.recordsPerPage});
+      }
+
     });
+  }
+
+  private sortAscending(sortField): any {
+    let sortOrder = 1;
+    if (sortField[0] === '-') {
+      sortOrder = -1;
+      sortField = sortField.substr(1);
+    }
+    return (a, b) => {
+      const result = (a[sortField] < b[sortField]) ? -1 : (a[sortField] > b[sortField]) ? 1 : 0;
+      return result * sortOrder;
+    };
+  }
+
+  pageChanged({pageNo, recordsPerPage}): void { // only applicable to client side pagination
+    this.loadingData = true;
+    this.selectedRows = [];
+    this.changeDetectorRef.detectChanges();
+    this.recordsPerPage = recordsPerPage;
+    this.currentPage = pageNo;
+    const {sort, sortField} = this.sortObj;
+
+    const gridData = JSON.parse(JSON.stringify(this.response.gridData)); // get deep clone
+    if (sort && sortField) {
+      gridData.sort(this.sortAscending(sortField));
+      if (sort === 'desc') {
+        gridData.reverse(); // sort Descending
+      }
+    }
+
+    const startingRecord = (this.recordsPerPage * this.currentPage) - this.recordsPerPage + 1;
+    const endingRecord = this.recordsPerPage * this.currentPage;
+    const gridItemsForDisplay = [];
+    for (let i = startingRecord - 1; i < endingRecord; i++) {
+      if (gridData[i]) {
+        gridItemsForDisplay.push(gridData[i]);
+      } else {
+        break;
+      }
+    }
+    this.gridItems = gridItemsForDisplay;
+    this.loadingData = false;
+    this.changeDetectorRef.detectChanges();
+    document.getElementById('amdgScrollViewport').scrollTop = 0;
+    setTimeout(() => {
+      this.calculateGridWidth();
+    }, 100);
   }
 
   private linkCreationInterceptor(gridData): any[] {

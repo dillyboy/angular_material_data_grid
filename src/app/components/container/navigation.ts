@@ -147,7 +147,8 @@ export const navigation = [
     panelIcon: '',
     openWhen: [
       '/examples/serverBindGrid',
-      '/examples/clientSidePagination'
+      '/examples/clientSidePagination',
+      '/examples/reinitializeGrid'
     ],
     children: [
       {
@@ -161,6 +162,12 @@ export const navigation = [
         headingIcon: '',
         highLightWhen: ['/examples/serverBindGrid'],
         route: '/examples/serverBindGrid'
+      },
+      {
+        headingName: 'Reinitialize Grid',
+        headingIcon: '',
+        highLightWhen: ['/examples/reinitializeGrid'],
+        route: '/examples/reinitializeGrid'
       }
     ]
   },

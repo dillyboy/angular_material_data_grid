@@ -32,6 +32,7 @@ export class StringFilterComponent implements OnInit {
   ];
   selection = new FormControl('contains', Validators.required);
   value = new FormControl(null, [Validators.required]);
+  filterParam = '';
   invalidValue = false;
   @ViewChild('menuTrigger') menu: MatMenuTrigger;
   @ViewChild('fromElement') fromElement: ElementRef;
@@ -45,9 +46,11 @@ export class StringFilterComponent implements OnInit {
       this.selection.setValue(this.initialFilter.operator);
       this.filterApplied = true;
       if (this.initialFilter.operator === 'blank') {
-        // this.value.setValue('Is Empty');
+        this.filterParam = 'Is Empty';
+        this.value.setValue('Is Empty');
         this.value.disable();
       } else {
+        this.filterParam = this.initialFilter.value;
         this.value.setValue(this.initialFilter.value);
       }
     }
@@ -98,6 +101,7 @@ export class StringFilterComponent implements OnInit {
     } else {
       this.filterApplied = false;
     }
+    this.filterParam = this.value.value;
     this.menu.closeMenu();
   }
 

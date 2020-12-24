@@ -123,11 +123,11 @@ export class DemoComponent implements OnInit {
     //   operator: 'eq',
     //   value: 'MALE'
     // },
-    // {
-    //   field: 'email',
-    //   operator: 'blank',
-    //   value: ''
-    // }
+    {
+      field: 'email',
+      operator: 'contains',
+      value: '.com'
+    }
   ];
 
   ngOnInit(): void {

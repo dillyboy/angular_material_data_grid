@@ -45,7 +45,7 @@
         <thead>
         <th *ngIf="selection" class="amdg-selection"></th>
         <th *ngFor="let heading of headings | columnFilter;" [style.width]="heading.width">
-          <amdg-filter-header [heading]="heading" (filter)="filter($event)"></amdg-filter-header>
+          <amdg-filter-header [initialFilters]="initialFilters" [heading]="heading" (filter)="filter($event)"></amdg-filter-header>
         </th>
         </thead>
       </table>

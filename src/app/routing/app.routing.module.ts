@@ -23,6 +23,7 @@ import { VirtualScrollingComponent } from '../pages/virtual-scrolling/virtual-sc
 import { ServerBindGridExampleComponent } from '../pages/server-bind-grid-example/server-bind-grid-example.component';
 import { ClientSidePaginationGridExampleComponent } from '../pages/client-side-pagination-grid-example/client-side-pagination-grid-example.component';
 import { ReinitializeGridExampleComponent } from '../pages/reinitialize-grid-example/reinitialize-grid-example.component';
+import { PreconfiguredFiltersExampleComponent } from '../pages/preconfigured-filters-example/preconfigured-filters-example.component';
 
 const routes: Routes = [
   { path: '' , redirectTo: 'overview', pathMatch: 'full' },
@@ -62,6 +63,7 @@ const routes: Routes = [
       { path: 'clientSidePagination', component: ClientSidePaginationGridExampleComponent },
       { path: 'serverBindGrid', component: ServerBindGridExampleComponent },
       { path: 'reinitializeGrid', component: ReinitializeGridExampleComponent },
+      { path: 'preconfiguredFilters', component: PreconfiguredFiltersExampleComponent },
     ]
   }
 ];

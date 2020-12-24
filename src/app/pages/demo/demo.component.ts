@@ -112,6 +112,24 @@ export class DemoComponent implements OnInit {
   /* Column configuration which will be passed to grid */
   headings: GridHeading[] = null;
 
+  initialFilters = [
+    // {
+    //   field: 'id',
+    //   operator: 'between',
+    //   value: '10-20'
+    // },
+    // {
+    //   field: 'gender',
+    //   operator: 'eq',
+    //   value: 'MALE'
+    // },
+    // {
+    //   field: 'email',
+    //   operator: 'blank',
+    //   value: ''
+    // }
+  ];
+
   ngOnInit(): void {
     /* Custom code that can be used to either retrieve user's column preference from local storage
        or from the original configuration based on availability.

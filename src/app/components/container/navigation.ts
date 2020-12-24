@@ -148,7 +148,8 @@ export const navigation = [
     openWhen: [
       '/examples/serverBindGrid',
       '/examples/clientSidePagination',
-      '/examples/reinitializeGrid'
+      '/examples/reinitializeGrid',
+      '/examples/preconfiguredFilters'
     ],
     children: [
       {
@@ -168,6 +169,12 @@ export const navigation = [
         headingIcon: '',
         highLightWhen: ['/examples/reinitializeGrid'],
         route: '/examples/reinitializeGrid'
+      },
+      {
+        headingName: 'Preconfigured Filters',
+        headingIcon: '',
+        highLightWhen: ['/examples/preconfiguredFilters'],
+        route: '/examples/preconfiguredFilters'
       }
     ]
   },

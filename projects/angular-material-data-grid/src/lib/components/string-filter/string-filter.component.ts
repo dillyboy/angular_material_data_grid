@@ -1,4 +1,14 @@
-import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatMenuTrigger } from '@angular/material/menu';
 
@@ -7,8 +17,9 @@ import { MatMenuTrigger } from '@angular/material/menu';
   templateUrl: './string-filter.component.html',
   styleUrls: ['./string-filter.component.scss']
 })
-export class StringFilterComponent {
+export class StringFilterComponent implements OnInit {
 
+  @Input() initialFilter = null;
   @Output() filter: any = new EventEmitter<any>();
   filterApplied = false;
   stringFilterTypes = [
@@ -26,7 +37,21 @@ export class StringFilterComponent {
   @ViewChild('fromElement') fromElement: ElementRef;
   @ViewChild('valueElement') valueElement: ElementRef;
 
-  constructor() { }
+  constructor() {
+  }
+
+  ngOnInit(): void {
+    if (this.initialFilter) {
+      this.selection.setValue(this.initialFilter.operator);
+      this.filterApplied = true;
+      if (this.initialFilter.operator === 'blank') {
+        // this.value.setValue('Is Empty');
+        this.value.disable();
+      } else {
+        this.value.setValue(this.initialFilter.value);
+      }
+    }
+  }
 
   menuOpened(): void {
     this.valueElement.nativeElement.focus();

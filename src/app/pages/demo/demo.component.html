@@ -4,6 +4,7 @@
     [selection]="true"
     [columnControl]="true"
     [serverSidePagination]="true"
+    [initialFilters]="initialFilters"
     (responseEmit)="responseReceived($event)"
     (selectionEmit)="selectionChanged($event)"
     (filtersChangedEmit)="filtersChanged($event)"

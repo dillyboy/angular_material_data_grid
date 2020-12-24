@@ -9,7 +9,8 @@
         <ng-container *ngIf="heading.type === 'string' || heading.type === 'url'">
             <ng-container [ngSwitch]="heading.filterType">
                 <amdg-multi-select *ngSwitchCase="'multi-select'"
-                        class="amdg-w-100" [filterConfig]="heading.other"
+                        class="amdg-w-100"
+                        [filterConfig]="heading.other"
                         (filter)="filterObjCreated($event)">
                 </amdg-multi-select>
                 <amdg-tag-filter *ngSwitchCase="'tag'"
@@ -18,6 +19,7 @@
                 </amdg-tag-filter>
                 <amdg-string-filter *ngSwitchDefault
                         class="amdg-w-100"
+                        [initialFilter]="initialFilter"
                         (filter)="filterObjCreated($event)">
                 </amdg-string-filter>
             </ng-container>

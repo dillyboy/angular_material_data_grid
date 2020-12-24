@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AngularMaterialDataGridModule } from 'angular-material-data-grid';
-// import { AngularMaterialDataGridModule } from '../../projects/angular-material-data-grid/src/lib/angular-material-data-grid.module';
+// import { AngularMaterialDataGridModule } from 'angular-material-data-grid';
+import { AngularMaterialDataGridModule } from '../../projects/angular-material-data-grid/src/lib/angular-material-data-grid.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { AppRoutingModule } from './routing/app.routing.module';
@@ -42,6 +42,8 @@ import { FixedHeaderComponent } from './pages/fixed-header/fixed-header.componen
 import { VirtualScrollingComponent } from './pages/virtual-scrolling/virtual-scrolling.component';
 import { ServerBindGridExampleComponent } from './pages/server-bind-grid-example/server-bind-grid-example.component';
 import { ClientSidePaginationGridExampleComponent } from './pages/client-side-pagination-grid-example/client-side-pagination-grid-example.component';
+import { ReinitializeGridExampleComponent } from './pages/reinitialize-grid-example/reinitialize-grid-example.component';
+import { PreconfiguredFiltersExampleComponent } from './pages/preconfigured-filters-example/preconfigured-filters-example.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,9 @@ import { ClientSidePaginationGridExampleComponent } from './pages/client-side-pa
     FixedHeaderComponent,
     VirtualScrollingComponent,
     ServerBindGridExampleComponent,
-    ClientSidePaginationGridExampleComponent
+    ClientSidePaginationGridExampleComponent,
+    ReinitializeGridExampleComponent,
+    PreconfiguredFiltersExampleComponent
   ],
   imports: [
     BrowserModule,

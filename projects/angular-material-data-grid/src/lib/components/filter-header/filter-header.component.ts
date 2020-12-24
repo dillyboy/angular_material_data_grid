@@ -16,11 +16,18 @@ export class FilterHeaderComponent implements OnInit {
     disableFiltering: false,
     other: {}
   };
+  @Input() initialFilters: any = [];
   @Output() filter = new EventEmitter();
+
+  initialFilter = null;
 
   constructor() { }
 
   ngOnInit(): void {
+    const i = this.initialFilters.findIndex(filter => filter.field === this.heading.fieldName);
+    if (i !== -1) {
+      this.initialFilter = this.initialFilters[i];
+    }
   }
 
   filterObjCreated(ev): void {

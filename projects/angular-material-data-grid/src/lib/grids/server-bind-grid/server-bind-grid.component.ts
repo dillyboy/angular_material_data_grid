@@ -47,6 +47,7 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
   @Input() entity = null;
   @Input() transparency = false;
   @Input() serverSidePagination = false;
+  @Input() initialFilters = [];
 
   columnSearchParam = '';
   allGridItemsSelected = false;
@@ -98,6 +99,9 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.entity?.currentValue || changes.headings?.currentValue) {
+      if (changes.initialFilters?.firstChange) {
+        this.filters = this.initialFilters;
+      }
       this.getData({pageNo: 1, recordsPerPage: this.recordsPerPage});
     }
   }

@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class MultiSelectComponent implements OnInit {
 
   @Output() filter: any = new EventEmitter<any>();
+  @Input() initialFilter = null;
   @Input() filterConfig: any = {
     selectionMode: null,
     source: null,
@@ -41,12 +42,34 @@ export class MultiSelectComponent implements OnInit {
           this.selectionList = data.payload.map(item => {
             return {text : item[key], value: item[value], hide: false};
           });
+          this.setInitialFilters();
         }
       });
     } else { // internal
       this.selectionList = this.filterConfig.optionsObject.map(item => ({...item, hide: false}));
+      this.setInitialFilters();
     }
   }
+
+  private setInitialFilters(): void {
+    if (this.initialFilter) {
+      if (this.multiple) {
+        const values = this.initialFilter.value.split(',');
+        const filterValues = [];
+        values.forEach(val => {
+          filterValues.push(...this.selectionList.filter(selection => selection.value === val));
+        });
+        this.selection.setValue(filterValues);
+      } else {
+        const i = this.selectionList.findIndex(selection => selection.value === this.initialFilter.value);
+        if (i !== -1) {
+          this.filterApplied = true;
+          this.selection.setValue(this.selectionList[i]);
+        }
+      }
+    }
+  }
+
   menuOpened(): void {
     this.fromElement.nativeElement.focus();
   }

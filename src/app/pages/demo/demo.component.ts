@@ -127,6 +127,11 @@ export class DemoComponent implements OnInit {
     //   field: 'email',
     //   operator: 'contains',
     //   value: '.com'
+    // },
+    // {
+    //   field: 'country',
+    //   operator: 'eq',
+    //   value: 'Brazil,Japan'
     // }
   ];
 

@@ -10,6 +10,7 @@
             <ng-container [ngSwitch]="heading.filterType">
                 <amdg-multi-select *ngSwitchCase="'multi-select'"
                         class="amdg-w-100"
+                        [initialFilter]="initialFilter"
                         [filterConfig]="heading.other"
                         (filter)="filterObjCreated($event)">
                 </amdg-multi-select>

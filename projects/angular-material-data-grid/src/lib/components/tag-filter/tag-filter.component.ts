@@ -9,6 +9,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 })
 export class TagFilterComponent implements OnInit {
 
+  @Input() initialFilter = null;
   @Input() numbersOnly = false;
   @Output() filter: any = new EventEmitter<any>();
   @ViewChild('menuTrigger') menu: MatMenuTrigger;
@@ -23,6 +24,10 @@ export class TagFilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.initialFilter) {
+      this.tagValues = this.initialFilter.value.split(',');
+      this.filterApplied = true;
+    }
   }
 
   menuOpened(): void {

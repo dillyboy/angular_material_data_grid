@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatDatepicker } from '@angular/material/datepicker';
@@ -8,8 +8,9 @@ import { MatDatepicker } from '@angular/material/datepicker';
   templateUrl: './date-filter.component.html',
   styleUrls: ['./date-filter.component.scss']
 })
-export class DateFilterComponent {
+export class DateFilterComponent implements OnInit {
 
+  @Input() initialFilter = null;
   @Output() filter: any = new EventEmitter<any>();
   filterApplied = false;
   dateFilterTypes = [
@@ -29,6 +30,16 @@ export class DateFilterComponent {
   @ViewChild('picker') picker: MatDatepicker<any>;
 
   constructor() { }
+
+  ngOnInit(): void {
+    if (this.initialFilter) {
+      this.value.setValue(this.initialFilter.value);
+      const [start, end] = this.initialFilter.value.split('-');
+      this.range.controls.start.setValue(new Date(start));
+      this.range.controls.end.setValue(new Date(end));
+      this.filterApplied = true;
+    }
+  }
 
   menuOpened(): void {
     setTimeout(() => {

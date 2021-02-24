@@ -3,7 +3,11 @@
 
 
         <ng-container *ngIf="heading.type == 'date'">
-            <amdg-date-filter class="amdg-w-100" (filter)="filterObjCreated($event)"></amdg-date-filter>
+            <amdg-date-filter
+                class="amdg-w-100"
+                [initialFilter]="initialFilter"
+                (filter)="filterObjCreated($event)">
+            </amdg-date-filter>
         </ng-container>
 
         <ng-container *ngIf="heading.type === 'string' || heading.type === 'url'">

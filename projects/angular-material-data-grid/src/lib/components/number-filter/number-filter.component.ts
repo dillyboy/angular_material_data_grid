@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatMenuTrigger } from '@angular/material/menu';
 
@@ -7,8 +7,9 @@ import { MatMenuTrigger } from '@angular/material/menu';
   templateUrl: './number-filter.component.html',
   styleUrls: ['./number-filter.component.scss']
 })
-export class NumberFilterComponent {
+export class NumberFilterComponent implements OnInit{
 
+  @Input() initialFilter = null;
   @Output() filter: any = new EventEmitter<any>();
   filterApplied = false;
   numericFilterTypes = [
@@ -34,6 +35,21 @@ export class NumberFilterComponent {
   @ViewChild('valueElement') valueElement: ElementRef;
 
   constructor() { }
+
+  ngOnInit(): void {
+    if (this.initialFilter) {
+      this.selection.setValue(this.initialFilter.operator);
+      this.filterParam = this.initialFilter.value;
+      if (this.initialFilter.operator === 'between') {
+        const [start, end] = this.initialFilter.value.split('-');
+        this.range.controls.from.setValue(start);
+        this.range.controls.to.setValue(end);
+      } else {
+        this.value.setValue(this.initialFilter.value);
+      }
+      this.filterApplied = true;
+    }
+  }
 
   menuOpened(): void {
     if (this.selection.value === 'between') {

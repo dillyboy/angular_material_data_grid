@@ -32,7 +32,11 @@
         </ng-container>
 
         <ng-container *ngIf="heading.type === 'number'">
-            <amdg-number-filter class="amdg-w-100" (filter)="filterObjCreated($event)"></amdg-number-filter>
+            <amdg-number-filter
+                class="amdg-w-100"
+                [initialFilter]="initialFilter"
+                (filter)="filterObjCreated($event)">
+            </amdg-number-filter>
         </ng-container>
 
 

@@ -355,6 +355,9 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
         }, 100);
       } else {
         this.pageChanged({pageNo: this.currentPage, recordsPerPage: this.recordsPerPage});
+        this.initialFilters.forEach(filter => {
+          this.filter(filter);
+        });
       }
 
     });

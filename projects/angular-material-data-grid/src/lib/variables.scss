@@ -1,6 +1,6 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
-$warn: mat-color($mat-red, 600);
+$warn: mat.get-color-from-palette(mat.$red-palette, 600);
 $highlight-color: rgba(118, 118, 118, 0.1);
 $highlight-dark-color: rgba(118, 118, 118, 0.3);
 $font-size: 12px;

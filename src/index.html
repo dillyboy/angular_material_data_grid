@@ -22,6 +22,28 @@
   <meta name="theme-color" content="#ffffff">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script>
+    // This executes on chrome and EDGE only as tested
+    document.fonts.onloadingdone = function (fontFaceSetEvent) {
+      // console.log(fontFaceSetEvent.fontfaces) to see the available fonts which have been loaded
+      // and change the font family name according to your font family requirement
+      const fontName = 'Material Icons';
+      if (fontFaceSetEvent.fontfaces.filter(i => i.family === fontName).length > 0) {
+        addMakeIconsVisibleClass();
+      }
+    };
+
+    // Fallback - call below function if not chrome (or EDGE)
+    if (navigator.userAgent.toLowerCase().indexOf('chrome') === -1) {
+      addMakeIconsVisibleClass();
+    }
+
+    function addMakeIconsVisibleClass() {
+      let style = document.createElement('style');
+      style.innerHTML = 'mat-icon { opacity: 1 !important }';
+      document.getElementsByTagName('head')[0].appendChild(style);
+    }
+  </script>
 </head>
 <body class="mat-typography">
   <app-root></app-root>

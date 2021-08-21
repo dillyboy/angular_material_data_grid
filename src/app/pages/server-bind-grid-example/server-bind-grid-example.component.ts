@@ -124,15 +124,15 @@ export class ServerBindGridExampleComponent {
   ];
 
   /* Column configuration which will be passed to grid */
-  headings: GridHeading[] = null;
+  headings: GridHeading[] = [];
 
   ngOnInit(): void {
     /* Custom code that can be used to either retrieve user's column preference from local storage
        or from the original configuration based on availability.
        This can also be done by calling an API endpoint in production application's so that the user
        preferences will not be lost between sessions. */
-    const demoGridUserPreference: GridHeading[] = JSON.parse(localStorage.getItem(this.GRID_ID));
-    if (demoGridUserPreference) {
+    const demoGridUserPreference: GridHeading[] = JSON.parse(localStorage.getItem(this.GRID_ID) || '{}');
+    if (Object.entries(demoGridUserPreference).length > 0) {
       this.headings = demoGridUserPreference;
     } else {
       this.headings = this.initialHeadings;

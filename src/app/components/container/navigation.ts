@@ -149,7 +149,11 @@ export const navigation = [
       '/examples/serverBindGrid',
       '/examples/clientSidePagination',
       '/examples/reinitializeGrid',
-      '/examples/preconfiguredFilters'
+      '/examples/preconfiguredFilters',
+      '/examples/masterDetailGrid',
+      '/examples/masterDetailChildGrid',
+      '/examples/masterDetailHtml',
+      '/examples/openDialog'
     ],
     children: [
       {
@@ -175,6 +179,18 @@ export const navigation = [
         headingIcon: '',
         highLightWhen: ['/examples/preconfiguredFilters'],
         route: '/examples/preconfiguredFilters'
+      },
+      {
+        headingName: 'Master Detail Grid',
+        headingIcon: '',
+        highLightWhen: ['/examples/masterDetailGrid', '/examples/masterDetailChildGrid', '/examples/masterDetailHtml'],
+        route: '/examples/masterDetailGrid'
+      },
+      {
+        headingName: 'Open Dialog',
+        headingIcon: '',
+        highLightWhen: ['/examples/openDialog'],
+        route: '/examples/openDialog'
       }
     ]
   },

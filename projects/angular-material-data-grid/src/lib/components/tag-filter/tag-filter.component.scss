@@ -1,10 +1,10 @@
 @import './../../variables';
 
-.placeholder {
+.amdg-placeholder {
   opacity: .6;
 }
 
-.filter-container {
+.amdg-filter-container {
   width: 260px;
   min-height: 60px;
   display: block;
@@ -12,14 +12,14 @@
   overflow: hidden;
   font-size: 12px;
 
-  .tags-container {
+  .amdg-tags-container {
     max-height: 300px;
     overflow-y: auto;
   }
 }
 
-.filter-open-btn {
-  line-height: 26px;
+.amdg-filter-open-btn {
+  line-height: 26px !important;
   font-size: inherit;
   padding: 0 4px;
   width: 100%;
@@ -32,7 +32,7 @@
   }
 }
 
-.mat-select-arrow {
+.amdg-select-arrow {
   width: 0;
   height: 0;
   border-left: 5px solid transparent;
@@ -41,20 +41,20 @@
   margin: 0 4px;
 }
 
-.tag-input {
+.amdg-tag-input {
   width: calc(100% - 30px);
 }
 
-.additional-selection {
+.amdg-additional-selection {
   opacity: 0.75;
   font-size: 0.75em;
   color: rgba(0, 0, 0, 0.87);
 }
 
-.text-muted {
+.amdg-text-muted {
   opacity: .6;
 }
 
-.text-center {
+.amdg-text-center {
   text-align: center;
 }

@@ -1,5 +1,5 @@
 <mat-select
-    class="modified-mat-select"
+    class="amdg-modified-mat-select"
     placeholder="Unfiltered"
     #mySelect
     [formControl]="selection"
@@ -10,18 +10,18 @@
     [disableOptionCentering]="true"
     panelClass="amdg-custom-select-position">
   <mat-select-trigger>
-    <a mat-button disableRipple color="accent" class="filter-value" [ngClass]="{'grid-filter-applied-color amdg-font-weight-bold': filterApplied}">{{selection.value ? selection.value[0]?.text || selection.value.text : ''}}</a>
-    <span *ngIf="selection.value?.length > 1" class="additional-selection">
+    <a mat-button disableRipple color="accent" class="amdg-filter-value" [ngClass]="{'grid-filter-applied-color amdg-font-weight-bold': filterApplied}">{{selection.value ? selection.value[0]?.text || selection.value.text : ''}}</a>
+    <span *ngIf="selection.value?.length > 1" class="amdg-additional-selection">
         (+{{selection.value.length - 1}} {{selection.value?.length === 2 ? 'other' : 'others'}})
       </span>
   </mat-select-trigger>
   <div class="amdg-layout-container amdg-mt-2">
     <div>
-      <button *ngIf="multiple" mat-stroked-button type="button" (click)="close()" class="amdg-small-stroked-button amdg-mr-2 mat-primary">Filter</button>
-      <button *ngIf="multiple" mat-stroked-button type="button" (click)="toggle()" class="amdg-small-stroked-button mat-accent">Select {{allSelected ? 'None': 'All'}}</button>
+      <button *ngIf="multiple" mat-stroked-button type="button" color="primary" (click)="close()" class="amdg-small-stroked-button amdg-mr-2">Filter</button>
+      <button *ngIf="multiple" mat-stroked-button type="button" color="accent" (click)="toggle()" class="amdg-small-stroked-button">Select {{allSelected ? 'None': 'All'}}</button>
     </div>
 
-    <button mat-stroked-button type="button" (click)="reset()" class="mat-warn amdg-small-stroked-button">Reset</button>
+    <button mat-stroked-button type="button" color="warn" (click)="reset()" class="amdg-small-stroked-button">Reset</button>
   </div>
   <div class="amdg-layout-container amdg-mt-2">
     <mat-form-field class="amdg-w-100">
@@ -31,7 +31,7 @@
       </button>
     </mat-form-field>
   </div>
-  <div id="list-container" >
+  <div id="amdg-list-container" >
     <mat-option class="amdg-mat-option" *ngFor="let item of selectionList" [value]="item" [ngClass]="{'amdg-d-none': item.hide}">{{item.text}}</mat-option>
   </div>
 </mat-select>

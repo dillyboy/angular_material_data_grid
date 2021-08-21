@@ -13,6 +13,10 @@
   padding: 0 8px;
 }
 
+.amdg-m-0 {
+  margin: 0 !important;
+}
+
 .amdg-mt-2 {
   margin-top: .5rem !important;
 }
@@ -35,6 +39,18 @@
 
 .amdg-mr-4 {
   margin-right: 1rem !important;
+}
+
+.amdg-mb-2 {
+  margin-bottom: .5rem !important;
+}
+
+.amdg-p-2 {
+  padding: .5rem !important;
+}
+
+.amdg-p-0 {
+  padding: 0 !important;
 }
 
 .amdg-p-3 {
@@ -67,6 +83,10 @@
 
 .amdg-fs-20 {
   font-size: 20px;
+}
+
+.amdg-text-center {
+  text-align: center !important;
 }
 
 .amdg-fs-40 {
@@ -126,24 +146,13 @@
 
 body {
   &.darkMode {
-    .modified-mat-select, .modified-input, .filter-open-btn {
+    .amdg-modified-mat-select, .amdg-filter-open-btn {
       background: #424242;
       color: white;
     }
     .cdk-drag-preview, .mat-menu-panel {
       color: white;
       background: #424242;
-    }
-    mat-form-field {
-      color: white;
-    }
-
-    .modified-input::placeholder  {
-      color: white;
-      opacity: 0.6;
-    }
-    .additional-selection {
-      color: white;
     }
 
     #grid {

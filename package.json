@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "lib:build": "ng build angular-material-data-grid",
+    "lib:build": "ng build angular-material-data-grid --configuration=production",
     "lib:package": "cd dist/angular-material-data-grid && npm publish"
   },
   "private": true,

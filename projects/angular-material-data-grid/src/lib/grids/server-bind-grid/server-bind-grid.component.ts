@@ -19,10 +19,12 @@ import GridResponseInterface from '../../interfaces/grid-response';
 import GridFilterItemInterface from '../../interfaces/grid-filter-item';
 import GridButtonClickInterface from '../../interfaces/grid-button-click-interface';
 import GridHeadingInterface from '../../interfaces/grid-heading-type';
+import GridMasterDetailConfigInterface from '../../interfaces/grid-master-detail-config-type';
 import {CdkVirtualScrollViewport} from '@angular/cdk/scrolling';
 import {MatDialog} from '@angular/material/dialog';
 import {moveItemInArray} from '@angular/cdk/drag-drop';
 import {GridService} from '../grid.service';
+
 
 @Component({
   selector: 'amdg-grid',
@@ -48,6 +50,18 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
   @Input() transparency = false;
   @Input() serverSidePagination = false;
   @Input() initialFilters = [];
+  @Input() expandable = false;
+  @Input() expandableConfig: GridMasterDetailConfigInterface = {
+    type: 'html',
+    multipleExpansion: false,
+    template: '<p>Pass the expandableConfig object into the grid</p>',
+    childGrid: {
+      headings: [],
+      url: '',
+      entity: {},
+      serverSidePagination: false
+    }
+  };
 
   columnSearchParam = '';
   allGridItemsSelected = false;
@@ -74,6 +88,7 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
   gridPostSubscription = null;
 
   fullscreen = false;
+  allRowsExpanded = false;
 
   @ViewChild('gridContainer') gridContainer: ElementRef;
   @ViewChild('cdkVirtualScrollViewport') cdkVirtualScrollViewport: CdkVirtualScrollViewport;
@@ -124,13 +139,13 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
   }
 
   scrollLeft(): void {
-    const scrollLeft = document.getElementById('amdgScrollViewport').scrollLeft;
-    document.getElementById('amdgScrollViewport').scrollLeft = scrollLeft - this.gridWidth * 80 / 100;
+    const scrollLeft = this.cdkVirtualScrollViewport.elementRef.nativeElement.scrollLeft;
+    this.cdkVirtualScrollViewport.elementRef.nativeElement.scrollLeft = scrollLeft - this.gridWidth * 80 / 100;
   }
 
   scrollRight(): void {
-    const scrollLeft = document.getElementById('amdgScrollViewport').scrollLeft;
-    document.getElementById('amdgScrollViewport').scrollLeft = this.gridWidth * 80 / 100 + scrollLeft;
+    const scrollLeft = this.cdkVirtualScrollViewport.elementRef.nativeElement.scrollLeft;
+    this.cdkVirtualScrollViewport.elementRef.nativeElement.scrollLeft = this.gridWidth * 80 / 100 + scrollLeft;
   }
 
   scrollChanged(ev?): void {
@@ -138,7 +153,7 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
     if (ev) {
       elem = ev.target;
     } else {
-      elem = document.getElementById('amdgScrollViewport') as HTMLElement;
+      elem = this.cdkVirtualScrollViewport.elementRef.nativeElement as HTMLElement;
     }
     this.scrollRemainingDistanceToLeft = elem.scrollLeft;
     this.scrollRemainingDistanceToRight = Math.trunc(elem.scrollWidth - elem.scrollLeft - this.gridWidth + this.horizontalScrollBarWidth);
@@ -294,6 +309,35 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
     }
   }
 
+  toggleAllRowsExpansion(): void {
+    if (this.loadingData === false) { // do not allow to toggle when data is loading
+      this.allRowsExpanded = !this.allRowsExpanded;
+      this.gridItems.forEach(item => {
+        if (item.gridItemExpanded === undefined) {
+          item.gridItemExpanded = true;
+        } else {
+          item.gridItemExpanded = !item.gridItemExpanded;
+        }
+      });
+    }
+  }
+
+  clickRow($event, item, index): void {
+    if (this.expandableConfig.multipleExpansion === false) {
+      this.gridItems.forEach((eachItem, itemIndex) => {
+        if (itemIndex !== index) {
+          eachItem.gridItemExpanded = false;
+        }
+      });
+    }
+
+    if (item.gridItemExpanded === undefined) {
+      item.gridItemExpanded = true;
+    } else {
+      item.gridItemExpanded = !item.gridItemExpanded;
+    }
+  }
+
   getSelection(): void {
     this.selectedRows = [];
     this.allCheckBoxesSelected = true;
@@ -349,7 +393,7 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
       if (this.serverSidePagination) {
         this.loadingData = false;
         this.changeDetectorRef.detectChanges();
-        document.getElementById('amdgScrollViewport').scrollTop = 0;
+        this.cdkVirtualScrollViewport.elementRef.nativeElement.scrollTop = 0;
         setTimeout(() => {
           this.calculateGridWidth();
         }, 100);
@@ -404,7 +448,7 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
     this.gridItems = gridItemsForDisplay;
     this.loadingData = false;
     this.changeDetectorRef.detectChanges();
-    document.getElementById('amdgScrollViewport').scrollTop = 0;
+    this.cdkVirtualScrollViewport.elementRef.nativeElement.scrollTop = 0;
     setTimeout(() => {
       this.calculateGridWidth();
     }, 100);

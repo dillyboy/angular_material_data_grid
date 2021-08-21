@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AngularMaterialDataGridModule } from 'angular-material-data-grid';
-// import { AngularMaterialDataGridModule } from '../../projects/angular-material-data-grid/src/lib/angular-material-data-grid.module';
+// import { AngularMaterialDataGridModule } from 'angular-material-data-grid';
+import { AngularMaterialDataGridModule } from '../../projects/angular-material-data-grid/src/lib/angular-material-data-grid.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { AppRoutingModule } from './routing/app.routing.module';
@@ -19,6 +19,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
 import { OverviewComponent } from './pages/overview/overview.component';
 import { ContainerComponent } from './components/container/container.component';
 import { DemoComponent } from './pages/demo/demo.component';
@@ -44,6 +45,12 @@ import { ServerBindGridExampleComponent } from './pages/server-bind-grid-example
 import { ClientSidePaginationGridExampleComponent } from './pages/client-side-pagination-grid-example/client-side-pagination-grid-example.component';
 import { ReinitializeGridExampleComponent } from './pages/reinitialize-grid-example/reinitialize-grid-example.component';
 import { PreconfiguredFiltersExampleComponent } from './pages/preconfigured-filters-example/preconfigured-filters-example.component';
+import { CustomDemoComponent } from './pages/custom-demo/custom-demo.component';
+import { MasterDetailExampleComponent } from './pages/master-detail-example/master-detail-example.component';
+import { MasterDetailChildGridExampleComponent } from './pages/master-detail-child-grid-example/master-detail-child-grid-example.component';
+import { MasterDetailHtmlExampleComponent } from './pages/master-detail-html-example/master-detail-html-example.component';
+import { OpenDialogComponent } from './pages/open-dialog/open-dialog.component';
+import { GridWithinDialogComponent } from './pages/open-dialog/grid-within-dialog/grid-within-dialog.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +78,13 @@ import { PreconfiguredFiltersExampleComponent } from './pages/preconfigured-filt
     ServerBindGridExampleComponent,
     ClientSidePaginationGridExampleComponent,
     ReinitializeGridExampleComponent,
-    PreconfiguredFiltersExampleComponent
+    PreconfiguredFiltersExampleComponent,
+    CustomDemoComponent,
+    MasterDetailExampleComponent,
+    MasterDetailChildGridExampleComponent,
+    MasterDetailHtmlExampleComponent,
+    OpenDialogComponent,
+    GridWithinDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -87,6 +100,7 @@ import { PreconfiguredFiltersExampleComponent } from './pages/preconfigured-filt
     MatRippleModule,
     MatListModule,
     MatCardModule,
+    MatMenuModule,
     MatTabsModule,
     HighlightModule,
     MatTooltipModule
@@ -103,6 +117,9 @@ import { PreconfiguredFiltersExampleComponent } from './pages/preconfigured-filt
         fullLibraryLoader: () => import('highlight.js'),
       }
     }
+  ],
+  entryComponents: [
+    GridWithinDialogComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,22 @@
+.layout-container {
+  margin-left: -20px;
+  margin-right: -20px;
+}
+
+.flex-item {
+  flex-grow:1;
+  margin: 15px;
+  border-radius: 4px;
+  border: 1px solid rgba(118, 118, 118, 0.26);
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    border-bottom: 1px solid rgba(118, 118, 118, 0.26) ;
+    border-radius: 4px 4px 0px 0px;
+  }
+}
+
+.flex-item:hover {
+  background: rgba(118, 118, 118, 0.1);
+}

@@ -16,7 +16,7 @@ export default interface GridHeadingInterface {
      * type - A column consists of multiple data types. Based on the value given here the column filtration and the way the data
      *        is displayed may vary
      */
-    type: 'string' | 'url' | 'number' | 'date' | 'button-group';
+    type: 'string' | 'url' | 'number' | 'date' | 'button-group' | 'image-url';
 
     /**
      * width - This refers to the column's width which can be given as a px value or a percentage. Eg: '150px' or '25%'

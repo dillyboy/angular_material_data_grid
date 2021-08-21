@@ -1,39 +1,39 @@
-<button class="filter-open-btn amdg-layout-container" [color]="filterApplied ? 'accent': 'none'" mat-stroked-button type="button" #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="numberFilterMenu" (menuOpened)="menuOpened()">
-    <span *ngIf="!filterApplied" class="amdg-text-truncate placeholder amdg-font-weight-normal">Unfiltered</span>
-    <span *ngIf="filterApplied" class="amdg-text-truncate" [matTooltip]="value.value">{{value.value}}</span>
-    <div class="mat-select-arrow"></div>
+<button class="amdg-filter-open-btn amdg-layout-container" [color]="filterApplied ? 'accent': 'none'" mat-stroked-button type="button" #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="numberFilterMenu" (menuOpened)="menuOpened()">
+  <span *ngIf="!filterApplied" class="amdg-text-truncate amdg-placeholder amdg-font-weight-normal">Unfiltered</span>
+  <span *ngIf="filterApplied" class="amdg-text-truncate" [matTooltip]="value.value">{{value.value}}</span>
+  <div class="amdg-select-arrow"></div>
 </button>
 
 <mat-menu #numberFilterMenu="matMenu" class="amdg-overflow-hidden">
-    <div class="filter-container" (click)="$event.stopPropagation()" (keydown.tab)="$event.stopPropagation()" (keydown.shift.tab)="$event.stopPropagation()">
-        <div class="amdg-layout-container">
-            <button mat-stroked-button type="button" (click)="validate()" class="amdg-mr-2 mat-primary amdg-small-stroked-button">Filter</button>
-            <button mat-stroked-button type="button" (click)="reset(true)" class="mat-warn amdg-small-stroked-button">Reset</button>
-        </div>
-        <div class="amdg-layout-container">
-            <mat-form-field class="amdg-w-100 amdg-mt-3">
-                <mat-select [formControl]="selection" placeholder="Logic" (selectionChange)="changeSelection()">
-                    <mat-option class="amdg-mat-option" *ngFor="let item of dateFilterTypes" [value]="item.value">{{item.text}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-
-        <div class="amdg-layout-container">
-            <mat-form-field class="amdg-w-100">
-                <mat-label>Enter a date range</mat-label>
-                <mat-date-range-input [formGroup]="range" [rangePicker]="picker" [disabled]="selection.value === 'blank'">
-                    <input readonly matStartDate formControlName="start" placeholder="Start date" (click)="picker.open()">
-                    <input readonly matEndDate formControlName="end" placeholder="End date" (click)="picker.open()">
-                </mat-date-range-input>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-date-range-picker #picker></mat-date-range-picker>
-
-                <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-                <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
-            </mat-form-field>
-        </div>
-        <div class="amdg-layout-container">
-            <span *ngIf="invalidValue" class="invalid-error">Invalid value entered</span>
-        </div>
+  <div class="amdg-filter-container" (click)="$event.stopPropagation()" (keydown.tab)="$event.stopPropagation()" (keydown.shift.tab)="$event.stopPropagation()">
+    <div class="amdg-layout-container">
+      <button mat-stroked-button type="button" color="primary" (click)="validate()" class="amdg-mr-2 amdg-small-stroked-button">Filter</button>
+      <button mat-stroked-button type="button" color="warn" (click)="reset(true)" class="amdg-small-stroked-button">Reset</button>
     </div>
+    <div class="amdg-layout-container">
+      <mat-form-field class="amdg-w-100 amdg-mt-3">
+        <mat-select [formControl]="selection" placeholder="Logic" (selectionChange)="changeSelection()">
+          <mat-option class="amdg-mat-option" *ngFor="let item of dateFilterTypes" [value]="item.value">{{item.text}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="amdg-layout-container">
+      <mat-form-field class="amdg-w-100">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [formGroup]="range" [rangePicker]="picker" [disabled]="selection.value === 'blank'">
+          <input readonly matStartDate formControlName="start" placeholder="Start date" (click)="picker.open()">
+          <input readonly matEndDate formControlName="end" placeholder="End date" (click)="picker.open()">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+
+        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+        <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="amdg-layout-container">
+      <span *ngIf="invalidValue" class="amdg-invalid-error">Invalid value entered</span>
+    </div>
+  </div>
 </mat-menu>

@@ -1,6 +1,6 @@
 @import './../../variables';
 
-.filter-value {
+.amdg-filter-value {
   padding: 0;
   display: inline;
   min-width: auto;
@@ -8,22 +8,22 @@
   line-height: normal;
 }
 
-.modified-mat-select {
+.amdg-modified-mat-select {
   border: 1px solid $highlight-dark-color;
   border-radius: 4px;
   padding: 0 4px;
-  height: 26px;
-  line-height: 26px;
+  height: 28px;
+  line-height: 28px !important;
   background: white;
   box-sizing: border-box;
 }
 
-.additional-selection {
+.amdg-additional-selection {
   opacity: 0.75;
   font-size: 0.75em;
 }
 
-#list-container {
+#amdg-list-container {
   max-height: 165px;
   overflow-y: scroll;
 }

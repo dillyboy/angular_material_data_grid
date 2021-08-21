@@ -18,7 +18,6 @@ imports: [
 
   usage = {
     html: `
-<!--Use <amdg-grid> for client side paginated grids-->
 <!--Below is an example of a server side paginated grid-->
 
 <amdg-grid

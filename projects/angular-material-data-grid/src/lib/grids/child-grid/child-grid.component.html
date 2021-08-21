@@ -1,0 +1,77 @@
+<mat-card id="grid" style="display: table;">
+  <table>
+    <thead>
+      <th *ngFor="let heading of headings | columnFilter;" [style.width]="heading.width">
+        <amdg-sort-header [heading]="heading" (filter)="sort($event)"></amdg-sort-header>
+      </th>
+    </thead>
+    <thead>
+      <th *ngFor="let heading of headings | columnFilter;" [style.width]="heading.width">
+        <amdg-filter-header [heading]="heading" (filter)="filter($event)"></amdg-filter-header>
+      </th>
+    </thead>
+    <mat-progress-bar *ngIf="loadingData" mode="indeterminate" class="amdg-position-absolute"></mat-progress-bar>
+    <tbody>
+    <ng-container *ngFor="let item of gridItems; let odd=odd; let i = index;">
+      <tr [ngClass]="{ odd: odd, rowSelected: item.gridItemSelected == true}">
+        <td *ngFor="let heading of headings | columnFilter;" [style.textAlign]="heading.align" [style.width]="heading.width">
+
+          <ng-container [ngSwitch]="heading.type">
+            <!--URL TYPE-->
+            <span *ngSwitchCase="'url'">
+              <ng-container *ngIf="heading.other.source === 'external'; else internalLink">
+                <a mat-button disableRipple color="primary" class="amdg-link" [ngClass]="{'amdg-link-disabled': loadingData}" *ngIf="heading.other && heading.other['urlTemplate']" [href]="item[heading.fieldName + 'Link'] + (item[heading.fieldName + 'QueryParams'] ? '?' + item[heading.fieldName + 'QueryParams'] : '')">{{item[heading.fieldName]}}</a>
+                <mat-icon color="primary" class="amdg-fs-12 amdg-icon-external-link" [ngClass]="{'link-amdg-link-disabled': loadingData}" *ngIf="heading.other && heading.other.openTab && item[heading.fieldName]" (click)="openExternalLinkInNewTab(item[heading.fieldName + 'Link'], item[heading.fieldName + 'QueryParams'])">launch</mat-icon>
+              </ng-container>
+              <ng-template #internalLink>
+                <a mat-button disableRipple color="primary" class="amdg-link" [ngClass]="{'link-amdg-link-disabled': loadingData}" *ngIf="heading.other && heading.other['urlTemplate']" [routerLink]="item[heading.fieldName + 'Link']" [queryParams]="item[heading.fieldName + 'QueryParams']">{{item[heading.fieldName]}}</a>
+                <mat-icon color="primary" class="amdg-fs-12 amdg-icon-external-link" [ngClass]="{'link-amdg-link-disabled': loadingData}" *ngIf="heading.other && heading.other.openTab && item[heading.fieldName]" (click)="openLinkInNewTab(item[heading.fieldName + 'Link'], item[heading.fieldName + 'QueryParams'])">launch</mat-icon>
+              </ng-template>
+            </span>
+
+            <!--IMAGE URL-->
+            <span *ngSwitchCase="'image-url'">
+              <img [src]="item[heading.fieldName]" alt="grid image item" width="80px" height="80px" class="amdg-mt-2 amdg-mb-2">
+            </span>
+
+            <!--BUTTON GROUP-->
+            <span *ngSwitchCase="'button-group'">
+              <ng-container *ngIf="heading.other && heading.other.buttons.length === 1">
+                <button [disabled]="item[heading.other.buttons[0].disableField]" color="primary" class="amdg-button-group-btn amdg-mr-2" type="button" mat-button (click)="goToLink(heading.fieldName, item, heading.other.buttons[0].display)">
+                  <mat-icon class="amdg-mr-2">{{heading.other.buttons[0].icon}}</mat-icon>
+                  {{heading.other.buttons[0].display}}
+                </button>
+              </ng-container>
+              <ng-container *ngIf="heading.other && heading.other.buttons.length > 1">
+                <button class="amdg-button-group-btn" mat-button color="primary" [matMenuTriggerFor]="gridButtonListMenu" [disabled]="item[heading.other.mainButton.disableField]"> {{heading.other.mainButton.display}} <mat-icon>{{heading.other.mainButton.icon}}</mat-icon></button>
+                <mat-menu #gridButtonListMenu="matMenu" xPosition="before">
+                  <button class="amdg-mat-menu-item" *ngFor="let btn of heading.other.buttons" [disabled]="item[btn.disableField]" mat-menu-item (click)="goToLink(heading.fieldName, item, btn.display)">
+                    <mat-icon class="amdg-mr-2 amdg-fs-20">{{btn.icon}}</mat-icon>
+                    {{btn.display}}
+                  </button>
+                </mat-menu>
+              </ng-container>
+            </span>
+
+            <!--ANY OTHER TYPE-->
+            <span *ngSwitchDefault [title]="item[heading.title] ? item[heading.title] : item[heading.fieldName]"> {{item[heading.fieldName]}}</span>
+          </ng-container>
+        </td>
+      </tr>
+
+    </ng-container>
+    </tbody>
+
+  </table>
+
+  <amdg-pagination
+      [loadingData]="loadingData"
+      [noOfTotalRecords]="serverSidePagination ? response.totalCount : response.gridData.length"
+      [noOfRecords]="response.gridData.length"
+      [noOfSelectedRow]="selectedRows.length"
+      [currentPage]="currentPage"
+      [showToggleFullScreen]="false"
+      [showNoOfRecords]="false"
+      (pageChanged)="serverSidePagination ? getData($event) : pageChanged($event)">
+  </amdg-pagination>
+</mat-card>

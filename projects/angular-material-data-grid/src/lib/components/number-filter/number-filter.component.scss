@@ -1,10 +1,10 @@
 @import './../../variables';
 
-.placeholder {
+.amdg-placeholder {
   opacity: .6;
 }
 
-.filter-container {
+.amdg-filter-container {
   width: 260px;
   min-height: 60px;
   display: block;
@@ -13,8 +13,8 @@
   font-size: 12px;
 }
 
-.filter-open-btn {
-  line-height: 26px;
+.amdg-filter-open-btn {
+  line-height: 26px !important;
   font-size: inherit;
   padding: 0 4px;
   width: 100%;
@@ -27,7 +27,7 @@
   }
 }
 
-.mat-select-arrow {
+.amdg-select-arrow {
   width: 0;
   height: 0;
   border-left: 5px solid transparent;
@@ -41,7 +41,7 @@ mat-form-field {
   margin: 0;
 }
 
-.invalid-range-error {
+.amdg-invalid-range-error {
   color: $warn;
   font-size: 12px;
 }

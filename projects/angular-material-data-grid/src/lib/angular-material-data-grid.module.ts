@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ServerBindGridComponent } from './grids/server-bind-grid/server-bind-grid.component';
+import { ChildGridComponent } from './grids/child-grid/child-grid.component';
+import { TemplatePipe } from './grids/server-bind-grid/template.pipe';
+import { TemplateObjectPipe } from './grids/server-bind-grid/template_object.pipe';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { ColumnFilterPipe } from './components/pipes/column-filter.pipe';
@@ -48,7 +51,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     DateFilterComponent,
     StringFilterComponent,
     TagFilterComponent,
-    ServerBindGridComponent
+    ServerBindGridComponent,
+    TemplatePipe,
+    TemplateObjectPipe,
+    ChildGridComponent
   ],
   imports: [
     CommonModule,

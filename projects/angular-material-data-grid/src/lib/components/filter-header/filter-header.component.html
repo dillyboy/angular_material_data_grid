@@ -1,44 +1,44 @@
-<div class="filter-component">
-    <ng-container *ngIf="heading.disableFiltering !== true">
+<div class="amdg-filter-component">
+  <ng-container *ngIf="heading.disableFiltering !== true">
 
 
-        <ng-container *ngIf="heading.type == 'date'">
-            <amdg-date-filter
-                class="amdg-w-100"
-                [initialFilter]="initialFilter"
-                (filter)="filterObjCreated($event)">
-            </amdg-date-filter>
-        </ng-container>
-
-        <ng-container *ngIf="heading.type === 'string' || heading.type === 'url'">
-            <ng-container [ngSwitch]="heading.filterType">
-                <amdg-multi-select *ngSwitchCase="'multi-select'"
-                        class="amdg-w-100"
-                        [initialFilter]="initialFilter"
-                        [filterConfig]="heading.other"
-                        (filter)="filterObjCreated($event)">
-                </amdg-multi-select>
-                <amdg-tag-filter *ngSwitchCase="'tag'"
-                        class="amdg-w-100"
-                        [initialFilter]="initialFilter"
-                        (filter)="filterObjCreated($event)">
-                </amdg-tag-filter>
-                <amdg-string-filter *ngSwitchDefault
-                        class="amdg-w-100"
-                        [initialFilter]="initialFilter"
-                        (filter)="filterObjCreated($event)">
-                </amdg-string-filter>
-            </ng-container>
-        </ng-container>
-
-        <ng-container *ngIf="heading.type === 'number'">
-            <amdg-number-filter
-                class="amdg-w-100"
-                [initialFilter]="initialFilter"
-                (filter)="filterObjCreated($event)">
-            </amdg-number-filter>
-        </ng-container>
-
-
+    <ng-container *ngIf="heading.type == 'date'">
+      <amdg-date-filter
+          class="amdg-w-100"
+          [initialFilter]="initialFilter"
+          (filter)="filterObjCreated($event)">
+      </amdg-date-filter>
     </ng-container>
+
+    <ng-container *ngIf="heading.type === 'string' || heading.type === 'url'">
+      <ng-container [ngSwitch]="heading.filterType">
+        <amdg-multi-select *ngSwitchCase="'multi-select'"
+                           class="amdg-w-100"
+                           [initialFilter]="initialFilter"
+                           [filterConfig]="heading.other"
+                           (filter)="filterObjCreated($event)">
+        </amdg-multi-select>
+        <amdg-tag-filter *ngSwitchCase="'tag'"
+                         class="amdg-w-100"
+                         [initialFilter]="initialFilter"
+                         (filter)="filterObjCreated($event)">
+        </amdg-tag-filter>
+        <amdg-string-filter *ngSwitchDefault
+                            class="amdg-w-100"
+                            [initialFilter]="initialFilter"
+                            (filter)="filterObjCreated($event)">
+        </amdg-string-filter>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="heading.type === 'number'">
+      <amdg-number-filter
+          class="amdg-w-100"
+          [initialFilter]="initialFilter"
+          (filter)="filterObjCreated($event)">
+      </amdg-number-filter>
+    </ng-container>
+
+
+  </ng-container>
 </div>

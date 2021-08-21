@@ -8,20 +8,20 @@
   .mat-icon-button, .mat-flat-button {
     width: 26px;
     height: 26px;
-    line-height: 26px;
+    line-height: 26px !important;
     border-radius: 2px;
     margin-right: 4px;
     font-weight: 400;
     min-width: 26px;
     padding: 0;
-    &.active {
+    &.amdg-active {
       color: white;
     }
   }
 
 }
 
-.grid-filter-applied-color {
+.amdg-grid-filter-applied-color {
   padding: 0;
   display: inline;
   min-width: auto;
@@ -30,7 +30,7 @@
   cursor: inherit;
 }
 
-.text-muted {
+.amdg-text-muted {
   opacity: .6;
 }
 
@@ -42,7 +42,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .desktop {
+  .amdg-desktop {
     display: none !important;
   }
 }

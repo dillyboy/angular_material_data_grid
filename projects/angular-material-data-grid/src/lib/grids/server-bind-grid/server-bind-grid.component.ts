@@ -129,10 +129,10 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
     const heightOfHeaderAndFooter = 114;
     const heightToTop = this.fullscreen ? 0 : gridContainer.getBoundingClientRect().top;
     const otherOffset = this.fullscreen ? 0 : 24;
-    let totalOffset = heightOfHeaderAndFooter + heightToTop + otherOffset;
-    if (this.columnControl && !this.fullscreen) {
-      totalOffset += 24; // heightOfColumnControlBtn
-    }
+    const totalOffset = heightOfHeaderAndFooter + heightToTop + otherOffset;
+    // if (this.columnControl && !this.fullscreen) {
+      // totalOffset += 24; // heightOfColumnControlBtn
+    // }
     this.offsetTop = totalOffset;
     this.scrollChanged();
     this.changeDetectorRef.detectChanges();

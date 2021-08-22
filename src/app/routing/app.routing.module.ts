@@ -28,7 +28,8 @@ import { CustomDemoComponent } from '../pages/custom-demo/custom-demo.component'
 import { MasterDetailExampleComponent } from '../pages/master-detail-example/master-detail-example.component';
 import { MasterDetailChildGridExampleComponent } from '../pages/master-detail-child-grid-example/master-detail-child-grid-example.component';
 import { MasterDetailHtmlExampleComponent } from '../pages/master-detail-html-example/master-detail-html-example.component';
-import {OpenDialogComponent} from "../pages/open-dialog/open-dialog.component";
+import { OpenDialogComponent } from '../pages/open-dialog/open-dialog.component';
+import { TopRightButtonsExampleComponent } from '../pages/top-right-buttons-example/top-right-buttons-example.component';
 
 const routes: Routes = [
   { path: '' , redirectTo: 'overview', pathMatch: 'full' },
@@ -74,6 +75,7 @@ const routes: Routes = [
       { path: 'masterDetailHtml', component: MasterDetailHtmlExampleComponent },
       { path: 'customDemo', component: CustomDemoComponent },
       { path: 'openDialog', component: OpenDialogComponent },
+      { path: 'topRightButtons', component: TopRightButtonsExampleComponent },
     ]
   }
 ];

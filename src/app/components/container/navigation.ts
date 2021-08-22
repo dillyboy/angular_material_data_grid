@@ -153,7 +153,8 @@ export const navigation = [
       '/examples/masterDetailGrid',
       '/examples/masterDetailChildGrid',
       '/examples/masterDetailHtml',
-      '/examples/openDialog'
+      '/examples/openDialog',
+      '/examples/topRightButtons'
     ],
     children: [
       {
@@ -191,6 +192,12 @@ export const navigation = [
         headingIcon: '',
         highLightWhen: ['/examples/openDialog'],
         route: '/examples/openDialog'
+      },
+      {
+        headingName: 'Top Right Buttons',
+        headingIcon: '',
+        highLightWhen: ['/examples/topRightButtons'],
+        route: '/examples/topRightButtons'
       }
     ]
   },

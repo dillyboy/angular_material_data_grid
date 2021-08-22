@@ -20,6 +20,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { OverviewComponent } from './pages/overview/overview.component';
 import { ContainerComponent } from './components/container/container.component';
 import { DemoComponent } from './pages/demo/demo.component';
@@ -51,6 +52,7 @@ import { MasterDetailChildGridExampleComponent } from './pages/master-detail-chi
 import { MasterDetailHtmlExampleComponent } from './pages/master-detail-html-example/master-detail-html-example.component';
 import { OpenDialogComponent } from './pages/open-dialog/open-dialog.component';
 import { GridWithinDialogComponent } from './pages/open-dialog/grid-within-dialog/grid-within-dialog.component';
+import { TopRightButtonsExampleComponent } from './pages/top-right-buttons-example/top-right-buttons-example.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +86,8 @@ import { GridWithinDialogComponent } from './pages/open-dialog/grid-within-dialo
     MasterDetailChildGridExampleComponent,
     MasterDetailHtmlExampleComponent,
     OpenDialogComponent,
-    GridWithinDialogComponent
+    GridWithinDialogComponent,
+    TopRightButtonsExampleComponent
   ],
   imports: [
     BrowserModule,
@@ -103,7 +106,8 @@ import { GridWithinDialogComponent } from './pages/open-dialog/grid-within-dialo
     MatMenuModule,
     MatTabsModule,
     HighlightModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSnackBarModule
   ],
   providers: [
     {

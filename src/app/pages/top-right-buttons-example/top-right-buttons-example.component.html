@@ -1,0 +1,37 @@
+<div class="position-relative">
+  <amdg-grid
+      [headings]="headings"
+      [url]="url"
+      [selection]="true"
+      [serverSidePagination]="true">
+    <!--The content passed is only intended to be used on adding elements on the top right of the grid-->
+      <button mat-raised-button class="amdg-top-right-button" (click)="singleButtonClicked()">Single Button</button>
+      <button mat-raised-button class="amdg-top-right-button" [matMenuTriggerFor]="menu">Menu Button<mat-icon>expand_more</mat-icon></button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item class="amdg-mat-menu-item" (click)="itemClicked(1)">Item 1</button>
+        <button mat-menu-item class="amdg-mat-menu-item" (click)="itemClicked(2)">Item 2</button>
+      </mat-menu>
+  </amdg-grid>
+
+  <div class="scroll-down-animation-button" mat-ripple (click)="scrollBottom()">
+    Code
+    <div class="scroll-down-animation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+</div>
+
+<div class="content">
+  <mat-tab-group>
+    <mat-tab label="HTML">
+      <pre><code [highlight]="usage.html"></code></pre>
+    </mat-tab>
+    <mat-tab label="TS">
+      <pre><code [highlight]="usage.ts"></code></pre>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+

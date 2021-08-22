@@ -1,4 +1,4 @@
-<div id="amdg-grid-container" #gridContainer>
+<div id="amdg-grid-container">
   <div class="amdg-layout-container amdg-p-0">
     <div>
       <button *ngIf="columnControl" mat-raised-button id="column-control-btn" [matMenuTriggerFor]="columnControlMenu">Column Control<mat-icon>expand_more</mat-icon></button>
@@ -41,7 +41,7 @@
     <div class="empty-records" *ngIf="gridItems.length === 0 && !loadingData">
       No Records Available
     </div>
-    <div class="horizontal-scroll">
+    <div class="horizontal-scroll" #gridContainer>
       <table [ngStyle]="{'left': '-' + scrollRemainingDistanceToLeft + 'px', 'width': 'calc(100% - ' + horizontalScrollBarWidth + 'px)' }" >
         <thead>
         <th *ngIf="selection" class="amdg-selection"><mat-checkbox [(ngModel)]="allGridItemsSelected" [disabled]="loadingData" (ngModelChange)="gridItemSelectionChanged(true)"></mat-checkbox></th>

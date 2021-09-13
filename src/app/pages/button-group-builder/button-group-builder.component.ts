@@ -22,7 +22,7 @@ headings: GridHeading[] = [
         {display: 'Delete User', icon: 'delete', disableField: 'archived'},
       ]
     },
-    align: 'center', disableSorting: true,
+    textAlign: 'center', disableSorting: true,
   }
 ]`;
 

@@ -31,7 +31,7 @@ export class ServerBindGridExampleComponent {
 
   /* Original column configuration */
   initialHeadings: GridHeading[] = [
-    {fieldName: 'id', display: 'ID', type: 'number', width: '100px', disableSorting: true, align: 'right'},
+    {fieldName: 'id', display: 'ID', type: 'number', width: '100px', disableSorting: true, textAlign: 'right'},
     {fieldName: 'full_name', display: 'Full Name', type: 'url', width: '160px',
       other: {
         openTab: true,
@@ -119,7 +119,7 @@ export class ServerBindGridExampleComponent {
           {display: 'Delete User', icon: 'delete', disableField: 'archived'},
         ]
       },
-      align: 'center', disableSorting: true,
+      textAlign: 'center', disableSorting: true,
     }
   ];
 

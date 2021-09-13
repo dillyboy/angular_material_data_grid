@@ -31,7 +31,7 @@ export class TopRightButtonsExampleComponent {
 
   /* Column configuration */
   headings: GridHeading[] = [
-    {fieldName: 'id', display: 'ID', type: 'number', width: '100px', disableSorting: true, align: 'right'},
+    {fieldName: 'id', display: 'ID', type: 'number', width: '100px', disableSorting: true, textAlign: 'right'},
     {fieldName: 'first_name', display: 'First Name', type: 'string', width: '120px', filterType: 'tag'},
     {fieldName: 'last_name', display: 'Last Name', type: 'string', width: '120px', filterType: 'tag'},
     {fieldName: 'email', display: 'Email', type: 'string', width: '180px'},
@@ -64,7 +64,7 @@ export class TopRightButtonsExampleComponent {
 
   /* Original column configuration */
   headings: GridHeading[] = [
-    {fieldName: 'id', display: 'ID', type: 'number', width: '100px', disableSorting: true, align: 'right'},
+    {fieldName: 'id', display: 'ID', type: 'number', width: '100px', disableSorting: true, textAlign: 'right'},
     {fieldName: 'first_name', display: 'First Name', type: 'string', width: '120px', filterType: 'tag'},
     {fieldName: 'last_name', display: 'Last Name', type: 'string', width: '120px', filterType: 'tag'},
     {fieldName: 'email', display: 'Email', type: 'string', width: '180px'},

@@ -33,7 +33,7 @@ export class OpenDialogComponent {
           {display: 'Open', icon: 'search', disableField: 'disableEdit'}
         ]
       },
-      align: 'center', disableSorting: true,
+      textAlign: 'center', disableSorting: true,
     },
     {fieldName: 'order_id', display: 'ID', type: 'string', width: '130px'},
     {fieldName: 'order_date', display: 'Date', type: 'date', width: '110px'},
@@ -77,7 +77,7 @@ export class OpenDialogComponent {
         ]
       }
     },
-    {fieldName: 'cart_items', display: 'Cart Items', type: 'number', width: '120px', align: 'right'}
+    {fieldName: 'cart_items', display: 'Cart Items', type: 'number', width: '120px', textAlign: 'right'}
   ];
 
   entity = null;
@@ -143,7 +143,7 @@ export class OpenDialogComponent {
           {display: 'Open', icon: 'search', disableField: 'disableEdit'}
         ]
       },
-      align: 'center', disableSorting: true,
+      textAlign: 'center', disableSorting: true,
     },
     {fieldName: 'order_id', display: 'ID', type: 'string', width: '130px'},
     {fieldName: 'order_date', display: 'Date', type: 'date', width: '110px'},
@@ -187,7 +187,7 @@ export class OpenDialogComponent {
         ]
       }
     },
-    {fieldName: 'cart_items', display: 'Cart Items', type: 'number', width: '120px', align: 'right'}
+    {fieldName: 'cart_items', display: 'Cart Items', type: 'number', width: '120px', textAlign: 'right'}
   ];
 
   entity = null;

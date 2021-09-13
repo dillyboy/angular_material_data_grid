@@ -31,7 +31,7 @@ export class ClientSidePaginationGridExampleComponent implements OnInit {
 
   /* Original column configuration */
   initialHeadings: GridHeading[] = [
-    {fieldName: 'id', display: 'ID', type: 'number', width: '100px', disableSorting: true, align: 'right'},
+    {fieldName: 'id', display: 'ID', type: 'number', width: '100px', disableSorting: true, textAlign: 'right'},
     {fieldName: 'full_name', display: 'Full Name', type: 'url', width: '160px',
       other: {
         openTab: true,
@@ -119,7 +119,7 @@ export class ClientSidePaginationGridExampleComponent implements OnInit {
           {display: 'Delete User', icon: 'delete', disableField: 'archived'},
         ]
       },
-      align: 'center', disableSorting: true,
+      textAlign: 'center', disableSorting: true,
     }
   ];
 
@@ -172,7 +172,7 @@ export class ClientSidePaginationGridExampleComponent implements OnInit {
   GRID_ID = 'demoGrid' as const;
 
   initialHeadings: GridHeading[] = [
-    {fieldName: 'id', display: 'ID', type: 'number', width: '100px', disableSorting: true, align: 'right'},
+    {fieldName: 'id', display: 'ID', type: 'number', width: '100px', disableSorting: true, textAlign: 'right'},
     {fieldName: 'full_name', display: 'Full Name', type: 'url', width: '160px',
       other: {
         openTab: true,
@@ -260,7 +260,7 @@ export class ClientSidePaginationGridExampleComponent implements OnInit {
           {display: 'Delete User', icon: 'delete', disableField: `archived`},
         ]
       },
-      align: 'center', disableSorting: true,
+      textAlign: 'center', disableSorting: true,
     }
   ];
 

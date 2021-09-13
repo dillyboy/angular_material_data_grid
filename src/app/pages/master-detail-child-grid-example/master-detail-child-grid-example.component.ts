@@ -69,7 +69,7 @@ export class MasterDetailChildGridExampleComponent {
         ]
       }
     },
-    {fieldName: 'cart_items', display: 'Cart Items', type: 'number', width: '120px', align: 'right'}
+    {fieldName: 'cart_items', display: 'Cart Items', type: 'number', width: '120px', textAlign: 'right'}
   ];
 
   expandableConfig: GridMasterDetailConfig = {
@@ -149,7 +149,7 @@ export class MasterDetailChildGridExampleComponent {
         ]
       }
     },
-    {fieldName: 'cart_items', display: 'Cart Items', type: 'number', width: '120px', align: 'right'}
+    {fieldName: 'cart_items', display: 'Cart Items', type: 'number', width: '120px', textAlign: 'right'}
   ];
 
   expandableConfig: GridMasterDetailConfig = {

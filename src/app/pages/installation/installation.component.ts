@@ -34,7 +34,7 @@ url = 'https://angular-grid.herokuapp.com/getUsers'; // add your POST endpoint h
 /* Try https://angular-grid.herokuapp.com/getAllUsers for client side pagination */
 
 headings: GridHeading[] = [
-  {fieldName: 'id', display: 'ID', type: 'number', width: '100px', disableSorting: true, align: 'right'},
+  {fieldName: 'id', display: 'ID', type: 'number', width: '100px', disableSorting: true, textAlign: 'right'},
   {fieldName: 'first_name', display: 'First Name', type: 'string', width: '120px'},
   {fieldName: 'email', display: 'Email', type: 'string', width: '180px'},
   {fieldName: 'gender', display: 'Gender', type: 'string', width: '100px',

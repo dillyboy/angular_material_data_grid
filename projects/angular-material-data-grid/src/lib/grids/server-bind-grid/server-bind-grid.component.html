@@ -72,7 +72,13 @@
                   <td *ngIf="expandable" mat-ripple class="amdg-selection amdg-animated amdg-fs-20 amdg-text-center amdg-cursor-pointer" (click)="clickRow($event, item, i)">
                     <span *ngIf="item.gridItemExpanded !== true">+</span><span *ngIf="item.gridItemExpanded">−</span>
                   </td>
-                  <td *ngFor="let heading of headings | columnFilter;" [style.textAlign]="heading.align" [style.width]="heading.width">
+                  <td *ngFor="let heading of headings | columnFilter;"
+                      [style.width]="heading.width"
+                      [style.textAlign]="heading.textAlign   || item?.amdgGridRowCellsTextAlign?.[heading.fieldName]"
+                      [style.background]="heading.background || item?.amdgGridRowCellsBackground?.[heading.fieldName]"
+                      [style.color]="heading.color           || item?.amdgGridRowCellsColor?.[heading.fieldName]"
+                      [style.fontWeight]="heading.fontWeight || item?.amdgGridRowCellsFontWeight?.[heading.fieldName]"
+                      [style.fontStyle]="heading.fontStyle   || item?.amdgGridRowCellsFontStyle?.[heading.fieldName]">
 
                     <ng-container [ngSwitch]="heading.type">
                       <!--URL TYPE-->

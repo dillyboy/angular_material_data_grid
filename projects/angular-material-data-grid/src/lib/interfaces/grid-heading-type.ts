@@ -36,9 +36,29 @@ export default interface GridHeadingInterface {
     disableSorting?: boolean;
 
     /**
-     * align - This value in the grid can be aligned to left, right or center. By default, it is left-aligned.
+     * textAlign - This value can be used to align column items to left, right or center. By default, it is left-aligned.
      */
-    align?: 'left' | 'right' | 'center';
+    textAlign?: 'left' | 'right' | 'center';
+
+    /**
+     * background - This value can be used to change the background color of a column.
+     */
+    background?: string;
+
+    /**
+     * color - This value can be used to change the font color of a column.
+     */
+    color?: string;
+
+    /**
+     * fontWeight - This value can be used to change the fontWeight of a column.
+     */
+    fontWeight?: '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900' | 'bold' | 'normal';
+
+    /**
+     * fontStyle - This value can be used to change the fontStyle of a column.
+     */
+    fontStyle?: 'italic' | 'normal';
 
     /**
      * filterType - This is a feature to enable an optional filter type that can be given for types url or string.

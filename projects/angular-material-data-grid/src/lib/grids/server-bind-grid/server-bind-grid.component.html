@@ -74,11 +74,16 @@
                   </td>
                   <td *ngFor="let heading of headings | columnFilter;"
                       [style.width]="heading.width"
-                      [style.textAlign]="heading.textAlign   || item?.amdgGridRowCellsTextAlign?.[heading.fieldName]"
-                      [style.background]="heading.background || item?.amdgGridRowCellsBackground?.[heading.fieldName]"
-                      [style.color]="heading.color           || item?.amdgGridRowCellsColor?.[heading.fieldName]"
-                      [style.fontWeight]="heading.fontWeight || item?.amdgGridRowCellsFontWeight?.[heading.fieldName]"
-                      [style.fontStyle]="heading.fontStyle   || item?.amdgGridRowCellsFontStyle?.[heading.fieldName]">
+                      [style.textAlign]="heading.textAlign"
+                      [style.background]="heading.background"
+                      [style.color]="heading.color"
+                      [style.fontWeight]="heading.fontWeight"
+                      [style.fontStyle]="heading.fontStyle">
+<!--                    || item?.amdgGridRowCellsTextAlign?.[heading.fieldName]-->
+<!--                    || item?.amdgGridRowCellsBackground?.[heading.fieldName]-->
+<!--                    || item?.amdgGridRowCellsColor?.[heading.fieldName]-->
+<!--                    || item?.amdgGridRowCellsFontWeight?.[heading.fieldName]-->
+<!--                    || item?.amdgGridRowCellsFontStyle?.[heading.fieldName]"-->
 
                     <ng-container [ngSwitch]="heading.type">
                       <!--URL TYPE-->

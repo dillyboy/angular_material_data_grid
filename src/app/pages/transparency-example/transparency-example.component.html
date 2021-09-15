@@ -1,0 +1,32 @@
+<div class="position-relative">
+  <amdg-grid
+      [headings]="headings"
+      [url]="url"
+      [selection]="true"
+      [serverSidePagination]="true"
+      [entity]="entity"
+      [transparency]="true">
+  </amdg-grid>
+
+  <div class="scroll-down-animation-button" mat-ripple (click)="scrollBottom()">
+    Code
+    <div class="scroll-down-animation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <mat-tab-group>
+    <mat-tab label="HTML">
+      <pre><code [highlight]="usage.html"></code></pre>
+    </mat-tab>
+    <mat-tab label="Host css">
+      <pre><code [highlight]="usage.scss"></code></pre>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+

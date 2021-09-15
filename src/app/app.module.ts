@@ -53,6 +53,9 @@ import { MasterDetailHtmlExampleComponent } from './pages/master-detail-html-exa
 import { OpenDialogComponent } from './pages/open-dialog/open-dialog.component';
 import { GridWithinDialogComponent } from './pages/open-dialog/grid-within-dialog/grid-within-dialog.component';
 import { TopRightButtonsExampleComponent } from './pages/top-right-buttons-example/top-right-buttons-example.component';
+import { ChangeLogComponent } from './pages/change-log/change-log.component';
+import { TransparencyExampleComponent } from './pages/transparency-example/transparency-example.component';
+import { CellStylesExampleComponent } from './pages/cell-styles-example/cell-styles-example.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +90,10 @@ import { TopRightButtonsExampleComponent } from './pages/top-right-buttons-examp
     MasterDetailHtmlExampleComponent,
     OpenDialogComponent,
     GridWithinDialogComponent,
-    TopRightButtonsExampleComponent
+    TopRightButtonsExampleComponent,
+    ChangeLogComponent,
+    TransparencyExampleComponent,
+    CellStylesExampleComponent
   ],
   imports: [
     BrowserModule,

@@ -67,7 +67,9 @@
           <table>
             <tbody (window:mouseup)="endSelect()">
               <ng-container *cdkVirtualFor="let item of gridItems; let odd=odd; let i = index;">
-                <tr (mouseover)="overSelect($event, item)" [ngClass]="{ odd: odd, rowSelected: item.gridItemSelected == true, expanded: item.gridItemExpanded}">
+                <tr (mouseover)="overSelect($event, item)"
+                    [ngClass]="{ odd: odd, rowSelected: item.gridItemSelected == true, expanded: item.gridItemExpanded}"
+                    [style.background]="item?.amdgGridRowBackground">
                   <td *ngIf="selection" class="amdg-selection amdg-animated" #selection (mousedown)="startSelect(item, selection)"><mat-checkbox [(ngModel)]="item['gridItemSelected']" (ngModelChange)="gridItemSelectionChanged()"></mat-checkbox></td>
                   <td *ngIf="expandable" mat-ripple class="amdg-selection amdg-animated amdg-fs-20 amdg-text-center amdg-cursor-pointer" (click)="clickRow($event, item, i)">
                     <span *ngIf="item.gridItemExpanded !== true">+</span><span *ngIf="item.gridItemExpanded">−</span>

@@ -30,6 +30,9 @@ import { MasterDetailChildGridExampleComponent } from '../pages/master-detail-ch
 import { MasterDetailHtmlExampleComponent } from '../pages/master-detail-html-example/master-detail-html-example.component';
 import { OpenDialogComponent } from '../pages/open-dialog/open-dialog.component';
 import { TopRightButtonsExampleComponent } from '../pages/top-right-buttons-example/top-right-buttons-example.component';
+import { ChangeLogComponent } from '../pages/change-log/change-log.component';
+import { TransparencyExampleComponent } from '../pages/transparency-example/transparency-example.component';
+import { CellStylesExampleComponent } from '../pages/cell-styles-example/cell-styles-example.component';
 
 const routes: Routes = [
   { path: '' , redirectTo: 'overview', pathMatch: 'full' },
@@ -40,7 +43,8 @@ const routes: Routes = [
       { path: 'demo/:id', component: DetailComponent },
       { path: 'introduction', component: IntroductionComponent },
       { path: 'installation', component: InstallationComponent },
-      { path: 'propertiesAndEvents', component: PropertiesAndEventsComponent }
+      { path: 'propertiesAndEvents', component: PropertiesAndEventsComponent },
+      { path: 'changeLog', component: ChangeLogComponent },
     ]
   },
   { path: 'columnsAndFilters', component: ContainerComponent,
@@ -76,6 +80,8 @@ const routes: Routes = [
       { path: 'customDemo', component: CustomDemoComponent },
       { path: 'openDialog', component: OpenDialogComponent },
       { path: 'topRightButtons', component: TopRightButtonsExampleComponent },
+      { path: 'transparency', component: TransparencyExampleComponent },
+      { path: 'cellStyles', component: CellStylesExampleComponent },
     ]
   }
 ];

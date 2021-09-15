@@ -6,7 +6,8 @@ export const navigation = [
       '/gettingStarted/demo',
       '/gettingStarted/introduction',
       '/gettingStarted/installation',
-      '/gettingStarted/propertiesAndEvents'
+      '/gettingStarted/propertiesAndEvents',
+      '/gettingStarted/changeLog'
     ],
     children: [
       {
@@ -32,6 +33,12 @@ export const navigation = [
         headingIcon: '',
         highLightWhen: ['/gettingStarted/propertiesAndEvents'],
         route: '/gettingStarted/propertiesAndEvents'
+      },
+      {
+        headingName: 'Change Log',
+        headingIcon: '',
+        highLightWhen: ['/gettingStarted/changeLog'],
+        route: '/gettingStarted/changeLog'
       }
     ]
   },
@@ -154,7 +161,9 @@ export const navigation = [
       '/examples/masterDetailChildGrid',
       '/examples/masterDetailHtml',
       '/examples/openDialog',
-      '/examples/topRightButtons'
+      '/examples/topRightButtons',
+      '/examples/transparency',
+      '/examples/cellStyles'
     ],
     children: [
       {
@@ -198,7 +207,19 @@ export const navigation = [
         headingIcon: '',
         highLightWhen: ['/examples/topRightButtons'],
         route: '/examples/topRightButtons'
-      }
+      },
+      {
+        headingName: 'Transparency',
+        headingIcon: '',
+        highLightWhen: ['/examples/transparency'],
+        route: '/examples/transparency'
+      },
+      {
+        headingName: 'Cell Styles',
+        headingIcon: '',
+        highLightWhen: ['/examples/cellStyles'],
+        route: '/examples/cellStyles'
+      },
     ]
   },
 ];

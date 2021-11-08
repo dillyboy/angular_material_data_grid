@@ -1,6 +1,141 @@
 <div class="content">
   <h1>Change Log</h1>
 
+  <h2>0.3.9, 0.4.0 <span style="font-weight: normal; font-size: 16px">(9th November 2021)</span></h2>
+
+  <mat-card class="simple-table-container mb-3">
+    <div>
+      <table class="simple-table">
+        <tr>
+          <th width="400px">Type</th>
+          <th>Description</th>
+        </tr>
+        <tr class="odd">
+          <td>Refactor (Breaking Changes)</td>
+          <td>Changed the output <b>headingsChangedEmit</b> to <b>columnPreferencesChangedEmit</b> and <b>resetColumnPreferencesEmit</b> to <b>columnPreferencesResetEmit</b>.</td>
+        </tr>
+        <tr>
+          <td>Feature</td>
+          <td>Added new output <b>columnPreferencesChangeEndedEmit</b>. See how it differs from <b>columnPreferencesChangedEmit </b>
+            <a routerLink="/gettingStarted/propertiesAndEvents">here</a>.
+          </td>
+        </tr>
+        <tr class="odd">
+          <td>Feature</td>
+          <td>The prefix and suffix attributes are now capable of showing html elements.
+            Use this with caution to not hinder performance. For example show an image of a country
+              in front of the country name in the column or show a red color circle when displaying 'Failed'.</td>
+        </tr>
+      </table>
+    </div>
+  </mat-card>
+
+  <h2>0.3.8 <span style="font-weight: normal; font-size: 16px">(7th November 2021)</span></h2>
+
+  <mat-card class="simple-table-container mb-3">
+    <div>
+      <table class="simple-table">
+        <tr>
+          <th width="400px">Type</th>
+          <th>Description</th>
+        </tr>
+        <tr class="odd">
+          <td>Feature</td>
+          <td>Number/ currency type can now also have Tag filters. Find out <a routerLink="/columnsAndFilters/tagFilter">here</a>.</td>
+        </tr>
+        <tr>
+          <td>Bug Fix</td>
+          <td>Fixed an issue of removing an incorrect tag when the user presses remove in the <b>Tag filter</b>.</td>
+        </tr>
+      </table>
+    </div>
+  </mat-card>
+
+  <h2>0.3.6, 0.3.7 <span style="font-weight: normal; font-size: 16px">(5th November 2021)</span></h2>
+
+  <mat-card class="simple-table-container mb-3">
+    <div>
+      <table class="simple-table">
+        <tr>
+          <th width="400px">Type</th>
+          <th>Description</th>
+        </tr>
+        <tr class="odd">
+          <td>Feature</td>
+          <td>Added prefix and suffix that can be added to grid data. This helps to add characters
+              in front or at the end of data (Eg: #1 or 10%). Also the 'currency' type data can have a prefix other than
+              $ symbol.</td>
+        </tr>
+        <tr>
+          <td>Feature</td>
+          <td>Added an optional input to the grid component which will give the grid an elevation level shown by the
+            intensity of the shadow underneath from 0 to 24.</td>
+        </tr>
+        <tr class="odd">
+          <td>Feature</td>
+          <td>Added a feature to make values of the types 'string' | 'url' | 'number' | 'currency' | 'date' clickable
+            by adding a new boolean attribute named <b>clickable</b> to the <b>GridHeading</b> interface.</td>
+        </tr>
+        <tr>
+          <td>Bug Fix</td>
+          <td>Fixed a bug relating to tag and multi-select filter types which shows as filters were
+            applied before pressing 'filter' when search criteria is added.</td>
+        </tr>
+      </table>
+    </div>
+  </mat-card>
+
+  <h2>0.3.4, 0.3.5 <span style="font-weight: normal; font-size: 16px">(3rd November 2021)</span></h2>
+
+  <mat-card class="simple-table-container mb-3">
+    <div>
+      <table class="simple-table">
+        <tr>
+          <th width="400px">Type</th>
+          <th>Description</th>
+        </tr>
+        <tr class="odd">
+          <td>Feature</td>
+          <td>Added button to reset column preferences which will trigger an output that can be captured from
+            parent component when clicked.</td>
+        </tr>
+        <tr>
+          <td>Feature</td>
+          <td>Added feature to reinitialize grid by resetting all added filters from parent component.</td>
+        </tr>
+      </table>
+    </div>
+  </mat-card>
+
+  <h2>0.3.3 <span style="font-weight: normal; font-size: 16px">(30th October 2021)</span></h2>
+
+  <mat-card class="simple-table-container mb-3">
+    <div>
+      <table class="simple-table">
+        <tr>
+          <th width="400px">Type</th>
+          <th>Description</th>
+        </tr>
+        <tr class="odd">
+          <td>Bug Fix</td>
+          <td>Fixed the issue of not attaching a token (if available) when calling an endpoint from the string multi-select filter.</td>
+        </tr>
+        <tr>
+          <td>Feature</td>
+          <td>Added <b>currency</b> data type.</td>
+        </tr>
+        <tr class="odd">
+          <td>Feature</td>
+          <td>Added <b>headerTooltip</b> attribute to <b>GridHeading</b> interface to pass a small explanation for the column header which will be shown when the user hovers over. </td>
+        </tr>
+        <tr>
+          <td>Refactor</td>
+          <td>Increased the width of column control menu.</td>
+        </tr>
+      </table>
+    </div>
+  </mat-card>
+
   <h2>0.3.2 <span style="font-weight: normal; font-size: 16px">(16th September 2021)</span></h2>
 
   <mat-card class="simple-table-container mb-3">

@@ -17,9 +17,10 @@ import { MatMenuTrigger } from '@angular/material/menu';
   templateUrl: './string-filter.component.html',
   styleUrls: ['./string-filter.component.scss']
 })
-export class StringFilterComponent implements OnInit {
+export class StringFilterComponent implements OnInit, OnChanges {
 
   @Input() initialFilter = null;
+  @Input() resetFilters = null;
   @Output() filter: any = new EventEmitter<any>();
   filterApplied = false;
   stringFilterTypes = [
@@ -56,6 +57,12 @@ export class StringFilterComponent implements OnInit {
     }
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.resetFilters?.currentValue) {
+      this.reset(false);
+    }
+  }
+
   menuOpened(): void {
     this.valueElement.nativeElement.focus();
   }
@@ -76,10 +83,7 @@ export class StringFilterComponent implements OnInit {
     this.selection.setValue('contains');
     this.value.setValue(null);
     this.value.enable();
-
-    if (emit) {
-      this.close(null);
-    }
+    this.close(null, emit);
   }
 
   validate(): void {
@@ -94,8 +98,10 @@ export class StringFilterComponent implements OnInit {
     }
   }
 
-  private close(value: string): void {
-    this.filter.emit({ operator: this.selection.value, value });
+  private close(value: string, emit = true): void {
+    if (emit) {
+      this.filter.emit({ operator: this.selection.value, value });
+    }
     if (value) {
       this.filterApplied = true;
     } else {

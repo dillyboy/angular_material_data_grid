@@ -25,12 +25,20 @@
   margin-top: .75rem !important;
 }
 
+.amdg-ml-1 {
+  margin-left: .25rem !important;
+}
+
 .amdg-ml-2 {
   margin-left: .5rem !important;
 }
 
 .amdg-ml-3 {
   margin-left: .75rem !important;
+}
+
+.amdg-mr-1 {
+  margin-right: .25rem !important;
 }
 
 .amdg-mr-2 {
@@ -85,6 +93,10 @@
   font-size: 20px;
 }
 
+.amdg-text-muted {
+  opacity: .6;
+}
+
 .amdg-text-center {
   text-align: center !important;
 }
@@ -121,6 +133,15 @@
   font-size: 12px !important;
 }
 
+.amdg-cell-color-circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 12px;
+  position: relative;
+  top: 2px;
+  display: inline-block;
+}
+
 .amdg-mat-option {
   height: 26px !important;
   padding: 0 10px !important;
@@ -155,6 +176,9 @@ body {
       background: #424242;
     }
 
+    #amdg-multi-select-search, #amdg-multi-select-search-close {
+      color: white;
+    }
     #grid {
       &.grid-transparency {
         background: rgb(66 66 66 / 90%) !important;

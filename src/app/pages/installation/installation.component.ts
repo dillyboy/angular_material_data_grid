@@ -49,7 +49,7 @@ headings: GridHeading[] = [
     }
   },
   {fieldName: 'date_of_birth', display: 'Date Of Birth', type: 'date', width: '150px'}
-]
+];
 
 responseReceived(response: GridResponse): void {
   console.log(response); // If necessary manipulate the data or use data in the parent component

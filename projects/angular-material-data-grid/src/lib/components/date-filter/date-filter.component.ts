@@ -1,4 +1,14 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatDatepicker } from '@angular/material/datepicker';
@@ -8,9 +18,10 @@ import { MatDatepicker } from '@angular/material/datepicker';
   templateUrl: './date-filter.component.html',
   styleUrls: ['./date-filter.component.scss']
 })
-export class DateFilterComponent implements OnInit {
+export class DateFilterComponent implements OnInit, OnChanges {
 
   @Input() initialFilter = null;
+  @Input() resetFilters = null;
   @Output() filter: any = new EventEmitter<any>();
   filterApplied = false;
   dateFilterTypes = [
@@ -41,6 +52,12 @@ export class DateFilterComponent implements OnInit {
     }
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.resetFilters?.currentValue) {
+      this.reset(false);
+    }
+  }
+
   menuOpened(): void {
     setTimeout(() => {
       this.picker.open();
@@ -62,9 +79,7 @@ export class DateFilterComponent implements OnInit {
     this.selection.setValue('betweendates');
     this.range.controls.start.setValue(null);
     this.range.controls.end.setValue(null);
-    if (emit) {
-      this.close(null);
-    }
+    this.close(null, emit);
   }
 
   validate(): void {
@@ -84,8 +99,10 @@ export class DateFilterComponent implements OnInit {
     }
   }
 
-  private close(value: string): void {
-    this.filter.emit({ operator: this.selection.value, value });
+  private close(value: string, emit = true): void {
+    if (emit) {
+      this.filter.emit({ operator: this.selection.value, value });
+    }
     if (value) {
       this.filterApplied = true;
     } else {

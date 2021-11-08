@@ -9,10 +9,11 @@
     (opened)="menuOpened()"
     [disableOptionCentering]="true"
     panelClass="amdg-custom-select-position">
-  <mat-select-trigger>
-    <a mat-button disableRipple color="accent" class="amdg-filter-value" [ngClass]="{'grid-filter-applied-color amdg-font-weight-bold': filterApplied}">{{selection.value ? selection.value[0]?.text || selection.value.text : ''}}</a>
-    <span *ngIf="selection.value?.length > 1" class="amdg-additional-selection">
-        (+{{selection.value.length - 1}} {{selection.value?.length === 2 ? 'other' : 'others'}})
+  <mat-select-trigger class="amdg-layout-container amdg-p-0">
+    <span *ngIf="selectionValuesApplied.length === 0" class="mat-select-placeholder">Unfiltered</span>
+    <a mat-button disableRipple color="accent" class="amdg-filter-value amdg-text-truncate" [ngClass]="{'grid-filter-applied-color amdg-font-weight-bold': filterApplied}">{{selectionValuesApplied[0]}}</a>
+    <span *ngIf="selectionValuesApplied.length > 1" class="amdg-additional-selection">
+        (+{{selectionValuesApplied.length - 1}} {{selectionValuesApplied.length === 2 ? 'other' : 'others'}})
       </span>
   </mat-select-trigger>
   <div class="amdg-layout-container amdg-mt-2">
@@ -25,8 +26,8 @@
   </div>
   <div class="amdg-layout-container amdg-mt-2">
     <mat-form-field class="amdg-w-100">
-      <input matInput #fromElement placeholder="Search..." [(ngModel)]="searchFilter" (ngModelChange)="changeSearch()"/>
-      <button mat-button *ngIf="searchFilter" matSuffix mat-icon-button aria-label="Clear" (click)="searchFilter='';changeSearch()  ">
+      <input id="amdg-multi-select-search" matInput #fromElement placeholder="Search..." [(ngModel)]="searchFilter" (ngModelChange)="changeSearch()"/>
+      <button id="amdg-multi-select-search-close" mat-button *ngIf="searchFilter" matSuffix mat-icon-button aria-label="Clear" (click)="searchFilter='';changeSearch()  ">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>

@@ -11,6 +11,7 @@ export class ServerBindGridExampleComponent {
   usage = {
     html: `
   <amdg-grid
+      *ngIf="showGrid"
       [headings]="headings"
       [url]="url"
       [selection]="true"
@@ -20,7 +21,8 @@ export class ServerBindGridExampleComponent {
       (selectionEmit)="selectionChanged($event)"
       (filtersChangedEmit)="filtersChanged($event)"
       (buttonClickEmit)="buttonClick($event)"
-      (headingsChangedEmit)="headingsConfigChanged($event)">
+      (columnPreferencesChangedEmit)="headingsConfigChanged($event)"
+      (columnPreferencesResetEmit)="resetColumnPreferencesClick()">
   </amdg-grid>`,
     ts: `
   /* POST endpoint URL */
@@ -28,6 +30,8 @@ export class ServerBindGridExampleComponent {
 
   /* Unique identifier can be used to save user's column preferences */
   GRID_ID = 'demoServerBindGrid' as const;
+
+  showGrid = true;
 
   /* Original column configuration */
   initialHeadings: GridHeading[] = [
@@ -126,6 +130,8 @@ export class ServerBindGridExampleComponent {
   /* Column configuration which will be passed to grid */
   headings: GridHeading[] = [];
 
+  constructor(private changeDetectorRef: ChangeDetectorRef) { }
+
   ngOnInit(): void {
     /* Custom code that can be used to either retrieve user's column preference from local storage
        or from the original configuration based on availability.
@@ -164,6 +170,15 @@ export class ServerBindGridExampleComponent {
   headingsConfigChanged(headings: GridHeading[]): void {
     /* Saving the user's column preference in local storage */
     localStorage.setItem(this.GRID_ID, JSON.stringify(headings));
+  }
+
+  resetColumnPreferencesClick(): void {
+    localStorage.removeItem(this.GRID_ID);
+    this.headings = JSON.parse(JSON.stringify(this.initialHeadings));
+    this.showGrid = false;
+    this.changeDetectorRef.detectChanges();
+    this.showGrid = true;
+    this.changeDetectorRef.detectChanges();
   }
 `};
 

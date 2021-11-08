@@ -17,6 +17,7 @@ export class FilterHeaderComponent implements OnInit {
     other: {}
   };
   @Input() initialFilters: any = [];
+  @Input() resetFilters = null;
   @Output() filter = new EventEmitter();
 
   initialFilter = null;

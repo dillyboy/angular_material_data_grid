@@ -7,7 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class SortHeaderComponent {
 
-  @Input() heading: any = { display: null, type: 'string', sort: '', disableSorting: false};
+  @Input() heading: any = { display: null, type: 'string', sort: '', disableSorting: false, headerTooltip: null};
   @Output() filter = new EventEmitter();
   constructor() { }
 

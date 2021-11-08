@@ -2,8 +2,8 @@
   <h1>Columns & Filters</h1>
 
   <p>Each column should contain a <b>fieldName</b> which maps to the data attribute, a <b>display</b> value
-    for that column and also a data <b>type</b> which can be either<br>
-    'string' | 'url' | 'number' | 'date' | 'button-group'</p>
+    for that column and also a data <b>type</b> which can be either
+    'string' | 'url' | 'number' | 'currency' | 'date' | 'button-group' | 'image-url</p>
   <p>A very basic column configuration looks like the object below</p>
   <code highlight="{ fieldName: 'email', display: 'Email', type: 'string' }"></code>
 
@@ -33,7 +33,7 @@
           <td>This refers to the column header name which is displayed to the user.</td>
         </tr>
         <tr class="odd">
-          <td><code highlight="type: 'string' | 'url' | 'number' | 'date' | 'button-group'"></code></td>
+          <td><code highlight="type: 'string' | 'url' | 'number' | 'currency' | 'date' | 'button-group' | 'image-url'"></code></td>
           <td>A column consists of multiple data types. Based on the value given here the column
             filtration and the way the data is displayed may vary.</td>
         </tr>
@@ -44,37 +44,53 @@
           </td>
         </tr>
         <tr class="odd">
+          <td><code highlight="clickable: boolean"></code></td>
+          <td>This boolean value determines if the values in this columns are clickable which will
+              trigger a click event <code highlight="@Output() buttonClickEmit: EventEmitter<GridButtonClick>"></code> It is applicable to data types of 'string' | 'url' | 'number' | 'currency' | 'date'
+          </td>
+        </tr>
+        <tr class="">
           <td><code highlight="disableFiltering: boolean"></code></td>
           <td>This boolean value determines if the filter is shown or hidden.
             By default filtering is enabled which means it goes as false.</td>
         </tr>
-        <tr>
+        <tr class="odd">
           <td><code highlight="disableSorting: boolean"></code></td>
           <td>This boolean value determines if sorting is enabled/disabled. By default sorting is
             enabled which means it goes as false.</td>
         </tr>
-        <tr class="odd">
+        <tr class="">
           <td><code highlight="textAlign: 'left' | 'right' | 'center'"></code></td>
           <td>This value in the grid can be aligned to left, right or center.
             By default, it is left-aligned.</td>
         </tr>
-        <tr>
+        <tr class="odd">
           <td><code highlight="background: string"></code></td>
           <td>This value can be used to change the background color of a column.</td>
         </tr>
-        <tr class="odd">
+        <tr>
           <td><code highlight="color: string"></code></td>
           <td>This value can be used to change the font color of a column.</td>
         </tr>
-        <tr>
+        <tr class="odd">
           <td><code highlight="fontWeight: '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900' | 'bold' | 'normal'"></code></td>
           <td>This value can be used to change the fontWeight of a column.</td>
         </tr>
-        <tr class="odd">
+        <tr>
           <td><code highlight="fontStyle: 'italic' | 'normal'"></code></td>
           <td>This value can be used to change the fontStyle of a column.</td>
         </tr>
+        <tr class="odd">
+          <td><code highlight="prefix: string"></code></td>
+          <td>Add a custom prefix to the displayed data. For example # in front of a number - #1.
+              This can also be used to change the currency symbol from the default $ sign to another
+              in the currency data type.</td>
+        </tr>
         <tr>
+          <td><code highlight="suffix: string"></code></td>
+          <td>Add a custom suffix to the displayed data. For example % at the end of a number - 20%.</td>
+        </tr>
+        <tr class="odd">
           <td><code highlight="filterType: 'multi-select' | 'tag'"></code></td>
           <td>This is a feature to enable an optional filter type that can be given for types url or string.
             A multi-select filter type is an advanced filter which can either have one or more filter
@@ -82,13 +98,18 @@
             very large number of possible values which cannot be displayed in a multi-filter's list of options.
             Eg: Social Security Numbers</td>
         </tr>
-        <tr class="odd">
+        <tr>
           <td><code highlight="show: boolean"></code></td>
           <td>This identifies if a column is shown to the user or not. If this value is not given,
             the column is treated as a required column which is always shown and cannot be hidden by
             the user through column control. If true is given the column will be shown and the user
             can also hide it. If false is given the user cannot see the column but can enable it back
             through column control.</td>
+        </tr>
+        <tr class="odd">
+          <td><code highlight="headerTooltip?: string"></code></td>
+          <td>This can be used to pass a small explanation for the column header which will be shown when the
+            user hovers over.</td>
         </tr>
         <tr>
           <td><code highlight="other?: OtherConfigType"></code></td>
@@ -130,12 +151,12 @@
         </tr>
         <tr>
           <td><b class="accent-color">Numeric Filter</b></td>
-          <td>This filter type can be used for column types <b>number</b>.
+          <td>This filter type can be used for column types <b>number</b> and <b>currency</b>.
             Detailed Explanation <a routerLink="/columnsAndFilters/numericFilter">here.</a></td>
         </tr>
         <tr class="odd">
           <td><b class="accent-color">Date Range Filter</b></td>
-          <td>This filter type can be used for column types <b>date</b>.
+          <td>This filter type can be used for column type <b>date</b>.
             Detailed Explanation <a routerLink="/columnsAndFilters/dateRangeFilter">here.</a></td>
         </tr>
       </table>

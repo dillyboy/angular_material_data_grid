@@ -1,17 +1,27 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ApiResponseModel } from '../../api-response.model';
-import { HttpClient } from '@angular/common/http';
+import { GridService } from '../../grids/grid.service';
 
 @Component({
   selector: 'amdg-multi-select',
   templateUrl: './multi-select.component.html',
   styleUrls: ['./multi-select.component.scss']
 })
-export class MultiSelectComponent implements OnInit {
+export class MultiSelectComponent implements OnInit, OnChanges {
 
   @Output() filter: any = new EventEmitter<any>();
   @Input() initialFilter = null;
+  @Input() resetFilters = null;
   @Input() filterConfig: any = {
     selectionMode: null,
     source: null,
@@ -25,18 +35,19 @@ export class MultiSelectComponent implements OnInit {
   @ViewChild('mySelect') mySelect;
   @ViewChild('fromElement') fromElement: ElementRef;
   selection = new FormControl();
+  selectionValuesApplied = [];
   selectionList: any[] = [];
   allSelected = false;
   searchFilter = '';
   multiple = true;
   filterApplied = false;
-  constructor(private http: HttpClient) { }
+  constructor(private gridService: GridService) { }
 
   ngOnInit(): void {
     this.multiple = this.filterConfig.selectionMode === 'multiple' ? true : false;
 
     if (this.filterConfig.source === 'external') {
-      this.http.get<ApiResponseModel>(this.filterConfig.url).subscribe(data => {
+      this.gridService.getAny(this.filterConfig.url).subscribe(data => {
         if (data.statusCode === 200) {
           const {key, value} = this.filterConfig;
           this.selectionList = data.payload.map(item => {
@@ -51,20 +62,28 @@ export class MultiSelectComponent implements OnInit {
     }
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.resetFilters?.currentValue) {
+      this.reset(false);
+    }
+  }
+
   private setInitialFilters(): void {
     if (this.initialFilter) {
       if (this.multiple) {
         const values = this.initialFilter.value.split(',');
         const filterValues = [];
         values.forEach(val => {
-          filterValues.push(...this.selectionList.filter(selection => selection.value === val));
+          filterValues.push(...this.selectionList.filter(selection => selection.value === val.trim()));
         });
         this.selection.setValue(filterValues);
+        this.selectionValuesApplied = JSON.parse(JSON.stringify(values));
       } else {
         const i = this.selectionList.findIndex(selection => selection.value === this.initialFilter.value);
         if (i !== -1) {
           this.filterApplied = true;
           this.selection.setValue(this.selectionList[i]);
+          this.selectionValuesApplied = [this.selectionList[i].text];
         }
       }
     }
@@ -81,6 +100,7 @@ export class MultiSelectComponent implements OnInit {
       this.allSelected = false;
     }
     if (this.multiple === false) {
+      this.selectionValuesApplied = [this.selection.value.text];
       this.filter.emit({operator: 'eq', value: this.selection.value.value});
       this.filterApplied = true;
       this.mySelect.close();
@@ -90,6 +110,7 @@ export class MultiSelectComponent implements OnInit {
 
   close(): void {
     const values = this.selection.value?.map(val => val.value);
+    this.selectionValuesApplied = JSON.parse(JSON.stringify(values));
     const value = values?.toString();
     if (value) {
       this.filter.emit({operator: 'eq', value});
@@ -109,13 +130,16 @@ export class MultiSelectComponent implements OnInit {
     }
   }
 
-  reset(): void {
+  reset(emit = true): void {
+    this.selectionValuesApplied = [];
     if (this.multiple) {
       this.selection.setValue([]);
     } else {
       this.selection.setValue(null);
     }
-    this.filter.emit({operator: 'eq', value: null});
+    if (emit) {
+      this.filter.emit({operator: 'eq', value: null});
+    }
     this.filterApplied = false;
     this.mySelect.close();
   }

@@ -16,7 +16,6 @@ export class PreconfiguredFiltersExampleComponent {
       [url]="url"
       [selection]="true"
       [serverSidePagination]="true"
-      [entity]="entity"
       [initialFilters]="initialFilters"> <!--This line is needed for preconfigured filters-->
   </amdg-grid>`,
     ts: `
@@ -54,12 +53,6 @@ export class PreconfiguredFiltersExampleComponent {
       value: '30-50'
     }
   ];
-
-  entity = null;
-
-  reinitialize(): void {
-    this.entity = {};
-  }
 `};
 
   /* POST endpoint URL */
@@ -97,13 +90,7 @@ export class PreconfiguredFiltersExampleComponent {
     }
   ];
 
-  entity = null;
-
   constructor() { }
-
-  reinitialize(): void {
-    this.entity = {};
-  }
 
   scrollBottom(): void {
     window.scrollTo(0, 1000);

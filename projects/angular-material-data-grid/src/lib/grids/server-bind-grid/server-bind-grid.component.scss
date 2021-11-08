@@ -1,15 +1,20 @@
 @import '../../variables';
 
+.mat-menu-panel.amdg-column-control-menu {
+  width: 320px;
+  max-width: 320px;
+}
+
 .amdg-column-control-container {
   max-height: 420px;
   overflow: hidden;
   .amdg-cdk-drop-list {
-    width: 260px;
+    // width: 260px;
     padding: 0 9px;
     min-height: 60px;
     display: block;
     border-radius: 4px;
-    max-height: 350px;
+    max-height: 345px;
     overflow: auto;
     div div mat-icon {
       font-size: 18px;
@@ -57,13 +62,24 @@
 }
 
 #amdg-grid-container {
-  #column-control-btn {
-    @extend .amdg-top-button;
+  #column-control-btn-card {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding: 0 0 0 1px;
+    button {
+      @extend .amdg-top-button;
+    }
   }
 
   .amdg-top-right-button {
-    @extend .amdg-top-button;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
     margin-left: 8px;
+    padding: 0;
+    display: inline-block;
+    button {
+      @extend .amdg-top-button;
+    }
   }
 
   #grid {

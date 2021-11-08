@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  api: 'https://angular-grid.herokuapp.com/',
+  // api: 'http://localhost:3000/',
+  api: 'https://angular-grid.herokuapp.com/'
 };
 
 /*

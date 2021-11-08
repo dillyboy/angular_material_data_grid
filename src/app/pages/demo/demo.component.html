@@ -1,4 +1,5 @@
 <amdg-grid
+    *ngIf="showGrid"
     [headings]="headings"
     [url]="url"
     [selection]="true"
@@ -9,7 +10,8 @@
     (selectionEmit)="selectionChanged($event)"
     (filtersChangedEmit)="filtersChanged($event)"
     (buttonClickEmit)="buttonClick($event)"
-    (headingsChangedEmit)="headingsConfigChanged($event)">
+    (columnPreferencesChangeEndedEmit)="headingsConfigChanged($event)"
+    (columnPreferencesResetEmit)="resetColumnPreferencesClick()">
 <!--  <button mat-raised-button class="amdg-top-right-button">Download File</button>-->
 <!--  <button mat-raised-button class="amdg-top-right-button" [matMenuTriggerFor]="menu">Right Button<mat-icon>expand_more</mat-icon></button>-->
 <!--  <mat-menu #menu="matMenu">-->

@@ -3,9 +3,21 @@
 
   <p>A tag filter is similar to a multi-select filter but is used if there are a very large number of possible
     values which cannot be displayed in a multi-filter's list of options. Eg: Social Security Numbers.
-    A column with the type of string or url can contain this Tag Filter. To add this filter to a
-    column it is essential to add filterType as <a routerLink="/columnsAndFilters/overview">'tag'.</a>
+    A column with the type of 'string' or 'url' can contain this Tag Filter. Also the data types 'number' and 'currency'
+    may contain a Tag filter, the only difference is, it only allow numbers to be added. To add this filter to a
+    column it is essential to add filterType as <a routerLink="/columnsAndFilters/overview">'tag'.</a> A user can add
+    multiple tags by pasting a comma separated string or copying cells from an excel file.
   </p>
+  <p>Validations for adding tag filters include:</p>
+  <ul>
+    <li>A maximum of 5000 tags can be added.</li>
+    <li>A single tag (string) may only contain a maximum of 30 characters.</li>
+    <li>A single number tag may only contain a maximum of 9 characters.</li>
+    <li>Number type tags cannot contain alphanumeric characters.</li>
+    <li>The same tag cannot be entered again.</li>
+    <li>If a comma separated string is pasted (multiple tags) the system will automatically remove duplicates and trim
+      the surrounding spaces, then add the tags.</li>
+  </ul>
   <br>
   <p>Example of a tag filter configuration.</p>
   <pre><code [highlight]="ts"></code></pre>

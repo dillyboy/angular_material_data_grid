@@ -9,6 +9,7 @@ import {
   Input,
   NgZone,
   OnChanges,
+  OnInit,
   Output,
   Renderer2,
   SimpleChanges,
@@ -34,13 +35,15 @@ import {GridService} from '../grid.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
-export class ServerBindGridComponent implements AfterViewInit, OnChanges {
+export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Output() responseEmit: any = new EventEmitter<GridResponseInterface>();
   @Output() selectionEmit: any = new EventEmitter<any[]>();
   @Output() filtersChangedEmit: any = new EventEmitter<GridFilterItemInterface[]>();
   @Output() buttonClickEmit: any = new EventEmitter<GridButtonClickInterface>();
-  @Output() headingsChangedEmit: any = new EventEmitter<GridHeadingInterface[]>();
+  @Output() columnPreferencesChangedEmit: any = new EventEmitter<GridHeadingInterface[]>();
+  @Output() columnPreferencesChangeEndedEmit: any = new EventEmitter<GridHeadingInterface[]>();
+  @Output() columnPreferencesResetEmit: any = new EventEmitter();
 
   @Input() headings: GridHeadingInterface[] = [];
   @Input() url = '';
@@ -48,8 +51,10 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
   @Input() columnControl = false;
   @Input() entity = null;
   @Input() transparency = false;
+  @Input() elevation: 0 | 1 | 2 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 = 2;
   @Input() serverSidePagination = false;
   @Input() initialFilters = [];
+  @Input() resetFilters = null;
   @Input() expandable = false;
   @Input() expandableConfig: GridMasterDetailConfigInterface = {
     type: 'html',
@@ -63,6 +68,7 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
     }
   };
 
+  headingsCopy = [];
   columnSearchParam = '';
   allGridItemsSelected = false;
   loadingData = false;
@@ -106,6 +112,10 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
               private gridService: GridService) {
   }
 
+  ngOnInit(): void {
+    this.headingsCopy = JSON.parse(JSON.stringify(this.headings));
+  }
+
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.calculateGridWidth();
@@ -118,6 +128,20 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
         this.filters = this.initialFilters;
       }
       this.getData({pageNo: 1, recordsPerPage: this.recordsPerPage});
+    }
+
+    if (changes.headings?.currentValue) {
+      this.updateColumns();
+    }
+
+    if (changes.resetFilters?.currentValue) {
+      this.filters = [];
+      if (this.serverSidePagination) {
+        this.getData({pageNo: 1, recordsPerPage: this.recordsPerPage});
+      } else {
+        this.response = JSON.parse(JSON.stringify(this.responseBackup));
+        this.pageChanged({pageNo: 1, recordsPerPage: this.recordsPerPage});
+      }
     }
   }
 
@@ -159,13 +183,23 @@ export class ServerBindGridComponent implements AfterViewInit, OnChanges {
     this.scrollRemainingDistanceToRight = Math.trunc(elem.scrollWidth - elem.scrollLeft - this.gridWidth + this.horizontalScrollBarWidth);
   }
 
-  updateColumns(): void {
+  updateColumns(columnPreferenceChangeEnded = false): void {
     this.headings = [...this.headings]; // to run change detection in the virtual scroll need to reassign a fresh copy
     setTimeout(() => {
       this.scrollChanged(); // this is done to recalculate scrollRemainingDistanceToLeft & scrollRemainingDistanceToRight
                             // values which helps to show the auto scroll navigate buttons
       this.changeDetectorRef.detectChanges();
-      this.headingsChangedEmit.emit(this.headings);
+      if (columnPreferenceChangeEnded) {
+
+        // only emit if there is an actual change to the headings array
+        if (JSON.stringify(this.headings) !== JSON.stringify(this.headingsCopy)) {
+          this.columnPreferencesChangeEndedEmit.emit(this.headings);
+          this.headingsCopy = JSON.parse(JSON.stringify(this.headings));
+        }
+
+      } else {
+        this.columnPreferencesChangedEmit.emit(this.headings);
+      }
     }, 100);
   }
 

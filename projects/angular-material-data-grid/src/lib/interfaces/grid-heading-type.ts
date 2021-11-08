@@ -16,7 +16,7 @@ export default interface GridHeadingInterface {
      * type - A column consists of multiple data types. Based on the value given here the column filtration and the way the data
      *        is displayed may vary
      */
-    type: 'string' | 'url' | 'number' | 'date' | 'button-group' | 'image-url';
+    type: 'string' | 'url' | 'number' | 'currency' | 'date' | 'button-group' | 'image-url';
 
     /**
      * width - This refers to the column's width which can be given as a px value or a percentage. Eg: '150px' or '25%'
@@ -24,9 +24,17 @@ export default interface GridHeadingInterface {
     width?: string;
 
     /**
+     * clickable - This boolean value determines if the values in this columns are clickable which will
+     *             trigger a click event. It is applicable to data types of 'string' | 'url' | 'number' | 'currency' | 'date'
+     */
+
+    clickable?: boolean;
+
+    /**
      * disableFiltering - This boolean value determines if the filter is shown or hidden.
      *                    By default filtering is enabled which means it goes as false
      */
+
     disableFiltering?: boolean;
 
     /**
@@ -61,6 +69,16 @@ export default interface GridHeadingInterface {
     fontStyle?: 'italic' | 'normal';
 
     /**
+     * prefix - Add a custom prefix to the displayed data. For example # in front of a number - #1.
+     */
+    prefix?: string;
+
+    /**
+     * suffix - Add a custom suffix to the displayed data. For example % at the end of a number - 20%.
+     */
+    suffix?: string;
+
+    /**
      * filterType - This is a feature to enable an optional filter type that can be given for types url or string.
      *              A multi-select filter type is an advanced filter which can either have one or more filter values given to a single
      *              column. A tag filter is a similar filter but is used if there are a very large number of possible values which
@@ -75,6 +93,12 @@ export default interface GridHeadingInterface {
      *        column control
      */
     show?: boolean;
+
+    /**
+     * headerTooltip - This can be used to pass a small explanation for the column header which will be shown when the
+     *                 user hovers over
+     */
+    headerTooltip?: string;
 
     /**
      * other - This refers to additional configurations that can be given to a column to control the behaviour of urls, multi-selects

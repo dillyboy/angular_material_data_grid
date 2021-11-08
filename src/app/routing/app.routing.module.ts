@@ -61,7 +61,7 @@ const routes: Routes = [
   },
   { path: 'features', component: ContainerComponent,
     children: [
-      { path: 'columnControl', component: ColumnControlComponent },
+      { path: 'columnPreferences', component: ColumnControlComponent },
       { path: 'itemSelection', component: ItemSelectionComponent },
       { path: 'theming', component: ThemingComponent },
       { path: 'fixedHeader', component: FixedHeaderComponent },

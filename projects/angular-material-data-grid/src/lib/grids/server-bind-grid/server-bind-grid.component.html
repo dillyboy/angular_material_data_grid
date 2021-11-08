@@ -1,10 +1,10 @@
 <div id="amdg-grid-container">
   <div class="amdg-layout-container amdg-p-0">
     <div>
-      <button *ngIf="columnControl" mat-raised-button id="column-control-btn" [matMenuTriggerFor]="columnControlMenu">Column Control<mat-icon>expand_more</mat-icon></button>
-      <mat-menu #columnControlMenu="matMenu" class="amdg-overflow-hidden">
+      <mat-card id="column-control-btn-card"><button *ngIf="columnControl" mat-raised-button [matMenuTriggerFor]="columnControlMenu">Column Preferences<mat-icon>expand_more</mat-icon></button></mat-card>
+      <mat-menu #columnControlMenu="matMenu" class="amdg-column-control-menu" (closed)="updateColumns(true)">
         <div class="amdg-column-control-container" (click)="$event.stopPropagation()">
-          <div class="amdg-p-3">
+          <div class="amdg-layout-container amdg-p-3" style="align-items: start">
             <mat-form-field class="amdg-w-100 amdg-fs-12">
               <mat-label>Search Columns</mat-label>
               <mat-icon matPrefix class="amdg-mr-2">search</mat-icon>
@@ -13,6 +13,9 @@
                 <mat-icon>close</mat-icon>
               </button>
             </mat-form-field>
+            <button mat-stroked-button aria-label="Reset" color="warn" class="amdg-ml-2" (click)="columnPreferencesResetEmit.emit();columnSearchParam=''">
+              Reset
+            </button>
           </div>
 
           <div class="amdg-cdk-drop-list" cdkDropList (cdkDropListDropped)="columnDrop($event)" [cdkDropListDisabled]="columnSearchParam.length === 0 ? false: true">
@@ -23,6 +26,9 @@
                 <mat-checkbox *ngIf="heading.show !== undefined" [(ngModel)]="heading.show" (ngModelChange)="updateColumns()"><span class="amdg-ml-3">{{heading.display}} <span *ngIf="!heading.display" style="font-style: italic">Unnamed</span></span></mat-checkbox>
               </div>
             </div>
+            <div class="amdg-text-muted amdg-text-center" *ngIf="(headings | columnSearchFilter: columnSearchParam)?.length == 0">
+              <b>No such column</b>
+            </div>
           </div>
         </div>
       </mat-menu>
@@ -31,7 +37,7 @@
       <ng-content></ng-content>
     </div>
   </div>
-  <mat-card id="grid" [ngClass]="{'fullscreen': fullscreen, 'grid-transparency': transparency}">
+  <mat-card id="grid" class="mat-elevation-z{{elevation}}" [ngClass]="{'fullscreen': fullscreen, 'grid-transparency': transparency}" [style.border-top-left-radius]="columnControl ? '0px' : '4px'">
     <button *ngIf="scrollRemainingDistanceToLeft !== 0" mat-button (click)="scrollLeft()" aria-label="navigate left" class="navigate-left-btn">
       <mat-icon class="amdg-fs-40 navigate-icons">chevron_left</mat-icon>
     </button>
@@ -57,7 +63,7 @@
         <th *ngIf="selection" class="amdg-selection"></th>
         <th *ngIf="expandable" class="amdg-selection"></th>
         <th *ngFor="let heading of headings | columnFilter;" [style.width]="heading.width">
-          <amdg-filter-header [initialFilters]="initialFilters" [heading]="heading" (filter)="filter($event)"></amdg-filter-header>
+          <amdg-filter-header [initialFilters]="initialFilters" [resetFilters]="resetFilters" [heading]="heading" (filter)="filter($event)"></amdg-filter-header>
         </th>
         </thead>
       </table>
@@ -124,8 +130,26 @@
                         </ng-container>
                       </span>
 
+                      <!--CURRENCY-->
+                      <span *ngSwitchCase="'currency'">
+                        {{item[heading.fieldName] | currency: heading.prefix}}
+                      </span>
+
                       <!--ANY OTHER TYPE-->
-                      <span *ngSwitchDefault [title]="item[heading.title] ? item[heading.title] : item[heading.fieldName]"> {{item[heading.fieldName]}}</span>
+                      <span *ngSwitchDefault [title]="item[heading.title] ? item[heading.title] : item[heading.fieldName]">
+                        <ng-container *ngIf="heading?.clickable; else plainValue">
+                          <a mat-button disableRipple color="primary" class="amdg-link" (click)="goToLink(heading.fieldName, item, item[heading.fieldName])">
+                            <span *ngIf="heading.prefix" [innerHTML]="heading.prefix | template : item"></span>
+                            {{item[heading.fieldName]}}
+                            <span *ngIf="heading.suffix" [innerHTML]="heading.suffix | template : item"></span>
+                          </a>
+                        </ng-container>
+                        <ng-template #plainValue>
+                          <span *ngIf="heading.prefix" [innerHTML]="heading.prefix | template : item"></span>
+                          {{item[heading.fieldName]}}
+                          <span *ngIf="heading.suffix" [innerHTML]="heading.suffix | template : item"></span>
+                        </ng-template>
+                      </span>
                     </ng-container>
                   </td>
                 </tr>

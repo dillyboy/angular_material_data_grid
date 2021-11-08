@@ -53,6 +53,11 @@
               </ng-container>
             </span>
 
+            <!--CURRENCY-->
+            <span *ngSwitchCase="'currency'">
+              {{item[heading.fieldName] | currency}}
+            </span>
+
             <!--ANY OTHER TYPE-->
             <span *ngSwitchDefault [title]="item[heading.title] ? item[heading.title] : item[heading.fieldName]"> {{item[heading.fieldName]}}</span>
           </ng-container>

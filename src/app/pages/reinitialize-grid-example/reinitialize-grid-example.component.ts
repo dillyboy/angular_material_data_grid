@@ -11,16 +11,20 @@ export class ReinitializeGridExampleComponent {
 
   usage = {
     html: `
-  <button mat-raised-button type="button" (click)="reinitialize()">
-    Reinitialize Grid From Parent Component
-  </button>
+  <div style="margin-bottom: 24px">
+    <p>This example shows how to reinitialize the grid from parent component</p>
+    <button mat-raised-button type="button" (click)="resetPressed()" class="mr-3">Reinitialize with current filters</button>
+    <span>or</span>
+    <button mat-raised-button type="button" (click)="resetWithFilters()" class="ml-3">Reinitialize by resetting all filters</button>
+  </div>
 
   <amdg-grid
       [headings]="headings"
       [url]="url"
       [selection]="true"
       [serverSidePagination]="true"
-      [entity]="entity">
+      [entity]="entity"
+      [resetFilters]="resetFilters">
   </amdg-grid>`,
     ts: `
   /* POST endpoint URL */
@@ -46,9 +50,14 @@ export class ReinitializeGridExampleComponent {
   ];
 
   entity = null;
+  resetFilters = null;
 
-  reinitialize(): void {
+  resetPressed(): void {
     this.entity = {};
+  }
+
+  resetWithFilters(): void {
+    this.resetFilters = {};
   }
 `};
 
@@ -75,11 +84,14 @@ export class ReinitializeGridExampleComponent {
   ];
 
   entity = null;
+  resetFilters = null;
 
-  constructor() { }
-
-  reinitialize(): void {
+  resetPressed(): void {
     this.entity = {};
+  }
+
+  resetWithFilters(): void {
+    this.resetFilters = {};
   }
 
   scrollBottom(): void {

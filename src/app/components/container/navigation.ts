@@ -110,7 +110,7 @@ export const navigation = [
     panelHeading: 'Grid Features',
     panelIcon: '',
     openWhen: [
-      '/features/columnControl',
+      '/features/columnPreferences',
       '/features/itemSelection',
       '/features/theming',
       '/features/fixedHeader',
@@ -118,10 +118,10 @@ export const navigation = [
     ],
     children: [
       {
-        headingName: 'Column Control',
+        headingName: 'Column Preferences',
         headingIcon: '',
-        highLightWhen: ['/features/columnControl'],
-        route: '/features/columnControl'
+        highLightWhen: ['/features/columnPreferences'],
+        route: '/features/columnPreferences'
       },
       {
         headingName: 'Item Selection',

@@ -43,14 +43,26 @@
             programmatically re-initialise the grid by just assigning an empty object if necessary.</td>
         </tr>
         <tr class="">
+          <td><code highlight="@Input() resetFilters: any"></code></td>
+          <td>This is an optional input (object) which can be used to re-initialise the grid by resetting all the
+            added filters. Everytime this object is changed a new request will be sent automatically by resetting all
+            the filters if server-side pagination is used (not in a client side paginated grid). </td>
+        </tr>
+        <tr class="odd">
           <td><code highlight="@Input() serverSidePagination: boolean"></code></td>
           <td>By default the grid system is client side paginated. However if your backend supports server-side
               pagination in accordance with this document, set this value to true.</td>
         </tr>
-        <tr class="odd">
+        <tr class="">
           <td><code highlight="@Input() transparency: boolean"></code></td>
           <td>This is an optional input which will give the grid an aesthetic upgrade for unique UI preferences but
             does not offer any additional functionality. (It makes the data grid slightly transparent.)
+          </td>
+        </tr>
+        <tr class="odd">
+          <td><code highlight="@Input() elevation: 0 | 1 | 2 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24"></code></td>
+          <td>This is an optional input which will give the grid an elevation level shown by the intensity of the
+            shadow underneath from 0 to 24.
           </td>
         </tr>
         <tr class="">
@@ -74,10 +86,22 @@
             any operations can be performed on the parent component.</td>
         </tr>
         <tr class="">
-          <td><code highlight="@Output() headingsChangedEmit: EventEmitter<GridHeadingInterface[]>"></code></td>
-          <td>This output will only happen if the columnControl is set to true.
-            This returns the headings array which was modified by the user. This is useful to save
-            the user's column preference for a return visit.</td>
+          <td><code highlight="@Output() columnPreferencesChangedEmit: EventEmitter<GridHeadingInterface[]>"></code></td>
+          <td>This output will only occur if the columnControl is set to true.
+            This returns the updated headings array every single time when the user reorders columns or toggles
+            column visibility.</td>
+        </tr>
+        <tr class="odd">
+          <td><code highlight="@Output() columnPreferencesChangeEndedEmit: EventEmitter<GridHeadingInterface[]>"></code></td>
+          <td>This output will only occur if the columnControl is set to true.
+            This returns the updated headings array when the user reorders columns or toggles column visibility and finally
+            closes the column preference menu by clicking elsewhere. This is ideal to capture and save the user's column
+            preference for a return visit with a backend integration.</td>
+        </tr>
+        <tr class="">
+          <td><code highlight="@Output() columnPreferencesResetEmit: EventEmitter"></code></td>
+          <td>This output will occur when columnControl is set to true and the user clicks on the reset button
+            in the columnControl section.</td>
         </tr>
       </table>
     </div>

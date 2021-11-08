@@ -1,5 +1,5 @@
 <div class="amdg-layout-container" [ngStyle]="{'cursor': heading.disableSorting ? 'default': 'pointer'}" matRipple [matRippleDisabled]="heading.disableSorting" (click)="sort()">
-  <span id="amdg-header-text" class="amdg-text-truncate"> {{heading.display}}</span>
+  <span id="amdg-header-text" class="amdg-text-truncate" [matTooltip]="heading.headerTooltip"> {{heading.display}}</span>
   <ng-container *ngIf="!heading.disableSorting">
     <mat-icon *ngIf="!heading.sort"   class="amdg-sort-icon" matTooltip="Sort Ascending">sort</mat-icon>
     <mat-icon *ngIf="heading.sort === 'asc'"  color="accent" matTooltip="Sort Descending">arrow_upward</mat-icon>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { GridButtonClick, GridFilterItem, GridHeading, GridResponse } from 'angular-material-data-grid';
 
@@ -12,6 +12,7 @@ export class ClientSidePaginationGridExampleComponent implements OnInit {
   usage = {
     html: `
   <amdg-grid
+      *ngIf="showGrid"
       [headings]="headings"
       [url]="url"
       [selection]="true"
@@ -20,7 +21,8 @@ export class ClientSidePaginationGridExampleComponent implements OnInit {
       (selectionEmit)="selectionChanged($event)"
       (filtersChangedEmit)="filtersChanged($event)"
       (buttonClickEmit)="buttonClick($event)"
-      (headingsChangedEmit)="headingsConfigChanged($event)">
+      (columnPreferencesChangedEmit)="headingsConfigChanged($event)"
+      (columnPreferencesResetEmit)="resetColumnPreferencesClick()">
   </amdg-grid>`,
     ts: `
   /* POST endpoint URL */
@@ -28,6 +30,8 @@ export class ClientSidePaginationGridExampleComponent implements OnInit {
 
   /* Unique identifier can be used to save user's column preferences */
   GRID_ID = 'demoGrid' as const;
+
+  showGrid = true;
 
   /* Original column configuration */
   initialHeadings: GridHeading[] = [
@@ -126,6 +130,8 @@ export class ClientSidePaginationGridExampleComponent implements OnInit {
   /* Column configuration which will be passed to grid */
   headings: GridHeading[] = [];
 
+  constructor(private changeDetectorRef: ChangeDetectorRef) { }
+
   ngOnInit(): void {
     /* Custom code that can be used to either retrieve user's column preference from local storage
        or from the original configuration based on availability.
@@ -165,11 +171,22 @@ export class ClientSidePaginationGridExampleComponent implements OnInit {
     /* Saving the user's column preference in local storage */
     localStorage.setItem(this.GRID_ID, JSON.stringify(headings));
   }
+
+  resetColumnPreferencesClick(): void {
+    localStorage.removeItem(this.GRID_ID);
+    this.headings = JSON.parse(JSON.stringify(this.initialHeadings));
+    this.showGrid = false;
+    this.changeDetectorRef.detectChanges();
+    this.showGrid = true;
+    this.changeDetectorRef.detectChanges();
+  }
 `};
 
   url = `${environment.api}getAllUsers`;
 
   GRID_ID = 'demoGrid' as const;
+
+  showGrid = true;
 
   initialHeadings: GridHeading[] = [
     {fieldName: 'id', display: 'ID', type: 'number', width: '100px', disableSorting: true, textAlign: 'right'},
@@ -266,6 +283,8 @@ export class ClientSidePaginationGridExampleComponent implements OnInit {
 
   headings: GridHeading[] = [];
 
+  constructor(private changeDetectorRef: ChangeDetectorRef) { }
+
   ngOnInit(): void {
     const demoGridUserPreference: GridHeading[] = JSON.parse(localStorage.getItem(this.GRID_ID) || '{}');
     if (Object.entries(demoGridUserPreference).length > 0) {
@@ -297,7 +316,17 @@ export class ClientSidePaginationGridExampleComponent implements OnInit {
   }
 
   headingsConfigChanged(headings: GridHeading[]): void {
+    /* Saving the user's column preference in local storage */
     localStorage.setItem(this.GRID_ID, JSON.stringify(headings));
+  }
+
+  resetColumnPreferencesClick(): void {
+    localStorage.removeItem(this.GRID_ID);
+    this.headings = JSON.parse(JSON.stringify(this.initialHeadings));
+    this.showGrid = false;
+    this.changeDetectorRef.detectChanges();
+    this.showGrid = true;
+    this.changeDetectorRef.detectChanges();
   }
 
   scrollBottom(): void {

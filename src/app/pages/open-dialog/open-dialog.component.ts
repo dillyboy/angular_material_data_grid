@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { GridButtonClick, GridHeading, GridResponse } from 'angular-material-data-grid';
 import { MatDialog} from '@angular/material/dialog';
 import { GridWithinDialogComponent } from './grid-within-dialog/grid-within-dialog.component';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-open-dialog',
@@ -133,7 +134,7 @@ export class OpenDialogComponent {
 };
 
   /* POST endpoint URL */
-  url = 'https://angular-grid.herokuapp.com/getOrderData';
+  url = `${environment.api}getOrderData`;
 
   /* Column configuration */
   headings: GridHeading[] = [

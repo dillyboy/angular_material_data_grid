@@ -18,8 +18,8 @@ export class TopRightButtonsExampleComponent {
       [selection]="true"
       [serverSidePagination]="true">
       <!--The content passed is only intended to be used on adding elements on the top right of the grid-->
-      <button mat-raised-button class="amdg-top-right-button" (click)="singleButtonClicked()">Single Button</button>
-      <button mat-raised-button class="amdg-top-right-button" [matMenuTriggerFor]="menu">Menu Button<mat-icon>expand_more</mat-icon></button>
+      <mat-card class="amdg-top-right-button"><button mat-raised-button (click)="singleButtonClicked()">Single Button</button></mat-card>
+      <mat-card class="amdg-top-right-button"><button mat-raised-button [matMenuTriggerFor]="menu">Menu Button<mat-icon>expand_more</mat-icon></button></mat-card>
       <mat-menu #menu="matMenu">
         <button mat-menu-item class="amdg-mat-menu-item" (click)="itemClicked(1)">Item 1</button>
         <button mat-menu-item class="amdg-mat-menu-item" (click)="itemClicked(2)">Item 2</button>

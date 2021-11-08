@@ -6,6 +6,9 @@
   min-width: auto;
   font-size: 12px;
   line-height: normal;
+  &:hover {
+    text-decoration: none !important;
+  }
 }
 
 .amdg-modified-mat-select {
@@ -24,6 +27,6 @@
 }
 
 #amdg-list-container {
-  max-height: 165px;
+  max-height: 160px;
   overflow-y: scroll;
 }

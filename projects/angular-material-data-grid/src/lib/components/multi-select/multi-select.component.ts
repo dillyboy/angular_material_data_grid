@@ -100,8 +100,9 @@ export class MultiSelectComponent implements OnInit, OnChanges {
       this.allSelected = false;
     }
     if (this.multiple === false) {
-      this.selectionValuesApplied = [this.selection.value.text];
-      this.filter.emit({operator: 'eq', value: this.selection.value.value});
+      const {text, value} = this.selection.value;
+      this.selectionValuesApplied = [text];
+      this.filter.emit({operator: 'eq', value});
       this.filterApplied = true;
       this.mySelect.close();
     }
@@ -109,8 +110,9 @@ export class MultiSelectComponent implements OnInit, OnChanges {
   }
 
   close(): void {
+    const texts = this.selection.value?.map(val => val.text);
     const values = this.selection.value?.map(val => val.value);
-    this.selectionValuesApplied = JSON.parse(JSON.stringify(values));
+    this.selectionValuesApplied = JSON.parse(JSON.stringify(texts));
     const value = values?.toString();
     if (value) {
       this.filter.emit({operator: 'eq', value});
@@ -148,6 +150,13 @@ export class MultiSelectComponent implements OnInit, OnChanges {
     this.selectionList.forEach((value, i) => {
       value.hide = !value.text.toLowerCase().includes(this.searchFilter.toLowerCase());
     });
+  }
+
+  searchFilterKeydown(event): void {
+    // prevent default behavior of selecting an option when the user filters the options with space being added
+    if (event.code === 'Space') {
+      event.stopPropagation();
+    }
   }
 
 }

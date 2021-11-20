@@ -226,7 +226,7 @@ export class ChildGridComponent implements OnInit {
 
     const urlHeadings = [];
     this.headings.forEach(heading => {
-      if (heading.type === 'url') {
+      if (heading?.clickable === 'url') {
         urlHeadings.push({
           type: heading.fieldName,
           urlTemplate: heading.other?.urlTemplate,

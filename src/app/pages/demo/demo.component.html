@@ -6,9 +6,11 @@
     [columnControl]="true"
     [serverSidePagination]="true"
     [initialFilters]="initialFilters"
+    (requestBodyEmit)="requestBodyChanged($event)"
     (responseEmit)="responseReceived($event)"
     (selectionEmit)="selectionChanged($event)"
     (filtersChangedEmit)="filtersChanged($event)"
+    (sortChangedEmit)="sortChanged($event)"
     (buttonClickEmit)="buttonClick($event)"
     (columnPreferencesChangeEndedEmit)="headingsConfigChanged($event)"
     (columnPreferencesResetEmit)="resetColumnPreferencesClick()">

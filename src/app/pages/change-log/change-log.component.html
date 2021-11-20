@@ -1,7 +1,38 @@
 <div class="content">
   <h1>Change Log</h1>
 
-  <h2>0.3.9, 0.4.0 <span style="font-weight: normal; font-size: 16px">(9th November 2021)</span></h2>
+  <h2>0.4.2, 0.4.3, 0.4.4, 0.4.5 <span style="font-weight: normal; font-size: 16px">(11th November 2021)</span></h2>
+
+  <mat-card class="simple-table-container mb-3">
+    <div>
+      <table class="simple-table">
+        <tr>
+          <th width="400px">Type</th>
+          <th>Description</th>
+        </tr>
+        <tr class="odd">
+          <td>Refactor (Breaking Changes)</td>
+          <td>Removed the data type 'url' as this did not serve any purpose for an actual data type, but only helps to create links.
+              Now urls can be generated with 'string' | 'number' | 'currency' | 'date' types. Also the clickable attribute is
+              changed from a boolean to either the have the value 'url' or 'button'. Refer <a routerLink="/columnsAndFilters/urlBuilder">URL Builder</a> for the updated Docs to help refactor the code.</td>
+        </tr>
+        <tr>
+          <td>Feature</td>
+          <td>'other' object is passed with the grid response if available.</td>
+        </tr>
+        <tr class="odd">
+          <td>Bug Fix</td>
+          <td>Prevented the default behavior in the multi-select filter of selecting an option when the user filters the options with space being added.</td>
+        </tr>
+        <tr>
+          <td>Bug Fix</td>
+          <td>Fixed issue with showing the value and not showing the display text when multiple multi-select filters are applied.</td>
+        </tr>
+      </table>
+    </div>
+  </mat-card>
+
+  <h2>0.3.9, 0.4.0, 0.4.1 <span style="font-weight: normal; font-size: 16px">(9th November 2021)</span></h2>
 
   <mat-card class="simple-table-container mb-3">
     <div>
@@ -25,6 +56,10 @@
           <td>The prefix and suffix attributes are now capable of showing html elements.
             Use this with caution to not hinder performance. For example show an image of a country
               in front of the country name in the column or show a red color circle when displaying 'Failed'.</td>
+        </tr>
+        <tr class="">
+          <td>Feature</td>
+          <td>Added two new outputs: <b>requestBodyEmit</b> and <b>sortChangedEmit</b>. See the functionality <a routerLink="/gettingStarted/propertiesAndEvents">here</a>.</td>
         </tr>
       </table>
     </div>
@@ -73,7 +108,7 @@
         </tr>
         <tr class="odd">
           <td>Feature</td>
-          <td>Added a feature to make values of the types 'string' | 'url' | 'number' | 'currency' | 'date' clickable
+          <td>Added a feature to make values of the types 'string' | 'number' | 'currency' | 'date' clickable
             by adding a new boolean attribute named <b>clickable</b> to the <b>GridHeading</b> interface.</td>
         </tr>
         <tr>

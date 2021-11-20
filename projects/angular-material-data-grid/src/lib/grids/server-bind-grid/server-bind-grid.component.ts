@@ -16,8 +16,10 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
+import GridRequestInterface from '../../interfaces/grid-request';
 import GridResponseInterface from '../../interfaces/grid-response';
 import GridFilterItemInterface from '../../interfaces/grid-filter-item';
+import GridSortItemInterface from '../../interfaces/grid-sort-item';
 import GridButtonClickInterface from '../../interfaces/grid-button-click-interface';
 import GridHeadingInterface from '../../interfaces/grid-heading-type';
 import GridMasterDetailConfigInterface from '../../interfaces/grid-master-detail-config-type';
@@ -37,9 +39,11 @@ import {GridService} from '../grid.service';
 })
 export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges {
 
+  @Output() requestBodyEmit: any = new EventEmitter<GridRequestInterface>();
   @Output() responseEmit: any = new EventEmitter<GridResponseInterface>();
   @Output() selectionEmit: any = new EventEmitter<any[]>();
   @Output() filtersChangedEmit: any = new EventEmitter<GridFilterItemInterface[]>();
+  @Output() sortChangedEmit: any = new EventEmitter<GridSortItemInterface>();
   @Output() buttonClickEmit: any = new EventEmitter<GridButtonClickInterface>();
   @Output() columnPreferencesChangedEmit: any = new EventEmitter<GridHeadingInterface[]>();
   @Output() columnPreferencesChangeEndedEmit: any = new EventEmitter<GridHeadingInterface[]>();
@@ -86,7 +90,7 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
   scrollRemainingDistanceToRight = null;
   horizontalScrollBarWidth = null;
   currentPage = 1;
-  sortObj = {
+  sortObj: GridSortItemInterface = {
     sort: null,
     sortField: null
   };
@@ -217,11 +221,12 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
         heading.sort = null;
       }
     });
-    const sortObj = {
+    const sortObj: GridSortItemInterface = {
       sort: this.headings[index]?.sort,
       sortField: this.headings[index]?.sort ? this.headings[index]?.fieldName : null
     };
     this.sortObj = sortObj;
+    this.sortChangedEmit.emit(sortObj);
     if (this.serverSidePagination) {
       this.getData({pageNo: 1, recordsPerPage: this.recordsPerPage});
     } else {
@@ -399,7 +404,7 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     this.currentPage = pageNo;
     this.changeDetectorRef.detectChanges();
 
-    let body = null;
+    let body: GridRequestInterface = null;
     if (this.serverSidePagination) {
       body = {
         entity: this.entity,
@@ -414,14 +419,15 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
       };
     }
 
-    console.log(body);
+    this.requestBodyEmit.emit(body);
 
     this.gridPostSubscription = this.gridService.getAnyPost(this.url, body).subscribe(data => {
 
       const gridData = this.linkCreationInterceptor(data.payload.gridData);
+      const {totalCount, other} = data.payload;
       this.selectedRows = [];
-      this.response = {gridData, totalCount: data.payload.totalCount};
-      this.responseBackup = {gridData, totalCount: data.payload.totalCount};
+      this.response = {gridData, totalCount, other};
+      this.responseBackup = {gridData, totalCount, other};
       this.gridItems = gridData;
       this.responseEmit.emit(this.response);
       if (this.serverSidePagination) {
@@ -492,7 +498,7 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
 
     const urlHeadings = [];
     this.headings.forEach(heading => {
-      if (heading.type === 'url') {
+      if (heading?.clickable === 'url') {
         urlHeadings.push({
           type: heading.fieldName,
           urlTemplate: heading.other?.urlTemplate,

@@ -16,7 +16,7 @@ export default interface GridHeadingInterface {
      * type - A column consists of multiple data types. Based on the value given here the column filtration and the way the data
      *        is displayed may vary
      */
-    type: 'string' | 'url' | 'number' | 'currency' | 'date' | 'button-group' | 'image-url';
+    type: 'string' | 'number' | 'currency' | 'date' | 'button-group' | 'image-url';
 
     /**
      * width - This refers to the column's width which can be given as a px value or a percentage. Eg: '150px' or '25%'
@@ -25,10 +25,10 @@ export default interface GridHeadingInterface {
 
     /**
      * clickable - This boolean value determines if the values in this columns are clickable which will
-     *             trigger a click event. It is applicable to data types of 'string' | 'url' | 'number' | 'currency' | 'date'
+     *             trigger a click event. It is applicable to data types of 'string' | 'number' | 'currency' | 'date'
      */
 
-    clickable?: boolean;
+    clickable?: 'url' | 'button';
 
     /**
      * disableFiltering - This boolean value determines if the filter is shown or hidden.
@@ -109,5 +109,5 @@ export default interface GridHeadingInterface {
     /**
      * sort - This field is autofilled by the grid system, do not set values manually
      */
-    sort?: string;
+    sort?: null | '' | undefined | 'desc' | 'asc';
 }

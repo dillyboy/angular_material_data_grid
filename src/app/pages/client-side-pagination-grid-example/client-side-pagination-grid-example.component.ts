@@ -1,6 +1,13 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { GridButtonClick, GridFilterItem, GridHeading, GridResponse } from 'angular-material-data-grid';
+import {
+  GridButtonClick,
+  GridFilterItem,
+  GridHeading,
+  GridRequest,
+  GridResponse,
+  GridSortItem
+} from 'angular-material-data-grid';
 
 @Component({
   selector: 'app-client-side-pagination-grid-example',
@@ -17,9 +24,11 @@ export class ClientSidePaginationGridExampleComponent implements OnInit {
       [url]="url"
       [selection]="true"
       [columnControl]="true"
+      (requestBodyEmit)="requestBodyChanged($event)"
       (responseEmit)="responseReceived($event)"
       (selectionEmit)="selectionChanged($event)"
       (filtersChangedEmit)="filtersChanged($event)"
+      (sortChangedEmit)="sortChanged($event)"
       (buttonClickEmit)="buttonClick($event)"
       (columnPreferencesChangedEmit)="headingsConfigChanged($event)"
       (columnPreferencesResetEmit)="resetColumnPreferencesClick()">
@@ -36,7 +45,7 @@ export class ClientSidePaginationGridExampleComponent implements OnInit {
   /* Original column configuration */
   initialHeadings: GridHeading[] = [
     {fieldName: 'id', display: 'ID', type: 'number', width: '100px', disableSorting: true, textAlign: 'right'},
-    {fieldName: 'full_name', display: 'Full Name', type: 'url', width: '160px',
+    {fieldName: 'full_name', display: 'Full Name', type: 'string', width: '160px', clickable: 'url',
       other: {
         openTab: true,
         urlTemplate: '/gettingStarted/demo/:id',
@@ -145,6 +154,10 @@ export class ClientSidePaginationGridExampleComponent implements OnInit {
     }
   }
 
+  requestBodyChanged(body: GridRequest): void {
+    console.log(body);
+  }
+
   responseReceived(response: GridResponse): void {
     /* Simple example of manipulating some data retrieved through the grid component */
     response.gridData.forEach(item => {
@@ -161,6 +174,10 @@ export class ClientSidePaginationGridExampleComponent implements OnInit {
 
   filtersChanged(filters: GridFilterItem[]): void {
     console.log(filters);
+  }
+
+  sortChanged(sortObject: GridSortItem): void {
+    console.log(sortObject);
   }
 
   buttonClick(button: GridButtonClick): void {
@@ -190,7 +207,7 @@ export class ClientSidePaginationGridExampleComponent implements OnInit {
 
   initialHeadings: GridHeading[] = [
     {fieldName: 'id', display: 'ID', type: 'number', width: '100px', disableSorting: true, textAlign: 'right'},
-    {fieldName: 'full_name', display: 'Full Name', type: 'url', width: '160px',
+    {fieldName: 'full_name', display: 'Full Name', type: 'string', width: '160px', clickable: 'url',
       other: {
         openTab: true,
         urlTemplate: '/gettingStarted/demo/:id',
@@ -294,6 +311,10 @@ export class ClientSidePaginationGridExampleComponent implements OnInit {
     }
   }
 
+  requestBodyChanged(body: GridRequest): void {
+    console.log(body);
+  }
+
   responseReceived(response: GridResponse): void {
     response.gridData.forEach(item => {
       item.date_of_birth = item.date_of_birth.substring(0, 10);
@@ -309,6 +330,10 @@ export class ClientSidePaginationGridExampleComponent implements OnInit {
 
   filtersChanged(filters: GridFilterItem[]): void {
     console.log(filters);
+  }
+
+  sortChanged(sortObject: GridSortItem): void {
+    console.log(sortObject);
   }
 
   buttonClick(button: GridButtonClick): void {

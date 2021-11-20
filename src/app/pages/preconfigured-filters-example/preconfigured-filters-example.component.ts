@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { GridHeading } from 'angular-material-data-grid';
+import { GridFilterItem, GridHeading } from 'angular-material-data-grid';
 
 @Component({
   selector: 'app-preconfigured-filters-example',
@@ -41,7 +41,7 @@ export class PreconfiguredFiltersExampleComponent {
     }
   ];
 
-  initialFilters = [
+  initialFilters: GridFilterItem[] = [
     {
       field: 'gender',
       operator: 'eq',
@@ -77,7 +77,7 @@ export class PreconfiguredFiltersExampleComponent {
     }
   ];
 
-  initialFilters = [
+  initialFilters: GridFilterItem[] = [
     {
       field: 'gender',
       operator: 'eq',

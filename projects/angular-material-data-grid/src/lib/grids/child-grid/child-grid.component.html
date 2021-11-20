@@ -17,17 +17,6 @@
         <td *ngFor="let heading of headings | columnFilter;" [style.textAlign]="heading.align" [style.width]="heading.width">
 
           <ng-container [ngSwitch]="heading.type">
-            <!--URL TYPE-->
-            <span *ngSwitchCase="'url'">
-              <ng-container *ngIf="heading.other.source === 'external'; else internalLink">
-                <a mat-button disableRipple color="primary" class="amdg-link" [ngClass]="{'amdg-link-disabled': loadingData}" *ngIf="heading.other && heading.other['urlTemplate']" [href]="item[heading.fieldName + 'Link'] + (item[heading.fieldName + 'QueryParams'] ? '?' + item[heading.fieldName + 'QueryParams'] : '')">{{item[heading.fieldName]}}</a>
-                <mat-icon color="primary" class="amdg-fs-12 amdg-icon-external-link" [ngClass]="{'link-amdg-link-disabled': loadingData}" *ngIf="heading.other && heading.other.openTab && item[heading.fieldName]" (click)="openExternalLinkInNewTab(item[heading.fieldName + 'Link'], item[heading.fieldName + 'QueryParams'])">launch</mat-icon>
-              </ng-container>
-              <ng-template #internalLink>
-                <a mat-button disableRipple color="primary" class="amdg-link" [ngClass]="{'link-amdg-link-disabled': loadingData}" *ngIf="heading.other && heading.other['urlTemplate']" [routerLink]="item[heading.fieldName + 'Link']" [queryParams]="item[heading.fieldName + 'QueryParams']">{{item[heading.fieldName]}}</a>
-                <mat-icon color="primary" class="amdg-fs-12 amdg-icon-external-link" [ngClass]="{'link-amdg-link-disabled': loadingData}" *ngIf="heading.other && heading.other.openTab && item[heading.fieldName]" (click)="openLinkInNewTab(item[heading.fieldName + 'Link'], item[heading.fieldName + 'QueryParams'])">launch</mat-icon>
-              </ng-template>
-            </span>
 
             <!--IMAGE URL-->
             <span *ngSwitchCase="'image-url'">
@@ -59,7 +48,39 @@
             </span>
 
             <!--ANY OTHER TYPE-->
-            <span *ngSwitchDefault [title]="item[heading.title] ? item[heading.title] : item[heading.fieldName]"> {{item[heading.fieldName]}}</span>
+            <span *ngSwitchDefault [title]="item[heading.title] ? item[heading.title] : item[heading.fieldName]">
+
+              <ng-container *ngIf="heading?.clickable; else plainValue">
+
+                <ng-container *ngIf="heading.clickable === 'url'">
+                  <ng-container *ngIf="heading.other.source === 'external'; else internalLink">
+                    <a mat-button disableRipple color="primary" class="amdg-link" [ngClass]="{'amdg-link-disabled': loadingData}" *ngIf="heading.other && heading.other['urlTemplate']" [href]="item[heading.fieldName + 'Link'] + (item[heading.fieldName + 'QueryParams'] ? '?' + item[heading.fieldName + 'QueryParams'] : '')">{{item[heading.fieldName]}}</a>
+                    <mat-icon color="primary" class="amdg-fs-12 amdg-icon-external-link" [ngClass]="{'link-amdg-link-disabled': loadingData}" *ngIf="heading.other && heading.other.openTab && item[heading.fieldName]" (click)="openExternalLinkInNewTab(item[heading.fieldName + 'Link'], item[heading.fieldName + 'QueryParams'])">launch</mat-icon>
+                  </ng-container>
+                  <ng-template #internalLink>
+                    <a mat-button disableRipple color="primary" class="amdg-link" [ngClass]="{'link-amdg-link-disabled': loadingData}" *ngIf="heading.other && heading.other['urlTemplate']" [routerLink]="item[heading.fieldName + 'Link']" [queryParams]="item[heading.fieldName + 'QueryParams']">{{item[heading.fieldName]}}</a>
+                    <mat-icon color="primary" class="amdg-fs-12 amdg-icon-external-link" [ngClass]="{'link-amdg-link-disabled': loadingData}" *ngIf="heading.other && heading.other.openTab && item[heading.fieldName]" (click)="openLinkInNewTab(item[heading.fieldName + 'Link'], item[heading.fieldName + 'QueryParams'])">launch</mat-icon>
+                  </ng-template>
+                </ng-container>
+
+                <ng-container *ngIf="heading.clickable === 'button'">
+                   <a mat-button disableRipple color="primary" class="amdg-link" (click)="goToLink(heading.fieldName, item, item[heading.fieldName])">
+                     <span *ngIf="heading.prefix" [innerHTML]="heading.prefix | template : item"></span>
+                     {{item[heading.fieldName]}}
+                     <span *ngIf="heading.suffix" [innerHTML]="heading.suffix | template : item"></span>
+                  </a>
+                </ng-container>
+
+              </ng-container>
+
+
+              <ng-template #plainValue>
+                <span *ngIf="heading.prefix" [innerHTML]="heading.prefix | template : item"></span>
+                {{item[heading.fieldName]}}
+                <span *ngIf="heading.suffix" [innerHTML]="heading.suffix | template : item"></span>
+              </ng-template>
+
+            </span>
           </ng-container>
         </td>
       </tr>

@@ -5,7 +5,7 @@
     overwhelmed. These can be shown if the user wishes and the user can also customize the view by re-ordering
     the columns. These options are given if the <a routerLink="/gettingStarted/propertiesAndEvents">columnControl</a>
     input is set to true, by default it is false. Changes made using the column control are emitted to the parent
-    component with the output <b>headingsChangedEmit</b> which can be used to save the user's column preference.
+    component with the output <b>columnPreferencesChangedEmit</b> or <b>columnPreferencesChangeEndedEmit</b> which can be used to save the user's column preference.
     All the given preferences can be reset if the user clicks the <b>Reset</b> button which will output <b>resetColumnPreferencesEmit</b>.
   </p>
   <img src="./assets/column_reordering.png" alt="" style="width: 200px;">

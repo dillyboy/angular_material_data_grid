@@ -3,7 +3,7 @@
 
   <p>Each column should contain a <b>fieldName</b> which maps to the data attribute, a <b>display</b> value
     for that column and also a data <b>type</b> which can be either
-    'string' | 'url' | 'number' | 'currency' | 'date' | 'button-group' | 'image-url</p>
+    'string' | 'number' | 'currency' | 'date' | 'button-group' | 'image-url</p>
   <p>A very basic column configuration looks like the object below</p>
   <code highlight="{ fieldName: 'email', display: 'Email', type: 'string' }"></code>
 
@@ -33,7 +33,7 @@
           <td>This refers to the column header name which is displayed to the user.</td>
         </tr>
         <tr class="odd">
-          <td><code highlight="type: 'string' | 'url' | 'number' | 'currency' | 'date' | 'button-group' | 'image-url'"></code></td>
+          <td><code highlight="type: 'string' | 'number' | 'currency' | 'date' | 'button-group' | 'image-url'"></code></td>
           <td>A column consists of multiple data types. Based on the value given here the column
             filtration and the way the data is displayed may vary.</td>
         </tr>
@@ -44,9 +44,11 @@
           </td>
         </tr>
         <tr class="odd">
-          <td><code highlight="clickable: boolean"></code></td>
-          <td>This boolean value determines if the values in this columns are clickable which will
-              trigger a click event <code highlight="@Output() buttonClickEmit: EventEmitter<GridButtonClick>"></code> It is applicable to data types of 'string' | 'url' | 'number' | 'currency' | 'date'
+          <td><code highlight="clickable: 'url' | 'button'"></code></td>
+          <td>This optional attribute makes a grid value clickable. It can either be a <b>url</b> which will create a link (needs additional configurations - check
+            <a routerLink="/columnsAndFilters/urlBuilder">URL builder</a>) or <b>button</b> which will
+              trigger a click event. <code highlight="@Output() buttonClickEmit: EventEmitter<GridButtonClick>"></code>
+              It is applicable to data types of 'string' | 'number' | 'currency' | 'date'
           </td>
         </tr>
         <tr class="">
@@ -92,9 +94,9 @@
         </tr>
         <tr class="odd">
           <td><code highlight="filterType: 'multi-select' | 'tag'"></code></td>
-          <td>This is a feature to enable an optional filter type that can be given for types url or string.
-            A multi-select filter type is an advanced filter which can either have one or more filter
-            values given to a single column. A tag filter is a similar filter but is used if there are a
+          <td>This is a feature to enable an optional filter type that can be given for string or number type.
+            A multi-select filter (available for only string type) type is an advanced filter which can either have one or more filter
+            values given to a single column. A tag filter (available for both string and number types) is a similar filter but is used if there are a
             very large number of possible values which cannot be displayed in a multi-filter's list of options.
             Eg: Social Security Numbers</td>
         </tr>
@@ -102,9 +104,9 @@
           <td><code highlight="show: boolean"></code></td>
           <td>This identifies if a column is shown to the user or not. If this value is not given,
             the column is treated as a required column which is always shown and cannot be hidden by
-            the user through column control. If true is given the column will be shown and the user
+            the user through <b>Column Preferences</b> (Only if column <a routerLink="/gettingStarted/propertiesAndEvents">@Input() columnControl</a> is passed as true). If true is given the column will be shown and the user
             can also hide it. If false is given the user cannot see the column but can enable it back
-            through column control.</td>
+            through Column Preferences.</td>
         </tr>
         <tr class="odd">
           <td><code highlight="headerTooltip?: string"></code></td>
@@ -136,17 +138,17 @@
         </tr>
         <tr class="odd">
           <td><b class="accent-color">String Filter</b></td>
-          <td>This filter type can be used for column types <b>string</b> and <b>url</b>.
+          <td>This filter type can be used for column <b>string</b> type.
             Detailed Explanation <a routerLink="/columnsAndFilters/stringFilter">here.</a></td>
         </tr>
         <tr>
           <td><b class="accent-color">Multi Select Filter</b></td>
-          <td>This filter type can be used for column types <b>string</b> and <b>url</b>.
+          <td>This filter type can be used for column <b>string</b> type.
             Detailed Explanation <a routerLink="/columnsAndFilters/multiSelectFilter">here.</a></td>
         </tr>
         <tr class="odd">
           <td><b class="accent-color">Tag Filter</b></td>
-          <td>This filter type can be used for column types <b>string</b> and <b>url</b>.
+          <td>This filter type can be used for column <b>string</b> type.
             Detailed Explanation <a routerLink="/columnsAndFilters/tagFilter">here.</a></td>
         </tr>
         <tr>

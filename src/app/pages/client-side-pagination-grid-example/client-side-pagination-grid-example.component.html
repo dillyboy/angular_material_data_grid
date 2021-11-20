@@ -5,9 +5,11 @@
       [url]="url"
       [selection]="true"
       [columnControl]="true"
+      (requestBodyEmit)="requestBodyChanged($event)"
       (responseEmit)="responseReceived($event)"
       (selectionEmit)="selectionChanged($event)"
       (filtersChangedEmit)="filtersChanged($event)"
+      (sortChangedEmit)="sortChanged($event)"
       (buttonClickEmit)="buttonClick($event)"
       (columnPreferencesChangedEmit)="headingsConfigChanged($event)"
       (columnPreferencesResetEmit)="resetColumnPreferencesClick()">

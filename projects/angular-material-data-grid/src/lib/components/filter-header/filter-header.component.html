@@ -11,7 +11,7 @@
       </amdg-date-filter>
     </ng-container>
 
-    <ng-container *ngIf="heading.type === 'string' || heading.type === 'url'">
+    <ng-container *ngIf="heading.type === 'string'">
       <ng-container [ngSwitch]="heading.filterType">
         <amdg-multi-select *ngSwitchCase="'multi-select'"
                            class="amdg-w-100"

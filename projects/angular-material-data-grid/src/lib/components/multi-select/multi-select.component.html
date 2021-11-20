@@ -26,7 +26,7 @@
   </div>
   <div class="amdg-layout-container amdg-mt-2">
     <mat-form-field class="amdg-w-100">
-      <input id="amdg-multi-select-search" matInput #fromElement placeholder="Search..." [(ngModel)]="searchFilter" (ngModelChange)="changeSearch()"/>
+      <input id="amdg-multi-select-search" matInput #fromElement placeholder="Search..." [(ngModel)]="searchFilter" (ngModelChange)="changeSearch()" (keydown)="searchFilterKeydown($event)"/>
       <button id="amdg-multi-select-search-close" mat-button *ngIf="searchFilter" matSuffix mat-icon-button aria-label="Clear" (click)="searchFilter='';changeSearch()  ">
         <mat-icon>close</mat-icon>
       </button>

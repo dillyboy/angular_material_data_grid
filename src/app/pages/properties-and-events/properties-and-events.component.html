@@ -66,19 +66,28 @@
           </td>
         </tr>
         <tr class="">
+          <td><code highlight="@Output() requestBodyEmit: EventEmitter<GridRequest>"></code></td>
+          <td>The requestBodyEmit returns the request body when the POST request is sent to the backend. It contains the
+            <b>GridRequestInterface</b>.</td>
+        </tr>
+        <tr class="odd">
           <td><code highlight="@Output() responseEmit: EventEmitter<GridResponse>"></code></td>
           <td>The responseEmit returns the data when it is received from the backend. It contains the
             records, total number of pages and also an other object (which can be used to send additional
             data.)</td>
         </tr>
-        <tr class="odd">
+        <tr class="">
           <td><code highlight="@Output() selectionEmit: EventEmitter<any[]>"></code></td>
           <td>The selectionEmit outputs the selected records to the parent component. This is only useful if the
             selection input given is true.</td>
         </tr>
-        <tr class="">
+        <tr class="odd">
           <td><code highlight="@Output() filtersChangedEmit: EventEmitter<GridFilterItem[]>"></code></td>
           <td>This returns the filter objects created by the grid system when the user adds filters.</td>
+        </tr>
+        <tr class="">
+          <td><code highlight="@Output() sortChangedEmit: EventEmitter<GridSortItem>"></code></td>
+          <td>This returns the sort object created by the grid system when the user sorts.</td>
         </tr>
         <tr class="odd">
           <td><code highlight="@Output() buttonClickEmit: EventEmitter<GridButtonClick>"></code></td>

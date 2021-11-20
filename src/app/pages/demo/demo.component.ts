@@ -1,6 +1,13 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { GridButtonClick, GridFilterItem, GridHeading, GridResponse } from 'angular-material-data-grid';
+import {
+  GridButtonClick,
+  GridFilterItem,
+  GridHeading,
+  GridRequest,
+  GridResponse,
+  GridSortItem
+} from 'angular-material-data-grid';
 
 @Component({
   selector: 'app-demo',
@@ -20,7 +27,7 @@ export class DemoComponent implements OnInit {
   /* Original column configuration */
   initialHeadings: GridHeading[] = [
     {fieldName: 'id', display: 'ID', type: 'number', width: '100px', disableSorting: true, textAlign: 'right'},
-    {fieldName: 'full_name', display: 'Full Name', type: 'url', width: '160px',
+    {fieldName: 'full_name', display: 'Full Name', type: 'string', width: '160px', clickable: 'url',
       other: {
         openTab: true,
         urlTemplate: '/gettingStarted/demo/:id',
@@ -55,7 +62,7 @@ export class DemoComponent implements OnInit {
       other: {
         selectionMode: 'multiple',
         source: 'external',
-        url: 'https://angular-grid.herokuapp.com/countries',
+        url: `${environment.api}countries`,
         key: 'displayName',
         value: 'value'
       }
@@ -152,6 +159,10 @@ export class DemoComponent implements OnInit {
     }
   }
 
+  requestBodyChanged(body: GridRequest): void {
+    console.log(body);
+  }
+
   responseReceived(response: GridResponse): void {
     /* Simple example of manipulating some data retrieved through the grid component */
     response.gridData.forEach(item => {
@@ -168,6 +179,10 @@ export class DemoComponent implements OnInit {
 
   filtersChanged(filters: GridFilterItem[]): void {
     console.log(filters);
+  }
+
+  sortChanged(sortObject: GridSortItem): void {
+    console.log(sortObject);
   }
 
   buttonClick(button: GridButtonClick): void {

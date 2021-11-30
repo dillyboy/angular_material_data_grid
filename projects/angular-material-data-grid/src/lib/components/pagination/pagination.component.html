@@ -12,6 +12,7 @@
     <ng-container *ngFor="let page of pagesOnDisplay">
       <button *ngIf="currentPage !== page"
               mat-icon-button
+              [ngClass]="[(page + '').length >= 3 ? 'amdg-larger-page-btn': '']"
               aria-label="pagination"
               color="accent"
               class="amdg-desktop"
@@ -22,6 +23,7 @@
 
       <button *ngIf="currentPage === page"
               mat-flat-button
+              [ngClass]="[(page + '').length >= 3 ? 'amdg-larger-page-btn': '']"
               aria-label="pagination"
               color="accent"
               class="amdg-active"

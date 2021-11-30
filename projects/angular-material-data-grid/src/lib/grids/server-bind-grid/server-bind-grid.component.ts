@@ -316,6 +316,7 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
         this.selectedRows.push(item);
       }
     });
+    this.allGridItemsSelected = this.selectedRows.length === this.gridItems.length;
     this.selectionEmit.emit(this.selectedRows);
   }
 
@@ -387,8 +388,8 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
         this.allCheckBoxesSelected = false;
       }
     }
+    this.allGridItemsSelected = this.selectedRows.length === this.gridItems.length;
     this.selectionEmit.emit(this.selectedRows);
-    // this.selectAllState = false;
   }
 
   // page change event
@@ -425,11 +426,13 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
 
       const gridData = this.linkCreationInterceptor(data.payload.gridData);
       const {totalCount, other} = data.payload;
+      this.allGridItemsSelected = false;
       this.selectedRows = [];
       this.response = {gridData, totalCount, other};
       this.responseBackup = {gridData, totalCount, other};
       this.gridItems = gridData;
       this.responseEmit.emit(this.response);
+      this.selectionEmit.emit(this.selectedRows);
       if (this.serverSidePagination) {
         this.loadingData = false;
         this.changeDetectorRef.detectChanges();
@@ -461,7 +464,9 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
 
   pageChanged({pageNo, recordsPerPage}): void { // only applicable to client side pagination
     this.loadingData = true;
+    this.allGridItemsSelected = false;
     this.selectedRows = [];
+    this.selectionEmit.emit(this.selectedRows);
     this.changeDetectorRef.detectChanges();
     this.recordsPerPage = recordsPerPage;
     this.currentPage = pageNo;

@@ -156,9 +156,11 @@ export const navigation = [
       '/examples/serverBindGrid',
       '/examples/clientSidePagination',
       '/examples/reinitializeGrid',
+      '/examples/dynamicHeadings',
       '/examples/preconfiguredFilters',
       '/examples/masterDetailGrid',
       '/examples/masterDetailChildGrid',
+      '/examples/masterDetailBreakdownGrid',
       '/examples/masterDetailHtml',
       '/examples/openDialog',
       '/examples/topRightButtons',
@@ -184,6 +186,12 @@ export const navigation = [
         highLightWhen: ['/examples/reinitializeGrid'],
         route: '/examples/reinitializeGrid'
       },
+      // {
+      //   headingName: 'Dynamic Headings',
+      //   headingIcon: '',
+      //   highLightWhen: ['/examples/dynamicHeadings'],
+      //   route: '/examples/dynamicHeadings'
+      // },
       {
         headingName: 'Preconfigured Filters',
         headingIcon: '',
@@ -193,7 +201,7 @@ export const navigation = [
       {
         headingName: 'Master Detail Grid',
         headingIcon: '',
-        highLightWhen: ['/examples/masterDetailGrid', '/examples/masterDetailChildGrid', '/examples/masterDetailHtml'],
+        highLightWhen: ['/examples/masterDetailGrid', '/examples/masterDetailChildGrid', '/examples/masterDetailHtml', '/examples/masterDetailBreakdownGrid'],
         route: '/examples/masterDetailGrid'
       },
       {

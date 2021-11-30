@@ -131,14 +131,16 @@
       z-index: 1;
       background-color: rgba(0, 0, 0, 0.5);
       color: white;
-      font-size: 18px;
+      font-size: 16px;
       min-width: 40px;
       margin: 0 auto;
       right: 0;
       left: 0;
-      width: 170px;
+      width: 190px;
       padding: 10px;
       border-radius: 4px;
+      text-align: center;
+      box-sizing: border-box;
     }
 
     .horizontal-scroll {
@@ -216,6 +218,11 @@
   width: 34px !important;
 }
 
+.amdg-selection-breakdown {
+  width: 33px !important;
+  border-left: 0 !important;
+}
+
 #amdgScrollViewport {
   scroll-behavior: smooth;
 }
@@ -274,7 +281,14 @@
 }
 
 .amdg-h-150px {
-  height: 150px;
+  max-height: 150px;
+  overflow-x: hidden;
+  border-top: 2px solid $highlight-dark-color;
+  border-bottom: 2px solid $highlight-dark-color;
+}
+
+.amdg-breakdown-table-border-top {
+  border-top: 2px solid $highlight-dark-color;
 }
 
 @mixin amdg-pulse-animation() {

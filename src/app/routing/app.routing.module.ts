@@ -23,10 +23,13 @@ import { VirtualScrollingComponent } from '../pages/virtual-scrolling/virtual-sc
 import { ServerBindGridExampleComponent } from '../pages/server-bind-grid-example/server-bind-grid-example.component';
 import { ClientSidePaginationGridExampleComponent } from '../pages/client-side-pagination-grid-example/client-side-pagination-grid-example.component';
 import { ReinitializeGridExampleComponent } from '../pages/reinitialize-grid-example/reinitialize-grid-example.component';
+import { DynamicHeadingsExampleComponent } from '../pages/dynamic-headings-example/dynamic-headings-example.component';
 import { PreconfiguredFiltersExampleComponent } from '../pages/preconfigured-filters-example/preconfigured-filters-example.component';
 import { CustomDemoComponent } from '../pages/custom-demo/custom-demo.component';
 import { MasterDetailExampleComponent } from '../pages/master-detail-example/master-detail-example.component';
+// tslint:disable-next-line:max-line-length
 import { MasterDetailChildGridExampleComponent } from '../pages/master-detail-child-grid-example/master-detail-child-grid-example.component';
+import { MasterDetailBreakdownGridExampleComponent } from '../pages/master-detail-breakdown-grid-example/master-detail-breakdown-grid-example.component';
 import { MasterDetailHtmlExampleComponent } from '../pages/master-detail-html-example/master-detail-html-example.component';
 import { OpenDialogComponent } from '../pages/open-dialog/open-dialog.component';
 import { TopRightButtonsExampleComponent } from '../pages/top-right-buttons-example/top-right-buttons-example.component';
@@ -73,9 +76,11 @@ const routes: Routes = [
       { path: 'clientSidePagination', component: ClientSidePaginationGridExampleComponent },
       { path: 'serverBindGrid', component: ServerBindGridExampleComponent },
       { path: 'reinitializeGrid', component: ReinitializeGridExampleComponent },
+      { path: 'dynamicHeadings', component: DynamicHeadingsExampleComponent },
       { path: 'preconfiguredFilters', component: PreconfiguredFiltersExampleComponent },
       { path: 'masterDetailGrid', component: MasterDetailExampleComponent },
       { path: 'masterDetailChildGrid', component: MasterDetailChildGridExampleComponent },
+      { path: 'masterDetailBreakdownGrid', component: MasterDetailBreakdownGridExampleComponent },
       { path: 'masterDetailHtml', component: MasterDetailHtmlExampleComponent },
       { path: 'customDemo', component: CustomDemoComponent },
       { path: 'openDialog', component: OpenDialogComponent },

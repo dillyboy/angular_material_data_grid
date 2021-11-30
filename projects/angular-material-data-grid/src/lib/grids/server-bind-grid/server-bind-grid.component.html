@@ -163,7 +163,7 @@
                 </tr>
                 <tr *ngIf="expandable && item.gridItemExpanded" [style.height]="'auto'" [ngClass]="{ odd: odd, rowSelected: item.gridItemSelected}">
                   <td class="amdg-p-0" [attr.colspan]="headings.length + 1 + (selection ? 1 : 0)">
-                    <div [ngClass]="[item.gridItemExpanded ? 'amdg-content-opened' : 'amdg-content-closed', item.gridItemExpanded && expandableConfig.type === 'text_area' ? 'amdg-h-150px' :  '']"  [ngSwitch]="expandableConfig.type">
+                    <div [ngClass]="[item.gridItemExpanded ? 'amdg-content-opened' : 'amdg-content-closed']" [ngSwitch]="expandableConfig.type">
                       <ng-container *ngSwitchCase="'html'">
                         <div [innerHTML]="expandableConfig.template | template : item"
                              [ngStyle]="{
@@ -189,6 +189,48 @@
                             [serverSidePagination]="true">
                           </amdg-child-grid>
                         </div>
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'breakdown'">
+                        <div class="amdg-h-150px">
+                          <div [innerHTML]="expandableConfig.template | template : item"
+                               [ngStyle]="{
+                                          width: (gridWidth - 16) + 'px',
+                                          position: 'relative',
+                                          left: scrollRemainingDistanceToLeft + 'px',
+                                          borderTop: '1px solid rgba(118, 118, 118, 0.3)'
+                                        }">
+                          </div>
+                          <table class="amdg-w-100" [ngClass]="{'amdg-breakdown-table-border-top': expandableConfig.template}">
+                            <tr *ngFor="let item of item.amdgBreakdownGridRecords; let odd=odd; let even=even;" [ngClass]="{'amdg-cursor-pointer': expandable,odd: odd, even: even}" >
+                              <td class="amdg-selection-breakdown" *ngIf="selection"></td>
+                              <td class="amdg-selection" *ngIf="expandable"></td>
+                              <td  *ngFor="let heading of headings | columnFilter;"
+                                   [style.width]="heading.width"
+                                   [style.textAlign]="heading.textAlign"
+                                   [style.background]="heading.background"
+                                   [style.color]="heading.color"
+                                   [style.fontWeight]="heading.fontWeight"
+                                   [style.fontStyle]="heading.fontStyle" class="amdg-text-truncate">
+                                <ng-container [ngSwitch]="heading.type">
+                                  <!--IMAGE URL-->
+                                  <span *ngSwitchCase="'image-url'">
+                                    <img [src]="item[heading.fieldName]" alt="grid image item" width="80px" height="80px" class="amdg-mt-2 amdg-mb-2">
+                                  </span>
+
+                                  <!--BUTTON GROUP-->
+                                  <span *ngSwitchCase="'button-group'">
+                                  </span>
+                                  <!--CURRENCY-->
+                                  <span *ngSwitchCase="'currency'">
+                                    {{item[heading.fieldName] | currency: heading.prefix}}
+                                  </span>
+                                  <span *ngSwitchDefault [title]="item[heading.fieldName]"> {{item[heading.fieldName]}}</span>
+                                </ng-container>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+
                       </ng-container>
                     </div>
                   </td>

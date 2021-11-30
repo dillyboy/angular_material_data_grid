@@ -1,0 +1,17 @@
+<div class="position-relative">
+  <button class="mb-2" mat-raised-button [matMenuTriggerFor]="menu">Heading Set</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item class="amdg-mat-menu-item" (click)="categoryChanged(1)">Set 1</button>
+    <button mat-menu-item class="amdg-mat-menu-item" (click)="categoryChanged(2)">Set 2</button>
+  </mat-menu>
+
+  <amdg-grid
+      [headings]="headings"
+      [url]="url"
+      [selection]="true"
+      [serverSidePagination]="true"
+      [initialFilters]="initialFilters">
+  </amdg-grid>
+
+</div>
+

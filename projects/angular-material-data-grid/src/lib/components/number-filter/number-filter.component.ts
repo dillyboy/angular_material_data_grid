@@ -4,6 +4,7 @@ import {
   EventEmitter,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   Output,
   SimpleChanges,
@@ -17,7 +18,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
   templateUrl: './number-filter.component.html',
   styleUrls: ['./number-filter.component.scss']
 })
-export class NumberFilterComponent implements OnInit, OnChanges {
+export class NumberFilterComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() initialFilter = null;
   @Input() resetFilters = null;
@@ -33,6 +34,7 @@ export class NumberFilterComponent implements OnInit, OnChanges {
     {value: 'lessthan', text: 'Is less than'}
   ];
   selection = new FormControl('between', Validators.required);
+  selectionSubscription = null;
   range = new FormGroup({
     from: new FormControl(null, [Validators.required, Validators.pattern('^[0-9]*$')]),
     to: new FormControl(null, [Validators.required, Validators.pattern('^[0-9]*$')])
@@ -60,12 +62,21 @@ export class NumberFilterComponent implements OnInit, OnChanges {
       }
       this.filterApplied = true;
     }
+
+    this.selectionSubscription = this.selection.valueChanges.subscribe(value => {
+      this.invalidRangeValue = false;
+      this.invalidValue = false;
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.resetFilters?.currentValue) {
       this.reset(false);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.selectionSubscription.unsubscribe();
   }
 
   menuOpened(): void {

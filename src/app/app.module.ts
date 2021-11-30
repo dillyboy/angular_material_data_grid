@@ -49,6 +49,7 @@ import { PreconfiguredFiltersExampleComponent } from './pages/preconfigured-filt
 import { CustomDemoComponent } from './pages/custom-demo/custom-demo.component';
 import { MasterDetailExampleComponent } from './pages/master-detail-example/master-detail-example.component';
 import { MasterDetailChildGridExampleComponent } from './pages/master-detail-child-grid-example/master-detail-child-grid-example.component';
+import { MasterDetailBreakdownGridExampleComponent } from './pages/master-detail-breakdown-grid-example/master-detail-breakdown-grid-example.component';
 import { MasterDetailHtmlExampleComponent } from './pages/master-detail-html-example/master-detail-html-example.component';
 import { OpenDialogComponent } from './pages/open-dialog/open-dialog.component';
 import { GridWithinDialogComponent } from './pages/open-dialog/grid-within-dialog/grid-within-dialog.component';
@@ -56,6 +57,7 @@ import { TopRightButtonsExampleComponent } from './pages/top-right-buttons-examp
 import { ChangeLogComponent } from './pages/change-log/change-log.component';
 import { TransparencyExampleComponent } from './pages/transparency-example/transparency-example.component';
 import { CellStylesExampleComponent } from './pages/cell-styles-example/cell-styles-example.component';
+import { DynamicHeadingsExampleComponent } from './pages/dynamic-headings-example/dynamic-headings-example.component';
 
 @NgModule({
   declarations: [
@@ -87,13 +89,15 @@ import { CellStylesExampleComponent } from './pages/cell-styles-example/cell-sty
     CustomDemoComponent,
     MasterDetailExampleComponent,
     MasterDetailChildGridExampleComponent,
+    MasterDetailBreakdownGridExampleComponent,
     MasterDetailHtmlExampleComponent,
     OpenDialogComponent,
     GridWithinDialogComponent,
     TopRightButtonsExampleComponent,
     ChangeLogComponent,
     TransparencyExampleComponent,
-    CellStylesExampleComponent
+    CellStylesExampleComponent,
+    DynamicHeadingsExampleComponent
   ],
   imports: [
     BrowserModule,

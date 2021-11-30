@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, OnDestroy, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, Renderer2, ViewChild } from '@angular/core';
 import { navigation } from './navigation';
 import { NavigationEnd, Router } from '@angular/router';
 import { Platform } from '@angular/cdk/platform';
 import { MatDrawer } from '@angular/material/sidenav';
+import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-container',
@@ -22,8 +23,14 @@ export class ContainerComponent implements AfterViewInit , OnDestroy {
   selectedLink = 'Demo';
   mobile = false;
   @ViewChild('drawer') drawer: MatDrawer;
+  mobileQuery: MediaQueryList;
+  private mobileQueryListener: () => void;
 
-  constructor(private renderer: Renderer2, private router: Router, private platform: Platform) {
+  constructor(private renderer: Renderer2,
+              private router: Router,
+              private platform: Platform,
+              changeDetectorRef: ChangeDetectorRef,
+              media: MediaMatcher) {
     this.darkMode = (localStorage.getItem('darkMode')  === 'true');
     if (this.darkMode) {
       this.renderer.addClass(document.body, 'darkMode');
@@ -37,10 +44,15 @@ export class ContainerComponent implements AfterViewInit , OnDestroy {
         window.scrollTo(0, 0);
       }
     });
+
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this.mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this.mobileQueryListener);
+    // this.mobileQuery.addEventListener('change', this.mobileQueryListener);
   }
 
   ngAfterViewInit(): void {
-    if (this.platform.ANDROID || this.platform.IOS) {
+    if (this.platform.ANDROID || this.platform.IOS || this.mobileQuery.matches) {
       this.mobile = true;
       this.drawer.close();
     }
@@ -65,6 +77,7 @@ export class ContainerComponent implements AfterViewInit , OnDestroy {
 
   ngOnDestroy(): void {
     this.routerEvents.unsubscribe();
+    this.mobileQuery.removeListener(this.mobileQueryListener);
   }
 
 }

@@ -6,7 +6,7 @@ export default interface GridMasterDetailConfigInterface {
      * type - Master detail grid type determines if the row is expanded the container will
      *        contain a custom template or a child grid.
      */
-    type: 'table' | 'html';
+    type: 'table' | 'html' | 'breakdown';
 
     /**
      * multipleExpansion - This allows multiple rows to be expanded at a given time or not

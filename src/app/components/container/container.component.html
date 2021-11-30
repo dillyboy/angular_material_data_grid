@@ -19,7 +19,7 @@
   </div>
 </mat-card>
 <mat-drawer-container autosize style="min-height: 100vh">
-  <mat-drawer #drawer class="sidenav" mode="side" opened>
+  <mat-drawer #drawer class="sidenav" [mode]="mobileQuery.matches ? 'over' : 'side'" opened>
     <mat-accordion>
       <mat-expansion-panel [expanded]="panel.openWhen.includes(currentNav)" *ngFor="let panel of sidePanelNavigation">
         <mat-expansion-panel-header>

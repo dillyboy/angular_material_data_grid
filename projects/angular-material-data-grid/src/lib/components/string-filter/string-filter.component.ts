@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatMenuTrigger } from '@angular/material/menu';
+import GridFilterItemInterface from '../../interfaces/grid-filter-item';
 
 @Component({
   selector: 'amdg-string-filter',
@@ -19,7 +20,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 })
 export class StringFilterComponent implements OnInit, OnChanges {
 
-  @Input() initialFilter = null;
+  @Input() initialFilter?: GridFilterItemInterface;
   @Input() resetFilters = null;
   @Output() filter: any = new EventEmitter<any>();
   filterApplied = false;
@@ -33,11 +34,11 @@ export class StringFilterComponent implements OnInit, OnChanges {
   ];
   selection = new FormControl('contains', Validators.required);
   value = new FormControl(null, [Validators.required]);
-  filterParam = '';
+  filterParam: string | number = '';
   invalidValue = false;
-  @ViewChild('menuTrigger') menu: MatMenuTrigger;
-  @ViewChild('fromElement') fromElement: ElementRef;
-  @ViewChild('valueElement') valueElement: ElementRef;
+  @ViewChild('menuTrigger') menu!: MatMenuTrigger;
+  @ViewChild('fromElement') fromElement!: ElementRef;
+  @ViewChild('valueElement') valueElement!: ElementRef;
 
   constructor() {
   }
@@ -58,7 +59,7 @@ export class StringFilterComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.resetFilters?.currentValue) {
+    if (changes['resetFilters']?.currentValue) {
       this.reset(false);
     }
   }
@@ -78,7 +79,7 @@ export class StringFilterComponent implements OnInit, OnChanges {
     }
   }
 
-  reset(emit?): void {
+  reset(emit?: boolean): void {
     this.invalidValue = false;
     this.selection.setValue('contains');
     this.value.setValue(null);
@@ -98,7 +99,7 @@ export class StringFilterComponent implements OnInit, OnChanges {
     }
   }
 
-  private close(value: string, emit = true): void {
+  private close(value: string | null, emit = true): void {
     if (emit) {
       this.filter.emit({ operator: this.selection.value, value });
     }

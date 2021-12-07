@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailComponent {
 
-  urlExtracts = {params: null, queryParams: null};
+  urlExtracts: any = {params: null, queryParams: null};
   constructor(private route: ActivatedRoute) {
     const {params, queryParams} = route.snapshot;
     this.urlExtracts.params = params;

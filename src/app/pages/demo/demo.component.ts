@@ -7,7 +7,7 @@ import {
   GridRequest,
   GridResponse,
   GridSortItem
-} from 'angular-material-data-grid';
+} from '../../../../projects/angular-material-data-grid/src/lib/angular-material-data-grid-interfaces';
 
 @Component({
   selector: 'app-demo',

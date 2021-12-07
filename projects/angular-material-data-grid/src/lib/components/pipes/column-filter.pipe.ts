@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ColumnFilterPipe implements PipeTransform {
 
   transform(value: any[], ...args: unknown[]): any[] {
-    const headings = [];
+    const headings: string[] = [];
     value.forEach(heading => {
       if (heading.show || heading.show === undefined) {
         headings.push(heading);

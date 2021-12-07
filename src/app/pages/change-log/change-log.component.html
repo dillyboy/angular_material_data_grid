@@ -1,7 +1,49 @@
 <div class="content">
   <h1>Change Log</h1>
 
-  <h2>0.4.10 <span style="font-weight: normal; font-size: 16px">(1st December 2021)</span></h2>
+  <h2>0.5.0, 0.5.1 <span style="font-weight: normal; font-size: 16px">(7th December 2021)</span></h2>
+
+  <mat-card class="simple-table-container mb-3">
+    <div>
+      <table class="simple-table">
+        <tr>
+          <th width="400px">Type</th>
+          <th>Description</th>
+        </tr>
+        <tr class="odd">
+          <td>Feature</td>
+          <td>Upgraded base project to Angular version 13.0.3, The library also now compiles with Angular sources in Ivy partial compilation mode.</td>
+        </tr>
+        <tr>
+          <td>Feature</td>
+          <td>Supported strict typing</td>
+        </tr>
+      </table>
+    </div>
+  </mat-card>
+
+  <h2>0.4.13, 0.4.14, 0.4.15, 0.4.16 <span style="font-weight: normal; font-size: 16px">(4th December 2021)</span></h2>
+
+  <mat-card class="simple-table-container mb-3">
+    <div>
+      <table class="simple-table">
+        <tr>
+          <th width="400px">Type</th>
+          <th>Description</th>
+        </tr>
+        <tr class="odd">
+          <td>Bug Fix</td>
+          <td>Fixed issue filtering client side paginated data when null values are present.</td>
+        </tr>
+        <tr>
+          <td>Feature</td>
+          <td>Added ability to search empty strings in the multi-filter's filtration.</td>
+        </tr>
+      </table>
+    </div>
+  </mat-card>
+
+  <h2>0.4.10, 0.4.11, 0.4.12 <span style="font-weight: normal; font-size: 16px">(1st December 2021)</span></h2>
 
   <mat-card class="simple-table-container mb-3">
     <div>
@@ -13,6 +55,10 @@
         <tr class="odd">
           <td>Bug Fix</td>
           <td>Fixed issue with checking all records checkbox automatically when filters are applied and records shown are less than the perPage count.</td>
+        </tr>
+        <tr>
+          <td>Bug Fix</td>
+          <td>Fixed issue with filter not applying when Numeric filter equal to zero (0) is applied.</td>
         </tr>
       </table>
     </div>

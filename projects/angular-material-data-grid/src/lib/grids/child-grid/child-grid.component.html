@@ -92,7 +92,7 @@
 
   <amdg-pagination
       [loadingData]="loadingData"
-      [noOfTotalRecords]="serverSidePagination ? response.totalCount : response.gridData.length"
+      [noOfTotalRecords]="serverSidePagination ? (response.totalCount ? response.totalCount : 0) : response.gridData.length"
       [noOfRecords]="response.gridData.length"
       [noOfSelectedRow]="selectedRows.length"
       [currentPage]="currentPage"

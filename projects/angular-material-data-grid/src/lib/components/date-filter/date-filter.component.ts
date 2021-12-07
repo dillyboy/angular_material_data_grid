@@ -12,6 +12,7 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatDatepicker } from '@angular/material/datepicker';
+import GridFilterItemInterface from '../../interfaces/grid-filter-item';
 
 @Component({
   selector: 'amdg-date-filter',
@@ -20,7 +21,7 @@ import { MatDatepicker } from '@angular/material/datepicker';
 })
 export class DateFilterComponent implements OnInit, OnChanges {
 
-  @Input() initialFilter = null;
+  @Input() initialFilter?: GridFilterItemInterface;
   @Input() resetFilters = null;
   @Output() filter: any = new EventEmitter<any>();
   filterApplied = false;
@@ -36,24 +37,24 @@ export class DateFilterComponent implements OnInit, OnChanges {
   selection = new FormControl('betweendates', Validators.required);
   value = new FormControl(null, [Validators.required]);
   invalidValue = false;
-  @ViewChild('menuTrigger') menu: MatMenuTrigger;
-  @ViewChild('fromElement') fromElement: ElementRef;
-  @ViewChild('picker') picker: MatDatepicker<any>;
+  @ViewChild('menuTrigger') menu!: MatMenuTrigger;
+  @ViewChild('fromElement') fromElement!: ElementRef;
+  @ViewChild('picker') picker!: MatDatepicker<any>;
 
   constructor() { }
 
   ngOnInit(): void {
-    if (this.initialFilter) {
+    if (this.initialFilter && typeof this.initialFilter.value !== 'number') {
       this.value.setValue(this.initialFilter.value);
       const [start, end] = this.initialFilter.value.split('-');
-      this.range.controls.start.setValue(new Date(start));
-      this.range.controls.end.setValue(new Date(end));
+      this.range.controls['start'].setValue(new Date(start));
+      this.range.controls['end'].setValue(new Date(end));
       this.filterApplied = true;
     }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.resetFilters?.currentValue) {
+    if (changes['resetFilters']?.currentValue) {
       this.reset(false);
     }
   }
@@ -73,12 +74,12 @@ export class DateFilterComponent implements OnInit, OnChanges {
     }
   }
 
-  reset(emit?): void {
+  reset(emit?: any): void {
     this.invalidValue = false;
     this.value.setValue(null);
     this.selection.setValue('betweendates');
-    this.range.controls.start.setValue(null);
-    this.range.controls.end.setValue(null);
+    this.range.controls['start'].setValue(null);
+    this.range.controls['end'].setValue(null);
     this.close(null, emit);
   }
 
@@ -99,7 +100,7 @@ export class DateFilterComponent implements OnInit, OnChanges {
     }
   }
 
-  private close(value: string, emit = true): void {
+  private close(value: string | null, emit = true): void {
     if (emit) {
       this.filter.emit({ operator: this.selection.value, value });
     }
@@ -111,7 +112,7 @@ export class DateFilterComponent implements OnInit, OnChanges {
     this.menu.closeMenu();
   }
 
-  private formatDate(date): void {
+  private formatDate(date: any): void {
     try {
       if (date) {
         let month = (date.getMonth() + 1).toString();

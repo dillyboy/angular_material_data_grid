@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { environment } from '../environments/environment';
-declare var gtag;
-declare var ga;
+declare var gtag: any;
+declare var ga: any;
 
 
 @Component({
@@ -12,7 +13,7 @@ declare var ga;
 })
 export class AppComponent {
 
-  routerEvents = null;
+  routerEvents: Subscription = new Subscription();
 
   constructor(private router: Router) {
     this.routerEvents = this.router.events.subscribe(event => {

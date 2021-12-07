@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { GridFilterItem, GridHeading } from 'angular-material-data-grid';
+import { GridFilterItem, GridHeading } from '../../../../projects/angular-material-data-grid/src/lib/angular-material-data-grid-interfaces';
 
 @Component({
   selector: 'app-dynamic-headings-example',
@@ -47,7 +47,7 @@ export class DynamicHeadingsExampleComponent {
     this.categoryChanged(1);
   }
 
-  categoryChanged(columnOrderId): void {
+  categoryChanged(columnOrderId: number): void {
     let columnOrder = [];
     const defaultOrder = ['id', 'first_name', 'last_name', 'email', 'gender'];
 
@@ -60,8 +60,8 @@ export class DynamicHeadingsExampleComponent {
         break;
     }
 
-    const reorderedHeadings = [];
-    columnOrder.forEach(order => {
+    const reorderedHeadings: GridHeading[] = [];
+    columnOrder.forEach((order: string) => {
       this.headingsCopy.forEach(heading => {
         if (order === heading.fieldName) {
           // if (heading.fieldName === sortedField) {

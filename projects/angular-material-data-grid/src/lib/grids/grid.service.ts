@@ -10,11 +10,11 @@ export class GridService {
 
   constructor(private http: HttpClient) { }
 
-  getAny(url): Observable<any> {
+  getAny(url: string): Observable<any> {
     return this.http.get<ApiResponseModel>(url);
   }
 
-  getAnyPost(url, body): Observable<any> {
+  getAnyPost(url: string, body: any): Observable<any> {
     return this.http.post<ApiResponseModel>(url, body);
   }
 }

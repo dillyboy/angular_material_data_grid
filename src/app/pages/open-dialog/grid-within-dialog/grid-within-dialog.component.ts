@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { GridHeading } from 'angular-material-data-grid';
+import { GridHeading } from '../../../../../projects/angular-material-data-grid/src/lib/angular-material-data-grid-interfaces';
+
 
 @Component({
   selector: 'app-grid-within-dialog',

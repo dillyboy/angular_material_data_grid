@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GridButtonClick, GridHeading, GridResponse } from 'angular-material-data-grid';
+import { GridButtonClick, GridHeading, GridResponse } from '../../../../projects/angular-material-data-grid/src/lib/angular-material-data-grid-interfaces';
 import { MatDialog} from '@angular/material/dialog';
 import { GridWithinDialogComponent } from './grid-within-dialog/grid-within-dialog.component';
 import { environment } from '../../../environments/environment';
@@ -208,7 +208,7 @@ export class OpenDialogComponent {
 
   responseReceived(response: GridResponse): void {
     /* Simple example of manipulating some data retrieved through the grid component */
-    response.gridData.forEach(item => {
+    response.gridData.forEach((item: any) => {
       item.order_date = item.order_date.substring(0, 10);
     });
   }

@@ -22,7 +22,7 @@
             <div class="column-item" *ngFor="let heading of headings | columnSearchFilter: columnSearchParam" cdkDrag>
               <div class="amdg-d-inline-flex">
                 <mat-icon [ngStyle]="{'opacity': columnSearchParam.length === 0 ? 1: 0}">drag_indicator</mat-icon>
-                <mat-checkbox *ngIf="heading.show === undefined" disabled checked="true"><span class="amdg-ml-3">{{heading.display}}<span *ngIf="!heading.display" style="font-style: italic">Unnamed</span></span></mat-checkbox>
+                <mat-checkbox *ngIf="heading.show === undefined" disabled [checked]="true"><span class="amdg-ml-3">{{heading.display}}<span *ngIf="!heading.display" style="font-style: italic">Unnamed</span></span></mat-checkbox>
                 <mat-checkbox *ngIf="heading.show !== undefined" [(ngModel)]="heading.show" (ngModelChange)="updateColumns()"><span class="amdg-ml-3">{{heading.display}} <span *ngIf="!heading.display" style="font-style: italic">Unnamed</span></span></mat-checkbox>
               </div>
             </div>
@@ -76,7 +76,7 @@
                 <tr (mouseover)="overSelect($event, item)"
                     [ngClass]="{ odd: odd, rowSelected: item.gridItemSelected == true, expanded: item.gridItemExpanded}"
                     [style.background]="item?.amdgGridRowBackground">
-                  <td *ngIf="selection" class="amdg-selection amdg-animated" #selection (mousedown)="startSelect(item, selection)"><mat-checkbox [(ngModel)]="item['gridItemSelected']" (ngModelChange)="gridItemSelectionChanged()"></mat-checkbox></td>
+                  <td *ngIf="selection" class="amdg-selection amdg-animated" #selectionElem (mousedown)="startSelect(item, selectionElem)"><mat-checkbox [(ngModel)]="item['gridItemSelected']" (ngModelChange)="gridItemSelectionChanged()"></mat-checkbox></td>
                   <td *ngIf="expandable" mat-ripple class="amdg-selection amdg-animated amdg-fs-20 amdg-text-center amdg-cursor-pointer" (click)="clickRow($event, item, i)">
                     <span *ngIf="item.gridItemExpanded !== true">+</span><span *ngIf="item.gridItemExpanded">−</span>
                   </td>
@@ -183,9 +183,9 @@
                                           borderTop: '1px solid rgba(118, 118, 118, 0.3)'
                                         }">
                           <amdg-child-grid
-                            [headings]="expandableConfig.childGrid.headings"
-                            [url]="expandableConfig.childGrid.url"
-                            [entity]="expandableConfig.childGrid.entity | template_object: item"
+                            [headings]="expandableConfig.childGrid!.headings"
+                            [url]="expandableConfig.childGrid!.url"
+                            [entity]="expandableConfig.childGrid!.entity | template_object: item"
                             [serverSidePagination]="true">
                           </amdg-child-grid>
                         </div>
@@ -249,7 +249,7 @@
     </div>
     <amdg-pagination
         [loadingData]="loadingData"
-        [noOfTotalRecords]="serverSidePagination ? response.totalCount : response.gridData.length"
+        [noOfTotalRecords]="serverSidePagination ? (response.totalCount ? response.totalCount : 0) : response.gridData.length"
         [noOfRecords]="response.gridData.length"
         [noOfSelectedRow]="selectedRows.length"
         [currentPage]="currentPage"

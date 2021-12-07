@@ -16,6 +16,7 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
+import {Subscription} from 'rxjs';
 import GridRequestInterface from '../../interfaces/grid-request';
 import GridResponseInterface from '../../interfaces/grid-response';
 import GridFilterItemInterface from '../../interfaces/grid-filter-item';
@@ -25,8 +26,9 @@ import GridHeadingInterface from '../../interfaces/grid-heading-type';
 import GridMasterDetailConfigInterface from '../../interfaces/grid-master-detail-config-type';
 import {CdkVirtualScrollViewport} from '@angular/cdk/scrolling';
 import {MatDialog} from '@angular/material/dialog';
-import {moveItemInArray} from '@angular/cdk/drag-drop';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {GridService} from '../grid.service';
+import {GridFilterItem} from '../../angular-material-data-grid-interfaces';
 
 
 @Component({
@@ -57,7 +59,7 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
   @Input() transparency = false;
   @Input() elevation: 0 | 1 | 2 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 = 2;
   @Input() serverSidePagination = false;
-  @Input() initialFilters = [];
+  @Input() initialFilters: GridFilterItem[] = [];
   @Input() resetFilters = null;
   @Input() expandable = false;
   @Input() expandableConfig: GridMasterDetailConfigInterface = {
@@ -78,30 +80,30 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
   loadingData = false;
   response: GridResponseInterface = { gridData: [], totalCount: 0};
   responseBackup: GridResponseInterface = { gridData: [], totalCount: 0};
-  gridItems = [];
+  gridItems: any[] = [];
   recordsPerPage = 100;
   selectionStarted = false;
   selectionTimeoutHandler: any;
   allCheckBoxesSelected = false;
-  selectedRows = [];
-  gridWidth = null;
-  offsetTop = null;
+  selectedRows: any[] = [];
+  gridWidth = 0;
+  offsetTop = 0;
   scrollRemainingDistanceToLeft = 0;
-  scrollRemainingDistanceToRight = null;
-  horizontalScrollBarWidth = null;
+  scrollRemainingDistanceToRight = 0;
+  horizontalScrollBarWidth = 0;
   currentPage = 1;
   sortObj: GridSortItemInterface = {
     sort: null,
     sortField: null
   };
-  filters = [];
-  gridPostSubscription = null;
+  filters: GridFilterItemInterface[] = [];
+  gridPostSubscription: Subscription = new Subscription();
 
   fullscreen = false;
   allRowsExpanded = false;
 
-  @ViewChild('gridContainer') gridContainer: ElementRef;
-  @ViewChild('cdkVirtualScrollViewport') cdkVirtualScrollViewport: CdkVirtualScrollViewport;
+  @ViewChild('gridContainer') gridContainer!: ElementRef;
+  @ViewChild('cdkVirtualScrollViewport') cdkVirtualScrollViewport!: CdkVirtualScrollViewport;
 
   // Window resize listener
   @HostListener('window:resize', ['$event'])
@@ -127,18 +129,18 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.entity?.currentValue || changes.headings?.currentValue) {
-      if (changes.initialFilters?.firstChange) {
+    if (changes['entity']?.currentValue || changes['headings']?.currentValue) {
+      if (changes['initialFilters']?.firstChange) {
         this.filters = this.initialFilters;
       }
       this.getData({pageNo: 1, recordsPerPage: this.recordsPerPage});
     }
 
-    if (changes.headings?.currentValue) {
+    if (changes['headings']?.currentValue) {
       this.updateColumns();
     }
 
-    if (changes.resetFilters?.currentValue) {
+    if (changes['resetFilters']?.currentValue) {
       this.filters = [];
       if (this.serverSidePagination) {
         this.getData({pageNo: 1, recordsPerPage: this.recordsPerPage});
@@ -176,8 +178,8 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     this.cdkVirtualScrollViewport.elementRef.nativeElement.scrollLeft = this.gridWidth * 80 / 100 + scrollLeft;
   }
 
-  scrollChanged(ev?): void {
-    let elem = null;
+  scrollChanged(ev?: Event): void {
+    let elem: any = null;
     if (ev) {
       elem = ev.target;
     } else {
@@ -207,13 +209,13 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     }, 100);
   }
 
-  columnDrop(ev): void {
+  columnDrop(ev: CdkDragDrop<any>): void {
     moveItemInArray(this.headings, ev.previousIndex, ev.currentIndex);
     this.updateColumns();
   }
 
-  sort(ev): void {
-    let index = null;
+  sort(ev: GridHeadingInterface): void {
+    let index = 0;
     this.headings.forEach((heading: any, i) => {
       if (heading.fieldName === ev.fieldName) {
         index = i;
@@ -234,7 +236,7 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     }
   }
 
-  filter(ev): void {
+  filter(ev: GridFilterItemInterface): void {
     let filterIndex = null;
     this.filters.forEach((filter, i) => {
       if (filter.field === ev.field) {
@@ -242,13 +244,13 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
       }
     });
     if (filterIndex !== null) {
-      if (ev.value) {
+      if (ev.value || ev.value === '') {
         this.filters[filterIndex] = ev;
       } else {
         this.filters.splice(filterIndex, 1);
       }
     } else {
-      if (ev.value) {
+      if (ev.value || ev.value === '') {
         this.filters.push(ev);
       }
     }
@@ -256,43 +258,38 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
 
     if (this.serverSidePagination === false) {
       this.ngZone.runOutsideAngular(() => {
-        const operators = {
-          between: (field, range) => {
+        const operators: any = {
+          between: (field: string, range: string) => {
             const [min, max] = range.split('-').map(Number);
-            return min <= field && field <= max;
+            return min <= parseInt(field, 10) && parseInt(field, 10) <= max;
           },
-          betweendates: (field, range) => {
+          betweendates: (field: string, range: string) => {
             const [min, max] = range.split('-');
             return new Date(min) <= new Date(field) && new Date(field) <= new Date(max);
           },
-          eq: (field, value) => {
+          eq: (field: string, value: string) => {
             if (typeof value === 'string' && value.includes(',')) {
               return value.split(',').includes(field);
             } else {
               return field === value;
             }
           },
-          neq: (field, value) => field !== value,
-          greaterorequal: (field, value) => field >= value,
-          greaterthan: (field, value) => field > value,
-          lessthanorequal: (field, value) => field <= value,
-          lessthan: (field, value) => field < value,
-          contains: (field, value) => field.includes(value),
-          startswith: (field, value) => field.startsWith(value),
-          endswith: (field, value) => field.endsWith(value),
-          blank: field => !field,
+          neq: (field: string, value: string) => field !== value,
+          greaterorequal: (field: string, value: string) => field >= value,
+          greaterthan: (field: string, value: string) => field > value,
+          lessthanorequal: (field: string, value: string) => field <= value,
+          lessthan: (field: string, value: string) => field < value,
+          contains: (field: string, value: string) => field.includes(value),
+          startswith: (field: string, value: string) => field.startsWith(value),
+          endswith: (field: string, value: string) => field.endsWith(value),
+          blank: (field: string) => !field,
         };
 
         const result = this.responseBackup.gridData.filter(o =>
             this.filters.every(({ field, operator, value }) => {
-              let fieldItem = o[field];
-              if (typeof o[field] === 'string') {
-                fieldItem = fieldItem.toLowerCase();
-              }
-              if (typeof value === 'string') {
-                value = value.toLowerCase();
-              }
-              return operators[operator](fieldItem, value);
+              const fieldItem = o[field] ? o[field] : '';
+              const filterValue = value ? value : '';
+              return operators[operator](fieldItem.toString().toLowerCase(), filterValue.toString().toLowerCase());
             })
         );
 
@@ -308,7 +305,7 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
 
   gridItemSelectionChanged(all = false): void {
     this.selectedRows = [];
-    this.gridItems.forEach(item => {
+    this.gridItems.forEach((item: any) => {
       if (all) {
         item.gridItemSelected = this.allGridItemsSelected;
       }
@@ -321,7 +318,7 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   // Multiple Selection logic
-  startSelect(item, element): void {
+  startSelect(item: any, element: HTMLElement): void {
     this.selectionTimeoutHandler = setTimeout(() => {
       this.renderer.addClass(element, 'amdg-pulse');
       this.selectionStarted = true;
@@ -338,11 +335,11 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     clearInterval(this.selectionTimeoutHandler);
     if (this.selectionStarted) {
       this.selectionStarted = false;
-      window.document.getSelection().removeAllRanges();
+      window.document.getSelection()!.removeAllRanges();
     }
   }
 
-  overSelect($event, item): void {
+  overSelect($event: MouseEvent, item: any): void {
     if (this.selectionStarted) {
       item.gridItemSelected = true;
       this.getSelection();
@@ -362,7 +359,7 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     }
   }
 
-  clickRow($event, item, index): void {
+  clickRow($event: any, item: any, index: number): void {
     if (this.expandableConfig.multipleExpansion === false) {
       this.gridItems.forEach((eachItem, itemIndex) => {
         if (itemIndex !== index) {
@@ -393,11 +390,11 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   // page change event
-  getData({pageNo, recordsPerPage}): void {
+  getData({pageNo, recordsPerPage}: any): void {
 
     if (this.gridPostSubscription) {
       this.gridPostSubscription.unsubscribe();
-      this.gridPostSubscription = null;
+      this.gridPostSubscription = new Subscription();
     }
 
     this.recordsPerPage = recordsPerPage;
@@ -405,7 +402,7 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     this.currentPage = pageNo;
     this.changeDetectorRef.detectChanges();
 
-    let body: GridRequestInterface = null;
+    let body: GridRequestInterface;
     if (this.serverSidePagination) {
       body = {
         entity: this.entity,
@@ -450,19 +447,19 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     });
   }
 
-  private sortAscending(sortField): any {
+  private sortAscending(sortField: string): any {
     let sortOrder = 1;
     if (sortField[0] === '-') {
       sortOrder = -1;
       sortField = sortField.substr(1);
     }
-    return (a, b) => {
+    return (a: any, b: any) => {
       const result = (a[sortField] < b[sortField]) ? -1 : (a[sortField] > b[sortField]) ? 1 : 0;
       return result * sortOrder;
     };
   }
 
-  pageChanged({pageNo, recordsPerPage}): void { // only applicable to client side pagination
+  pageChanged({pageNo, recordsPerPage}: any): void { // only applicable to client side pagination
     this.loadingData = true;
     this.allGridItemsSelected = false;
     this.selectedRows = [];
@@ -499,9 +496,9 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     }, 100);
   }
 
-  private linkCreationInterceptor(gridData): any[] {
+  private linkCreationInterceptor(gridData: any[]): any[] {
 
-    const urlHeadings = [];
+    const urlHeadings: any[] = [];
     this.headings.forEach(heading => {
       if (heading?.clickable === 'url') {
         urlHeadings.push({
@@ -514,11 +511,11 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     });
 
     const items = gridData.map(item => {
-      const obj = {};
+      const obj: any = {};
       urlHeadings.forEach(heading => {
         const splitUrl = heading.urlTemplate.split('/');
-        const newUrl = [];
-        splitUrl.forEach(urlItem => {
+        const newUrl: any[] = [];
+        splitUrl.forEach((urlItem: any) => {
           if (urlItem.includes(':')) {
             urlItem = item[urlItem.substring(1)];
           }
@@ -526,7 +523,7 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
         });
         obj[heading.type + 'Link'] = newUrl.join('/');
         if (heading.queryParams) {
-          let objParams = null;
+          let objParams: any = null;
           if (heading.source === 'external') {
             objParams = '';
             Object.keys(heading.queryParams).forEach(field => {
@@ -548,14 +545,14 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     return items;
   }
 
-  toggleFullScreen(ev): void {
+  toggleFullScreen(ev: boolean): void {
     this.fullscreen = ev;
     setTimeout(() => { // wait until dom adjusts
       this.calculateGridWidth();
     });
   }
 
-  openLinkInNewTab(link, params = {}): void {
+  openLinkInNewTab(link: string, params: any = {}): void {
     let paramString = '?';
     // if (isEmpty(params)) {
     //   paramString = '';
@@ -566,7 +563,7 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     window.open(link + paramString);
   }
 
-  openExternalLinkInNewTab(link, params): void {
+  openExternalLinkInNewTab(link: string, params: any): void {
     if (params) {
       window.open(link + '?' + params);
     } else {
@@ -574,7 +571,7 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     }
   }
 
-  goToLink(fieldName, item, click?): void {
+  goToLink(fieldName: string, item: string, click?: string): void {
     this.buttonClickEmit.emit({fieldName, item, click});
   }
 }

@@ -7,11 +7,11 @@ export class TemplateObjectPipe implements PipeTransform {
 
   constructor() {}
 
-  transform(value: any, args: unknown): JSON {
+  transform(value: any, args: any): JSON {
     let modifiedTemplate: any = JSON.stringify(value);
     const splitOne = modifiedTemplate.split('{{');
     splitOne.splice(0, 1); // remove first element
-    splitOne.forEach(item => {
+    splitOne.forEach((item: string) => {
       const [customVariable] = item.split('}}');
       modifiedTemplate = modifiedTemplate.replaceAll( '{{' + customVariable + '}}', args[customVariable]);
     });

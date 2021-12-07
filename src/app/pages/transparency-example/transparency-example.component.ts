@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { GridHeading } from 'angular-material-data-grid';
+import { GridHeading } from '../../../../projects/angular-material-data-grid/src/lib/angular-material-data-grid-interfaces';
 
 @Component({
   selector: 'app-transparency-example',
@@ -52,7 +52,7 @@ export class TransparencyExampleComponent {
     }
   ];
 
-  entity = null;
+  entity: any = null;
 
   constructor() { }
 

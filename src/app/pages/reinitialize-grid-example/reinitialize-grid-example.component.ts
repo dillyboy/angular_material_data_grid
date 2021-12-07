@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GridHeading } from 'angular-material-data-grid';
+import { GridHeading } from '../../../../projects/angular-material-data-grid/src/lib/angular-material-data-grid-interfaces';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -49,8 +49,8 @@ export class ReinitializeGridExampleComponent {
     }
   ];
 
-  entity = null;
-  resetFilters = null;
+  entity: any = null;
+  resetFilters: any = null;
 
   resetPressed(): void {
     this.entity = {};
@@ -83,8 +83,8 @@ export class ReinitializeGridExampleComponent {
     }
   ];
 
-  entity = null;
-  resetFilters = null;
+  entity: any = null;
+  resetFilters: any = null;
 
   resetPressed(): void {
     this.entity = {};

@@ -8,11 +8,11 @@ export class TemplatePipe implements PipeTransform {
 
   constructor(private sanitizer: DomSanitizer) {}
 
-  transform(value: any, args: unknown): SafeHtml {
+  transform(value: any, args: any): SafeHtml {
     let modifiedTemplate = value;
     const splitOne = value.split('{{');
     splitOne.splice(0, 1); // remove first element
-    splitOne.forEach(item => {
+    splitOne.forEach((item: string) => {
       const [customVariable] = item.split('}}');
       modifiedTemplate = modifiedTemplate.replaceAll( '{{' + customVariable + '}}', args[customVariable]);
     });

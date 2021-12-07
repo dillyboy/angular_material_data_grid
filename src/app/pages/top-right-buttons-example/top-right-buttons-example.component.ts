@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { GridHeading } from 'angular-material-data-grid';
+import { GridHeading } from '../../../../projects/angular-material-data-grid/src/lib/angular-material-data-grid-interfaces';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -87,7 +87,7 @@ export class TopRightButtonsExampleComponent {
     this.snackBar.open('Download Clicked!', 'Ok');
   }
 
-  itemClicked(no): void {
+  itemClicked(no: number): void {
     this.snackBar.open(`Menu item #${no} clicked`, 'Ok');
   }
 

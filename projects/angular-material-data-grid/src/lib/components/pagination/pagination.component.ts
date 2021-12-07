@@ -12,7 +12,7 @@ export class PaginationComponent implements OnInit, OnChanges {
   @Output() pageChanged: any = new EventEmitter<any>();
   @Output() toggleFullScreen: any = new EventEmitter<any>();
 
-  @Input() noOfTotalRecords = 0;
+  @Input() noOfTotalRecords: number = 0;
   @Input() loadingData = true;
   @Input() noOfRecords = 0;
   @Input() noOfSelectedRow = 0;
@@ -23,7 +23,7 @@ export class PaginationComponent implements OnInit, OnChanges {
   newRecordsPerPage = 100;
   pages = 0;
   // currentPage = 1;
-  pagesOnDisplay = [];
+  pagesOnDisplay: number[] = [];
   pageInfoDisplayText = '';
   discardSelectionConfirmationObj = {
     width: '300px',
@@ -43,7 +43,7 @@ export class PaginationComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.loadingData?.currentValue === false) { // render pages buttons when data is loaded
+    if (changes['loadingData']?.currentValue === false) { // render pages buttons when data is loaded
       if (this.newRecordsPerPage !== this.recordsPerPage) { // if page size changes go back to page 1
         this.recordsPerPage = this.newRecordsPerPage;
         this.currentPage = 1;
@@ -52,7 +52,7 @@ export class PaginationComponent implements OnInit, OnChanges {
     }
   }
 
-  pageChange(pageNo, notify = true): void {
+  pageChange(pageNo: number, notify = true): void {
     if (this.noOfSelectedRow > 0) {
       this.dialog.open(ConfirmationComponent, this.discardSelectionConfirmationObj).afterClosed().subscribe(result => {
         if (result) {
@@ -65,7 +65,7 @@ export class PaginationComponent implements OnInit, OnChanges {
 
   }
 
-  continuePageChange(pageNo, notify = true): void {
+  continuePageChange(pageNo: number, notify = true): void {
     this.pages = Math.ceil(this.noOfTotalRecords / this.recordsPerPage);
     this.currentPage = pageNo;
     this.pagesOnDisplay = [];

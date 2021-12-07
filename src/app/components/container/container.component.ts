@@ -4,6 +4,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { Platform } from '@angular/cdk/platform';
 import { MatDrawer } from '@angular/material/sidenav';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-container',
@@ -13,7 +14,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 export class ContainerComponent implements AfterViewInit , OnDestroy {
   darkMode = false;
   sidePanelNavigation = navigation;
-  routerEvents = null;
+  routerEvents: Subscription = new Subscription();
   currentNav = '';
   links = ['Demo', 'Introduction', 'Installation', 'Basic Usage'];
   // Client Side Pagination
@@ -22,7 +23,7 @@ export class ContainerComponent implements AfterViewInit , OnDestroy {
   // Column reordering and optional columns
   selectedLink = 'Demo';
   mobile = false;
-  @ViewChild('drawer') drawer: MatDrawer;
+  @ViewChild('drawer') drawer!: MatDrawer;
   mobileQuery: MediaQueryList;
   private mobileQueryListener: () => void;
 
@@ -67,7 +68,7 @@ export class ContainerComponent implements AfterViewInit , OnDestroy {
     }
   }
 
-  goToRoute(item): void {
+  goToRoute(item: any): void {
     this.selectedLink = item.headingName;
     this.router.navigate([item.route]);
     if (this.mobile) {

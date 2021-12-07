@@ -1,7 +1,7 @@
 <button class="amdg-filter-open-btn amdg-layout-container" mat-stroked-button [color]="filterApplied ? 'accent': 'none'" type="button" #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="numberFilterMenu" (menuOpened)="menuOpened()">
   <span *ngIf="!filterApplied" class="amdg-placeholder amdg-font-weight-normal">Unfiltered</span>
   <span *ngIf="filterApplied" class="amdg-text-truncate">{{tagValuesApplied ? tagValuesApplied[0] : null }}</span>
-  <span *ngIf="filterApplied && tagValuesApplied?.length > 1" class="amdg-additional-selection">
+  <span *ngIf="filterApplied && tagValuesApplied.length > 1" class="amdg-additional-selection">
       (+{{tagValuesApplied.length - 1}} {{tagValuesApplied?.length === 2 ? 'other' : 'others'}})
     </span>
   <div class="amdg-select-arrow"></div>
@@ -16,7 +16,7 @@
     <div class="amdg-layout-container amdg-mt-2">
       <mat-form-field class="amdg-tag-input">
         <mat-label>Add Tag</mat-label>
-        <input matInput #fromElement type="text" [formControl]="tagValue" (keydown.enter)="addTagValue($event);" (paste)="stringPaste($event.clipboardData.getData('Text'), $event)" (keypress)="tagValueKeypress($event)">
+        <input matInput #fromElement type="text" [formControl]="tagValue" (keydown.enter)="addTagValue($event);" (paste)="stringPaste($event)" (keypress)="tagValueKeypress($event)">
         <mat-error>{{error}}</mat-error>
       </mat-form-field>
       <mat-icon class="amdg-cursor-pointer" mat-ripple color="primary" (click)="addTagValue($event);">add</mat-icon>

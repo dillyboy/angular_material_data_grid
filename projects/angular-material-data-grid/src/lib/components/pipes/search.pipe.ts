@@ -10,7 +10,7 @@ export class SearchPipe implements PipeTransform {
       return values;
     }
 
-    return values.filter(value => {
+    return values.filter((value: any) => {
       return value.text.toLowerCase().includes(args.toLowerCase());
     });
   }

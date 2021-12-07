@@ -1,47 +1,30 @@
-@use '~@angular/material' as mat;
-$mat-theme-ignore-duplication-warnings: true;
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
-// Plus imports for other components in your app.
+@use '@angular/material' as mat;
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
 @include mat.core();
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$serverbind-grid-primary: mat.define-palette(mat.$blue-palette);
-$serverbind-grid-primary-dark: mat.define-palette(mat.$blue-palette, 400);
-$serverbind-grid-accent: mat.define-palette(mat.$amber-palette, 800, 700, 900);
+$my-primary: mat.define-palette(mat.$blue-palette);
+$my-primary-dark: mat.define-palette(mat.$blue-palette, 400);
+$my-accent: mat.define-palette(mat.$amber-palette, 800, 700, 900);
+$my-warn: mat.define-palette(mat.$red-palette);
 
-// The warn palette is optional (defaults to red).
-$serverbind-grid-warn: mat.define-palette(mat.$red-palette);
-
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$serverbind-grid-theme: mat.define-light-theme((
-        color: (
-                primary: $serverbind-grid-primary,
-                accent: $serverbind-grid-accent,
-                warn: $serverbind-grid-warn,
-        )
+$my-theme: mat.define-light-theme((
+  color: (
+    primary: $my-primary,
+    accent: $my-accent,
+    warn: $my-warn,
+  )
 ));
 
-$serverbind-grid-dark-theme: mat.define-dark-theme((
-        color: (
-                primary: $serverbind-grid-primary-dark,
-                accent: $serverbind-grid-accent,
-                warn: $serverbind-grid-warn,
-        )
+$my-dark-theme: mat.define-dark-theme((
+  color: (
+    primary: $my-primary-dark,
+    accent: $my-accent,
+    warn: $my-warn,
+  )
 ));
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
- @include mat.all-component-themes($serverbind-grid-theme);
+@include mat.all-component-themes($my-theme);
 
 .darkMode {
-  @include mat.all-component-themes($serverbind-grid-dark-theme);
+  @include mat.all-component-themes($my-dark-theme);
 }

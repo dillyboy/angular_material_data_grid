@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import GridFilterItemInterface from '../../interfaces/grid-filter-item';
 
 @Component({
   selector: 'amdg-filter-header',
@@ -16,23 +17,23 @@ export class FilterHeaderComponent implements OnInit {
     disableFiltering: false,
     other: {}
   };
-  @Input() initialFilters: any = [];
+  @Input() initialFilters: GridFilterItemInterface[] = [];
   @Input() resetFilters = null;
   @Output() filter = new EventEmitter();
 
-  initialFilter = null;
+  initialFilter?: GridFilterItemInterface;
 
   constructor() { }
 
   ngOnInit(): void {
-    const i = this.initialFilters.findIndex(filter => filter.field === this.heading.fieldName);
+    const i = this.initialFilters.findIndex((filter: GridFilterItemInterface) => filter.field === this.heading.fieldName);
     if (i !== -1) {
       this.initialFilter = this.initialFilters[i];
     }
   }
 
-  filterObjCreated(ev): void {
-    this.filter.emit({field: this.heading.fieldName, ...ev});
+  filterObjCreated(ev: GridFilterItemInterface): void {
+    this.filter.emit({field: this.heading.fieldName, operator: ev.operator, value: ev.value});
   }
 
 }

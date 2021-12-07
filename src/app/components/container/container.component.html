@@ -37,7 +37,7 @@
       </mat-expansion-panel>
     </mat-accordion>
   </mat-drawer>
-  <div style="margin: 1.5rem">
+  <div [ngStyle]="{'margin': mobileQuery.matches ? '1rem': '1.5rem'}">
     <router-outlet></router-outlet>
   </div>
 </mat-drawer-container>

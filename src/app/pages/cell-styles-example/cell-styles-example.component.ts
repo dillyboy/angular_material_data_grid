@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { GridHeading, GridResponse } from 'angular-material-data-grid';
+import { GridHeading, GridResponse } from '../../../../projects/angular-material-data-grid/src/lib/angular-material-data-grid-interfaces';
 
 @Component({
   selector: 'app-cell-styles-example',

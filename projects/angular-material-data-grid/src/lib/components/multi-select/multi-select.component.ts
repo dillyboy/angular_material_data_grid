@@ -10,7 +10,9 @@ import {
   ViewChild
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatSelect } from "@angular/material/select";
 import { GridService } from '../../grids/grid.service';
+import GridFilterItemInterface from '../../interfaces/grid-filter-item';
 
 @Component({
   selector: 'amdg-multi-select',
@@ -20,7 +22,7 @@ import { GridService } from '../../grids/grid.service';
 export class MultiSelectComponent implements OnInit, OnChanges {
 
   @Output() filter: any = new EventEmitter<any>();
-  @Input() initialFilter = null;
+  @Input() initialFilter?: GridFilterItemInterface;
   @Input() resetFilters = null;
   @Input() filterConfig: any = {
     selectionMode: null,
@@ -32,10 +34,10 @@ export class MultiSelectComponent implements OnInit, OnChanges {
     stringList: null
   };
 
-  @ViewChild('mySelect') mySelect;
-  @ViewChild('fromElement') fromElement: ElementRef;
+  @ViewChild('mySelect') mySelect!: MatSelect;
+  @ViewChild('fromElement') fromElement!: ElementRef;
   selection = new FormControl();
-  selectionValuesApplied = [];
+  selectionValuesApplied: any[] = [];
   selectionList: any[] = [];
   allSelected = false;
   searchFilter = '';
@@ -50,36 +52,36 @@ export class MultiSelectComponent implements OnInit, OnChanges {
       this.gridService.getAny(this.filterConfig.url).subscribe(data => {
         if (data.statusCode === 200) {
           const {key, value} = this.filterConfig;
-          this.selectionList = data.payload.map(item => {
+          this.selectionList = data.payload.map((item: any) => {
             return {text : item[key], value: item[value], hide: false};
           });
           this.setInitialFilters();
         }
       });
     } else { // internal
-      this.selectionList = this.filterConfig.optionsObject.map(item => ({...item, hide: false}));
+      this.selectionList = this.filterConfig.optionsObject.map((item: any) => ({...item, hide: false}));
       this.setInitialFilters();
     }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.resetFilters?.currentValue) {
+    if (changes['resetFilters']?.currentValue) {
       this.reset(false);
     }
   }
 
   private setInitialFilters(): void {
     if (this.initialFilter) {
-      if (this.multiple) {
+      if (this.multiple && typeof this.initialFilter.value !== 'number') {
         const values = this.initialFilter.value.split(',');
-        const filterValues = [];
-        values.forEach(val => {
+        const filterValues: any[] = [];
+        values.forEach((val: any) => {
           filterValues.push(...this.selectionList.filter(selection => selection.value === val.trim()));
         });
         this.selection.setValue(filterValues);
         this.selectionValuesApplied = JSON.parse(JSON.stringify(values));
       } else {
-        const i = this.selectionList.findIndex(selection => selection.value === this.initialFilter.value);
+        const i = this.selectionList.findIndex(selection => selection.value === this.initialFilter?.value);
         if (i !== -1) {
           this.filterApplied = true;
           this.selection.setValue(this.selectionList[i]);
@@ -110,8 +112,8 @@ export class MultiSelectComponent implements OnInit, OnChanges {
   }
 
   close(): void {
-    const texts = this.selection.value?.map(val => val.text);
-    const values = this.selection.value?.map(val => val.value);
+    const texts = this.selection.value?.map((val: any) => val.text);
+    const values = this.selection.value?.map((val: any)  => val.value);
     this.selectionValuesApplied = JSON.parse(JSON.stringify(texts));
     const value = values?.toString();
     if (value) {
@@ -152,7 +154,7 @@ export class MultiSelectComponent implements OnInit, OnChanges {
     });
   }
 
-  searchFilterKeydown(event): void {
+  searchFilterKeydown(event: KeyboardEvent): void {
     // prevent default behavior of selecting an option when the user filters the options with space being added
     if (event.code === 'Space') {
       event.stopPropagation();

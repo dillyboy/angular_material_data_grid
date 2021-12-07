@@ -8,11 +8,13 @@ import {
   OnInit,
   Output
 } from '@angular/core';
+import {Subscription} from 'rxjs';
 import GridHeadingInterface from '../../interfaces/grid-heading-type';
 import GridButtonClickInterface from '../../interfaces/grid-button-click-interface';
 import GridResponseInterface from '../../interfaces/grid-response';
 import GridFilterItemInterface from '../../interfaces/grid-filter-item';
 import {GridService} from '../grid.service';
+import GridSortItemInterface from '../../interfaces/grid-sort-item';
 
 @Component({
   selector: 'amdg-child-grid',
@@ -28,18 +30,18 @@ export class ChildGridComponent implements OnInit {
 
   @Input() headings: GridHeadingInterface[] = [];
   @Input() url = '';
-  @Input() entity = null;
+  @Input() entity: any = null;
 
   loadingData = false;
   response: GridResponseInterface = { gridData: [], totalCount: 0};
   responseBackup: GridResponseInterface = { gridData: [], totalCount: 0};
-  gridItems = [];
+  gridItems: any[] = [];
   recordsPerPage = 100;
-  gridPostSubscription = null;
+  gridPostSubscription: Subscription = new Subscription();
   currentPage = 1;
   @Input() serverSidePagination = false;
-  filters = [];
-  sortObj = {
+  filters: GridFilterItemInterface[] = [];
+  sortObj: GridSortItemInterface = {
     sort: null,
     sortField: null
   };
@@ -54,8 +56,8 @@ export class ChildGridComponent implements OnInit {
     this.getData({pageNo: 1, recordsPerPage: this.recordsPerPage});
   }
 
-  sort(ev): void {
-    let index = null;
+  sort(ev: GridHeadingInterface): void {
+    let index = 0;
     this.headings.forEach((heading: any, i) => {
       if (heading.fieldName === ev.fieldName) {
         index = i;
@@ -75,7 +77,7 @@ export class ChildGridComponent implements OnInit {
     }
   }
 
-  filter(ev): void {
+  filter(ev: GridFilterItemInterface): void {
     let filterIndex = null;
     this.filters.forEach((filter, i) => {
       if (filter.field === ev.field) {
@@ -97,43 +99,38 @@ export class ChildGridComponent implements OnInit {
 
     if (this.serverSidePagination === false) {
       this.ngZone.runOutsideAngular(() => {
-        const operators = {
-          between: (field, range) => {
+        const operators: any = {
+          between: (field: string, range: string) => {
             const [min, max] = range.split('-').map(Number);
-            return min <= field && field <= max;
+            return min <= parseInt(field, 10) && parseInt(field, 10) <= max;
           },
-          betweendates: (field, range) => {
+          betweendates: (field: string, range: string) => {
             const [min, max] = range.split('-');
             return new Date(min) <= new Date(field) && new Date(field) <= new Date(max);
           },
-          eq: (field, value) => {
+          eq: (field: string, value: string) => {
             if (typeof value === 'string' && value.includes(',')) {
               return value.split(',').includes(field);
             } else {
               return field === value;
             }
           },
-          neq: (field, value) => field !== value,
-          greaterorequal: (field, value) => field >= value,
-          greaterthan: (field, value) => field > value,
-          lessthanorequal: (field, value) => field <= value,
-          lessthan: (field, value) => field < value,
-          contains: (field, value) => field.includes(value),
-          startswith: (field, value) => field.startsWith(value),
-          endswith: (field, value) => field.endsWith(value),
-          blank: field => !field,
+          neq: (field: string, value: string) => field !== value,
+          greaterorequal: (field: string, value: string) => field >= value,
+          greaterthan: (field: string, value: string) => field > value,
+          lessthanorequal: (field: string, value: string) => field <= value,
+          lessthan: (field: string, value: string) => field < value,
+          contains: (field: string, value: string) => field.includes(value),
+          startswith: (field: string, value: string) => field.startsWith(value),
+          endswith: (field: string, value: string) => field.endsWith(value),
+          blank: (field: string) => !field,
         };
 
         const result = this.responseBackup.gridData.filter(o =>
             this.filters.every(({ field, operator, value }) => {
-              let fieldItem = o[field];
-              if (typeof o[field] === 'string') {
-                fieldItem = fieldItem.toLowerCase();
-              }
-              if (typeof value === 'string') {
-                value = value.toLowerCase();
-              }
-              return operators[operator](fieldItem, value);
+              const fieldItem = o[field] ? o[field] : '';
+              const filterValue = value ? value : '';
+              return operators[operator](fieldItem.toString().toLowerCase(), filterValue.toString().toLowerCase());
             })
         );
 
@@ -147,7 +144,7 @@ export class ChildGridComponent implements OnInit {
     }
   }
 
-  openLinkInNewTab(link, params = {}): void {
+  openLinkInNewTab(link: string, params: any = {}): void {
     let paramString = '?';
     // if (isEmpty(params)) {
     //   paramString = '';
@@ -158,7 +155,7 @@ export class ChildGridComponent implements OnInit {
     window.open(link + paramString);
   }
 
-  openExternalLinkInNewTab(link, params): void {
+  openExternalLinkInNewTab(link: string, params: any): void {
     if (params) {
       window.open(link + '?' + params);
     } else {
@@ -166,16 +163,16 @@ export class ChildGridComponent implements OnInit {
     }
   }
 
-  goToLink(fieldName, item, click?): void {
+  goToLink(fieldName: string, item: string, click?: string): void {
     this.buttonClickEmit.emit({fieldName, item, click});
   }
 
   // page change event
-  getData({pageNo, recordsPerPage}): void {
+  getData({pageNo, recordsPerPage}: any): void {
 
     if (this.gridPostSubscription) {
       this.gridPostSubscription.unsubscribe();
-      this.gridPostSubscription = null;
+      this.gridPostSubscription = new Subscription();
     }
 
     this.recordsPerPage = recordsPerPage;
@@ -222,9 +219,9 @@ export class ChildGridComponent implements OnInit {
     });
   }
 
-  private linkCreationInterceptor(gridData): any[] {
+  private linkCreationInterceptor(gridData: any[]): any[] {
 
-    const urlHeadings = [];
+    const urlHeadings: any[] = [];
     this.headings.forEach(heading => {
       if (heading?.clickable === 'url') {
         urlHeadings.push({
@@ -237,11 +234,11 @@ export class ChildGridComponent implements OnInit {
     });
 
     const items = gridData.map(item => {
-      const obj = {};
+      const obj: any = {};
       urlHeadings.forEach(heading => {
         const splitUrl = heading.urlTemplate.split('/');
-        const newUrl = [];
-        splitUrl.forEach(urlItem => {
+        const newUrl: any[] = [];
+        splitUrl.forEach((urlItem: any) => {
           if (urlItem.includes(':')) {
             urlItem = item[urlItem.substring(1)];
           }
@@ -249,7 +246,7 @@ export class ChildGridComponent implements OnInit {
         });
         obj[heading.type + 'Link'] = newUrl.join('/');
         if (heading.queryParams) {
-          let objParams = null;
+          let objParams: any = null;
           if (heading.source === 'external') {
             objParams = '';
             Object.keys(heading.queryParams).forEach(field => {
@@ -271,19 +268,19 @@ export class ChildGridComponent implements OnInit {
     return items;
   }
 
-  private sortAscending(sortField): any {
+  private sortAscending(sortField: string): any {
     let sortOrder = 1;
     if (sortField[0] === '-') {
       sortOrder = -1;
       sortField = sortField.substr(1);
     }
-    return (a, b) => {
+    return (a: any, b: any) => {
       const result = (a[sortField] < b[sortField]) ? -1 : (a[sortField] > b[sortField]) ? 1 : 0;
       return result * sortOrder;
     };
   }
 
-  pageChanged({pageNo, recordsPerPage}): void { // only applicable to client side pagination
+  pageChanged({pageNo, recordsPerPage}: any): void { // only applicable to client side pagination
     this.loadingData = true;
     this.selectedRows = [];
     this.changeDetectorRef.detectChanges();

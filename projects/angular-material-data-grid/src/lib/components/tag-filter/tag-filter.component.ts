@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatMenuTrigger } from '@angular/material/menu';
+import GridFilterItemInterface from '../../interfaces/grid-filter-item';
 
 @Component({
   selector: 'amdg-tag-filter',
@@ -19,15 +20,15 @@ import { MatMenuTrigger } from '@angular/material/menu';
 })
 export class TagFilterComponent implements OnInit, OnChanges {
 
-  @Input() initialFilter = null;
+  @Input() initialFilter?: GridFilterItemInterface;
   @Input() resetFilters = null;
   @Input() numbersOnly = false;
   @Output() filter: any = new EventEmitter<any>();
-  @ViewChild('menuTrigger') menu: MatMenuTrigger;
-  @ViewChild('fromElement') fromElement: ElementRef;
+  @ViewChild('menuTrigger') menu!: MatMenuTrigger;
+  @ViewChild('fromElement') fromElement!: ElementRef;
   filterApplied = false;
   tagValue = new FormControl('', []);
-  tagValues = [];
+  tagValues: string[] = [];
   tagValuesApplied = [];
   error = '';
   maximumTagLimit = 5000 as const;
@@ -40,8 +41,8 @@ export class TagFilterComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    if (this.initialFilter) {
-      const tagValues = this.initialFilter.value.split(',').map(item => item.trim());
+    if (this.initialFilter && typeof this.initialFilter.value !== "number") {
+        const tagValues = this.initialFilter.value.split(',').map(item => item.trim());
       if (tagValues.length <= this.maximumTagLimit) {
         this.tagValues = tagValues;
         this.tagValuesApplied = JSON.parse(JSON.stringify(this.tagValues));
@@ -53,7 +54,7 @@ export class TagFilterComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.resetFilters?.currentValue) {
+    if (changes['resetFilters']?.currentValue) {
       this.reset(false);
     }
   }
@@ -85,7 +86,7 @@ export class TagFilterComponent implements OnInit, OnChanges {
     this.menu.closeMenu();
   }
 
-  addTagValue(event): void {
+  addTagValue(event: Event): void {
     event.stopPropagation();
     if (this.tagValues.length < this.maximumTagLimit) {
       let maxLength: number = this.numberMaxLength;
@@ -126,20 +127,22 @@ export class TagFilterComponent implements OnInit, OnChanges {
     }
   }
 
-  stringPaste(stringList, event): void {
+  stringPaste(event: ClipboardEvent): void {
+
+    let stringList = event.clipboardData?.getData('Text');
     event.preventDefault();
 
-    stringList = stringList.replace(/	/g, ',');
-    stringList = stringList.replace(/\n/ig, ',');
-    stringList = stringList.replace(/\\t/g, ',');
-    stringList = stringList.replace(/\\n/g, ',');
-    stringList = stringList.replace(/[\r\n]/g, ',');
+    stringList = stringList?.replace(/	/g, ',');
+    stringList = stringList?.replace(/\n/ig, ',');
+    stringList = stringList?.replace(/\\t/g, ',');
+    stringList = stringList?.replace(/\\n/g, ',');
+    stringList = stringList?.replace(/[\r\n]/g, ',');
 
     let validPaste = true;
-    const list = stringList.split(',').filter(Boolean); // remove empty strings
+    const list = stringList ? stringList?.split(',').filter(Boolean) : []; // remove empty strings
     if (list.length <= this.maximumTagLimit && this.tagValues.length < this.maximumTagLimit &&
          (list.length + this.tagValues.length <= this.maximumTagLimit)) {
-      const formattedList = [];
+      const formattedList: string[] = [];
       let error = '';
       list.forEach(item => {
 
@@ -183,7 +186,7 @@ export class TagFilterComponent implements OnInit, OnChanges {
     }
   }
 
-  private ifNumber(numberArg): boolean {
+  private ifNumber(numberArg: any): boolean {
     return isNaN(numberArg) === false;
   }
 

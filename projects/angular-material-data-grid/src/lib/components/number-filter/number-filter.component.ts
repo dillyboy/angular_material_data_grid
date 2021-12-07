@@ -11,7 +11,9 @@ import {
   ViewChild
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { MatMenuTrigger } from '@angular/material/menu';
+import GridFilterItemInterface from '../../interfaces/grid-filter-item';
 
 @Component({
   selector: 'amdg-number-filter',
@@ -20,7 +22,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 })
 export class NumberFilterComponent implements OnInit, OnChanges, OnDestroy {
 
-  @Input() initialFilter = null;
+  @Input() initialFilter?: GridFilterItemInterface;
   @Input() resetFilters = null;
   @Output() filter: any = new EventEmitter<any>();
   filterApplied = false;
@@ -34,18 +36,18 @@ export class NumberFilterComponent implements OnInit, OnChanges, OnDestroy {
     {value: 'lessthan', text: 'Is less than'}
   ];
   selection = new FormControl('between', Validators.required);
-  selectionSubscription = null;
+  selectionSubscription: Subscription = new Subscription();
   range = new FormGroup({
     from: new FormControl(null, [Validators.required, Validators.pattern('^[0-9]*$')]),
     to: new FormControl(null, [Validators.required, Validators.pattern('^[0-9]*$')])
   });
   value = new FormControl(null, [Validators.required, Validators.pattern('^[0-9]*$')]);
-  filterParam = '';
+  filterParam: string | number = '';
   invalidRangeValue = false;
   invalidValue = false;
-  @ViewChild('menuTrigger') menu: MatMenuTrigger;
-  @ViewChild('fromElement') fromElement: ElementRef;
-  @ViewChild('valueElement') valueElement: ElementRef;
+  @ViewChild('menuTrigger') menu!: MatMenuTrigger;
+  @ViewChild('fromElement') fromElement!: ElementRef;
+  @ViewChild('valueElement') valueElement!: ElementRef;
 
   constructor() { }
 
@@ -53,10 +55,10 @@ export class NumberFilterComponent implements OnInit, OnChanges, OnDestroy {
     if (this.initialFilter) {
       this.selection.setValue(this.initialFilter.operator);
       this.filterParam = this.initialFilter.value;
-      if (this.initialFilter.operator === 'between') {
+      if (this.initialFilter.operator === 'between' && typeof this.initialFilter.value !== "number") {
         const [start, end] = this.initialFilter.value.split('-');
-        this.range.controls.from.setValue(start);
-        this.range.controls.to.setValue(end);
+        this.range.controls['from'].setValue(start);
+        this.range.controls['to'].setValue(end);
       } else {
         this.value.setValue(this.initialFilter.value);
       }
@@ -70,7 +72,7 @@ export class NumberFilterComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.resetFilters?.currentValue) {
+    if (changes['resetFilters']?.currentValue) {
       this.reset(false);
     }
   }
@@ -87,11 +89,11 @@ export class NumberFilterComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  reset(emit?): void {
+  reset(emit?: boolean): void {
     this.invalidRangeValue = false;
     this.invalidValue = false;
-    this.range.controls.from.setValue(null);
-    this.range.controls.to.setValue(null);
+    this.range.controls['from'].setValue(null);
+    this.range.controls['to'].setValue(null);
     this.value.setValue(null);
     this.filterParam = '';
     this.close(null, emit);
@@ -115,14 +117,14 @@ export class NumberFilterComponent implements OnInit, OnChanges, OnDestroy {
       if (this.value.valid) {
         this.invalidValue = false;
         this.filterParam = this.value.value;
-        this.close(this.value.value);
+        this.close(this.value.value.toString());
       } else {
         this.invalidValue = true;
       }
     }
   }
 
-  private close(value: string, emit = true): void {
+  private close(value: string | null, emit = true): void {
     if (emit) {
       this.filter.emit({operator: this.selection.value, value});
     }

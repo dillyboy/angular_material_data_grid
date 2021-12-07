@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@use '@angular/material' as mat;
 
 $warn: mat.get-color-from-palette(mat.$red-palette, 600);
 $highlight-color: rgba(118, 118, 118, 0.1);

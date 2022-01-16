@@ -109,8 +109,9 @@ export class ChildGridComponent implements OnInit {
             return new Date(min) <= new Date(field) && new Date(field) <= new Date(max);
           },
           eq: (field: string, value: string) => {
-            if (typeof value === 'string' && value.includes(',')) {
-              return value.split(',').includes(field);
+            if (value.includes(',') || field.includes(',')) {
+              // return value.split(',').includes(field);
+              return value.split(',').some(item => field.split(',').includes(item));
             } else {
               return field === value;
             }
@@ -127,12 +128,15 @@ export class ChildGridComponent implements OnInit {
         };
 
         const result = this.responseBackup.gridData.filter(o =>
-            this.filters.every(({ field, operator, value }) => {
-              const fieldItem = o[field] ? o[field] : '';
-              const filterValue = value ? value : '';
-              return operators[operator](fieldItem.toString().toLowerCase(), filterValue.toString().toLowerCase());
-            })
+          this.filters.every(({ field, operator, value }) => {
+            return operators[operator](makeSearchFriendly(o[field]), makeSearchFriendly(value));
+          })
         );
+
+        function makeSearchFriendly(searchTerm: any): string {
+          let searchableString = searchTerm ? searchTerm : '';
+          return searchableString.toString().toLowerCase().trim();
+        }
 
         this.ngZone.run(() => {
           this.response.gridData = result;

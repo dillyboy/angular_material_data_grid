@@ -10,18 +10,27 @@
         <amdg-filter-header [heading]="heading" (filter)="filter($event)"></amdg-filter-header>
       </th>
     </thead>
-    <mat-progress-bar *ngIf="loadingData" mode="indeterminate" class="amdg-position-absolute"></mat-progress-bar>
+    <mat-progress-bar *ngIf="loadingData" mode="indeterminate" class="amdg-position-absolute amdg-z-index-1"></mat-progress-bar>
     <tbody>
     <ng-container *ngFor="let item of gridItems; let odd=odd; let i = index;">
       <tr [ngClass]="{ odd: odd, rowSelected: item.gridItemSelected == true}">
-        <td *ngFor="let heading of headings | columnFilter;" [style.textAlign]="heading.align" [style.width]="heading.width">
+        <td *ngFor="let heading of headings | columnFilter;"
+            [style.width]="heading.width"
+            [style.textAlign]="heading.textAlign"
+            [style.background]="heading.background"
+            [style.color]="heading.color"
+            [style.fontWeight]="heading.fontWeight"
+            [style.fontStyle]="heading.fontStyle">
 
           <ng-container [ngSwitch]="heading.type">
 
             <!--IMAGE URL-->
-            <span *ngSwitchCase="'image-url'">
-              <img [src]="item[heading.fieldName]" alt="grid image item" width="80px" height="80px" class="amdg-mt-2 amdg-mb-2">
-            </span>
+            <div *ngSwitchCase="'image-url'" style="height: 48px" >
+              <img [src]="item[heading.fieldName]" alt="grid image item" width="40px" height="40px" class="amdg-mt-1 amdg-image-tag"  [matMenuTriggerFor]="imageMenu" #trigger="matMenuTrigger" (mouseenter)="trigger.openMenu()" (mouseleave)="trigger.closeMenu()">
+              <mat-menu #imageMenu="matMenu" [hasBackdrop]="false" class="amdg-image-menu-padding">
+                <img [src]="item[heading.fieldName]" class="amdg-image-tag" alt="grid image item" width="150px" height="150px">
+              </mat-menu>
+            </div>
 
             <!--BUTTON GROUP-->
             <span *ngSwitchCase="'button-group'">

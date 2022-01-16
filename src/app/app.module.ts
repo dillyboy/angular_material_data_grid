@@ -56,78 +56,77 @@ import { ChangeLogComponent } from './pages/change-log/change-log.component';
 import { TransparencyExampleComponent } from './pages/transparency-example/transparency-example.component';
 import { CellStylesExampleComponent } from './pages/cell-styles-example/cell-styles-example.component';
 import { DynamicHeadingsExampleComponent } from './pages/dynamic-headings-example/dynamic-headings-example.component';
+import { ImageTypeComponent } from './pages/image-type/image-type.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    OverviewComponent,
-    DemoComponent,
-    DetailComponent,
-    ContainerComponent,
-    IntroductionComponent,
-    InstallationComponent,
-    PropertiesAndEventsComponent,
-    ColumnsAndFiltersComponent,
-    StringFilterComponent,
-    MultiSelectFilterComponent,
-    TagFilterComponent,
-    NumericFilterComponent,
-    DateRangeFilterComponent,
-    UrlBuilderComponent,
-    ButtonGroupBuilderComponent,
-    ColumnControlComponent,
-    ItemSelectionComponent,
-    ThemingComponent,
-    FixedHeaderComponent,
-    VirtualScrollingComponent,
-    ServerBindGridExampleComponent,
-    ClientSidePaginationGridExampleComponent,
-    ReinitializeGridExampleComponent,
-    PreconfiguredFiltersExampleComponent,
-    CustomDemoComponent,
-    MasterDetailExampleComponent,
-    MasterDetailChildGridExampleComponent,
-    MasterDetailBreakdownGridExampleComponent,
-    MasterDetailHtmlExampleComponent,
-    OpenDialogComponent,
-    GridWithinDialogComponent,
-    TopRightButtonsExampleComponent,
-    ChangeLogComponent,
-    TransparencyExampleComponent,
-    CellStylesExampleComponent,
-    DynamicHeadingsExampleComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AngularMaterialDataGridModule,
-    AppRoutingModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSlideToggleModule,
-    FormsModule,
-    MatExpansionModule,
-    MatRippleModule,
-    MatListModule,
-    MatCardModule,
-    MatMenuModule,
-    MatTabsModule,
-    HighlightModule,
-    MatTooltipModule,
-    MatSnackBarModule
-  ],
-  providers: [
-    {
-      provide: HIGHLIGHT_OPTIONS,
-      useValue: {
-        fullLibraryLoader: () => import('highlight.js'),
-      }
-    }
-  ],
-  entryComponents: [
-    GridWithinDialogComponent
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        OverviewComponent,
+        DemoComponent,
+        DetailComponent,
+        ContainerComponent,
+        IntroductionComponent,
+        InstallationComponent,
+        PropertiesAndEventsComponent,
+        ColumnsAndFiltersComponent,
+        StringFilterComponent,
+        MultiSelectFilterComponent,
+        TagFilterComponent,
+        NumericFilterComponent,
+        DateRangeFilterComponent,
+        UrlBuilderComponent,
+        ButtonGroupBuilderComponent,
+        ColumnControlComponent,
+        ItemSelectionComponent,
+        ThemingComponent,
+        FixedHeaderComponent,
+        VirtualScrollingComponent,
+        ServerBindGridExampleComponent,
+        ClientSidePaginationGridExampleComponent,
+        ReinitializeGridExampleComponent,
+        PreconfiguredFiltersExampleComponent,
+        CustomDemoComponent,
+        MasterDetailExampleComponent,
+        MasterDetailChildGridExampleComponent,
+        MasterDetailBreakdownGridExampleComponent,
+        MasterDetailHtmlExampleComponent,
+        OpenDialogComponent,
+        GridWithinDialogComponent,
+        TopRightButtonsExampleComponent,
+        ChangeLogComponent,
+        TransparencyExampleComponent,
+        CellStylesExampleComponent,
+        DynamicHeadingsExampleComponent,
+        ImageTypeComponent
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AngularMaterialDataGridModule,
+        AppRoutingModule,
+        MatSidenavModule,
+        MatButtonModule,
+        MatIconModule,
+        MatSlideToggleModule,
+        FormsModule,
+        MatExpansionModule,
+        MatRippleModule,
+        MatListModule,
+        MatCardModule,
+        MatMenuModule,
+        MatTabsModule,
+        HighlightModule,
+        MatTooltipModule,
+        MatSnackBarModule
+    ],
+    providers: [
+        {
+            provide: HIGHLIGHT_OPTIONS,
+            useValue: {
+                fullLibraryLoader: () => import('highlight.js'),
+            }
+        }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

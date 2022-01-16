@@ -78,7 +78,7 @@ export class MasterDetailChildGridExampleComponent {
     childGrid: {
       headings: [
         {fieldName: 'product_id', display: 'ID', type: 'string', width: '140px', filterType: 'tag'},
-        {fieldName: 'product_image_url', display: 'Image', type: 'image-url', width: '98px', disableSorting: true},
+        {fieldName: 'product_image_url', display: 'Image', type: 'image-url', width: '80px', disableSorting: true, textAlign: 'center'},
         {fieldName: 'product_name', display: 'Name', type: 'string', width: '280px'},
         {fieldName: 'product_price', display: 'Price', type: 'number', width: '100px'},
         {fieldName: 'product_discounted_price', display: 'Discounted Price', type: 'number', width: '140px'},
@@ -158,7 +158,7 @@ export class MasterDetailChildGridExampleComponent {
     childGrid: {
       headings: [
         {fieldName: 'product_id', display: 'ID', type: 'string', width: '140px', filterType: 'tag'},
-        {fieldName: 'product_image_url', display: 'Image', type: 'image-url', width: '98px', disableSorting: true},
+        {fieldName: 'product_image_url', display: 'Image', type: 'image-url', width: '80px', disableSorting: true, textAlign: 'center'},
         {fieldName: 'product_name', display: 'Name', type: 'string', width: '280px'},
         {fieldName: 'product_price', display: 'Price', type: 'number', width: '100px'},
         {fieldName: 'product_discounted_price', display: 'Discounted Price', type: 'number', width: '140px'},

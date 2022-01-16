@@ -37,11 +37,12 @@ export class NumberFilterComponent implements OnInit, OnChanges, OnDestroy {
   ];
   selection = new FormControl('between', Validators.required);
   selectionSubscription: Subscription = new Subscription();
+  NUMBER_PATTERN = '^(\\+|-)?[0-9]+(.[0-9]{1,2})?$' as const; // '^[0-9]*$'
   range = new FormGroup({
-    from: new FormControl(null, [Validators.required, Validators.pattern('^[0-9]*$')]),
-    to: new FormControl(null, [Validators.required, Validators.pattern('^[0-9]*$')])
+    from: new FormControl(null, [Validators.required, Validators.pattern(this.NUMBER_PATTERN)]),
+    to: new FormControl(null, [Validators.required, Validators.pattern(this.NUMBER_PATTERN)])
   });
-  value = new FormControl(null, [Validators.required, Validators.pattern('^[0-9]*$')]);
+  value = new FormControl(null, [Validators.required, Validators.pattern(this.NUMBER_PATTERN)]);
   filterParam: string | number = '';
   invalidRangeValue = false;
   invalidValue = false;

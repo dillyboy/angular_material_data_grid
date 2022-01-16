@@ -53,7 +53,8 @@ export const navigation = [
       '/columnsAndFilters/numericFilter',
       '/columnsAndFilters/dateRangeFilter',
       '/columnsAndFilters/urlBuilder',
-      '/columnsAndFilters/buttonGroupBuilder'
+      '/columnsAndFilters/buttonGroupBuilder',
+      '/columnsAndFilters/imageType',
     ],
     children: [
       {
@@ -103,6 +104,12 @@ export const navigation = [
         headingIcon: '',
         highLightWhen: ['/columnsAndFilters/buttonGroupBuilder'],
         route: '/columnsAndFilters/buttonGroupBuilder'
+      },
+      {
+        headingName: 'Image Type',
+        headingIcon: '',
+        highLightWhen: ['/columnsAndFilters/imageType'],
+        route: '/columnsAndFilters/imageType'
       }
     ]
   },

@@ -37,7 +37,7 @@
       <ng-content></ng-content>
     </div>
   </div>
-  <mat-card id="grid" class="mat-elevation-z{{elevation}}" [ngClass]="{'fullscreen': fullscreen, 'grid-transparency': transparency}" [style.border-top-left-radius]="columnControl ? '0px' : '4px'">
+  <mat-card id="grid" class="mat-elevation-z{{elevation}}" [ngClass]="{'fullscreen': fullscreen, 'grid-transparency': transparency}" [style.border-top-left-radius]="columnControl ? '0px' : '5px'">
     <button *ngIf="scrollRemainingDistanceToLeft !== 0" mat-button (click)="scrollLeft()" aria-label="navigate left" class="navigate-left-btn">
       <mat-icon class="amdg-fs-40 navigate-icons">chevron_left</mat-icon>
     </button>
@@ -67,12 +67,12 @@
         </th>
         </thead>
       </table>
-      <mat-progress-bar *ngIf="loadingData" mode="indeterminate" class="amdg-position-absolute"></mat-progress-bar>
-      <cdk-virtual-scroll-viewport #cdkVirtualScrollViewport id="amdgScrollViewport"  minBufferPx="400" maxBufferPx="400" [ngStyle]="{'height': 'calc(100vh - ' +offsetTop+ 'px)' }" [itemSize]="20" (scroll)="scrollChanged($event)">
+      <mat-progress-bar *ngIf="loadingData" mode="indeterminate" class="amdg-position-absolute amdg-z-index-1"></mat-progress-bar>
+      <cdk-virtual-scroll-viewport #cdkVirtualScrollViewport id="amdgScrollViewport"  [ngStyle]="{'height': 'calc(100vh - ' +offsetTop+ 'px)' }" (scroll)="scrollChanged($event)">
         <div class="vertical-scroll">
           <table>
             <tbody (window:mouseup)="endSelect()">
-              <ng-container *cdkVirtualFor="let item of gridItems; let odd=odd; let i = index;">
+              <ng-container *cdkVirtualFor="let item of gridItems; let odd=odd; let i = index;templateCacheSize: 400">
                 <tr (mouseover)="overSelect($event, item)"
                     [ngClass]="{ odd: odd, rowSelected: item.gridItemSelected == true, expanded: item.gridItemExpanded}"
                     [style.background]="item?.amdgGridRowBackground">
@@ -96,9 +96,12 @@
                     <ng-container [ngSwitch]="heading.type">
 
                       <!--IMAGE URL-->
-                      <span *ngSwitchCase="'image-url'">
-                        <img [src]="item[heading.fieldName]" alt="grid image item" width="80px" height="80px" class="amdg-mt-2 amdg-mb-2">
-                      </span>
+                      <div *ngSwitchCase="'image-url'" style="height: 48px" >
+                        <img [src]="item[heading.fieldName]" alt="grid image item" width="40px" height="40px" class="amdg-mt-1 amdg-image-tag"  [matMenuTriggerFor]="imageMenu" #trigger="matMenuTrigger" (mouseenter)="trigger.openMenu()" (mouseleave)="trigger.closeMenu()">
+                        <mat-menu #imageMenu="matMenu" [hasBackdrop]="false" class="amdg-image-menu-padding">
+                          <img [src]="item[heading.fieldName]" class="amdg-image-tag" alt="grid image item" width="150px" height="150px">
+                        </mat-menu>
+                      </div>
 
                       <!--BUTTON GROUP-->
                       <span *ngSwitchCase="'button-group'">

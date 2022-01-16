@@ -24,12 +24,21 @@ import GridSortItemInterface from '../../interfaces/grid-sort-item';
 import GridButtonClickInterface from '../../interfaces/grid-button-click-interface';
 import GridHeadingInterface from '../../interfaces/grid-heading-type';
 import GridMasterDetailConfigInterface from '../../interfaces/grid-master-detail-config-type';
-import {CdkVirtualScrollViewport} from '@angular/cdk/scrolling';
+import {
+  CdkVirtualScrollViewport,
+  FixedSizeVirtualScrollStrategy,
+  VIRTUAL_SCROLL_STRATEGY
+} from '@angular/cdk/scrolling';
 import {MatDialog} from '@angular/material/dialog';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {GridService} from '../grid.service';
 import {GridFilterItem} from '../../angular-material-data-grid-interfaces';
 
+export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
+  constructor() {
+    super(20, 400, 400);
+  }
+}
 
 @Component({
   selector: 'amdg-grid',
@@ -37,7 +46,8 @@ import {GridFilterItem} from '../../angular-material-data-grid-interfaces';
   styleUrls: ['./server-bind-grid.component.scss',
     '../../angular-material-data-grid-utilities.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  providers: [{provide: VIRTUAL_SCROLL_STRATEGY, useClass: CustomVirtualScrollStrategy}],
 })
 export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges {
 
@@ -268,8 +278,9 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
             return new Date(min) <= new Date(field) && new Date(field) <= new Date(max);
           },
           eq: (field: string, value: string) => {
-            if (typeof value === 'string' && value.includes(',')) {
-              return value.split(',').includes(field);
+            if (value.includes(',') || field.includes(',')) {
+              // return value.split(',').includes(field);
+              return value.split(',').some(item => field.split(',').includes(item));
             } else {
               return field === value;
             }
@@ -286,12 +297,15 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
         };
 
         const result = this.responseBackup.gridData.filter(o =>
-            this.filters.every(({ field, operator, value }) => {
-              const fieldItem = o[field] ? o[field] : '';
-              const filterValue = value ? value : '';
-              return operators[operator](fieldItem.toString().toLowerCase(), filterValue.toString().toLowerCase());
-            })
+          this.filters.every(({ field, operator, value }) => {
+            return operators[operator](makeSearchFriendly(o[field]), makeSearchFriendly(value));
+          })
         );
+
+        function makeSearchFriendly(searchTerm: any): string {
+          let searchableString = searchTerm ? searchTerm : '';
+          return searchableString.toString().toLowerCase().trim();
+        }
 
         this.ngZone.run(() => {
           this.response.gridData = result;

@@ -36,6 +36,7 @@ import { TopRightButtonsExampleComponent } from '../pages/top-right-buttons-exam
 import { ChangeLogComponent } from '../pages/change-log/change-log.component';
 import { TransparencyExampleComponent } from '../pages/transparency-example/transparency-example.component';
 import { CellStylesExampleComponent } from '../pages/cell-styles-example/cell-styles-example.component';
+import { ImageTypeComponent } from "../pages/image-type/image-type.component";
 
 const routes: Routes = [
   { path: '' , redirectTo: 'overview', pathMatch: 'full' },
@@ -60,6 +61,7 @@ const routes: Routes = [
       { path: 'dateRangeFilter', component: DateRangeFilterComponent },
       { path: 'urlBuilder', component: UrlBuilderComponent },
       { path: 'buttonGroupBuilder', component: ButtonGroupBuilderComponent },
+      { path: 'imageType', component: ImageTypeComponent },
     ]
   },
   { path: 'features', component: ContainerComponent,

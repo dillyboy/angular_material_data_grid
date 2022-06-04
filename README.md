@@ -1,5 +1,4 @@
 # Advanced Angular Material Data Grid System
-#### Inspired by Kendo UI Grid
 
 This is an advanced data grid which is free to use with features and customizability only available on paid data grids.
 

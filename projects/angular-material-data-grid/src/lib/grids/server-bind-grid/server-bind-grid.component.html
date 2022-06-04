@@ -256,6 +256,9 @@
         [noOfRecords]="response.gridData.length"
         [noOfSelectedRow]="selectedRows.length"
         [currentPage]="currentPage"
+        [disableFullScreenToggle]="disableFullScreenToggle"
+        [pageSizes]="pageSizes"
+        [newRecordsPerPage]="pageSize"
         (pageChanged)="serverSidePagination ? getData($event) : pageChanged($event)"
         (toggleFullScreen)="toggleFullScreen($event)">
     </amdg-pagination>

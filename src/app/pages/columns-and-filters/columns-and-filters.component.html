@@ -127,7 +127,10 @@
   </mat-card>
   <br><br>
   <h1>Filter Types</h1>
-  <p> The grid system comes with five different filter types which can be used in specialized scenarios.</p>
+  <p> The grid system comes with five different filter types which can be used in specialized scenarios.
+      Each filter is sent to the backend (when server side pagination is used) with the filter value the user enters,
+      the column name (fieldName) and another item called the operator (Eg: eq, contains). It is important to go through the filter section
+      given below to study how to use these to implement in your backend.</p>
 
   <mat-card class="simple-table-container">
     <div>

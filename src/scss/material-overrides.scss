@@ -1,6 +1,9 @@
-.mat-expansion-indicator::after {
-  color: white !important;
+.custom-side-nav-header {
+  .mat-expansion-indicator::after {
+    color: white !important;
+  }
 }
+
 
 .mat-drawer.mat-drawer-side {
   z-index: 1!important;

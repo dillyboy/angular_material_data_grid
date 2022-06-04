@@ -1,6 +1,6 @@
 <button class="amdg-filter-open-btn amdg-layout-container" [color]="filterApplied ? 'accent': 'none'" mat-stroked-button type="button" #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="numberFilterMenu" (menuOpened)="menuOpened()">
   <span *ngIf="!filterApplied" class="amdg-text-truncate amdg-placeholder amdg-font-weight-normal">Unfiltered</span>
-  <span *ngIf="filterApplied" class="amdg-text-truncate" [matTooltip]="value.value">{{value.value}}</span>
+  <span *ngIf="filterApplied && value.value" class="amdg-text-truncate" [matTooltip]="value.value">{{value.value}}</span>
   <div class="amdg-select-arrow"></div>
 </button>
 

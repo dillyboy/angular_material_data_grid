@@ -18,10 +18,11 @@ export class IntroductionComponent implements OnInit {
 
   gridResponseObj = `{
   "payload": {
-    "gridData": [...],  // grid data
-    "totalCount": 1000  // total count of records in the database for pagination purposes
+    "gridData": [...],   // grid data
+    "totalCount": 1000,  // total count of records in the database for pagination purposes
+    "other": null        // send any other data you wish here in order to use in your application, Refer to @Output() responseEmit: EventEmitter <GridResponse>. 
   },
-  "success": true,      // handle errors if false
+  "success": true,      // if this value is not returned the grid will not populate the data, handle errors if false
   "message": "SUCCESS"  // show error message if success is false
 }`;
 

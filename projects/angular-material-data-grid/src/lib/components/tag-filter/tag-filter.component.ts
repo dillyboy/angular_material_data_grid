@@ -27,7 +27,7 @@ export class TagFilterComponent implements OnInit, OnChanges {
   @ViewChild('menuTrigger') menu!: MatMenuTrigger;
   @ViewChild('fromElement') fromElement!: ElementRef;
   filterApplied = false;
-  tagValue = new FormControl('', []);
+  tagValue = new FormControl<string>('', []);
   tagValues: string[] = [];
   tagValuesApplied = [];
   error = '';
@@ -94,7 +94,7 @@ export class TagFilterComponent implements OnInit, OnChanges {
         maxLength = this.stringMaxLength;
       }
       const {value} = this.tagValue;
-      if (value.trim()) {
+      if (value && value.trim()) {
         if (value.length <= maxLength) {
           if (this.tagValues.indexOf(value) === -1) {
             this.tagValues.push(value);

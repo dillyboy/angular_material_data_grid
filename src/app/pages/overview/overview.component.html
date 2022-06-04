@@ -5,7 +5,7 @@
   </div>
   <div class="main-text-holder">
     <h1>Advanced Angular Material</h1>
-    <h1>Data Grid System <span class="text-muted">(v0.5.7)</span></h1>
+    <h1>Data Grid System <span class="text-muted">(v0.7.2)</span></h1>
     <p>Inspired by Kendo UI Grid</p>
     <button mat-ripple class="mt-2" routerLink="/gettingStarted/demo">Get Started</button>
     <a href="https://github.com/dillyboy/angular_material_data_grid" class="position-absolute ml-5 mt-2" >
@@ -73,7 +73,54 @@
   </div>
 </div>
 
+<div class="feature faq-container">
+  <h1>Frequently Asked Questions</h1>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header class="faq-header">
+        <b>Q</b>: When it comes to Server Side Pagination how do I develop the backend in order to use this data grid?
+      </mat-expansion-panel-header>
+      <mat-divider></mat-divider>
+      <div class="mt-3 mb-3 text-justify">
+        <b>A</b>: This data-grid is highly opinionated on what data is sent from this library to the POST endpoint
+        provided and how the data should be returned so that the component functions as intended
+        (Refer to <b>Grid Request</b> and <b>Grid Response</b> in the introduction). However it does not mean you will
+        have to stick to any particular backend and/or database. This Demo application uses a NodeJS backend along with
+        a MongoDB Database which supports all the types of queries that will be sent through the filters in the grid system.
+        The Grid system was also implemented with a Java Backend with MongoDB and also another time with a SQL database.
+        It is not limited to any particular backend technology/language.
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header class="faq-header">
+          <b>Q</b>: If I use this, is there vendor lock-in? 🤔
+      </mat-expansion-panel-header>
+      <mat-divider></mat-divider>
+      <div class="mt-3 mb-3 text-justify">
+        <b>A</b>: No, this library is 100% open-source, which means anyone can download it and make changes if necessary.
+        A star to the github repository is highly appreciated. When it comes to consultations, I will only charge for
+        in-depth consultations in person.
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header class="faq-header">
+        More Questions?  Faced an issue?
+      </mat-expansion-panel-header>
+      <div class="mt-3 mb-3 text-justify">
+        Any company or individual who has more questions can reach out to me directly and I will be happy to
+        assist you within a few days. <br>
+        <b>dilshan.liyanage@hotmail.co.uk</b>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+</div>
+
 
 <div class="text-center p-3" style="background: #ececec">
-  Designed & Developed by <a href="https://dilshan.pro">dilshan.pro</a>
+  <p>Made in <span style="font-size: 30px; position: relative;top: 6px;" title="Sri Lanka">🇱🇰</span> with <span style="font-size: 20px; position: relative;top: 2px;" title="Love">❤️</span> |
+    Visit <a href="https://www.srilanka.travel/">Sri Lanka</a>
+  </p>
+  Designed & Developed by <a href="https://dilshan.pro">dilshan.pro</a> ©2022.
 </div>

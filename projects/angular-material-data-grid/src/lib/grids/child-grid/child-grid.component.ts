@@ -202,24 +202,24 @@ export class ChildGridComponent implements OnInit {
     console.log(body);
 
     this.gridPostSubscription = this.gridService.getAnyPost(this.url, body).subscribe(data => {
-
-      const gridData = this.linkCreationInterceptor(data.payload.gridData);
-      this.selectedRows = [];
-      this.response = {gridData, totalCount: data.payload.totalCount};
-      this.responseBackup = {gridData, totalCount: data.payload.totalCount};
-      this.gridItems = gridData;
-      this.responseEmit.emit(this.response);
-      if (this.serverSidePagination) {
-        this.loadingData = false;
-        this.changeDetectorRef.detectChanges();
-        // document.getElementById('amdgScrollViewport').scrollTop = 0;
-        // setTimeout(() => {
-        //   this.calculateGridWidth();
-        // }, 100);
-      } else {
-         this.pageChanged({pageNo: this.currentPage, recordsPerPage: this.recordsPerPage});
+      if (data.statusCode === 200 || data.success) {
+        const gridData = this.linkCreationInterceptor(data.payload.gridData);
+        this.selectedRows = [];
+        this.response = {gridData, totalCount: data.payload.totalCount};
+        this.responseBackup = {gridData, totalCount: data.payload.totalCount};
+        this.gridItems = gridData;
+        this.responseEmit.emit(this.response);
+        if (this.serverSidePagination) {
+          this.loadingData = false;
+          this.changeDetectorRef.detectChanges();
+          // document.getElementById('amdgScrollViewport').scrollTop = 0;
+          // setTimeout(() => {
+          //   this.calculateGridWidth();
+          // }, 100);
+        } else {
+          this.pageChanged({pageNo: this.currentPage, recordsPerPage: this.recordsPerPage});
+        }
       }
-
     });
   }
 

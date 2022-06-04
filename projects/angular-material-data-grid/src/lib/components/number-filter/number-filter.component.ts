@@ -35,14 +35,14 @@ export class NumberFilterComponent implements OnInit, OnChanges, OnDestroy {
     {value: 'lessthanorequal', text: 'Is less than or equal to'},
     {value: 'lessthan', text: 'Is less than'}
   ];
-  selection = new FormControl('between', Validators.required);
+  selection = new FormControl<null | string>('between', Validators.required);
   selectionSubscription: Subscription = new Subscription();
   NUMBER_PATTERN = '^(\\+|-)?[0-9]+(.[0-9]{1,2})?$' as const; // '^[0-9]*$'
   range = new FormGroup({
-    from: new FormControl(null, [Validators.required, Validators.pattern(this.NUMBER_PATTERN)]),
-    to: new FormControl(null, [Validators.required, Validators.pattern(this.NUMBER_PATTERN)])
+    from: new FormControl<string | null>(null, [Validators.required, Validators.pattern(this.NUMBER_PATTERN)]),
+    to: new FormControl<string | null>(null, [Validators.required, Validators.pattern(this.NUMBER_PATTERN)])
   });
-  value = new FormControl(null, [Validators.required, Validators.pattern(this.NUMBER_PATTERN)]);
+  value = new FormControl<string | null>(null, [Validators.required, Validators.pattern(this.NUMBER_PATTERN)]);
   filterParam: string | number = '';
   invalidRangeValue = false;
   invalidValue = false;
@@ -104,7 +104,7 @@ export class NumberFilterComponent implements OnInit, OnChanges, OnDestroy {
     if (this.selection.value === 'between') {
       if (this.range.valid) {
         const {from, to} = this.range.value;
-        if (from < to) {
+        if ((from && to) && from < to) {
           this.invalidRangeValue = false;
           this.filterParam = from + '-' + to;
           this.close(from + '-' + to);
@@ -117,8 +117,8 @@ export class NumberFilterComponent implements OnInit, OnChanges, OnDestroy {
     } else {
       if (this.value.valid) {
         this.invalidValue = false;
-        this.filterParam = this.value.value;
-        this.close(this.value.value.toString());
+        this.filterParam = this.value.value || '';
+        this.close(this.filterParam.toString());
       } else {
         this.invalidValue = true;
       }

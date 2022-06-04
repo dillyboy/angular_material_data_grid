@@ -60,6 +60,7 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
   @Output() columnPreferencesChangedEmit: any = new EventEmitter<GridHeadingInterface[]>();
   @Output() columnPreferencesChangeEndedEmit: any = new EventEmitter<GridHeadingInterface[]>();
   @Output() columnPreferencesResetEmit: any = new EventEmitter();
+  @Output() dataErrorEmit: any = new EventEmitter();
 
   @Input() headings: GridHeadingInterface[] = [];
   @Input() url = '';
@@ -83,6 +84,9 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
       serverSidePagination: false
     }
   };
+  @Input() disableFullScreenToggle = false;
+  @Input() pageSizes: number[] = [50, 100, 250, 500, 1000];
+  @Input() pageSize: number = 100;
 
   headingsCopy = [];
   columnSearchParam = '';
@@ -91,7 +95,6 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
   response: GridResponseInterface = { gridData: [], totalCount: 0};
   responseBackup: GridResponseInterface = { gridData: [], totalCount: 0};
   gridItems: any[] = [];
-  recordsPerPage = 100;
   selectionStarted = false;
   selectionTimeoutHandler: any;
   allCheckBoxesSelected = false;
@@ -143,7 +146,7 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
       if (changes['initialFilters']?.firstChange) {
         this.filters = this.initialFilters;
       }
-      this.getData({pageNo: 1, recordsPerPage: this.recordsPerPage});
+      this.getData({pageNo: 1, recordsPerPage: this.pageSize});
     }
 
     if (changes['headings']?.currentValue) {
@@ -153,10 +156,21 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     if (changes['resetFilters']?.currentValue) {
       this.filters = [];
       if (this.serverSidePagination) {
-        this.getData({pageNo: 1, recordsPerPage: this.recordsPerPage});
+        this.getData({pageNo: 1, recordsPerPage: this.pageSize});
       } else {
         this.response = JSON.parse(JSON.stringify(this.responseBackup));
-        this.pageChanged({pageNo: 1, recordsPerPage: this.recordsPerPage});
+        this.pageChanged({pageNo: 1, recordsPerPage: this.pageSize});
+      }
+    }
+
+    if (changes['pageSizes']?.currentValue || changes['pageSize']?.currentValue) {
+      if (this.pageSizes.length === 0) {
+        console.error('@Input() pageSizes array should have at least one page size');
+        this.pageSizes = [100];
+      }
+      if (!this.pageSizes.includes(this.pageSize)) {
+        this.pageSize = this.pageSizes[0];
+        console.error('@Input() pageSize does not exist on the @Input() pagesSizes array');
       }
     }
   }
@@ -240,9 +254,9 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     this.sortObj = sortObj;
     this.sortChangedEmit.emit(sortObj);
     if (this.serverSidePagination) {
-      this.getData({pageNo: 1, recordsPerPage: this.recordsPerPage});
+      this.getData({pageNo: 1, recordsPerPage: this.pageSize});
     } else {
-      this.pageChanged({pageNo: 1, recordsPerPage: this.recordsPerPage});
+      this.pageChanged({pageNo: 1, recordsPerPage: this.pageSize});
     }
   }
 
@@ -311,9 +325,9 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
           this.response.gridData = result;
         });
       });
-      this.pageChanged({pageNo: 1, recordsPerPage: this.recordsPerPage});
+      this.pageChanged({pageNo: 1, recordsPerPage: this.pageSize});
     } else {
-      this.getData({pageNo: 1, recordsPerPage: this.recordsPerPage});
+      this.getData({pageNo: 1, recordsPerPage: this.pageSize});
     }
   }
 
@@ -411,7 +425,7 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
       this.gridPostSubscription = new Subscription();
     }
 
-    this.recordsPerPage = recordsPerPage;
+    this.pageSize = recordsPerPage;
     this.loadingData = true;
     this.currentPage = pageNo;
     this.changeDetectorRef.detectChanges();
@@ -434,30 +448,34 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     this.requestBodyEmit.emit(body);
 
     this.gridPostSubscription = this.gridService.getAnyPost(this.url, body).subscribe(data => {
-
-      const gridData = this.linkCreationInterceptor(data.payload.gridData);
-      const {totalCount, other} = data.payload;
-      this.allGridItemsSelected = false;
-      this.selectedRows = [];
-      this.response = {gridData, totalCount, other};
-      this.responseBackup = {gridData, totalCount, other};
-      this.gridItems = gridData;
-      this.responseEmit.emit(this.response);
-      this.selectionEmit.emit(this.selectedRows);
-      if (this.serverSidePagination) {
-        this.loadingData = false;
-        this.changeDetectorRef.detectChanges();
-        this.cdkVirtualScrollViewport.elementRef.nativeElement.scrollTop = 0;
-        setTimeout(() => {
-          this.calculateGridWidth();
-        }, 100);
+      if (data.statusCode === 200 || data.success) {
+        const gridData = this.linkCreationInterceptor(data.payload.gridData);
+        const {totalCount, other} = data.payload;
+        this.allGridItemsSelected = false;
+        this.selectedRows = [];
+        this.response = {gridData, totalCount, other};
+        this.responseBackup = {gridData, totalCount, other};
+        this.gridItems = gridData;
+        this.responseEmit.emit(this.response);
+        this.selectionEmit.emit(this.selectedRows);
+        if (this.serverSidePagination) {
+          this.loadingData = false;
+          this.changeDetectorRef.detectChanges();
+          this.cdkVirtualScrollViewport.elementRef.nativeElement.scrollTop = 0;
+          setTimeout(() => {
+            this.calculateGridWidth();
+          }, 100);
+        } else {
+          this.pageChanged({pageNo: this.currentPage, recordsPerPage: this.pageSize});
+          this.initialFilters.forEach(filter => {
+            this.filter(filter);
+          });
+        }
       } else {
-        this.pageChanged({pageNo: this.currentPage, recordsPerPage: this.recordsPerPage});
-        this.initialFilters.forEach(filter => {
-          this.filter(filter);
-        });
+        this.dataErrorEmit.emit(data);
       }
-
+    }, error => {
+      this.dataErrorEmit.emit(error);
     });
   }
 
@@ -479,7 +497,7 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     this.selectedRows = [];
     this.selectionEmit.emit(this.selectedRows);
     this.changeDetectorRef.detectChanges();
-    this.recordsPerPage = recordsPerPage;
+    this.pageSize = recordsPerPage;
     this.currentPage = pageNo;
     const {sort, sortField} = this.sortObj;
 
@@ -491,8 +509,8 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
       }
     }
 
-    const startingRecord = (this.recordsPerPage * this.currentPage) - this.recordsPerPage + 1;
-    const endingRecord = this.recordsPerPage * this.currentPage;
+    const startingRecord = (this.pageSize * this.currentPage) - this.pageSize + 1;
+    const endingRecord = this.pageSize * this.currentPage;
     const gridItemsForDisplay = [];
     for (let i = startingRecord - 1; i < endingRecord; i++) {
       if (gridData[i]) {

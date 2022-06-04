@@ -1,27 +1,54 @@
-# Grid Example
+# Advanced Angular Material Data Grid System
+#### Inspired by Kendo UI Grid
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.4.
+This is an advanced data grid which is free to use with features and customizability only available on paid data grids.
 
-## Development server
+![Sample UI](https://angular-grid.herokuapp.com/assets/grid_background.png)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+#### Features
+- Easy to integrate server-side pagination (Tested with very large data sets)
+- Built in virtual scrolling
+- Advanced multi-filtering features
+- Customizable theming
+- Optional columns with re-ordering
+- Master Detail Grid
 
-## Code scaffolding
+The initial purpose of creating this data grid was to make it easy for developers to easily create highly advanced data grids with server-side pagination along with multiple filters and sorting with minimum effort and time. (Client Side Pagination is also present.) In order to make this possible a tight integration between the back-end data-source and the front-end component should be agreed upon. This gives the ability to stay focused on advanced functionality and the creation of data grids with only configurations while staying opinionated. Moreover, the solutions provided by reputed vendors were expensive which makes open-source software more attractive to many clients. This product is 100% open source. Check [Repository here](https://github.com/dillyboy/angular_material_data_grid).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Refer to the [Documentation](https://angular-grid.herokuapp.com/) page.
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+<hr />
 
-## Running unit tests
+#### Installation
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. Install Angular Material
 
-## Running end-to-end tests
+    - `ng add @angular/material`
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+2. Install Angular Material Data Grid
 
-## Further help
+    - `npm i angular-material-data-grid@0.6.1`\
+      \
+      or if your project uses Angular 14.0.0 and above
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+    - `npm i angular-material-data-grid`
+
+3. Import Module
+
+    - `import { AngularMaterialDataGridModule } from 'angular-material-data-grid';`
+
+    - `imports: [ ..,   AngularMaterialDataGridModule]`
+
+4. Usage (Basic)
+   ###### HTML
+    - <code><amdg-grid <br>
+      &nbsp;&nbsp;&nbsp;&nbsp;[headings]="headings"<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;[url]="url"<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;[serverSidePagination]="true"<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;(responseEmit)="responseReceived($event)"><br>
+      </amdg-grid></code>
+
+   ###### TypeScript
+   [Check here](https://angular-grid.herokuapp.com/gettingStarted/installation)
+

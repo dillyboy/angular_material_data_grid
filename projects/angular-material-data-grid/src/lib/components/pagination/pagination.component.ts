@@ -17,10 +17,11 @@ export class PaginationComponent implements OnInit, OnChanges {
   @Input() noOfRecords = 0;
   @Input() noOfSelectedRow = 0;
   @Input() currentPage = 1;
-  @Input() showToggleFullScreen = true;
+  @Input() disableFullScreenToggle = false;
   @Input() showNoOfRecords = true;
+  @Input() pageSizes: number[] = [50, 100, 250, 500, 1000];
+  @Input() newRecordsPerPage: number = 100;
   recordsPerPage = 100;
-  newRecordsPerPage = 100;
   pages = 0;
   // currentPage = 1;
   pagesOnDisplay: number[] = [];

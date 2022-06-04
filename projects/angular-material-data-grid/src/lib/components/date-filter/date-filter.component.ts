@@ -31,11 +31,11 @@ export class DateFilterComponent implements OnInit, OnChanges {
   ];
 
   range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl()
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null)
   });
-  selection = new FormControl('betweendates', Validators.required);
-  value = new FormControl(null, [Validators.required]);
+  selection = new FormControl<null | string>('betweendates', Validators.required);
+  value = new FormControl<null | string>(null, [Validators.required]);
   invalidValue = false;
   @ViewChild('menuTrigger') menu!: MatMenuTrigger;
   @ViewChild('fromElement') fromElement!: ElementRef;

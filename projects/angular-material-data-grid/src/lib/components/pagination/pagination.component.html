@@ -45,18 +45,14 @@
   </div>
 
   <div>
-    <button *ngIf="showToggleFullScreen" mat-icon-button aria-label="pagination" class="amdg-desktop amdg-mr-2" matTooltip="Toggle Fullscreen" (click)="fullscreen = !fullscreen;toggleFullScreen.emit(fullscreen)">
+    <button *ngIf="disableFullScreenToggle === false" mat-icon-button aria-label="pagination" class="amdg-desktop amdg-mr-2" matTooltip="Toggle Fullscreen" (click)="fullscreen = !fullscreen;toggleFullScreen.emit(fullscreen)">
       <mat-icon *ngIf="!fullscreen">fullscreen</mat-icon>
       <mat-icon *ngIf="fullscreen">fullscreen_exit</mat-icon>
     </button>
     <p *ngIf="showNoOfRecords" class="amdg-desktop amdg-text-muted amdg-d-inline amdg-mr-2">Items per page:</p>
     <mat-form-field *ngIf="showNoOfRecords" class="amdg-pagination-selector amdg-mr-4">
-      <mat-select [disabled]="loadingData"  [(ngModel)]="newRecordsPerPage" (ngModelChange)="recordsPerPageChanged()">
-        <mat-option class="amdg-mat-option" [value]="50">50</mat-option>
-        <mat-option class="amdg-mat-option" [value]="100">100</mat-option>
-        <mat-option class="amdg-mat-option" [value]="250">250</mat-option>
-        <mat-option class="amdg-mat-option" [value]="500">500</mat-option>
-        <mat-option class="amdg-mat-option" [value]="1000">1000</mat-option>
+      <mat-select [disabled]="loadingData" [(ngModel)]="newRecordsPerPage" (ngModelChange)="recordsPerPageChanged()">
+        <mat-option *ngFor="let pageSize of pageSizes" class="amdg-mat-option" [value]="pageSize">{{pageSize}}</mat-option>
       </mat-select>
     </mat-form-field>
     <span class="amdg-desktop" *ngIf="noOfSelectedRow">

@@ -32,9 +32,9 @@ export class StringFilterComponent implements OnInit, OnChanges {
     {value: 'endswith', text: 'Ends with'},
     {value: 'blank', text: 'Is Empty'},
   ];
-  selection = new FormControl('contains', Validators.required);
-  value = new FormControl(null, [Validators.required]);
-  filterParam: string | number = '';
+  selection = new FormControl<null | string>('contains', Validators.required);
+  value = new FormControl<null | string>(null, [Validators.required]);
+  filterParam: string | null = '';
   invalidValue = false;
   @ViewChild('menuTrigger') menu!: MatMenuTrigger;
   @ViewChild('fromElement') fromElement!: ElementRef;

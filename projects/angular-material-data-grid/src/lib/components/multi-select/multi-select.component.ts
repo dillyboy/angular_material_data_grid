@@ -36,7 +36,7 @@ export class MultiSelectComponent implements OnInit, OnChanges {
 
   @ViewChild('mySelect') mySelect!: MatSelect;
   @ViewChild('fromElement') fromElement!: ElementRef;
-  selection = new FormControl();
+  selection = new FormControl<any>(null);
   selectionValuesApplied: any[] = [];
   selectionList: any[] = [];
   allSelected = false;
@@ -50,12 +50,14 @@ export class MultiSelectComponent implements OnInit, OnChanges {
 
     if (this.filterConfig.source === 'external') {
       this.gridService.getAny(this.filterConfig.url).subscribe(data => {
-        if (data.statusCode === 200) {
+        if (data.statusCode === 200 || data.success) {
           const {key, value} = this.filterConfig;
           this.selectionList = data.payload.map((item: any) => {
             return {text : item[key], value: item[value], hide: false};
           });
           this.setInitialFilters();
+        } else {
+          console.log(`'${this.filterConfig.url}' failed`);
         }
       });
     } else { // internal

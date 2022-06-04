@@ -42,7 +42,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1.3mb"
+                  "maximumError": "1.35mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -138,6 +138,5 @@
         }
       }
     }
-  },
-  "defaultProject": "grid-example"
+  }
 }

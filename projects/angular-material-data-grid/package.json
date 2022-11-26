@@ -1,13 +1,7 @@
 {
   "name": "angular-material-data-grid",
-  "version": "0.7.2",
-  "peerDependencies": {
-    "@angular/common": "^13.1.0",
-    "@angular/core": "^13.1.0",
-    "@angular/cdk": "^13.0.3",
-    "@angular/forms": "~13.1.0",
-    "@angular/material": "^13.0.3"
-  },
+  "version": "0.9.0",
+  "peerDependencies": {},
   "dependencies": {
     "tslib": "^2.3.0"
   },

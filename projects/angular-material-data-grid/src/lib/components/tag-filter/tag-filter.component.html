@@ -2,7 +2,7 @@
   <span *ngIf="!filterApplied" class="amdg-placeholder amdg-font-weight-normal">Unfiltered</span>
   <span *ngIf="filterApplied" class="amdg-text-truncate">{{tagValuesApplied ? tagValuesApplied[0] : null }}</span>
   <span *ngIf="filterApplied && tagValuesApplied.length > 1" class="amdg-additional-selection">
-      (+{{tagValuesApplied.length - 1}} {{tagValuesApplied?.length === 2 ? 'other' : 'others'}})
+      (+{{tagValuesApplied.length - 1}} {{tagValuesApplied.length === 2 ? 'other' : 'others'}})
     </span>
   <div class="amdg-select-arrow"></div>
 </button>

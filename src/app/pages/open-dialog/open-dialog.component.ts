@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { GridButtonClick, GridHeading, GridResponse } from '../../../../projects/angular-material-data-grid/src/lib/angular-material-data-grid-interfaces';
-import { MatDialog} from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog} from '@angular/material/legacy-dialog';
 import { GridWithinDialogComponent } from './grid-within-dialog/grid-within-dialog.component';
 import { environment } from '../../../environments/environment';
 

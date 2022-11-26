@@ -51,6 +51,17 @@
     border: none;
     outline: none;
   }
+
+  #buy-me-a-coffee {
+    position: absolute;
+    margin-left: 80px;
+    margin-top: 8px;
+  }
+
+  .buy-me-a-coffee-container {
+    margin-top: 20px;
+    display: none;
+  }
 }
 
 .youtube {
@@ -95,8 +106,12 @@
 
 @media screen and (max-width: 768px) {
 
-  .logo-container {
+  .logo-container, #buy-me-a-coffee {
     display: none;
+  }
+
+  .buy-me-a-coffee-container {
+    display: block !important;
   }
 
   .main-text-holder {

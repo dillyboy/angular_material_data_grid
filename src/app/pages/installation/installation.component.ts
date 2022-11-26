@@ -8,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class InstallationComponent implements OnInit {
 
   angularMaterial = `ng add @angular/material`;
-  npmInstall = `npm i angular-material-data-grid@0.6.1
+  npmInstall = `// The version you install depends on the verison of Angular Material you are using
 
-// or if your project uses Angular 14.0.0 and above
+// Between Angular Material verison 10.2.7 and 13.3.9
+npm i angular-material-data-grid@0.6.1
+// Between Angular Material verison 14.0.0 and 14.2.5
+npm i angular-material-data-grid@0.8.0
+// Angular Material verison 15.0.0 and above
 npm i angular-material-data-grid`;
   modules = `
 import { AngularMaterialDataGridModule } from 'angular-material-data-grid';

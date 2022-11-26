@@ -10,7 +10,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatMenuTrigger } from '@angular/material/menu';
+import { MatLegacyMenuTrigger as MatMenuTrigger } from '@angular/material/legacy-menu';
 import { MatDatepicker } from '@angular/material/datepicker';
 import GridFilterItemInterface from '../../interfaces/grid-filter-item';
 

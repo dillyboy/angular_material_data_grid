@@ -23,7 +23,7 @@ export class MasterDetailChildGridExampleComponent {
   </amdg-grid>`,
     ts: `
   /* POST endpoint URL */
-  url = 'https://angular-grid.herokuapp.com/getOrderData';
+  url = 'https://angular-grid.onrender.com/getOrderData';
 
   /* Column configuration */
   headings: GridHeading[] = [
@@ -84,7 +84,7 @@ export class MasterDetailChildGridExampleComponent {
         {fieldName: 'product_discounted_price', display: 'Discounted Price', type: 'number', width: '140px'},
         {fieldName: 'currency', display: 'Currency', type: 'string', width: '100px', disableSorting: true, disableFiltering: true },
       ],
-      url: 'https://angular-grid.herokuapp.com/getProductsData',
+      url: 'https://angular-grid.onrender.com/getProductsData',
       entity : {
         order_id: '{{order_id}}' // pass order id on row
       },

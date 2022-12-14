@@ -26,7 +26,7 @@ headings: GridHeading[] = [
     other: {
       selectionMode: 'multiple',
       source: 'external',
-      url: 'https://angular-grid.herokuapp.com/countries',
+      url: 'https://angular-grid.onrender.com/countries',
       key: 'displayName',
       value: 'value'
     }

@@ -24,7 +24,7 @@ export class OpenDialogComponent {
   </amdg-grid>`,
     ts: `
   /* POST endpoint URL */
-  url = 'https://angular-grid.herokuapp.com/getOrderData';
+  url = 'https://angular-grid.onrender.com/getOrderData';
 
   /* Column configuration */
   headings: GridHeading[] = [
@@ -110,7 +110,7 @@ export class OpenDialogComponent {
   </amdg-grid>
 `, gridWithinDialogTs: `
   /* POST endpoint URL */
-  url = 'https://angular-grid.herokuapp.com/getProductsData';
+  url = 'https://angular-grid.onrender.com/getProductsData';
 
   /* Column configuration */
   headings: GridHeading[] = [

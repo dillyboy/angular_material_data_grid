@@ -35,7 +35,7 @@ export class ClientSidePaginationGridExampleComponent implements OnInit {
   </amdg-grid>`,
     ts: `
   /* POST endpoint URL */
-  url = 'https://angular-grid.herokuapp.com/getAllUsers';
+  url = 'https://angular-grid.onrender.com/getAllUsers';
 
   /* Unique identifier can be used to save user's column preferences */
   GRID_ID = 'demoGrid' as const;
@@ -80,7 +80,7 @@ export class ClientSidePaginationGridExampleComponent implements OnInit {
       other: {
         selectionMode: 'multiple',
         source: 'external',
-        url: 'https://angular-grid.herokuapp.com/countries',
+        url: 'https://angular-grid.onrender.com/countries',
         key: 'displayName',
         value: 'value'
       }

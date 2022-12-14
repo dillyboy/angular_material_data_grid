@@ -8,9 +8,9 @@
 
 .amdg-layout-container {
   display: flex !important;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 8px;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 0 8px !important;
 }
 
 .amdg-m-0 {
@@ -169,6 +169,27 @@
 
 .amdg-custom-select-position {
   margin: 25px 0px;
+}
+
+.amdg-checkbox {
+  .mdc-form-field {
+    .mdc-checkbox {
+        padding: 0 !important;
+        .mat-mdc-checkbox-touch-target,
+        .mdc-checkbox__native-control {
+          top: 0;
+          right: 0;
+          left: 0;
+          width: 18px;
+          height: 18px;
+          transform: none;
+        }
+        .mdc-checkbox__background {
+          left: 0;
+          top: 0;
+        }
+    }
+  }
 }
 
 .amdg-link {

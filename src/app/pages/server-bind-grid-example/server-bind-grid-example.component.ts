@@ -28,7 +28,7 @@ export class ServerBindGridExampleComponent {
   </amdg-grid>`,
     ts: `
   /* POST endpoint URL */
-  url = 'https://angular-grid.herokuapp.com/getUsers';
+  url = 'https://angular-grid.onrender.com/getUsers';
 
   /* Unique identifier can be used to save user's column preferences */
   GRID_ID = 'demoServerBindGrid' as const;
@@ -73,7 +73,7 @@ export class ServerBindGridExampleComponent {
       other: {
         selectionMode: 'multiple',
         source: 'external',
-        url: 'https://angular-grid.herokuapp.com/countries',
+        url: 'https://angular-grid.onrender.com/countries',
         key: 'displayName',
         value: 'value'
       }

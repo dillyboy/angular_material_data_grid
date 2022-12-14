@@ -30,7 +30,7 @@ export class MasterDetailBreakdownGridExampleComponent {
   </amdg-grid>`,
     ts: `
   /* POST endpoint URL */
-  url = 'https://angular-grid.herokuapp.com/getOrderData';
+  url = 'https://angular-grid.onrender.com/getOrderData';
 
   /* Column configuration */
   headings: GridHeading[] = [

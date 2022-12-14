@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   // api: 'http://localhost:3000/',
-  api: 'https://angular-grid.herokuapp.com/'
+  api: 'https://angular-grid.onrender.com/'
 };
 
 /*

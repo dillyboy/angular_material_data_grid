@@ -20,7 +20,7 @@ export class CellStylesExampleComponent {
   </amdg-grid>`,
     ts: `
   /* POST endpoint URL */
-  url = 'https://angular-grid.herokuapp.com/getUsers';
+  url = 'https://angular-grid.onrender.com/getUsers';
 
   /* Column configuration */
   headings: GridHeading[] = [

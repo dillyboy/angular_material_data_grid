@@ -38,8 +38,8 @@ imports: [
     ts: `
 // import { GridHeading, GridResponse } from 'angular-material-data-grid';
 
-url = 'https://angular-grid.herokuapp.com/getUsers'; // add your POST endpoint here later
-/* Try https://angular-grid.herokuapp.com/getAllUsers for client side pagination */
+url = 'https://angular-grid.onrender.com/getUsers'; // add your POST endpoint here later
+/* Try https://angular-grid.onrender.com/getAllUsers for client side pagination */
 
 headings: GridHeading[] = [
   {fieldName: 'id', display: 'ID', type: 'number', width: '100px', disableSorting: true, textAlign: 'right'},

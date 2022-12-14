@@ -11,7 +11,7 @@ import { GridHeading } from '../../../../../projects/angular-material-data-grid/
 export class GridWithinDialogComponent implements OnInit {
 
   /* POST endpoint URL */
-  url = 'https://angular-grid.herokuapp.com/getProductsData';
+  url = 'https://angular-grid.onrender.com/getProductsData';
 
   /* Column configuration */
   headings: GridHeading[] = [

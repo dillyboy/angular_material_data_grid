@@ -9,14 +9,15 @@ import {
   Input,
   NgZone,
   OnChanges,
+  OnDestroy,
   OnInit,
   Output,
   Renderer2,
   SimpleChanges,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
-import {Subscription} from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import GridRequestInterface from '../../interfaces/grid-request';
 import GridResponseInterface from '../../interfaces/grid-response';
 import GridFilterItemInterface from '../../interfaces/grid-filter-item';
@@ -27,12 +28,12 @@ import GridMasterDetailConfigInterface from '../../interfaces/grid-master-detail
 import {
   CdkVirtualScrollViewport,
   FixedSizeVirtualScrollStrategy,
-  VIRTUAL_SCROLL_STRATEGY
+  VIRTUAL_SCROLL_STRATEGY,
 } from '@angular/cdk/scrolling';
-import {MatLegacyDialog as MatDialog} from '@angular/material/legacy-dialog';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import {GridService} from '../grid.service';
-import {GridFilterItem} from '../../angular-material-data-grid-interfaces';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { GridService } from '../grid.service';
+import { GridFilterItem } from '../../angular-material-data-grid-interfaces';
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
   constructor() {
@@ -43,22 +44,33 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
 @Component({
   selector: 'amdg-grid',
   templateUrl: './server-bind-grid.component.html',
-  styleUrls: ['./server-bind-grid.component.scss',
-    '../../angular-material-data-grid-utilities.scss'],
+  styleUrls: [
+    './server-bind-grid.component.scss',
+    '../../angular-material-data-grid-utilities.scss',
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  providers: [{provide: VIRTUAL_SCROLL_STRATEGY, useClass: CustomVirtualScrollStrategy}],
+  providers: [
+    { provide: VIRTUAL_SCROLL_STRATEGY, useClass: CustomVirtualScrollStrategy },
+  ],
 })
-export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges {
-
+export class ServerBindGridComponent
+  implements OnInit, AfterViewInit, OnChanges, OnDestroy
+{
   @Output() requestBodyEmit: any = new EventEmitter<GridRequestInterface>();
   @Output() responseEmit: any = new EventEmitter<GridResponseInterface>();
   @Output() selectionEmit: any = new EventEmitter<any[]>();
-  @Output() filtersChangedEmit: any = new EventEmitter<GridFilterItemInterface[]>();
+  @Output() filtersChangedEmit: any = new EventEmitter<
+    GridFilterItemInterface[]
+  >();
   @Output() sortChangedEmit: any = new EventEmitter<GridSortItemInterface>();
   @Output() buttonClickEmit: any = new EventEmitter<GridButtonClickInterface>();
-  @Output() columnPreferencesChangedEmit: any = new EventEmitter<GridHeadingInterface[]>();
-  @Output() columnPreferencesChangeEndedEmit: any = new EventEmitter<GridHeadingInterface[]>();
+  @Output() columnPreferencesChangedEmit: any = new EventEmitter<
+    GridHeadingInterface[]
+  >();
+  @Output() columnPreferencesChangeEndedEmit: any = new EventEmitter<
+    GridHeadingInterface[]
+  >();
   @Output() columnPreferencesResetEmit: any = new EventEmitter();
   @Output() dataErrorEmit: any = new EventEmitter();
 
@@ -68,7 +80,31 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
   @Input() columnControl = false;
   @Input() entity = null;
   @Input() transparency = false;
-  @Input() elevation: 0 | 1 | 2 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 = 2;
+  @Input() elevation:
+    | 0
+    | 1
+    | 2
+    | 4
+    | 5
+    | 6
+    | 7
+    | 8
+    | 9
+    | 10
+    | 11
+    | 12
+    | 13
+    | 14
+    | 15
+    | 16
+    | 17
+    | 18
+    | 19
+    | 20
+    | 21
+    | 22
+    | 23
+    | 24 = 2;
   @Input() serverSidePagination = false;
   @Input() initialFilters: GridFilterItem[] = [];
   @Input() resetFilters = null;
@@ -81,19 +117,25 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
       headings: [],
       url: '',
       entity: {},
-      serverSidePagination: false
-    }
+      serverSidePagination: false,
+    },
   };
   @Input() disableFullScreenToggle = false;
   @Input() pageSizes: number[] = [50, 100, 250, 500, 1000];
   @Input() pageSize: number = 100;
+  // To let the grid know that the data is local and not to make a request
+  @Input() local?: boolean = false;
+  // To pass the local data to the grid
+  @Input() localData?: GridResponseInterface;
+  // Call the method to update the data in the grid onDemand
+  @Input() updateData?: Subject<GridResponseInterface>;
 
   headingsCopy = [];
   columnSearchParam = '';
   allGridItemsSelected = false;
   loadingData = false;
-  response: GridResponseInterface = { gridData: [], totalCount: 0};
-  responseBackup: GridResponseInterface = { gridData: [], totalCount: 0};
+  response: GridResponseInterface = { gridData: [], totalCount: 0 };
+  responseBackup: GridResponseInterface = { gridData: [], totalCount: 0 };
   gridItems: any[] = [];
   selectionStarted = false;
   selectionTimeoutHandler: any;
@@ -107,7 +149,7 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
   currentPage = 1;
   sortObj: GridSortItemInterface = {
     sort: null,
-    sortField: null
+    sortField: null,
   };
   filters: GridFilterItemInterface[] = [];
   gridPostSubscription: Subscription = new Subscription();
@@ -116,7 +158,8 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
   allRowsExpanded = false;
 
   @ViewChild('gridContainer') gridContainer!: ElementRef;
-  @ViewChild('cdkVirtualScrollViewport') cdkVirtualScrollViewport!: CdkVirtualScrollViewport;
+  @ViewChild('cdkVirtualScrollViewport')
+  cdkVirtualScrollViewport!: CdkVirtualScrollViewport;
 
   // Window resize listener
   @HostListener('window:resize', ['$event'])
@@ -124,15 +167,24 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     this.calculateGridWidth();
   }
 
-  constructor(private changeDetectorRef: ChangeDetectorRef,
-              private renderer: Renderer2,
-              public dialog: MatDialog,
-              private ngZone: NgZone,
-              private gridService: GridService) {
-  }
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    private renderer: Renderer2,
+    public dialog: MatDialog,
+    private ngZone: NgZone,
+    private gridService: GridService
+  ) {}
 
   ngOnInit(): void {
     this.headingsCopy = JSON.parse(JSON.stringify(this.headings));
+    this.updateData?.subscribe((data) => {
+      this.updateGridData(data);
+    });
+  }
+
+  ngOnDestroy(): void {
+    // unsubscribe to ensure no memory leaks
+    this.updateData?.unsubscribe();
   }
 
   ngAfterViewInit(): void {
@@ -146,7 +198,26 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
       if (changes['initialFilters']?.firstChange) {
         this.filters = this.initialFilters;
       }
-      this.getData({pageNo: 1, recordsPerPage: this.pageSize});
+      this.getData({ pageNo: 1, recordsPerPage: this.pageSize });
+    }
+
+    // To allow the grid to be refreshed with new local data onDemand
+    if (changes['localData']?.currentValue) {
+      if (this.local) {
+        if (this.localData) {
+          this.response = {
+            gridData: this.localData.gridData,
+            totalCount: this.localData.totalCount,
+            other: this.localData.other,
+          };
+          this.responseBackup = {
+            gridData: this.localData.gridData,
+            totalCount: this.localData.totalCount,
+            other: this.localData.other,
+          };
+          this.pageChanged({ pageNo: 1, recordsPerPage: this.pageSize });
+        }
+      }
     }
 
     if (changes['headings']?.currentValue) {
@@ -156,36 +227,46 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     if (changes['resetFilters']?.currentValue) {
       this.filters = [];
       if (this.serverSidePagination) {
-        this.getData({pageNo: 1, recordsPerPage: this.pageSize});
+        this.getData({ pageNo: 1, recordsPerPage: this.pageSize });
       } else {
         this.response = JSON.parse(JSON.stringify(this.responseBackup));
-        this.pageChanged({pageNo: 1, recordsPerPage: this.pageSize});
+        this.pageChanged({ pageNo: 1, recordsPerPage: this.pageSize });
       }
     }
 
-    if (changes['pageSizes']?.currentValue || changes['pageSize']?.currentValue) {
+    if (
+      changes['pageSizes']?.currentValue ||
+      changes['pageSize']?.currentValue
+    ) {
       if (this.pageSizes.length === 0) {
-        console.error('@Input() pageSizes array should have at least one page size');
+        console.error(
+          '@Input() pageSizes array should have at least one page size'
+        );
         this.pageSizes = [100];
       }
       if (!this.pageSizes.includes(this.pageSize)) {
         this.pageSize = this.pageSizes[0];
-        console.error('@Input() pageSize does not exist on the @Input() pagesSizes array');
+        console.error(
+          '@Input() pageSize does not exist on the @Input() pagesSizes array'
+        );
       }
     }
   }
 
   private calculateGridWidth(): void {
     const gridContainer = this.gridContainer.nativeElement;
-    const {offsetWidth, clientWidth} = this.cdkVirtualScrollViewport.elementRef.nativeElement;
+    const { offsetWidth, clientWidth } =
+      this.cdkVirtualScrollViewport.elementRef.nativeElement;
     this.horizontalScrollBarWidth = offsetWidth - clientWidth;
     this.gridWidth = offsetWidth;
     const heightOfHeaderAndFooter = 114;
-    const heightToTop = this.fullscreen ? 0 : gridContainer.getBoundingClientRect().top;
+    const heightToTop = this.fullscreen
+      ? 0
+      : gridContainer.getBoundingClientRect().top;
     const otherOffset = this.fullscreen ? 0 : 24;
     const totalOffset = heightOfHeaderAndFooter + heightToTop + otherOffset;
     // if (this.columnControl && !this.fullscreen) {
-      // totalOffset += 24; // heightOfColumnControlBtn
+    // totalOffset += 24; // heightOfColumnControlBtn
     // }
     this.offsetTop = totalOffset;
     this.scrollChanged();
@@ -193,13 +274,17 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   scrollLeft(): void {
-    const scrollLeft = this.cdkVirtualScrollViewport.elementRef.nativeElement.scrollLeft;
-    this.cdkVirtualScrollViewport.elementRef.nativeElement.scrollLeft = scrollLeft - this.gridWidth * 80 / 100;
+    const scrollLeft =
+      this.cdkVirtualScrollViewport.elementRef.nativeElement.scrollLeft;
+    this.cdkVirtualScrollViewport.elementRef.nativeElement.scrollLeft =
+      scrollLeft - (this.gridWidth * 80) / 100;
   }
 
   scrollRight(): void {
-    const scrollLeft = this.cdkVirtualScrollViewport.elementRef.nativeElement.scrollLeft;
-    this.cdkVirtualScrollViewport.elementRef.nativeElement.scrollLeft = this.gridWidth * 80 / 100 + scrollLeft;
+    const scrollLeft =
+      this.cdkVirtualScrollViewport.elementRef.nativeElement.scrollLeft;
+    this.cdkVirtualScrollViewport.elementRef.nativeElement.scrollLeft =
+      (this.gridWidth * 80) / 100 + scrollLeft;
   }
 
   scrollChanged(ev?: Event): void {
@@ -207,26 +292,32 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     if (ev) {
       elem = ev.target;
     } else {
-      elem = this.cdkVirtualScrollViewport.elementRef.nativeElement as HTMLElement;
+      elem = this.cdkVirtualScrollViewport.elementRef
+        .nativeElement as HTMLElement;
     }
     this.scrollRemainingDistanceToLeft = elem.scrollLeft;
-    this.scrollRemainingDistanceToRight = Math.trunc(elem.scrollWidth - elem.scrollLeft - this.gridWidth + this.horizontalScrollBarWidth);
+    this.scrollRemainingDistanceToRight = Math.trunc(
+      elem.scrollWidth -
+        elem.scrollLeft -
+        this.gridWidth +
+        this.horizontalScrollBarWidth
+    );
   }
 
   updateColumns(columnPreferenceChangeEnded = false): void {
     this.headings = [...this.headings]; // to run change detection in the virtual scroll need to reassign a fresh copy
     setTimeout(() => {
       this.scrollChanged(); // this is done to recalculate scrollRemainingDistanceToLeft & scrollRemainingDistanceToRight
-                            // values which helps to show the auto scroll navigate buttons
+      // values which helps to show the auto scroll navigate buttons
       this.changeDetectorRef.detectChanges();
       if (columnPreferenceChangeEnded) {
-
         // only emit if there is an actual change to the headings array
-        if (JSON.stringify(this.headings) !== JSON.stringify(this.headingsCopy)) {
+        if (
+          JSON.stringify(this.headings) !== JSON.stringify(this.headingsCopy)
+        ) {
           this.columnPreferencesChangeEndedEmit.emit(this.headings);
           this.headingsCopy = JSON.parse(JSON.stringify(this.headings));
         }
-
       } else {
         this.columnPreferencesChangedEmit.emit(this.headings);
       }
@@ -249,14 +340,16 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     });
     const sortObj: GridSortItemInterface = {
       sort: this.headings[index]?.sort,
-      sortField: this.headings[index]?.sort ? this.headings[index]?.fieldName : null
+      sortField: this.headings[index]?.sort
+        ? this.headings[index]?.fieldName
+        : null,
     };
     this.sortObj = sortObj;
     this.sortChangedEmit.emit(sortObj);
     if (this.serverSidePagination) {
-      this.getData({pageNo: 1, recordsPerPage: this.pageSize});
+      this.getData({ pageNo: 1, recordsPerPage: this.pageSize });
     } else {
-      this.pageChanged({pageNo: 1, recordsPerPage: this.pageSize});
+      this.pageChanged({ pageNo: 1, recordsPerPage: this.pageSize });
     }
   }
 
@@ -289,12 +382,17 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
           },
           betweendates: (field: string, range: string) => {
             const [min, max] = range.split('-');
-            return new Date(min) <= new Date(field) && new Date(field) <= new Date(max);
+            return (
+              new Date(min) <= new Date(field) &&
+              new Date(field) <= new Date(max)
+            );
           },
           eq: (field: string, value: string) => {
             if (value.includes(',') || field.includes(',')) {
               // return value.split(',').includes(field);
-              return value.split(',').some(item => field.split(',').includes(item));
+              return value
+                .split(',')
+                .some((item) => field.split(',').includes(item));
             } else {
               return field === value;
             }
@@ -310,9 +408,12 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
           blank: (field: string) => !field,
         };
 
-        const result = this.responseBackup.gridData.filter(o =>
+        const result = this.responseBackup.gridData.filter((o) =>
           this.filters.every(({ field, operator, value }) => {
-            return operators[operator](makeSearchFriendly(o[field]), makeSearchFriendly(value));
+            return operators[operator](
+              makeSearchFriendly(o[field]),
+              makeSearchFriendly(value)
+            );
           })
         );
 
@@ -325,9 +426,9 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
           this.response.gridData = result;
         });
       });
-      this.pageChanged({pageNo: 1, recordsPerPage: this.pageSize});
+      this.pageChanged({ pageNo: 1, recordsPerPage: this.pageSize });
     } else {
-      this.getData({pageNo: 1, recordsPerPage: this.pageSize});
+      this.getData({ pageNo: 1, recordsPerPage: this.pageSize });
     }
   }
 
@@ -341,7 +442,8 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
         this.selectedRows.push(item);
       }
     });
-    this.allGridItemsSelected = this.selectedRows.length === this.gridItems.length;
+    this.allGridItemsSelected =
+      this.selectedRows.length === this.gridItems.length;
     this.selectionEmit.emit(this.selectedRows);
   }
 
@@ -375,9 +477,10 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   toggleAllRowsExpansion(): void {
-    if (this.loadingData === false) { // do not allow to toggle when data is loading
+    if (this.loadingData === false) {
+      // do not allow to toggle when data is loading
       this.allRowsExpanded = !this.allRowsExpanded;
-      this.gridItems.forEach(item => {
+      this.gridItems.forEach((item) => {
         if (item.gridItemExpanded === undefined) {
           item.gridItemExpanded = true;
         } else {
@@ -413,13 +516,13 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
         this.allCheckBoxesSelected = false;
       }
     }
-    this.allGridItemsSelected = this.selectedRows.length === this.gridItems.length;
+    this.allGridItemsSelected =
+      this.selectedRows.length === this.gridItems.length;
     this.selectionEmit.emit(this.selectedRows);
   }
 
   // page change event
-  getData({pageNo, recordsPerPage}: any): void {
-
+  getData({ pageNo, recordsPerPage }: any): void {
     if (this.gridPostSubscription) {
       this.gridPostSubscription.unsubscribe();
       this.gridPostSubscription = new Subscription();
@@ -430,6 +533,39 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     this.currentPage = pageNo;
     this.changeDetectorRef.detectChanges();
 
+    // added for local data
+    if (this.local) {
+      if (this.localData) {
+        this.allGridItemsSelected = false;
+        this.selectedRows = [];
+        this.response = {
+          gridData: this.localData.gridData,
+          totalCount: this.localData.totalCount,
+          other: this.localData.other,
+        };
+        this.responseBackup = {
+          gridData: this.localData.gridData,
+          totalCount: this.localData.totalCount,
+          other: this.localData.other,
+        };
+        this.gridItems = this.localData.gridData;
+        this.responseEmit.emit(this.response);
+        this.selectionEmit.emit(this.selectedRows);
+        this.loadingData = false;
+        this.changeDetectorRef.detectChanges();
+        this.pageChanged({
+          pageNo: this.currentPage,
+          recordsPerPage: this.pageSize,
+        });
+        this.initialFilters.forEach((filter) => {
+          this.filter(filter);
+        });
+        return;
+      }
+      this.dataErrorEmit.emit('No data found');
+      return;
+    }
+
     let body: GridRequestInterface;
     if (this.serverSidePagination) {
       body = {
@@ -437,46 +573,56 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
         page: this.currentPage,
         perPage: recordsPerPage,
         filters: this.filters,
-        ...this.sortObj
+        ...this.sortObj,
       };
     } else {
       body = {
-        entity: this.entity
+        entity: this.entity,
       };
     }
 
     this.requestBodyEmit.emit(body);
 
-    this.gridPostSubscription = this.gridService.getAnyPost(this.url, body).subscribe(data => {
-      if (data.statusCode === 200 || data.success) {
-        const gridData = this.linkCreationInterceptor(data.payload.gridData);
-        const {totalCount, other} = data.payload;
-        this.allGridItemsSelected = false;
-        this.selectedRows = [];
-        this.response = {gridData, totalCount, other};
-        this.responseBackup = {gridData, totalCount, other};
-        this.gridItems = gridData;
-        this.responseEmit.emit(this.response);
-        this.selectionEmit.emit(this.selectedRows);
-        if (this.serverSidePagination) {
-          this.loadingData = false;
-          this.changeDetectorRef.detectChanges();
-          this.cdkVirtualScrollViewport.elementRef.nativeElement.scrollTop = 0;
-          setTimeout(() => {
-            this.calculateGridWidth();
-          }, 100);
-        } else {
-          this.pageChanged({pageNo: this.currentPage, recordsPerPage: this.pageSize});
-          this.initialFilters.forEach(filter => {
-            this.filter(filter);
-          });
+    this.gridPostSubscription = this.gridService
+      .getAnyPost(this.url, body)
+      .subscribe(
+        (data) => {
+          if (data.statusCode === 200 || data.success) {
+            const gridData = this.linkCreationInterceptor(
+              data.payload.gridData
+            );
+            const { totalCount, other } = data.payload;
+            this.allGridItemsSelected = false;
+            this.selectedRows = [];
+            this.response = { gridData, totalCount, other };
+            this.responseBackup = { gridData, totalCount, other };
+            this.gridItems = gridData;
+            this.responseEmit.emit(this.response);
+            this.selectionEmit.emit(this.selectedRows);
+            if (this.serverSidePagination) {
+              this.loadingData = false;
+              this.changeDetectorRef.detectChanges();
+              this.cdkVirtualScrollViewport.elementRef.nativeElement.scrollTop = 0;
+              setTimeout(() => {
+                this.calculateGridWidth();
+              }, 100);
+            } else {
+              this.pageChanged({
+                pageNo: this.currentPage,
+                recordsPerPage: this.pageSize,
+              });
+              this.initialFilters.forEach((filter) => {
+                this.filter(filter);
+              });
+            }
+          } else {
+            this.dataErrorEmit.emit(data);
+          }
+        },
+        (error) => {
+          this.dataErrorEmit.emit(error);
         }
-      } else {
-        this.dataErrorEmit.emit(data);
-      }
-    }, error => {
-      this.dataErrorEmit.emit(error);
-    });
+      );
   }
 
   private sortAscending(sortField: string): any {
@@ -486,12 +632,14 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
       sortField = sortField.substr(1);
     }
     return (a: any, b: any) => {
-      const result = (a[sortField] < b[sortField]) ? -1 : (a[sortField] > b[sortField]) ? 1 : 0;
+      const result =
+        a[sortField] < b[sortField] ? -1 : a[sortField] > b[sortField] ? 1 : 0;
       return result * sortOrder;
     };
   }
 
-  pageChanged({pageNo, recordsPerPage}: any): void { // only applicable to client side pagination
+  pageChanged({ pageNo, recordsPerPage }: any): void {
+    // only applicable to client side pagination
     this.loadingData = true;
     this.allGridItemsSelected = false;
     this.selectedRows = [];
@@ -499,7 +647,7 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     this.changeDetectorRef.detectChanges();
     this.pageSize = recordsPerPage;
     this.currentPage = pageNo;
-    const {sort, sortField} = this.sortObj;
+    const { sort, sortField } = this.sortObj;
 
     const gridData = JSON.parse(JSON.stringify(this.response.gridData)); // get deep clone
     if (sort && sortField) {
@@ -509,7 +657,7 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
       }
     }
 
-    const startingRecord = (this.pageSize * this.currentPage) - this.pageSize + 1;
+    const startingRecord = this.pageSize * this.currentPage - this.pageSize + 1;
     const endingRecord = this.pageSize * this.currentPage;
     const gridItemsForDisplay = [];
     for (let i = startingRecord - 1; i < endingRecord; i++) {
@@ -528,10 +676,25 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     }, 100);
   }
 
-  private linkCreationInterceptor(gridData: any[]): any[] {
+  // update grid data add by SOG-web
+  updateGridData(data: GridResponseInterface): void {
+    this.response = {
+      gridData: data.gridData,
+      totalCount: data.totalCount,
+      other: data.other,
+    };
+    this.responseBackup = {
+      gridData: data.gridData,
+      totalCount: data.totalCount,
+      other: data.other,
+    };
 
+    this.changeDetectorRef.detectChanges();
+  }
+
+  private linkCreationInterceptor(gridData: any[]): any[] {
     const urlHeadings: any[] = [];
-    this.headings.forEach(heading => {
+    this.headings.forEach((heading) => {
       if (heading?.clickable === 'url') {
         urlHeadings.push({
           type: heading.fieldName,
@@ -542,9 +705,9 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
       }
     });
 
-    const items = gridData.map(item => {
+    const items = gridData.map((item) => {
       const obj: any = {};
-      urlHeadings.forEach(heading => {
+      urlHeadings.forEach((heading) => {
         const splitUrl = heading.urlTemplate.split('/');
         const newUrl: any[] = [];
         splitUrl.forEach((urlItem: any) => {
@@ -558,13 +721,13 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
           let objParams: any = null;
           if (heading.source === 'external') {
             objParams = '';
-            Object.keys(heading.queryParams).forEach(field => {
+            Object.keys(heading.queryParams).forEach((field) => {
               objParams += field + '=' + item[heading.queryParams[field]] + '&';
             });
             objParams = objParams.slice(0, -1);
           } else {
             objParams = {};
-            Object.keys(heading.queryParams).forEach(field => {
+            Object.keys(heading.queryParams).forEach((field) => {
               objParams[field] = item[heading.queryParams[field]];
             });
           }
@@ -572,14 +735,15 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
           obj[heading.type + 'QueryParams'] = objParams;
         }
       });
-      return {...item, ...obj};
+      return { ...item, ...obj };
     });
     return items;
   }
 
   toggleFullScreen(ev: boolean): void {
     this.fullscreen = ev;
-    setTimeout(() => { // wait until dom adjusts
+    setTimeout(() => {
+      // wait until dom adjusts
       this.calculateGridWidth();
     });
   }
@@ -589,7 +753,7 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
     // if (isEmpty(params)) {
     //   paramString = '';
     // }
-    Object.keys(params).forEach(key => {
+    Object.keys(params).forEach((key) => {
       paramString += key + '=' + params[key];
     });
     window.open(link + paramString);
@@ -604,6 +768,6 @@ export class ServerBindGridComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   goToLink(fieldName: string, item: string, click?: string): void {
-    this.buttonClickEmit.emit({fieldName, item, click});
+    this.buttonClickEmit.emit({ fieldName, item, click });
   }
 }

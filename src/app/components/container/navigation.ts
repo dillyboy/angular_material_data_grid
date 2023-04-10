@@ -7,40 +7,40 @@ export const navigation = [
       '/gettingStarted/introduction',
       '/gettingStarted/installation',
       '/gettingStarted/propertiesAndEvents',
-      '/gettingStarted/changeLog'
+      '/gettingStarted/changeLog',
     ],
     children: [
       {
         headingName: 'Demo',
         headingIcon: '',
         highLightWhen: ['/gettingStarted/demo'],
-        route: '/gettingStarted/demo'
+        route: '/gettingStarted/demo',
       },
       {
         headingName: 'Introduction',
         headingIcon: '',
         highLightWhen: ['/gettingStarted/introduction'],
-        route: '/gettingStarted/introduction'
+        route: '/gettingStarted/introduction',
       },
       {
         headingName: 'Installation',
         headingIcon: '',
         highLightWhen: ['/gettingStarted/installation'],
-        route: '/gettingStarted/installation'
+        route: '/gettingStarted/installation',
       },
       {
         headingName: 'Properties & Events',
         headingIcon: '',
         highLightWhen: ['/gettingStarted/propertiesAndEvents'],
-        route: '/gettingStarted/propertiesAndEvents'
+        route: '/gettingStarted/propertiesAndEvents',
       },
       {
         headingName: 'Change Log',
         headingIcon: '',
         highLightWhen: ['/gettingStarted/changeLog'],
-        route: '/gettingStarted/changeLog'
-      }
-    ]
+        route: '/gettingStarted/changeLog',
+      },
+    ],
   },
   {
     panelHeading: 'Columns & Filters',
@@ -61,57 +61,57 @@ export const navigation = [
         headingName: 'Overview',
         headingIcon: '',
         highLightWhen: ['/columnsAndFilters/overview'],
-        route: '/columnsAndFilters/overview'
+        route: '/columnsAndFilters/overview',
       },
       {
         headingName: 'String Filter',
         headingIcon: '',
         highLightWhen: ['/columnsAndFilters/stringFilter'],
-        route: '/columnsAndFilters/stringFilter'
+        route: '/columnsAndFilters/stringFilter',
       },
       {
         headingName: 'Multi Select Filter',
         headingIcon: '',
         highLightWhen: ['/columnsAndFilters/multiSelectFilter'],
-        route: '/columnsAndFilters/multiSelectFilter'
+        route: '/columnsAndFilters/multiSelectFilter',
       },
       {
         headingName: 'Tag Filter',
         headingIcon: '',
         highLightWhen: ['/columnsAndFilters/tagFilter'],
-        route: '/columnsAndFilters/tagFilter'
+        route: '/columnsAndFilters/tagFilter',
       },
       {
         headingName: 'Numeric Filter',
         headingIcon: '',
         highLightWhen: ['/columnsAndFilters/numericFilter'],
-        route: '/columnsAndFilters/numericFilter'
+        route: '/columnsAndFilters/numericFilter',
       },
       {
         headingName: 'Date Range Filter',
         headingIcon: '',
         highLightWhen: ['/columnsAndFilters/dateRangeFilter'],
-        route: '/columnsAndFilters/dateRangeFilter'
+        route: '/columnsAndFilters/dateRangeFilter',
       },
       {
         headingName: 'URL Builder',
         headingIcon: '',
         highLightWhen: ['/columnsAndFilters/urlBuilder'],
-        route: '/columnsAndFilters/urlBuilder'
+        route: '/columnsAndFilters/urlBuilder',
       },
       {
         headingName: 'Button Group Builder',
         headingIcon: '',
         highLightWhen: ['/columnsAndFilters/buttonGroupBuilder'],
-        route: '/columnsAndFilters/buttonGroupBuilder'
+        route: '/columnsAndFilters/buttonGroupBuilder',
       },
       {
         headingName: 'Image Type',
         headingIcon: '',
         highLightWhen: ['/columnsAndFilters/imageType'],
-        route: '/columnsAndFilters/imageType'
-      }
-    ]
+        route: '/columnsAndFilters/imageType',
+      },
+    ],
   },
   {
     panelHeading: 'Grid Features',
@@ -121,40 +121,40 @@ export const navigation = [
       '/features/itemSelection',
       '/features/theming',
       '/features/fixedHeader',
-      '/features/virtualScrolling'
+      '/features/virtualScrolling',
     ],
     children: [
       {
         headingName: 'Column Preferences',
         headingIcon: '',
         highLightWhen: ['/features/columnPreferences'],
-        route: '/features/columnPreferences'
+        route: '/features/columnPreferences',
       },
       {
         headingName: 'Item Selection',
         headingIcon: '',
         highLightWhen: ['/features/itemSelection'],
-        route: '/features/itemSelection'
+        route: '/features/itemSelection',
       },
       {
         headingName: 'Theming',
         headingIcon: '',
         highLightWhen: ['/features/theming'],
-        route: '/features/theming'
+        route: '/features/theming',
       },
       {
         headingName: 'Fixed Header',
         headingIcon: '',
         highLightWhen: ['/features/fixedHeader'],
-        route: '/features/fixedHeader'
+        route: '/features/fixedHeader',
       },
       {
         headingName: 'Virtual Scrolling',
         headingIcon: '',
         highLightWhen: ['/features/virtualScrolling'],
-        route: '/features/virtualScrolling'
-      }
-    ]
+        route: '/features/virtualScrolling',
+      },
+    ],
   },
   {
     panelHeading: 'Examples',
@@ -162,6 +162,7 @@ export const navigation = [
     openWhen: [
       '/examples/serverBindGrid',
       '/examples/clientSidePagination',
+      '/examples/localData',
       '/examples/reinitializeGrid',
       '/examples/dynamicHeadings',
       '/examples/preconfiguredFilters',
@@ -172,26 +173,32 @@ export const navigation = [
       '/examples/openDialog',
       '/examples/topRightButtons',
       '/examples/transparency',
-      '/examples/cellStyles'
+      '/examples/cellStyles',
     ],
     children: [
       {
         headingName: 'Client Side Pagination',
         headingIcon: '',
         highLightWhen: ['/examples/clientSidePagination'],
-        route: '/examples/clientSidePagination'
+        route: '/examples/clientSidePagination',
+      },
+      {
+        headingName: 'Local Data',
+        headingIcon: '',
+        highLightWhen: ['/examples/localData'],
+        route: '/examples/localData',
       },
       {
         headingName: 'Server Side Pagination',
         headingIcon: '',
         highLightWhen: ['/examples/serverBindGrid'],
-        route: '/examples/serverBindGrid'
+        route: '/examples/serverBindGrid',
       },
       {
         headingName: 'Reinitialize Grid',
         headingIcon: '',
         highLightWhen: ['/examples/reinitializeGrid'],
-        route: '/examples/reinitializeGrid'
+        route: '/examples/reinitializeGrid',
       },
       // {
       //   headingName: 'Dynamic Headings',
@@ -203,38 +210,43 @@ export const navigation = [
         headingName: 'Preconfigured Filters',
         headingIcon: '',
         highLightWhen: ['/examples/preconfiguredFilters'],
-        route: '/examples/preconfiguredFilters'
+        route: '/examples/preconfiguredFilters',
       },
       {
         headingName: 'Master Detail Grid',
         headingIcon: '',
-        highLightWhen: ['/examples/masterDetailGrid', '/examples/masterDetailChildGrid', '/examples/masterDetailHtml', '/examples/masterDetailBreakdownGrid'],
-        route: '/examples/masterDetailGrid'
+        highLightWhen: [
+          '/examples/masterDetailGrid',
+          '/examples/masterDetailChildGrid',
+          '/examples/masterDetailHtml',
+          '/examples/masterDetailBreakdownGrid',
+        ],
+        route: '/examples/masterDetailGrid',
       },
       {
         headingName: 'Open Dialog',
         headingIcon: '',
         highLightWhen: ['/examples/openDialog'],
-        route: '/examples/openDialog'
+        route: '/examples/openDialog',
       },
       {
         headingName: 'Top Right Buttons',
         headingIcon: '',
         highLightWhen: ['/examples/topRightButtons'],
-        route: '/examples/topRightButtons'
+        route: '/examples/topRightButtons',
       },
       {
         headingName: 'Transparency',
         headingIcon: '',
         highLightWhen: ['/examples/transparency'],
-        route: '/examples/transparency'
+        route: '/examples/transparency',
       },
       {
         headingName: 'Cell Styles',
         headingIcon: '',
         highLightWhen: ['/examples/cellStyles'],
-        route: '/examples/cellStyles'
+        route: '/examples/cellStyles',
       },
-    ]
+    ],
   },
 ];

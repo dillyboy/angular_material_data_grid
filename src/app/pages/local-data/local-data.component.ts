@@ -9,7 +9,7 @@ import {
   GridSortItem,
 } from '../../../../projects/angular-material-data-grid/src/lib/angular-material-data-grid-interfaces';
 import { Subject } from 'rxjs';
-import { dataTest } from 'tt';
+import { dataTest, dataTest2 } from 'tt';
 
 @Component({
   selector: 'app-local-data',
@@ -624,8 +624,8 @@ export class LocalDataExampleComponent {
   // change data of grid onDemand
   changeGridData(): void {
     const data: GridResponse = {
-      gridData: dataTest.gridData,
-      totalCount: dataTest.gridData.length,
+      gridData: dataTest2.gridData,
+      totalCount: dataTest2.gridData.length,
     };
     this.updateData.next(data);
   }

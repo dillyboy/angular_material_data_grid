@@ -36,12 +36,15 @@ import { TopRightButtonsExampleComponent } from '../pages/top-right-buttons-exam
 import { ChangeLogComponent } from '../pages/change-log/change-log.component';
 import { TransparencyExampleComponent } from '../pages/transparency-example/transparency-example.component';
 import { CellStylesExampleComponent } from '../pages/cell-styles-example/cell-styles-example.component';
-import { ImageTypeComponent } from "../pages/image-type/image-type.component";
+import { ImageTypeComponent } from '../pages/image-type/image-type.component';
+import { LocalDataExampleComponent } from '../pages/local-data/local-data.component';
 
 const routes: Routes = [
-  { path: '' , redirectTo: 'overview', pathMatch: 'full' },
+  { path: '', redirectTo: 'overview', pathMatch: 'full' },
   { path: 'overview', component: OverviewComponent },
-  { path: 'gettingStarted', component: ContainerComponent,
+  {
+    path: 'gettingStarted',
+    component: ContainerComponent,
     children: [
       { path: 'demo', component: DemoComponent },
       { path: 'demo/:id', component: DetailComponent },
@@ -49,9 +52,11 @@ const routes: Routes = [
       { path: 'installation', component: InstallationComponent },
       { path: 'propertiesAndEvents', component: PropertiesAndEventsComponent },
       { path: 'changeLog', component: ChangeLogComponent },
-    ]
+    ],
   },
-  { path: 'columnsAndFilters', component: ContainerComponent,
+  {
+    path: 'columnsAndFilters',
+    component: ContainerComponent,
     children: [
       { path: 'overview', component: ColumnsAndFiltersComponent },
       { path: 'stringFilter', component: StringFilterComponent },
@@ -62,39 +67,56 @@ const routes: Routes = [
       { path: 'urlBuilder', component: UrlBuilderComponent },
       { path: 'buttonGroupBuilder', component: ButtonGroupBuilderComponent },
       { path: 'imageType', component: ImageTypeComponent },
-    ]
+    ],
   },
-  { path: 'features', component: ContainerComponent,
+  {
+    path: 'features',
+    component: ContainerComponent,
     children: [
       { path: 'columnPreferences', component: ColumnControlComponent },
       { path: 'itemSelection', component: ItemSelectionComponent },
       { path: 'theming', component: ThemingComponent },
       { path: 'fixedHeader', component: FixedHeaderComponent },
       { path: 'virtualScrolling', component: VirtualScrollingComponent },
-    ]
+    ],
   },
-  { path: 'examples', component: ContainerComponent,
+  {
+    path: 'examples',
+    component: ContainerComponent,
     children: [
-      { path: 'clientSidePagination', component: ClientSidePaginationGridExampleComponent },
+      {
+        path: 'clientSidePagination',
+        component: ClientSidePaginationGridExampleComponent,
+      },
+      { path: 'localData', component: LocalDataExampleComponent },
       { path: 'serverBindGrid', component: ServerBindGridExampleComponent },
       { path: 'reinitializeGrid', component: ReinitializeGridExampleComponent },
       { path: 'dynamicHeadings', component: DynamicHeadingsExampleComponent },
-      { path: 'preconfiguredFilters', component: PreconfiguredFiltersExampleComponent },
+      {
+        path: 'preconfiguredFilters',
+        component: PreconfiguredFiltersExampleComponent,
+      },
       { path: 'masterDetailGrid', component: MasterDetailExampleComponent },
-      { path: 'masterDetailChildGrid', component: MasterDetailChildGridExampleComponent },
-      { path: 'masterDetailBreakdownGrid', component: MasterDetailBreakdownGridExampleComponent },
+      {
+        path: 'masterDetailChildGrid',
+        component: MasterDetailChildGridExampleComponent,
+      },
+      {
+        path: 'masterDetailBreakdownGrid',
+        component: MasterDetailBreakdownGridExampleComponent,
+      },
       { path: 'masterDetailHtml', component: MasterDetailHtmlExampleComponent },
       { path: 'customDemo', component: CustomDemoComponent },
       { path: 'openDialog', component: OpenDialogComponent },
       { path: 'topRightButtons', component: TopRightButtonsExampleComponent },
       { path: 'transparency', component: TransparencyExampleComponent },
       { path: 'cellStyles', component: CellStylesExampleComponent },
-    ]
-  }
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {})],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

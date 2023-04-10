@@ -1,0 +1,40 @@
+<div class="position-relative">
+  <amdg-grid
+    *ngIf="showGrid"
+    [headings]="headings"
+    [local]="true"
+    [localData]="localData"
+    [updateData]="updateData"
+    [selection]="true"
+    [columnControl]="true"
+    (requestBodyEmit)="requestBodyChanged($event)"
+    (responseEmit)="responseReceived($event)"
+    (selectionEmit)="selectionChanged($event)"
+    (filtersChangedEmit)="filtersChanged($event)"
+    (sortChangedEmit)="sortChanged($event)"
+    (buttonClickEmit)="buttonClick($event)"
+    (columnPreferencesChangedEmit)="headingsConfigChanged($event)"
+    (columnPreferencesResetEmit)="resetColumnPreferencesClick()"
+  >
+  </amdg-grid>
+
+  <div class="scroll-down-animation-button" mat-ripple (click)="scrollBottom()">
+    Code
+    <div class="scroll-down-animation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <mat-tab-group>
+    <mat-tab label="HTML">
+      <pre><code [highlight]="usage.html"></code></pre>
+    </mat-tab>
+    <mat-tab label="TS">
+      <pre><code [highlight]="usage.ts"></code></pre>
+    </mat-tab>
+  </mat-tab-group>
+</div>
